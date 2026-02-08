@@ -195,10 +195,10 @@ export default function RegisterScreen() {
 
           <View style={styles.brandingFooter}>
             <Text style={[styles.brandingText, { color: colors.textSecondary + "80", fontFamily: "DMSans_400Regular" }]}>
-              My Life & My Cash Flow Affirmation Studios
+              My Life & My Cash Flow Affirmations
             </Text>
             <Text style={[styles.brandingSubtext, { color: colors.textSecondary + "60", fontFamily: "DMSans_400Regular" }]}>
-              A subsidiary of Zion House Int'l
+              A subsidiary of Zion House INT'L
             </Text>
           </View>
         </ScrollView>
