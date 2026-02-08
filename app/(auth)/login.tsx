@@ -10,6 +10,7 @@ import {
   Platform,
   ActivityIndicator,
   ScrollView,
+  Image,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -65,17 +66,11 @@ export default function LoginScreen() {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.headerSection}>
-            <View style={[styles.logoContainer, { backgroundColor: colors.goldLight }]}>
-              <Ionicons name="flame" size={36} color={colors.gold} />
-            </View>
-            <Text
-              style={[
-                styles.title,
-                { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
-              ]}
-            >
-              My Life {"\n"}& My Cash Flow
-            </Text>
+            <Image
+              source={require("@/assets/images/app-logo.png")}
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
             <Text style={[styles.subtitle, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
               Affirm your way to abundance
             </Text>
@@ -186,19 +181,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 48,
   },
-  logoContainer: {
-    width: 72,
-    height: 72,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 24,
-  },
-  title: {
-    fontSize: 32,
-    textAlign: "center",
-    lineHeight: 40,
-    marginBottom: 8,
+  logoImage: {
+    width: 160,
+    height: 160,
+    borderRadius: 28,
+    marginBottom: 16,
   },
   subtitle: {
     fontSize: 16,

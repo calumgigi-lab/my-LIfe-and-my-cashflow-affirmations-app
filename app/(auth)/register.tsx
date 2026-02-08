@@ -10,6 +10,7 @@ import {
   Platform,
   ActivityIndicator,
   ScrollView,
+  Image,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -77,6 +78,11 @@ export default function RegisterScreen() {
           </Pressable>
 
           <View style={styles.headerSection}>
+            <Image
+              source={require("@/assets/images/app-logo.png")}
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
             <Text
               style={[
                 styles.title,
@@ -221,15 +227,24 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   headerSection: {
+    alignItems: "center",
     marginBottom: 36,
+  },
+  logoImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 20,
+    marginBottom: 16,
   },
   title: {
     fontSize: 32,
     lineHeight: 40,
     marginBottom: 8,
+    textAlign: "center",
   },
   subtitle: {
     fontSize: 16,
+    textAlign: "center",
   },
   formSection: {
     gap: 16,

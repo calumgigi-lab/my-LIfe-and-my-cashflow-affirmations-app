@@ -9,6 +9,7 @@ import {
   Platform,
   ActivityIndicator,
   RefreshControl,
+  Image,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -85,15 +86,24 @@ export default function TodayScreen() {
         }
       >
         <Animated.View entering={FadeInDown.duration(600).delay(100)}>
-          <Text style={[styles.greeting, { color: colors.textSecondary, fontFamily: "DMSans_500Medium" }]}>
-            {greeting}
-          </Text>
-          <Text style={[styles.userName, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
-            {user?.displayName || user?.username}
-          </Text>
-          <Text style={[styles.dateText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-            {dayNames[now.getDay()]}, {monthNames[now.getMonth()]} {now.getDate()}
-          </Text>
+          <View style={styles.greetingRow}>
+            <View style={styles.greetingTextCol}>
+              <Text style={[styles.greeting, { color: colors.textSecondary, fontFamily: "DMSans_500Medium" }]}>
+                {greeting}
+              </Text>
+              <Text style={[styles.userName, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
+                {user?.displayName || user?.username}
+              </Text>
+              <Text style={[styles.dateText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
+                {dayNames[now.getDay()]}, {monthNames[now.getMonth()]} {now.getDate()}
+              </Text>
+            </View>
+            <Image
+              source={require("@/assets/images/app-logo.png")}
+              style={styles.headerLogo}
+              resizeMode="contain"
+            />
+          </View>
         </Animated.View>
 
         {stats && (
@@ -263,9 +273,21 @@ export default function TodayScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   scrollContent: { paddingHorizontal: 20 },
+  greetingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 24,
+  },
+  greetingTextCol: { flex: 1 },
+  headerLogo: {
+    width: 56,
+    height: 56,
+    borderRadius: 14,
+  },
   greeting: { fontSize: 15, marginBottom: 2 },
   userName: { fontSize: 28, lineHeight: 34, marginBottom: 4 },
-  dateText: { fontSize: 14, marginBottom: 24 },
+  dateText: { fontSize: 14 },
   statsRow: {
     flexDirection: "row",
     gap: 10,
