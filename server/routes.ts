@@ -162,14 +162,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     },
   );
 
-  app.get("/api/affirmations/:id", async (req: Request, res: Response) => {
-    const aff = await storage.getAffirmation(parseInt(req.params.id));
-    if (!aff) {
-      return res.status(404).json({ message: "Affirmation not found" });
-    }
-    res.json(aff);
-  });
-
   app.get("/api/affirmations/today", async (_req: Request, res: Response) => {
     const now = new Date();
     const month = now.getMonth() + 1;
@@ -177,6 +169,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const aff = await storage.getTodayAffirmation(month, day);
     if (!aff) {
       return res.json(null);
+    }
+    res.json(aff);
+  });
+
+  app.get("/api/affirmations/:id", async (req: Request, res: Response) => {
+    const aff = await storage.getAffirmation(parseInt(req.params.id));
+    if (!aff) {
+      return res.status(404).json({ message: "Affirmation not found" });
     }
     res.json(aff);
   });
