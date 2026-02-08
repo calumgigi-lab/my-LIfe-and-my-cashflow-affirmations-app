@@ -159,6 +159,15 @@ export default function LoginScreen() {
               </Text>
             </Pressable>
           </View>
+
+          <View style={styles.brandingFooter}>
+            <Text style={[styles.brandingText, { color: colors.textSecondary + "80", fontFamily: "DMSans_400Regular" }]}>
+              My Life & My Cash Flow Affirmation Studios
+            </Text>
+            <Text style={[styles.brandingSubtext, { color: colors.textSecondary + "60", fontFamily: "DMSans_400Regular" }]}>
+              A subsidiary of Zion House Int'l
+            </Text>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </View>
@@ -248,5 +257,20 @@ const styles = StyleSheet.create({
   },
   footerLink: {
     fontSize: 15,
+  },
+  brandingFooter: {
+    alignItems: "center",
+    marginTop: 40,
+    gap: 4,
+  },
+  brandingText: {
+    fontSize: 11,
+    textAlign: "center",
+    letterSpacing: 0.3,
+  },
+  brandingSubtext: {
+    fontSize: 10,
+    textAlign: "center",
+    letterSpacing: 0.3,
   },
 });

@@ -423,6 +423,25 @@ export default function ProfileScreen() {
             </Text>
           </Pressable>
         </Animated.View>
+
+        <View style={styles.brandingFooter}>
+          <Text
+            style={[
+              styles.brandingText,
+              { color: colors.textSecondary + "80", fontFamily: "DMSans_400Regular" },
+            ]}
+          >
+            My Life & My Cash Flow Affirmation Studios
+          </Text>
+          <Text
+            style={[
+              styles.brandingSubtext,
+              { color: colors.textSecondary + "60", fontFamily: "DMSans_400Regular" },
+            ]}
+          >
+            A subsidiary of Zion House Int'l
+          </Text>
+        </View>
       </ScrollView>
     </View>
   );
@@ -510,4 +529,19 @@ const styles = StyleSheet.create({
     marginTop: 32,
   },
   logoutText: { fontSize: 16 },
+  brandingFooter: {
+    alignItems: "center",
+    marginTop: 40,
+    gap: 4,
+  },
+  brandingText: {
+    fontSize: 11,
+    textAlign: "center",
+    letterSpacing: 0.3,
+  },
+  brandingSubtext: {
+    fontSize: 10,
+    textAlign: "center",
+    letterSpacing: 0.3,
+  },
 });
