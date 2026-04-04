@@ -12,6 +12,8 @@ import {
   RefreshControl,
 } from "react-native";
 import { router } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/colors";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/query-client";
@@ -56,6 +58,7 @@ export default function AdminPaymentsPanel() {
   const colors = Colors[colorScheme];
   const queryClient = useQueryClient();
   const { user, isLoading: authLoading } = useAuth();
+  const insets = useSafeAreaInsets();
 
   // Redirect non-admin users on auth state change
   React.useEffect(() => {
@@ -169,13 +172,19 @@ export default function AdminPaymentsPanel() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView
-        style={{ flex: 1, padding: 16 }}
+        style={{ flex: 1 }}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        contentContainerStyle={{ paddingBottom: 20 }}
       >
         {/* Header */}
-        <Text style={{ fontSize: 24, fontWeight: "bold", color: colors.text, marginBottom: 16 }}>
-          💳 Payment Management
-        </Text>
+        <View style={{ paddingTop: insets.top + 12, paddingHorizontal: 16, marginBottom: 20 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+            <Ionicons name="card" size={28} color={colors.text} />
+            <Text style={{ fontSize: 24, fontWeight: "bold", color: colors.text }}>
+              Payment Management
+            </Text>
+          </View>
+        </View>
 
         {/* Statistics Cards */}
         {stats && (
