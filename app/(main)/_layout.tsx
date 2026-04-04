@@ -7,6 +7,7 @@ import { Platform, StyleSheet, useColorScheme, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import React from "react";
 import { useThemeColors } from "@/constants/colors";
+import HamburgerMenu from "@/components/HamburgerMenu";
 
 function NativeTabLayout() {
   return (
@@ -38,11 +39,11 @@ function ClassicTabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.gold,
+        tabBarActiveTintColor: colors.tint,
         tabBarInactiveTintColor: colors.tabIconDefault,
         tabBarStyle: {
           position: "absolute" as const,
-          backgroundColor: isIOS ? "transparent" : isDark ? "#0A0A0A" : "#FAFAF8",
+          backgroundColor: isIOS ? "transparent" : colors.background,
           borderTopWidth: isWeb ? 1 : 0,
           borderTopColor: colors.border,
           elevation: 0,
@@ -56,7 +57,7 @@ function ClassicTabLayout() {
               style={StyleSheet.absoluteFill}
             />
           ) : isWeb ? (
-            <View style={[StyleSheet.absoluteFill, { backgroundColor: isDark ? "#0A0A0A" : "#FAFAF8" }]} />
+            <View style={[StyleSheet.absoluteFill, { backgroundColor: colors.background }]} />
           ) : null,
         tabBarLabelStyle: {
           fontFamily: "DMSans_500Medium",
@@ -96,8 +97,15 @@ function ClassicTabLayout() {
 }
 
 export default function MainTabLayout() {
+  const withMenu = (content: React.ReactNode) => (
+    <View style={{ flex: 1 }}>
+      {content}
+      <HamburgerMenu />
+    </View>
+  );
+
   if (isLiquidGlassAvailable()) {
-    return <NativeTabLayout />;
+    return withMenu(<NativeTabLayout />);
   }
-  return <ClassicTabLayout />;
+  return withMenu(<ClassicTabLayout />);
 }

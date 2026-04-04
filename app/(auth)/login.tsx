@@ -24,7 +24,7 @@ export default function LoginScreen() {
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
   const insets = useSafeAreaInsets();
-  const isDark = scheme === "dark";
+  const buttonGradient = [colors.tint, colors.tintLight, colors.goldDark] as const;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +43,36 @@ export default function LoginScreen() {
       await login(email.trim(), password);
       router.replace("/(main)");
     } catch (err: any) {
-      setError(err.message?.includes("401") ? "Invalid email or password" : "Something went wrong. Please try again.");
+      const rawMessage = String(err?.message || err || "");
+
+      if (rawMessage.toLowerCase().includes("network request failed")) {
+        setError("Cannot reach server. Check Wi-Fi/network and try again.");
+      } else if (rawMessage.includes("401")) {
+        setError("Invalid email or password");
+      } else {
+        let resolvedMessage: string | null = null;
+
+        const jsonStart = rawMessage.indexOf("{");
+        if (jsonStart >= 0) {
+          try {
+            const parsed = JSON.parse(rawMessage.slice(jsonStart));
+            if (parsed?.message) {
+              resolvedMessage = parsed.message;
+            }
+          } catch {
+            // Ignore JSON parse failures and use fallback extraction below.
+          }
+        }
+
+        if (!resolvedMessage && rawMessage.includes(":")) {
+          const maybeMessage = rawMessage.split(":").slice(1).join(":").trim();
+          if (maybeMessage && !maybeMessage.startsWith("{")) {
+            resolvedMessage = maybeMessage;
+          }
+        }
+
+        setError(resolvedMessage || "Something went wrong. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -128,7 +157,7 @@ export default function LoginScreen() {
               ]}
             >
               <LinearGradient
-                colors={["#D4A853", "#C8973E", "#A07830"]}
+                colors={buttonGradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.buttonGradient}
@@ -182,9 +211,9 @@ const styles = StyleSheet.create({
     marginBottom: 48,
   },
   logoImage: {
-    width: 160,
-    height: 160,
-    borderRadius: 28,
+    width: 280,
+    height: 280,
+    borderRadius: 40,
     marginBottom: 16,
   },
   subtitle: {

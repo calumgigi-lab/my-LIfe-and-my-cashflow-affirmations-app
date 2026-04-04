@@ -1,6 +1,7 @@
 import { db } from "./db";
-import { booklets, affirmations } from "@shared/schema";
+import { booklets, affirmations, affirmationCompletions } from "@shared/schema";
 import { eq, count } from "drizzle-orm";
+import template from "../affirmations_template.json";
 
 const sampleAffirmations: Record<number, { title: string; paragraphs: string[] }[]> = {
   1: [
@@ -132,38 +133,50 @@ const coverColors = [
 async function seed() {
   console.log("Seeding database...");
 
-  const [existingCount] = await db.select({ count: count() }).from(booklets);
-  if (existingCount.count > 0) {
-    console.log("Database already seeded, skipping...");
-    return;
+  // Delete all related data using TRUNCATE CASCADE for clean slate
+  try {
+    await db.execute(`TRUNCATE TABLE "booklets" CASCADE`);
+  } catch {
+    // Fallback to individual deletes if cascade fails
+    try {
+      await db.execute(`DELETE FROM "affirmation_completions"`);
+      await db.execute(`DELETE FROM "affirmations"`);
+      await db.execute(`DELETE FROM "booklets"`);
+    } catch {
+      await db.delete(affirmationCompletions);
+      await db.delete(affirmations);
+      await db.delete(booklets);
+    }
   }
+  console.log("Cleared existing data...");
 
-  for (let month = 1; month <= 12; month++) {
+  // Load affirmations from template file
+  const affirmationsData = require('../affirmations_template.json');
+  
+  for (const bookletData of affirmationsData) {
     const [booklet] = await db
       .insert(booklets)
       .values({
-        title: `${monthNames[month]} Affirmations`,
-        month,
-        year: 2025,
-        description: `Daily affirmations for the month of ${monthNames[month]}. Speak life, wealth, and purpose into your days.`,
-        coverColor: coverColors[month],
+        title: bookletData.title,
+        month: bookletData.month,
+        year: bookletData.year,
+        description: bookletData.description,
+        coverColor: "#8B5CF6",
       })
       .returning();
 
     console.log(`Created booklet: ${booklet.title}`);
 
-    const monthAffirmations = sampleAffirmations[month] || [];
-    for (let i = 0; i < monthAffirmations.length; i++) {
-      const aff = monthAffirmations[i];
+    for (const aff of bookletData.affirmations) {
       await db.insert(affirmations).values({
         bookletId: booklet.id,
-        dayNumber: i + 1,
+        dayNumber: aff.dayNumber,
         title: aff.title,
-        content: aff.paragraphs.join("\n\n"),
+        content: aff.content,
       });
     }
 
-    console.log(`  Added ${monthAffirmations.length} affirmations`);
+    console.log(`  Added ${bookletData.affirmations.length} affirmations`);
   }
 
   console.log("Seeding complete!");

@@ -5,6 +5,8 @@ import {
   affirmationCompletions,
   userStreaks,
   notificationSettings,
+  feedbackEntries,
+  monthlyPurchases,
   type User,
   type InsertUser,
   type Booklet,
@@ -12,7 +14,9 @@ import {
   type AffirmationCompletion,
   type UserStreak,
   type NotificationSetting,
-} from "@shared/schema";
+  type FeedbackEntry,
+  type MonthlyPurchase,
+} from "../shared/schema";
 import { db } from "./db";
 import { eq, and, desc, sql, count } from "drizzle-orm";
 
@@ -21,6 +25,7 @@ export interface IStorage {
   getUserByEmail(email: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  updateProfilePicture(userId: number, pictureUrl: string): Promise<User>;
 
   getBooklets(): Promise<Booklet[]>;
   getBooklet(id: number): Promise<Booklet | undefined>;
@@ -52,6 +57,23 @@ export interface IStorage {
     userId: number,
     settings: Partial<NotificationSetting>,
   ): Promise<NotificationSetting>;
+
+  createFeedback(
+    userId: number,
+    subject: string,
+    message: string,
+  ): Promise<FeedbackEntry>;
+
+  hasBookletAccess(userId: number, bookletId: number): Promise<boolean>;
+  getUnlockedBookletIds(userId: number): Promise<number[]>;
+  recordMonthlyPurchase(input: {
+    userId: number;
+    bookletId: number;
+    platform: string;
+    productId: string;
+    transactionId: string;
+    amountNaira?: number;
+  }): Promise<MonthlyPurchase>;
 
   getUserStats(userId: number): Promise<{
     totalAffirmed: number;
@@ -85,6 +107,15 @@ export class DatabaseStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const [user] = await db.insert(users).values(insertUser).returning();
+    return user;
+  }
+
+  async updateProfilePicture(userId: number, pictureUrl: string): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({ profilePictureUrl: pictureUrl })
+      .where(eq(users.id, userId))
+      .returning();
     return user;
   }
 
@@ -127,8 +158,11 @@ export class DatabaseStorage implements IStorage {
         dayNumber: affirmations.dayNumber,
         title: affirmations.title,
         content: affirmations.content,
+        imageUrl: affirmations.imageUrl,
         createdAt: affirmations.createdAt,
         bookletTitle: booklets.title,
+        bookletMonth: booklets.month,
+        bookletYear: booklets.year,
       })
       .from(affirmations)
       .innerJoin(booklets, eq(affirmations.bookletId, booklets.id))
@@ -302,6 +336,92 @@ export class DatabaseStorage implements IStorage {
       })
       .returning();
     return created;
+  }
+
+  async createFeedback(
+    userId: number,
+    subject: string,
+    message: string,
+  ): Promise<FeedbackEntry> {
+    const [feedback] = await db
+      .insert(feedbackEntries)
+      .values({
+        userId,
+        subject,
+        message,
+      })
+      .returning();
+
+    return feedback;
+  }
+
+  async hasBookletAccess(userId: number, bookletId: number): Promise<boolean> {
+    const [match] = await db
+      .select({ id: monthlyPurchases.id })
+      .from(monthlyPurchases)
+      .where(
+        and(
+          eq(monthlyPurchases.userId, userId),
+          eq(monthlyPurchases.bookletId, bookletId),
+          eq(monthlyPurchases.status, "approved"),
+        ),
+      )
+      .limit(1);
+
+    return !!match;
+  }
+
+  async getUnlockedBookletIds(userId: number): Promise<number[]> {
+    const rows = await db
+      .select({ bookletId: monthlyPurchases.bookletId })
+      .from(monthlyPurchases)
+      .where(
+        and(
+          eq(monthlyPurchases.userId, userId),
+          eq(monthlyPurchases.status, "approved"),
+        ),
+      );
+
+    return [...new Set(rows.map((row) => row.bookletId))];
+  }
+
+  async recordMonthlyPurchase(input: {
+    userId: number;
+    bookletId: number;
+    platform: string;
+    productId: string;
+    transactionId: string;
+    amountNaira?: number;
+  }): Promise<MonthlyPurchase> {
+    const [purchase] = await db
+      .insert(monthlyPurchases)
+      .values({
+        userId: input.userId,
+        bookletId: input.bookletId,
+        platform: input.platform,
+        productId: input.productId,
+        transactionId: input.transactionId,
+        amountNaira: input.amountNaira || 0,
+        status: "pending",
+      })
+      .onConflictDoNothing({ target: monthlyPurchases.transactionId })
+      .returning();
+
+    if (purchase) {
+      return purchase;
+    }
+
+    const [existing] = await db
+      .select()
+      .from(monthlyPurchases)
+      .where(eq(monthlyPurchases.transactionId, input.transactionId))
+      .limit(1);
+
+    if (!existing) {
+      throw new Error("Could not persist purchase");
+    }
+
+    return existing;
   }
 
   async getUserStats(userId: number): Promise<{

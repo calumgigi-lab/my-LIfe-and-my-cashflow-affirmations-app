@@ -1,12 +1,13 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, ReactNode } from "react";
-import { apiRequest, getApiUrl } from "@/lib/query-client";
-import { fetch } from "expo/fetch";
+import { apiRequest } from "@/lib/query-client";
 
 interface AuthUser {
   id: number;
   username: string;
   email: string;
   displayName: string | null;
+  isAdmin?: boolean;
+  profilePictureUrl?: string | null;
 }
 
 interface AuthContextValue {
@@ -29,13 +30,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function checkAuth() {
     try {
-      const baseUrl = getApiUrl();
-      const url = new URL("/api/auth/me", baseUrl);
-      const res = await fetch(url.toString(), { credentials: "include" });
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data);
-      }
+      const res = await apiRequest("GET", "/api/auth/me");
+      const data = await res.json();
+      setUser(data);
     } catch {
     } finally {
       setIsLoading(false);

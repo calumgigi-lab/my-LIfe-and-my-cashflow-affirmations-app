@@ -6,15 +6,25 @@ import { QueryClient, QueryFunction } from "@tanstack/react-query";
  * @returns {string} The API base URL
  */
 export function getApiUrl(): string {
-  let host = process.env.EXPO_PUBLIC_DOMAIN;
-
-  if (!host) {
-    throw new Error("EXPO_PUBLIC_DOMAIN is not set");
+  const explicitUrl = process.env.EXPO_PUBLIC_API_URL;
+  if (explicitUrl) {
+    return explicitUrl.endsWith("/") ? explicitUrl : `${explicitUrl}/`;
   }
 
-  let url = new URL(`https://${host}`);
+  let host = process.env.EXPO_PUBLIC_DOMAIN || "localhost:5000";
+
+  // Use http:// for development (local network), https:// for production
+  const protocol = host.includes("localhost") || host.includes("127.0.0.1") || host.includes("172.") ? "http" : "https";
+  let url = new URL(`${protocol}://${host}`);
 
   return url.href;
+}
+
+function getTunnelHeaders(baseUrl: string): Record<string, string> {
+  // localtunnel can block requests unless this header is present.
+  return baseUrl.includes(".loca.lt")
+    ? { "bypass-tunnel-reminder": "true" }
+    : {};
 }
 
 async function throwIfResNotOk(res: Response) {
@@ -31,10 +41,13 @@ export async function apiRequest(
 ): Promise<Response> {
   const baseUrl = getApiUrl();
   const url = new URL(route, baseUrl);
+  const tunnelHeaders = getTunnelHeaders(baseUrl);
 
   const res = await fetch(url.toString(), {
     method,
-    headers: data ? { "Content-Type": "application/json" } : {},
+    headers: data
+      ? { ...tunnelHeaders, "Content-Type": "application/json" }
+      : tunnelHeaders,
     body: data ? JSON.stringify(data) : undefined,
     credentials: "include",
   });
@@ -51,9 +64,11 @@ export const getQueryFn: <T>(options: {
   async ({ queryKey }) => {
     const baseUrl = getApiUrl();
     const url = new URL(queryKey.join("/") as string, baseUrl);
+    const tunnelHeaders = getTunnelHeaders(baseUrl);
 
     const res = await fetch(url.toString(), {
       credentials: "include",
+      headers: tunnelHeaders,
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {

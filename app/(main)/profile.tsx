@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   Alert,
   Switch,
+  Modal,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -20,6 +21,7 @@ import * as Haptics from "expo-haptics";
 import { useAuth } from "@/lib/auth-context";
 import { useThemeColors } from "@/constants/colors";
 import { apiRequest, queryClient } from "@/lib/query-client";
+import { ProfilePictureUpload } from "@/components/ProfilePictureUpload";
 import {
   requestNotificationPermissions,
   scheduleAffirmationReminders,
@@ -42,10 +44,13 @@ export default function ProfileScreen() {
   });
 
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [intervalMinutes, setIntervalMinutes] = useState(30);
+  const [showIntervalModal, setShowIntervalModal] = useState(false);
 
   useEffect(() => {
     if (notifSettings) {
       setNotificationsEnabled(notifSettings.enabled ?? false);
+      setIntervalMinutes(notifSettings.intervalMinutes ?? 30);
     }
   }, [notifSettings]);
 
@@ -62,12 +67,26 @@ export default function ProfileScreen() {
         }
         const startHour = notifSettings?.startHour ?? 8;
         const endHour = notifSettings?.endHour ?? 21;
-        const interval = notifSettings?.intervalMinutes ?? 30;
+        const interval = intervalMinutes;
         await scheduleAffirmationReminders(startHour, endHour, interval);
       } else {
         await cancelAllReminders();
       }
-      await apiRequest("PUT", "/api/notification-settings", { enabled });
+      await apiRequest("PUT", "/api/notification-settings", { enabled, intervalMinutes });
+      queryClient.invalidateQueries({ queryKey: ["/api/notification-settings"] });
+    },
+  });
+
+  const updateIntervalMutation = useMutation({
+    mutationFn: async (minutes: number) => {
+      setIntervalMinutes(minutes);
+      setShowIntervalModal(false);
+      if (notificationsEnabled) {
+        const startHour = notifSettings?.startHour ?? 8;
+        const endHour = notifSettings?.endHour ?? 21;
+        await scheduleAffirmationReminders(startHour, endHour, minutes);
+      }
+      await apiRequest("PUT", "/api/notification-settings", { intervalMinutes: minutes });
       queryClient.invalidateQueries({ queryKey: ["/api/notification-settings"] });
     },
   });
@@ -105,12 +124,12 @@ export default function ProfileScreen() {
     .slice(0, 2);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <View style={[styles.container, { backgroundColor: colors.background, paddingTop: insets.top }]}>
       <ScrollView
         contentContainerStyle={[
           styles.scrollContent,
           {
-            paddingTop: insets.top + (Platform.OS === "web" ? 67 : 0) + 16,
+            paddingTop: 0,
             paddingBottom: 120,
           },
         ]}
@@ -129,11 +148,12 @@ export default function ProfileScreen() {
           entering={FadeInDown.duration(600).delay(100)}
           style={styles.profileSection}
         >
-          <View style={[styles.avatar, { backgroundColor: colors.gold }]}>
-            <Text style={[styles.avatarText, { fontFamily: "DMSans_700Bold" }]}>
-              {initials}
-            </Text>
-          </View>
+          <ProfilePictureUpload
+            currentImageUrl={user?.profilePictureUrl || undefined}
+            displayName={user?.displayName || user?.username || "U"}
+            size={100}
+            editable={true}
+          />
           <Text
             style={[
               styles.displayName,
@@ -386,7 +406,7 @@ export default function ProfileScreen() {
                       },
                     ]}
                   >
-                    Get notified every 30 min, 8am-9pm
+                    Every {intervalMinutes} min, 8am-9pm
                   </Text>
                 </View>
               </View>
@@ -398,6 +418,61 @@ export default function ProfileScreen() {
               />
             </View>
           </View>
+
+          {notificationsEnabled && (
+            <View
+              style={[
+                styles.settingCard,
+                { backgroundColor: colors.surface, borderColor: colors.border, marginTop: 12 },
+              ]}
+            >
+              <Pressable
+                onPress={() => setShowIntervalModal(true)}
+                style={({ pressed }) => [
+                  styles.settingRow,
+                  { opacity: pressed ? 0.7 : 1 },
+                ]}
+              >
+                <View style={styles.settingInfo}>
+                  <View
+                    style={[
+                      styles.settingIconBg,
+                      { backgroundColor: colors.tintLight + "40" },
+                    ]}
+                  >
+                    <Ionicons
+                      name="time"
+                      size={22}
+                      color={colors.tint}
+                    />
+                  </View>
+                  <View>
+                    <Text
+                      style={[
+                        styles.settingLabel,
+                        { color: colors.text, fontFamily: "DMSans_600SemiBold" },
+                      ]}
+                    >
+                      Frequency
+                    </Text>
+                    <Text
+                      style={[
+                        styles.settingDesc,
+                        {
+                          color: colors.textSecondary,
+                          fontFamily: "DMSans_400Regular",
+                        },
+                      ]}
+                    >
+                      Customize how often you receive notifications
+                    </Text>
+                  </View>
+                </View>
+                <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
+              </Pressable>
+
+            </View>
+          )}
         </Animated.View>
 
         <Animated.View entering={FadeInDown.duration(600).delay(400)}>
@@ -443,6 +518,81 @@ export default function ProfileScreen() {
           </Text>
         </View>
       </ScrollView>
+
+      <Modal
+        visible={showIntervalModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowIntervalModal(false)}
+      >
+        <View style={[styles.modalOverlay, { backgroundColor: "rgba(0,0,0,0.5)" }]}>
+          <View style={[styles.intervalModal, { backgroundColor: colors.surface }]}> 
+            <Text
+              style={[
+                styles.modalTitle,
+                { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
+              ]}
+            >
+              Notification Frequency
+            </Text>
+            <Text
+              style={[
+                styles.modalSubtitle,
+                { color: colors.textSecondary, fontFamily: "DMSans_400Regular" },
+              ]}
+            >
+              How often would you like to receive affirmation reminders?
+            </Text>
+
+            {[15, 20, 30, 45, 60].map((interval) => (
+              <Pressable
+                key={interval}
+                onPress={() => updateIntervalMutation.mutate(interval)}
+                style={({ pressed }) => [
+                  styles.intervalOption,
+                  {
+                    backgroundColor:
+                      intervalMinutes === interval
+                        ? colors.gold + "20"
+                        : colors.inputBg,
+                    borderColor: intervalMinutes === interval ? colors.gold : colors.border,
+                    opacity: pressed ? 0.7 : 1,
+                  },
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.intervalText,
+                    {
+                      color: intervalMinutes === interval ? colors.gold : colors.text,
+                      fontFamily: "DMSans_600SemiBold",
+                    },
+                  ]}
+                >
+                  Every {interval} minutes
+                </Text>
+                {intervalMinutes === interval && (
+                  <Ionicons name="checkmark-circle" size={20} color={colors.gold} />
+                )}
+              </Pressable>
+            ))}
+
+            <Pressable
+              onPress={() => setShowIntervalModal(false)}
+              style={({ pressed }) => [styles.modalCloseButton, { opacity: pressed ? 0.7 : 1 }]}
+            >
+              <Text
+                style={[
+                  styles.modalCloseText,
+                  { color: colors.text, fontFamily: "DMSans_600SemiBold" },
+                ]}
+              >
+                Done
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -543,5 +693,52 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: "center",
     letterSpacing: 0.3,
+  },
+  modalOverlay: {
+    position: "absolute" as const,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1000,
+  },
+  intervalModal: {
+    width: "85%",
+    borderRadius: 24,
+    padding: 24,
+    gap: 16,
+  },
+  modalTitle: {
+    fontSize: 24,
+    marginBottom: 8,
+  },
+  modalSubtitle: {
+    fontSize: 14,
+    marginBottom: 16,
+  },
+  intervalOption: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    marginBottom: 10,
+  },
+  intervalText: {
+    fontSize: 16,
+  },
+  modalCloseButton: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    alignItems: "center",
+    marginTop: 12,
+  },
+  modalCloseText: {
+    fontSize: 16,
   },
 });

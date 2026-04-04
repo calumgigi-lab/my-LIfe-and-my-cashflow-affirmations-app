@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -8,13 +8,19 @@ import {
   ScrollView,
   Platform,
   ActivityIndicator,
+  Image,
+  ImageSourcePropType,
+  Alert,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useThemeColors } from "@/constants/colors";
+import { queryClient, apiRequest } from "@/lib/query-client";
+import { purchaseBooklet } from "@/lib/booklet-purchases";
+import { PaymentDetailsModal } from "@/components/PaymentDetailsModal";
 
 const monthNames = [
   "", "January", "February", "March", "April", "May", "June",
@@ -27,7 +33,23 @@ const monthIcons: Record<number, string> = {
   9: "earth", 10: "moon", 11: "gift", 12: "sparkles",
 };
 
-function BookletCard({ booklet, index, colors, isDark }: any) {
+const bookletCovers: Partial<Record<number, ImageSourcePropType>> = {
+  1: require("../../book thumbnail/january.png"),
+  2: require("../../book thumbnail/february.png"),
+  3: require("../../book thumbnail/march.png"),
+  5: require("../../book thumbnail/may.png"),
+  6: require("../../book thumbnail/june.png"),
+  8: require("../../book thumbnail/august.png"),
+  9: require("../../book thumbnail/september.png"),
+  10: require("../../book thumbnail/october.png"),
+  11: require("../../book thumbnail/november.png"),
+  12: require("../../book thumbnail/december.png"),
+};
+
+function BookletCard({ booklet, index, colors, isUnlocked, priceNaira, onUnlock, unlockingBookletId }: any) {
+  const coverSource = bookletCovers[booklet.month];
+  const isUnlocking = unlockingBookletId === booklet.id;
+
   return (
     <Animated.View entering={FadeInDown.duration(400).delay(index * 80)}>
       <Pressable
@@ -42,13 +64,18 @@ function BookletCard({ booklet, index, colors, isDark }: any) {
           },
         ]}
       >
-        <View style={[styles.bookletIcon, { backgroundColor: booklet.coverColor + "20" }]}>
-          <Ionicons
-            name={(monthIcons[booklet.month] || "book") as any}
-            size={28}
-            color={booklet.coverColor}
-          />
-        </View>
+        {!isUnlocked && <View style={styles.lockedOverlay} />}
+        {coverSource ? (
+          <Image source={coverSource} style={styles.bookletCoverImage} resizeMode="cover" />
+        ) : (
+          <View style={[styles.bookletIcon, { backgroundColor: booklet.coverColor + "20" }]}>
+            <Ionicons
+              name={(monthIcons[booklet.month] || "book") as any}
+              size={28}
+              color={booklet.coverColor}
+            />
+          </View>
+        )}
         <View style={styles.bookletInfo}>
           <Text style={[styles.bookletMonth, { color: colors.textSecondary, fontFamily: "DMSans_500Medium" }]}>
             {monthNames[booklet.month]} {booklet.year}
@@ -67,6 +94,29 @@ function BookletCard({ booklet, index, colors, isDark }: any) {
         </View>
         <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
       </Pressable>
+
+      {!isUnlocked && (
+        <Pressable
+          onPress={() => onUnlock(booklet)}
+          disabled={isUnlocking}
+          style={({ pressed }) => [
+            styles.unlockButton,
+            {
+              backgroundColor: colors.tint,
+              opacity: pressed || isUnlocking ? 0.85 : 1,
+            },
+          ]}
+        >
+          {isUnlocking ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <>
+              <Ionicons name="lock-closed" size={16} color="#fff" />
+              <Text style={styles.unlockButtonText}>Unlock for ₦{priceNaira}</Text>
+            </>
+          )}
+        </Pressable>
+      )}
     </Animated.View>
   );
 }
@@ -75,13 +125,57 @@ export default function LibraryScreen() {
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
   const insets = useSafeAreaInsets();
-  const isDark = scheme === "dark";
+  const [selectedBooklet, setSelectedBooklet] = useState<{ id: number; month: number; year: number } | null>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   const { data: bookletList, isLoading } = useQuery<any[]>({
     queryKey: ["/api/booklets"],
   });
 
+  const { data: accessData } = useQuery<{
+    unlockedBookletIds: number[];
+    previewDays: number;
+    monthlyPriceNaira: number;
+  }>({
+    queryKey: ["/api/booklets/access"],
+  });
+
+  const verifyPurchaseMutation = useMutation({
+    mutationFn: async (booklet: { id: number; month: number; year: number }) => {
+      await purchaseBooklet(booklet);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/booklets/access"] });
+    },
+  });
+
   const currentMonth = new Date().getMonth() + 1;
+  const unlockedSet = new Set(accessData?.unlockedBookletIds ?? []);
+  const monthlyPriceNaira = accessData?.monthlyPriceNaira ?? 1500;
+
+  const handleUnlockBooklet = (booklet: { id: number; month: number; year: number }) => {
+    setSelectedBooklet(booklet);
+    setShowPaymentModal(true);
+  };
+
+  const handleConfirmPayment = async () => {
+    if (!selectedBooklet) {
+      throw new Error("No booklet selected");
+    }
+    
+    return new Promise<void>((resolve, reject) => {
+      verifyPurchaseMutation.mutate(selectedBooklet, {
+        onSuccess: () => {
+          setShowPaymentModal(false);
+          setSelectedBooklet(null);
+          resolve();
+        },
+        onError: (error: any) => {
+          reject(new Error(error?.message || "Could not unlock this booklet"));
+        },
+      });
+    });
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -95,12 +189,19 @@ export default function LibraryScreen() {
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={[styles.title, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
-          Library
-        </Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-          Explore all monthly affirmation booklets
-        </Text>
+        <View style={styles.headerSection}>
+          <Image
+            source={require("@/assets/images/app-logo.png")}
+            style={styles.libraryHeaderLogo}
+            resizeMode="contain"
+          />
+          <Text style={[styles.title, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
+            Library
+          </Text>
+          <Text style={[styles.subtitle, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
+            Explore all monthly affirmation booklets
+          </Text>
+        </View>
 
         {isLoading ? (
           <View style={styles.loadingContainer}>
@@ -130,12 +231,26 @@ export default function LibraryScreen() {
                   booklet={booklet}
                   index={index}
                   colors={colors}
-                  isDark={isDark}
+                  isUnlocked={unlockedSet.has(booklet.id)}
+                  priceNaira={monthlyPriceNaira}
+                  onUnlock={handleUnlockBooklet}
+                  unlockingBookletId={verifyPurchaseMutation.variables?.id}
                 />
               ))}
           </View>
         )}
       </ScrollView>
+
+      <PaymentDetailsModal
+        visible={showPaymentModal}
+        bookletTitle={selectedBooklet ? `${monthNames[selectedBooklet.month]} ${selectedBooklet.year}` : ""}
+        amount={monthlyPriceNaira}
+        onConfirmPayment={handleConfirmPayment}
+        onCancel={() => {
+          setShowPaymentModal(false);
+          setSelectedBooklet(null);
+        }}
+      />
     </View>
   );
 }
@@ -143,6 +258,16 @@ export default function LibraryScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   scrollContent: { paddingHorizontal: 20 },
+  headerSection: {
+    alignItems: "center",
+    marginBottom: 24,
+  },
+  libraryHeaderLogo: {
+    width: 264,
+    height: 264,
+    borderRadius: 24,
+    marginBottom: 12,
+  },
   title: { fontSize: 32, lineHeight: 38, marginBottom: 4 },
   subtitle: { fontSize: 15, marginBottom: 28 },
   loadingContainer: { paddingVertical: 60, alignItems: "center" },
@@ -163,6 +288,26 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     gap: 14,
+    position: "relative",
+  },
+  lockedOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(9, 22, 43, 0.42)",
+    borderRadius: 16,
+  },
+  unlockButton: {
+    marginTop: 8,
+    height: 42,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 8,
+  },
+  unlockButtonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontFamily: "DMSans_700Bold",
   },
   bookletIcon: {
     width: 56,
@@ -170,6 +315,11 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     alignItems: "center",
     justifyContent: "center",
+  },
+  bookletCoverImage: {
+    width: 56,
+    height: 56,
+    borderRadius: 14,
   },
   bookletInfo: { flex: 1 },
   bookletMonth: { fontSize: 12, textTransform: "uppercase" as const, letterSpacing: 0.5, marginBottom: 2 },

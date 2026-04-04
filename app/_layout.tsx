@@ -7,6 +7,7 @@ import { KeyboardProvider } from "react-native-keyboard-controller";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { queryClient } from "@/lib/query-client";
 import { AuthProvider } from "@/lib/auth-context";
+import { endIapConnection, initializeIapConnection } from "@/lib/booklet-purchases";
 import {
   useFonts,
   PlayfairDisplay_700Bold,
@@ -30,6 +31,7 @@ function RootLayoutNav() {
         options={{ presentation: "modal", headerShown: false }}
       />
       <Stack.Screen name="(main)" options={{ headerShown: false }} />
+      <Stack.Screen name="menu" options={{ headerShown: false }} />
       <Stack.Screen name="booklet/[id]" options={{ headerShown: false }} />
       <Stack.Screen name="affirmation/[id]" options={{ headerShown: false }} />
     </Stack>
@@ -46,11 +48,34 @@ export default function RootLayout() {
     DMSans_700Bold,
   });
 
+  const [minDurationElapsed, setMinDurationElapsed] = React.useState(false);
+
+  // Ensure splash screen shows for minimum 5 seconds
   useEffect(() => {
-    if (fontsLoaded) {
+    const timer = setTimeout(() => {
+      setMinDurationElapsed(true);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (fontsLoaded && minDurationElapsed) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded, minDurationElapsed]);
+
+  useEffect(() => {
+    initializeIapConnection().catch(() => {
+      // Native IAP is unavailable in Expo Go/web; unlock flow falls back gracefully there.
+    });
+
+    return () => {
+      endIapConnection().catch(() => {
+        // Ignore cleanup errors on shutdown.
+      });
+    };
+  }, []);
 
   if (!fontsLoaded) return null;
 

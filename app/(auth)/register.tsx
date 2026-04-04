@@ -24,6 +24,7 @@ export default function RegisterScreen() {
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
   const insets = useSafeAreaInsets();
+  const buttonGradient = [colors.tint, colors.tintLight, colors.goldDark] as const;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -172,7 +173,7 @@ export default function RegisterScreen() {
               ]}
             >
               <LinearGradient
-                colors={["#D4A853", "#C8973E", "#A07830"]}
+                colors={buttonGradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.buttonGradient}
@@ -231,9 +232,9 @@ const styles = StyleSheet.create({
     marginBottom: 36,
   },
   logoImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 20,
+    width: 200,
+    height: 200,
+    borderRadius: 35,
     marginBottom: 16,
   },
   title: {

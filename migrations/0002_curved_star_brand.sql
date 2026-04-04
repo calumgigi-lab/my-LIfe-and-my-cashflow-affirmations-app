@@ -1,0 +1,1 @@
+ALTER TABLE "monthly_purchases" ALTER COLUMN "amount_naira" SET DEFAULT 0;

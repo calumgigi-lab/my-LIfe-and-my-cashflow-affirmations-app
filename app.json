@@ -36,12 +36,27 @@
           "origin": "https://replit.com/"
         }
       ],
+      "react-native-iap",
       "expo-font",
       "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {
+        "origin": "https://replit.com/"
+      },
+      "eas": {
+        "projectId": "544bfd7d-c1d3-4081-b9f2-dad5263d3fbb"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/544bfd7d-c1d3-4081-b9f2-dad5263d3fbb"
     }
   }
 }

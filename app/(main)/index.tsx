@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   RefreshControl,
   Image,
+  Alert,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -20,14 +21,25 @@ import * as Haptics from "expo-haptics";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useAuth } from "@/lib/auth-context";
 import { useThemeColors } from "@/constants/colors";
-import { apiRequest, queryClient } from "@/lib/query-client";
+import { apiRequest, getApiUrl, queryClient } from "@/lib/query-client";
+import { purchaseBooklet } from "@/lib/booklet-purchases";
+import { PaymentDetailsModal } from "@/components/PaymentDetailsModal";
 
 export default function TodayScreen() {
   const { user } = useAuth();
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
   const insets = useSafeAreaInsets();
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const isDark = scheme === "dark";
+  const affirmationCardGradient = isDark
+    ? [colors.surfaceSecondary, colors.surface, colors.background]
+    : [colors.surfaceSecondary, colors.surface, "#FFFFFF"];
+  const primaryActionGradient = [colors.tint, colors.tintLight, colors.goldDark] as const;
+  const completedBannerStyle = {
+    backgroundColor: isDark ? "rgba(48, 209, 88, 0.16)" : "rgba(52, 199, 89, 0.12)",
+    borderColor: isDark ? "rgba(48, 209, 88, 0.32)" : "rgba(52, 199, 89, 0.24)",
+  };
 
   const { data: todayAff, isLoading: affLoading, refetch: refetchAff } = useQuery<any>({
     queryKey: ["/api/affirmations/today"],
@@ -40,6 +52,20 @@ export default function TodayScreen() {
   const { data: completionCheck } = useQuery<any>({
     queryKey: ["/api/completions/check", todayAff?.id?.toString()],
     enabled: !!todayAff?.id,
+  });
+
+  const { data: todayAccess } = useQuery<{
+    bookletId: number;
+    unlocked: boolean;
+    previewDays: number;
+    monthlyPriceNaira: number;
+  }>({
+    queryKey: ["/api/booklets", todayAff?.bookletId, "access"],
+    enabled: !!todayAff?.bookletId,
+    queryFn: async () => {
+      const response = await apiRequest("GET", `/api/booklets/${todayAff.bookletId}/access`);
+      return response.json();
+    },
   });
 
   const completeMutation = useMutation({
@@ -57,7 +83,37 @@ export default function TodayScreen() {
     },
   });
 
+  const unlockMutation = useMutation({
+    mutationFn: async () => {
+      const productId = `affirmation_${todayAff.bookletMonth}_${todayAff.bookletYear}`;
+      const response = await apiRequest("POST", "/api/purchases/verify", {
+        bookletId: Number(todayAff.bookletId),
+        platform: Platform.OS,
+        productId,
+        transactionId: `manual_${Platform.OS}_${todayAff.bookletId}_${Date.now()}`,
+        purchaseToken: `manual_${productId}_${Date.now()}`,
+      });
+      return response.json();
+    },
+    onSuccess: () => {
+      setShowPaymentModal(false);
+      queryClient.invalidateQueries({ queryKey: ["/api/booklets/access"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/booklets", todayAff?.bookletId, "access"] });
+    },
+    onError: (error: any) => {
+      Alert.alert("Payment Error", error?.message || "Could not record payment. Please try again.");
+    },
+  });
+
   const isCompleted = completionCheck?.completed === true;
+  const previewDays = todayAccess?.previewDays ?? 2;
+  const isTodayLocked = !!todayAff && todayAccess?.unlocked === false && todayAff.dayNumber > previewDays;
+  const monthlyPriceNaira = todayAccess?.monthlyPriceNaira ?? 1500;
+  const todayImageUrl = todayAff?.imageUrl
+    ? (todayAff.imageUrl.startsWith("http")
+      ? todayAff.imageUrl
+      : new URL(todayAff.imageUrl, getApiUrl()).toString())
+    : null;
   const isLoading = affLoading || statsLoading;
 
   const onRefresh = useCallback(() => {
@@ -98,11 +154,6 @@ export default function TodayScreen() {
                 {dayNames[now.getDay()]}, {monthNames[now.getMonth()]} {now.getDate()}
               </Text>
             </View>
-            <Image
-              source={require("@/assets/images/app-logo.png")}
-              style={styles.headerLogo}
-              resizeMode="contain"
-            />
           </View>
         </Animated.View>
 
@@ -151,14 +202,17 @@ export default function TodayScreen() {
         ) : todayAff ? (
           <Animated.View entering={FadeInUp.duration(700).delay(400)}>
             <Pressable
-              onPress={() => router.push({ pathname: "/affirmation/[id]", params: { id: todayAff.id.toString() } })}
+              onPress={() => {
+                if (isTodayLocked) return;
+                router.push({ pathname: "/affirmation/[id]", params: { id: todayAff.id.toString() } });
+              }}
               style={({ pressed }) => [{ opacity: pressed ? 0.95 : 1 }]}
             >
               <LinearGradient
-                colors={isDark ? ["#2A2418", "#1A1410", "#0A0A0A"] : ["#FDF8EE", "#F8EFDB", "#F0E0C0"]}
+                colors={affirmationCardGradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                style={[styles.affirmationCard, { borderColor: isDark ? "#3A2E18" : "#E8D5A8" }]}
+                style={[styles.affirmationCard, { borderColor: colors.border }]}
               >
                 <View style={styles.affCardHeader}>
                   <View style={[styles.dayBadge, { backgroundColor: colors.gold }]}>
@@ -173,6 +227,14 @@ export default function TodayScreen() {
                   )}
                 </View>
 
+                {todayImageUrl && (
+                  <Image
+                    source={{ uri: todayImageUrl }}
+                    style={[styles.todayAffirmationImage, { backgroundColor: colors.surfaceSecondary }]}
+                    resizeMode="cover"
+                  />
+                )}
+
                 <Text style={[styles.affTitle, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
                   {todayAff.title}
                 </Text>
@@ -181,7 +243,9 @@ export default function TodayScreen() {
                   style={[styles.affPreview, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}
                   numberOfLines={4}
                 >
-                  {todayAff.content.split("\n\n")[0]}
+                  {isTodayLocked
+                    ? `This daily affirmation is locked. Days 1-${previewDays} are free previews. Unlock this month to read and affirm fully.`
+                    : todayAff.content.split("\n\n")[0]}
                 </Text>
 
                 <View style={styles.affCardFooter}>
@@ -195,7 +259,34 @@ export default function TodayScreen() {
               </LinearGradient>
             </Pressable>
 
-            {!isCompleted ? (
+            {isTodayLocked ? (
+              <Pressable
+                onPress={() => setShowPaymentModal(true)}
+                disabled={unlockMutation.isPending}
+                style={({ pressed }) => [
+                  styles.affirmButton,
+                  { opacity: pressed || unlockMutation.isPending ? 0.9 : 1 },
+                ]}
+              >
+                <LinearGradient
+                  colors={primaryActionGradient}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.affirmButtonGradient}
+                >
+                  {unlockMutation.isPending ? (
+                    <ActivityIndicator color="#fff" />
+                  ) : (
+                    <>
+                      <Ionicons name="lock-closed" size={22} color="#fff" />
+                      <Text style={[styles.affirmButtonText, { fontFamily: "DMSans_700Bold" }]}>
+                        Unlock for ₦{monthlyPriceNaira}
+                      </Text>
+                    </>
+                  )}
+                </LinearGradient>
+              </Pressable>
+            ) : !isCompleted ? (
               <Pressable
                 onPress={() => completeMutation.mutate(todayAff.id)}
                 disabled={completeMutation.isPending}
@@ -205,7 +296,7 @@ export default function TodayScreen() {
                 ]}
               >
                 <LinearGradient
-                  colors={["#D4A853", "#C8973E", "#A07830"]}
+                  colors={primaryActionGradient}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                   style={styles.affirmButtonGradient}
@@ -223,7 +314,7 @@ export default function TodayScreen() {
                 </LinearGradient>
               </Pressable>
             ) : (
-              <View style={[styles.completedBanner, { backgroundColor: isDark ? "#1A2E1A" : "#E8F8E8", borderColor: isDark ? "#2A4A2A" : "#B8E0B8" }]}>
+              <View style={[styles.completedBanner, completedBannerStyle]}>
                 <Ionicons name="checkmark-circle" size={22} color={colors.success} />
                 <Text style={[styles.completedText, { color: colors.success, fontFamily: "DMSans_600SemiBold" }]}>
                   Affirmed for today
@@ -266,6 +357,17 @@ export default function TodayScreen() {
           </Pressable>
         </Animated.View>
       </ScrollView>
+
+      {/* Payment Modal */}
+      <PaymentDetailsModal
+        visible={showPaymentModal}
+        bookletTitle={todayAff?.bookletTitle || "Monthly Affirmation"}
+        amount={monthlyPriceNaira}
+        onConfirmPayment={async () => {
+          await unlockMutation.mutateAsync();
+        }}
+        onCancel={() => setShowPaymentModal(false)}
+      />
     </View>
   );
 }
@@ -280,11 +382,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   greetingTextCol: { flex: 1 },
-  headerLogo: {
-    width: 56,
-    height: 56,
-    borderRadius: 14,
-  },
   greeting: { fontSize: 15, marginBottom: 2 },
   userName: { fontSize: 28, lineHeight: 34, marginBottom: 4 },
   dateText: { fontSize: 14 },
@@ -323,6 +420,13 @@ const styles = StyleSheet.create({
   },
   dayBadgeText: { color: "#fff", fontSize: 11, letterSpacing: 1 },
   bookletLabel: { fontSize: 13 },
+  todayAffirmationImage: {
+    width: "100%",
+    height: 200,
+    borderRadius: 12,
+    marginBottom: 16,
+    overflow: "hidden",
+  },
   affTitle: { fontSize: 24, lineHeight: 30, marginBottom: 12 },
   affPreview: { fontSize: 15, lineHeight: 24 },
   affCardFooter: {
