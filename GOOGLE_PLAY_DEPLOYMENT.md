@@ -10,7 +10,7 @@
 1. Go to https://play.google.com/console
 2. Click "Create app"
 3. Fill in:
-   - **App name**: "My Life & My Cash Flow"
+   - **App name**: "MY LIFE & MY CASHFLOW AFFIRMATIONS"
    - **Default language**: English
    - **App category**: Lifestyle/Books & Reference
    - **App type**: Free
@@ -46,7 +46,7 @@ The app bundle will be created in the `dist/` directory.
 ### Step 5: Create Store Listings
 
 In Google Play Console, fill in:
-- **App title**: My Life & My Cash Flow
+- **App title**: MY LIFE & MY CASHFLOW AFFIRMATIONS
 - **Short description**: "Daily affirmations to transform your mindset and empower your financial growth"
 - **Full description**: 
   - "Discover daily affirmations designed to help you build a positive mindset around money and personal growth."
