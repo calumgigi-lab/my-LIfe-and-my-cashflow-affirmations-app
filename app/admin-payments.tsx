@@ -231,7 +231,7 @@ export default function AdminPaymentsPanel() {
 
             <View
               style={{
-                backgroundColor: colors.cardBackground || "#F5F5F5",
+                backgroundColor: colors.surface || "#1A436F",
                 padding: 12,
                 borderRadius: 8,
               }}
@@ -258,8 +258,8 @@ export default function AdminPaymentsPanel() {
                 borderRadius: 20,
                 backgroundColor:
                   filterStatus === status
-                    ? colors.primary || "#2196F3"
-                    : colors.cardBackground || "#F5F5F5",
+                    ? colors.tint || "#9EC9FF"
+                    : colors.surface || "#1A436F",
               }}
             >
               <Text
@@ -297,7 +297,7 @@ export default function AdminPaymentsPanel() {
             <View
               key={payment.id}
               style={{
-                backgroundColor: colors.cardBackground || "#F5F5F5",
+                backgroundColor: colors.surface || "#1A436F",
                 borderRadius: 8,
                 marginBottom: 12,
                 overflow: "hidden",
@@ -375,15 +375,17 @@ export default function AdminPaymentsPanel() {
                         </Text>
                         <TextInput
                           style={{
-                            backgroundColor: colors.cardBackground || "#F5F5F5",
+                            backgroundColor: colors.inputBg || "#235487",
                             borderRadius: 6,
                             padding: 10,
                             color: colors.text,
                             fontSize: 12,
                             marginBottom: 8,
+                            borderWidth: 1,
+                            borderColor: colors.border || "#4876A8",
                           }}
                           placeholder="Enter reason..."
-                          placeholderTextColor={colors.text + "50"}
+                          placeholderTextColor={colors.textSecondary + "80"}
                           value={approvalReason}
                           onChangeText={setApprovalReason}
                           editable={!approveMutation.isPending}
@@ -422,15 +424,17 @@ export default function AdminPaymentsPanel() {
                         </Text>
                         <TextInput
                           style={{
-                            backgroundColor: colors.cardBackground || "#F5F5F5",
+                            backgroundColor: colors.inputBg || "#235487",
                             borderRadius: 6,
                             padding: 10,
                             color: colors.text,
                             fontSize: 12,
                             marginBottom: 8,
+                            borderWidth: 1,
+                            borderColor: colors.border || "#4876A8",
                           }}
                           placeholder="Enter reason..."
-                          placeholderTextColor={colors.text + "50"}
+                          placeholderTextColor={colors.textSecondary + "80"}
                           value={rejectionReason}
                           onChangeText={setRejectionReason}
                           editable={!rejectMutation.isPending}
@@ -506,9 +510,11 @@ function DetailRow({ label, value }: { label: string; value: string }) {
           color: colors.text,
           fontSize: 12,
           fontFamily: "monospace",
-          backgroundColor: colors.cardBackground || "#F5F5F5",
-          padding: 6,
+          backgroundColor: colors.surface || "#1A436F",
+          padding: 8,
           borderRadius: 4,
+          borderLeftWidth: 2,
+          borderLeftColor: colors.tint,
         }}
       >
         {value}

@@ -160,31 +160,14 @@ export default function HamburgerMenu() {
                   style={({ pressed }) => [
                     styles.menuItem,
                     {
-                      borderColor: colors.gold,
+                      borderColor: colors.border,
                       backgroundColor: pressed ? colors.surfaceSecondary : colors.surface,
                     },
                   ]}
                 >
-                  <Ionicons name="card-outline" size={19} color={colors.gold} />
-                  <Text style={[styles.menuLabel, { color: colors.gold }]}>Payments</Text>
-                  <Ionicons name="chevron-forward" size={17} color={colors.gold} />
-                </Pressable>
-                <Pressable
-                  onPress={() => {
-                    setOpen(false);
-                    router.push("/admin-affirmations" as any);
-                  }}
-                  style={({ pressed }) => [
-                    styles.menuItem,
-                    {
-                      borderColor: colors.gold,
-                      backgroundColor: pressed ? colors.surfaceSecondary : colors.surface,
-                    },
-                  ]}
-                >
-                  <Ionicons name="create-outline" size={19} color={colors.gold} />
-                  <Text style={[styles.menuLabel, { color: colors.gold }]}>Affirmations</Text>
-                  <Ionicons name="chevron-forward" size={17} color={colors.gold} />
+                  <Ionicons name="card-outline" size={19} color={colors.text} />
+                  <Text style={[styles.menuLabel, { color: colors.text }]}>Payments</Text>
+                  <Ionicons name="chevron-forward" size={17} color={colors.textSecondary} />
                 </Pressable>
               </>
             )}
