@@ -14,13 +14,5 @@
       "developmentClient": true,
       "distribution": "internal"
     }
-  },
-  "submit": {
-    "production": {
-      "android": {
-        "serviceAccount": "./google-play-keyfile.json",
-        "track": "internal"
-      }
-    }
   }
 }

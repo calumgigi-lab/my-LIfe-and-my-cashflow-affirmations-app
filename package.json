@@ -24,9 +24,11 @@
     "affirmations:bulk": "node scripts/bulk-import-affirmations.js",
     "affirmations:seed": "tsx --require ./server/load-env.js server/seed-new.ts",
     "dev:remote": "set EXPO_PUBLIC_API_URL=https://global-affirmation-hub-api.vercel.app&& set EXPO_DEV_HOST=tunnel&& npx expo start --host tunnel --clear",
-    "build:android": "eas build --platform android --release",
+    "build:android": "eas build --platform android",
     "build:android:local": "npx expo prebuild --platform android --clean && npx expo run android --release",
-    "bundle:android": "eas build --platform android --release --json --output dist/app.aab"
+    "bundle:android": "eas build --platform android --json",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@expo-google-fonts/dm-sans": "^0.4.2",
