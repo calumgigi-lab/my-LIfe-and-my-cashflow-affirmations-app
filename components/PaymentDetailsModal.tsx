@@ -276,7 +276,7 @@ export function PaymentDetailsModal({
                 1. Copy account number above{"\n"}
                 2. Open your bank app{"\n"}
                 3. Transfer ₦{amount.toLocaleString()}{"\n"}
-                4. Tap "Confirm Payment" below
+                4. Tap &quot;Confirm Payment&quot; below
               </Text>
             </View>
 
@@ -291,7 +291,7 @@ export function PaymentDetailsModal({
               <View style={{ flexDirection: "row", gap: 8 }}>
                 <Ionicons name="information-circle" size={16} color="#2196F3" />
                 <Text style={{ color: colors.text, fontSize: 12, lineHeight: 18, flex: 1, opacity: 0.7 }}>
-                  After you send the money, tap "Confirm Payment" and admin will verify within 24 hours.
+                  After you send the money, tap &quot;Confirm Payment&quot; and admin will verify within 24 hours.
                 </Text>
               </View>
             </View>

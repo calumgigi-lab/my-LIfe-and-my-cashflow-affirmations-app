@@ -8,7 +8,6 @@ import {
   useColorScheme,
   ActivityIndicator,
   TextInput,
-  FlatList,
   RefreshControl,
 } from "react-native";
 import { router } from "expo-router";
@@ -288,7 +287,7 @@ export default function AdminPaymentsPanel() {
         {/* Loading State */}
         {isLoading && (
           <View style={{ alignItems: "center", paddingVertical: 40 }}>
-            <ActivityIndicator size="large" color={colors.primary || "#2196F3"} />
+            <ActivityIndicator size="large" color={colors.tint || "#9EC9FF"} />
           </View>
         )}
 

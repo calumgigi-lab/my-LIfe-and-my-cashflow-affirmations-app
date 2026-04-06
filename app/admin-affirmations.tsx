@@ -60,7 +60,7 @@ export default function AdminAffirmationsPanel() {
   // Load affirmation for selected day
   React.useEffect(() => {
     if (affirmationsList.length > 0) {
-      const aff = affirmationsList.find((a) => a.dayNumber === selectedDay);
+      const aff = affirmationsList.find((a: Affirmation) => a.dayNumber === selectedDay);
       if (aff) {
         setAffirmationTitle(aff.title);
         setAffirmationContent(aff.content);
@@ -79,7 +79,7 @@ export default function AdminAffirmationsPanel() {
         if (!selectedBooklet) throw new Error("No booklet selected");
 
         // Check if affirmation exists
-        const existing = affirmationsList.find((a) => a.dayNumber === selectedDay);
+        const existing = affirmationsList.find((a: Affirmation) => a.dayNumber === selectedDay);
 
         const endpoint = existing
           ? `/api/admin/affirmations/${existing.id}`
@@ -102,7 +102,7 @@ export default function AdminAffirmationsPanel() {
 
         queryClient.invalidateQueries({ queryKey: ["affirmations", selectedBooklet] });
         Alert.alert("Success", `Day ${selectedDay} affirmation saved!`);
-      } catch (error) {
+      } catch {
         Alert.alert("Error", "Failed to save affirmation");
       } finally {
         setIsSaving(false);
@@ -349,7 +349,7 @@ export default function AdminAffirmationsPanel() {
                 📊 Progress
               </Text>
               <Text style={{ color: colors.textSecondary, fontSize: 13 }}>
-                Affirmations filled: {affirmationsList.filter((a) => a.content && !a.content.includes("[ADD")).length} / 31
+                Affirmations filled: {affirmationsList.filter((a: Affirmation) => a.content && !a.content.includes("[ADD")).length} / 31
               </Text>
               <Text
                 style={{
