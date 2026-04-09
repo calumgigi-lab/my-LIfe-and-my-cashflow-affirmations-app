@@ -6,18 +6,16 @@ import { QueryClient, QueryFunction } from "@tanstack/react-query";
  * @returns {string} The API base URL
  */
 export function getApiUrl(): string {
+  // Production backend URL - baked into APK
+  const productionUrl = "https://global-affirmation-hub-api.vercel.app/";
+  
+  // Use production URL by default, or allow environment override for development
   const explicitUrl = process.env.EXPO_PUBLIC_API_URL;
   if (explicitUrl) {
     return explicitUrl.endsWith("/") ? explicitUrl : `${explicitUrl}/`;
   }
 
-  let host = process.env.EXPO_PUBLIC_DOMAIN || "localhost:5000";
-
-  // Use http:// for development (local network), https:// for production
-  const protocol = host.includes("localhost") || host.includes("127.0.0.1") || host.includes("172.") ? "http" : "https";
-  let url = new URL(`${protocol}://${host}`);
-
-  return url.href;
+  return productionUrl;
 }
 
 function getTunnelHeaders(baseUrl: string): Record<string, string> {
