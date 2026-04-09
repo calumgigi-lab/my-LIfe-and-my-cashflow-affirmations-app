@@ -1,0 +1,64 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Install Expo CLI
+        run: npm install -g eas-cli
+      
+      - name: Build with Expo (APK)
+        run: |
+          npx expo prebuild --clean
+          cd android
+          ./gradlew clean assembleRelease
+        env:
+          NODE_ENV: production
+          EXPO_PUBLIC_API_URL: https://global-affirmation-hub-api.vercel.app
+      
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 30
+      
+      - name: Create Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: android/app/build/outputs/apk/release/app-release.apk
+          tag_name: v1.0.2
+          body: |
+            Release build v1.0.2
+            Backend: https://global-affirmation-hub-api.vercel.app
+            Ready for Google Play submission
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
