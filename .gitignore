@@ -54,6 +54,16 @@ local.properties
 # Metro
 .metro-health-check*
 
+# Image assets - Keep locally, don't commit
+assets/images/**
+book\ thumbnail/**
+images\ for\ the\ pages/**
+google_play_graphics/**
+attached_assets/**
+WhatsApp\ Unknown*/**
+public/images/**
+apks_extracted/**
+
 # Debug logs
 npm-debug.*
 yarn-debug.*
@@ -117,6 +127,11 @@ coverage/
 .nyc_output/
 *.lcov
 
+# Local development
+.local/
+.replit
+replit.md
+
 # Misc
 .cache/
 *.log
@@ -129,4 +144,5 @@ tmp/
 dist-ssr/
 *.sln
 *.sw?
+
 

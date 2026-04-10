@@ -1,51 +1,82 @@
-# Don't deploy development/build artifacts
+# Only deploy the API folder content
+# Exclude everything that's not needed for serverless functions
+
+# Dependencies (will be installed fresh)
 node_modules/
-.next/
-dist/
-build/
-.expo/
-server_dist/
-.gradle/
-.DS_Store
-
-# Don't deploy version control
-.git
-.gitignore
-
-# Don't deploy environment files
-.env
-.env*.local
-.env*.development
-.env*.test
-
-# Don't deploy cache/logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 .npm/
 .yarn/
-pip-log.txt
-__pycache__/
-*.pyc
+pnpm-store/
 
-# Don't deploy IDE files
+# Build outputs
+dist/
+build/
+.next/
+out/
+.turbo/
+server_dist/
+.expo/
+web-build/
+
+# Source directories not needed for API
+app/
+lib/
+components/
+constants/
+shared/
+scripts/
+public/
+patches/
+migrations/
+android/
+ios/
+assets/
+images/
+book\ thumbnail/
+attached_assets/
+google_play_graphics/
+WhatsApp\ Unknown\ *
+
+# Configuration files not needed
+.env
+.env*.local
+eas.json
+app.json
+babel.config.js
+metro.config.js
+*.config.js
+tsconfig.json
+eslint.config.js
+.replit
+replit.md
+
+# git and version control
+.git
+.gitignore
+.github/
+
+# Documentation
+*.md
+**/*.md
+
+# Build artifacts
+*.apk
+*.aab
+*.apks
+*.zip
+*.jar
+*.log
+.gradle/
+android/
+
+# OS/IDE
+.DS_Store
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Native builds
-android/
-ios/
-
-# Testing
-coverage/
-.nyc_output/
-
-# Python venv
-.venv/
-venv/
-
-# Misc
-.vercelignore
+# Local development
+.local/
 .vercel/
+.cache/
+
