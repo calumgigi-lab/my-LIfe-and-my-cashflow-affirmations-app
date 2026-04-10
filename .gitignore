@@ -14,6 +14,13 @@ out/
 .turbo/
 server_dist/
 
+# Android Build Artifacts - LARGE FILES
+*.apk
+*.aab
+*.apks
+app.zip
+bundletool.jar
+
 # Expo & React Native
 .expo/
 web-build/
