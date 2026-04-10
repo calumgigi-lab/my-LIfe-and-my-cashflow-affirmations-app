@@ -14,7 +14,7 @@ buildscript {
 
 // Define SDK versions to match app.json and gradle.properties
 ext {
-  minSdkVersion = 24
+  minSdkVersion = 22
   targetSdkVersion = 36
   compileSdkVersion = 36
   buildToolsVersion = "36.0.0"

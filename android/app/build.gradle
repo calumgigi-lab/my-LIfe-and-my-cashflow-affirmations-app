@@ -91,20 +91,12 @@ android {
     namespace 'com.mylifemycashflow'
     defaultConfig {
         applicationId 'com.mylifemycashflow'
-        minSdkVersion 24
+        minSdkVersion 22
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
         versionName "1.0.2"
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
-        
-        // Force CMake to use SDK 24 minimum for Hermes/Prefab compatibility
-        externalNativeBuild {
-            cmake {
-                cppFlags "-std=c++17"
-                arguments "-DANDROID_PLATFORM=android-24", "-DANDROID_ABI=arm64-v8a", "-DANDROID_STL=c++_static"
-            }
-        }
     }
     signingConfigs {
         debug {

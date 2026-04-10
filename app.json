@@ -2,7 +2,7 @@
   "expo": {
     "name": "MY LIFE & MY CASHFLOW AFFIRMATIONS",
     "slug": "my-life-my-cash-flow",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "mylifemycashflow",
@@ -19,7 +19,9 @@
     },
     "android": {
       "package": "com.mylifemycashflow",
-      "minSdkVersion": 24,
+      "minSdkVersion": 22,
+      "versionCode": 2,
+      "displayName": "MY LIFE & MY CASHFLOW AFFIRMATIONS",
       "adaptiveIcon": {
         "backgroundColor": "#0A0A0A",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
