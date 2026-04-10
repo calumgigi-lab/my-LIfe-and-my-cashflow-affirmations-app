@@ -1,4 +1,30 @@
 {
   "version": 2,
-  "installCommand": "npm ci"
+  "buildCommand": "npm install --production=false && npm prune --production",
+  "env": {
+    "DATABASE_URL": "@database_url"
+  },
+  "functions": {
+    "api/**": {
+      "maxDuration": 30,
+      "memory": 512,
+      "runtime": "nodejs20.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "status": 404
+    }
+  ],
+  "ignoreCommand": "git check-ignore",
+  "excludeFiles": "**/{node_modules,dist,build,.expo,android,ios,.next,.vscode,.idea,**/*.log,*.pyc,__pycache__}"
 }

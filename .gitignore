@@ -1,18 +1,25 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-# Dependencies
+# Dependencies - MUST EXCLUDE (449MB)
 node_modules/
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
+
+# Build outputs - DO NOT TRACK
+dist/
+build/
+out/
+.next/
+.turbo/
+server_dist/
 
 # Expo & React Native
 .expo/
-dist/
 web-build/
 expo-env.d.ts
-.next/
 
-# Native builds (too large to upload)
+# Native builds (managed separately)
 ios/
 android/
 *.orig.*
@@ -23,20 +30,19 @@ android/
 *.key
 *.mobileprovision
 
-# Gradle
+# Gradle cache
 .gradle/
 android/.gradle/
 android/build/
 android/app/build/
 local.properties
 
-# Build outputs
-build/
-server_dist/
+# Build artifacts
 *.apk
 *.aab
 *.dex
 *.so
+*.o
 
 # Metro
 .metro-health-check*
@@ -47,46 +53,62 @@ yarn-debug.*
 yarn-error.*
 pip-log.txt
 pip-delete-this-directory.txt
+lerna-debug.log*
 
-# OS
+# OS files
 .DS_Store
-*.pem
 Thumbs.db
+*.pem
 
-# Environment files
+# Environment files (NEVER track secrets)
 .env
-.env*.local
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE & Editor
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.project
+.classpath
 
 # TypeScript
 *.tsbuildinfo
 
 # Vercel
-.vercel
 .vercel/
+.vercelignore
 
 # Python
 .venv/
 venv/
+ENV/
+env/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 *.egg-info/
-dist/
-build/
 .pytest_cache/
-
-# IDE
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
-.idea/
-*.swp
-*.swo
-*~
+.coverage
+htmlcov/
 
 # Testing
 coverage/
 .nyc_output/
+*.lcov
 
 # Misc
 .cache/
@@ -94,3 +116,10 @@ coverage/
 temp/
 tmp/
 .DS_Store
+.AppleDouble
+.LSOverride
+.turbo/
+dist-ssr/
+*.sln
+*.sw?
+
