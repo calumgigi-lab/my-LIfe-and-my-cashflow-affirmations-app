@@ -24,7 +24,5 @@
       "src": "/(.*)",
       "status": 404
     }
-  ],
-  "ignoreCommand": "git check-ignore",
-  "excludeFiles": "**/{node_modules,dist,build,.expo,android,ios,.next,.vscode,.idea,**/*.log,*.pyc,__pycache__}"
+  ]
 }
