@@ -1,0 +1,2056 @@
+﻿> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:processResources NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:compileKotlin UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:jar UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-module-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-module-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :expo-updates-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-module-gradle-plugin:processResources UP-TO-DATE
+> Task :expo-updates-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :expo-updates-gradle-plugin:processResources UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:compileKotlin UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:pluginDescriptors UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:processResources UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:classes UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :expo-module-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :expo-module-gradle-plugin:compileJava NO-SOURCE
+> Task :expo-module-gradle-plugin:classes UP-TO-DATE
+> Task :expo-module-gradle-plugin:jar UP-TO-DATE
+> Task :expo-updates-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :expo-updates-gradle-plugin:compileJava NO-SOURCE
+> Task :expo-updates-gradle-plugin:classes UP-TO-DATE
+> Task :expo-updates-gradle-plugin:jar UP-TO-DATE
+
+> Configure project :app
+ ??  [33mApplying gradle plugin[0m '[32mexpo-updates-gradle-plugin[0m'
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+
+> Configure project :
+[32m[ExpoRootProject][0m Using the following versions:
+  - buildTools:  [32m36.0.0[0m
+  - minSdk:      [32m24[0m
+  - compileSdk:  [32m36[0m
+  - targetSdk:   [32m36[0m
+  - ndk:         [32m27.1.12297006[0m
+  - kotlin:      [32m2.1.20[0m
+  - ksp:         [32m2.1.20-2.0.1[0m
+
+> Configure project :expo-modules-core
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+
+> Configure project :expo
+
+Using expo modules
+  - [32mexpo-constants[0m (18.0.13)
+  - [32mexpo-eas-client[0m (1.0.8)
+  - [32mexpo-json-utils[0m (0.15.0)
+  - [32mexpo-manifests[0m (1.0.10)
+  - [32mexpo-modules-core[0m (3.0.29)
+  - [32mexpo-structured-headers[0m (5.0.0)
+  - [32mexpo-updates[0m (29.0.16)
+  - [32mexpo-updates-interface[0m (2.0.0)
+  - [33m[?][0m [32mexpo-application[0m (7.0.8)
+  - [33m[?][0m [32mexpo-asset[0m (12.0.12)
+  - [33m[?][0m [32mexpo-blur[0m (15.0.8)
+  - [33m[?][0m [32mexpo-crypto[0m (15.0.8)
+  - [33m[?][0m [32mexpo-file-system[0m (19.0.21)
+  - [33m[?][0m [32mexpo-font[0m (14.0.11)
+  - [33m[?][0m [32mexpo-haptics[0m (15.0.8)
+  - [33m[?][0m [32mexpo-image[0m (3.0.11)
+  - [33m[?][0m [32mexpo-image-loader[0m (6.0.0)
+  - [33m[?][0m [32mexpo-image-picker[0m (17.0.10)
+  - [33m[?][0m [32mexpo-keep-awake[0m (15.0.8)
+  - [33m[?][0m [32mexpo-linear-gradient[0m (15.0.8)
+  - [33m[?][0m [32mexpo-linking[0m (8.0.11)
+  - [33m[?][0m [32mexpo-location[0m (19.0.8)
+  - [33m[?][0m [32mexpo-notifications[0m (0.32.16)
+  - [33m[?][0m [32mexpo-splash-screen[0m (31.0.13)
+  - [33m[?][0m [32mexpo-system-ui[0m (6.0.9)
+  - [33m[?][0m [32mexpo-web-browser[0m (15.0.10)
+
+
+> Configure project :react-native-gesture-handler
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+
+> Configure project :react-native-iap
+[NitroModules] ? NitroIap is boosted by nitro!
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+
+> Configure project :react-native-worklets
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+
+> Configure project :react-native-reanimated
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+
+> Configure project :react-native-screens
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+WARNING: [CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+[CXX5101] NDK folder 'C:\Android\ndk\27.1.12297006' specified does not contain 'platforms'.
+
+> Task :app:externalNativeBuildCleanDebug
+> Task :app:externalNativeBuildCleanDebugOptimized
+> Task :app:externalNativeBuildCleanRelease
+> Task :expo-eas-client:clean
+> Task :expo-constants:clean
+> Task :expo-json-utils:clean
+> Task :expo-modules-core:externalNativeBuildCleanDebug
+> Task :expo-modules-core:externalNativeBuildCleanRelease
+> Task :expo:clean
+> Task :expo-manifests:clean
+> Task :app:clean
+> Task :expo-structured-headers:clean
+> Task :expo-modules-core:clean
+> Task :expo-updates:clean
+> Task :react-native-gesture-handler:externalNativeBuildCleanDebug
+> Task :react-native-iap:externalNativeBuildCleanDebug
+> Task :react-native-gesture-handler:externalNativeBuildCleanRelease
+> Task :react-native-iap:externalNativeBuildCleanRelease
+> Task :expo-updates-interface:clean
+> Task :react-native-iap:clean
+> Task :react-native-reanimated:cleanCmakeCache
+> Task :react-native-reanimated:externalNativeBuildCleanDebug
+> Task :react-native-reanimated:externalNativeBuildCleanRelease
+> Task :react-native-async-storage_async-storage:clean
+> Task :react-native-gesture-handler:clean
+> Task :react-native-screens:externalNativeBuildCleanDebug
+> Task :react-native-screens:externalNativeBuildCleanRelease
+> Task :react-native-keyboard-controller:clean
+> Task :react-native-safe-area-context:clean
+> Task :react-native-worklets:cleanCmakeCache
+> Task :react-native-worklets:externalNativeBuildCleanDebug
+> Task :react-native-worklets:externalNativeBuildCleanRelease
+> Task :react-native-worklets:clean
+> Task :react-native-screens:clean
+> Task :app:generateAutolinkingNewArchitectureFiles
+> Task :app:generateAutolinkingPackageList
+> Task :app:generateCodegenSchemaFromJavaScript SKIPPED
+> Task :app:generateCodegenArtifactsFromSchema SKIPPED
+> Task :app:generateReactNativeEntryPoint
+> Task :react-native-svg:clean
+> Task :expo-eas-client:preBuild UP-TO-DATE
+> Task :expo-json-utils:preBuild UP-TO-DATE
+> Task :expo-manifests:preBuild UP-TO-DATE
+> Task :expo-modules-core:preBuild UP-TO-DATE
+> Task :expo-structured-headers:preBuild UP-TO-DATE
+> Task :expo-updates:preBuild UP-TO-DATE
+> Task :expo-updates-interface:preBuild UP-TO-DATE
+> Task :react-native-reanimated:clean
+
+> Task :expo-constants:createExpoConfig
+.\gradlew.bat : The NODE_ENV environment variable is required but was not specified. Ensure the project is 
+bundled with Expo CLI or NODE_ENV is set. Using only .env.local and .env
+At line:1 char:96
++ ... mation-Hub-1\android"; .\gradlew.bat clean assembleDebug 2>&1 | Out-F ...
++                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (The NODE_ENV en....local and .env:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+env: load .env.local .env
+env: export ADMIN_SETUP_TOKEN DATABASE_URL NODE_ENV PORT EXPO_PUBLIC_DOMAIN
+
+> Task :expo-constants:preBuild
+> Task :react-native-iap:preBuild UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateCodegenSchemaFromJavaScript
+> Task :react-native-gesture-handler:generateCodegenSchemaFromJavaScript
+> Task :expo:generatePackagesList
+> Task :expo:preBuild
+> Task :react-native-reanimated:assertMinimalReactNativeVersionTask
+> Task :react-native-reanimated:assertNewArchitectureEnabledTask SKIPPED
+> Task :react-native-keyboard-controller:generateCodegenSchemaFromJavaScript
+> Task :react-native-reanimated:assertWorkletsVersionTask
+> Task :react-native-async-storage_async-storage:generateCodegenArtifactsFromSchema
+> Task :react-native-async-storage_async-storage:preBuild
+> Task :react-native-gesture-handler:generateCodegenArtifactsFromSchema
+> Task :react-native-gesture-handler:preBuild
+> Task :react-native-reanimated:generateCodegenSchemaFromJavaScript
+> Task :react-native-keyboard-controller:generateCodegenArtifactsFromSchema
+> Task :react-native-keyboard-controller:preBuild
+> Task :react-native-safe-area-context:generateCodegenSchemaFromJavaScript
+> Task :react-native-screens:generateCodegenSchemaFromJavaScript
+> Task :react-native-svg:generateCodegenSchemaFromJavaScript
+> Task :react-native-reanimated:generateCodegenArtifactsFromSchema
+> Task :react-native-safe-area-context:generateCodegenArtifactsFromSchema
+> Task :react-native-safe-area-context:preBuild
+> Task :react-native-reanimated:prepareReanimatedHeadersForPrefabs
+> Task :react-native-reanimated:preBuild
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo:preDebugBuild
+> Task :expo:writeDebugAarMetadata
+> Task :expo-constants:preDebugBuild
+> Task :expo-constants:writeDebugAarMetadata
+> Task :expo-eas-client:preDebugBuild UP-TO-DATE
+> Task :expo-eas-client:writeDebugAarMetadata
+> Task :expo-json-utils:preDebugBuild UP-TO-DATE
+> Task :react-native-worklets:assertMinimalReactNativeVersionTask
+> Task :react-native-worklets:assertNewArchitectureEnabledTask SKIPPED
+> Task :expo-json-utils:writeDebugAarMetadata
+> Task :expo-manifests:preDebugBuild UP-TO-DATE
+> Task :react-native-screens:generateCodegenArtifactsFromSchema
+> Task :react-native-screens:preBuild
+> Task :expo-modules-core:preDebugBuild UP-TO-DATE
+> Task :expo-manifests:writeDebugAarMetadata
+> Task :expo-modules-core:writeDebugAarMetadata
+> Task :expo-updates:preDebugBuild UP-TO-DATE
+> Task :expo-structured-headers:preDebugBuild UP-TO-DATE
+> Task :expo-updates:writeDebugAarMetadata
+> Task :expo-updates-interface:preDebugBuild UP-TO-DATE
+> Task :expo-structured-headers:writeDebugAarMetadata
+> Task :react-native-async-storage_async-storage:preDebugBuild
+> Task :react-native-async-storage_async-storage:writeDebugAarMetadata
+> Task :react-native-gesture-handler:preDebugBuild
+> Task :expo-updates-interface:writeDebugAarMetadata
+> Task :react-native-iap:preDebugBuild UP-TO-DATE
+> Task :react-native-gesture-handler:writeDebugAarMetadata
+> Task :react-native-keyboard-controller:preDebugBuild
+> Task :react-native-iap:writeDebugAarMetadata
+> Task :react-native-reanimated:preDebugBuild
+> Task :react-native-keyboard-controller:writeDebugAarMetadata
+> Task :react-native-safe-area-context:preDebugBuild
+> Task :react-native-reanimated:writeDebugAarMetadata
+> Task :react-native-screens:preDebugBuild
+> Task :react-native-safe-area-context:writeDebugAarMetadata
+> Task :react-native-screens:writeDebugAarMetadata
+> Task :expo:generateDebugResValues
+> Task :expo-constants:generateDebugResValues
+> Task :expo:generateDebugResources
+> Task :expo-constants:generateDebugResources
+> Task :expo:packageDebugResources
+> Task :expo-constants:packageDebugResources
+> Task :expo-json-utils:generateDebugResValues
+> Task :expo-eas-client:generateDebugResValues
+> Task :expo-eas-client:generateDebugResources
+> Task :expo-json-utils:generateDebugResources
+> Task :expo-eas-client:packageDebugResources
+> Task :expo-manifests:generateDebugResValues
+> Task :expo-json-utils:packageDebugResources
+> Task :expo-modules-core:generateDebugResValues
+> Task :expo-manifests:generateDebugResources
+> Task :expo-modules-core:generateDebugResources
+> Task :expo-modules-core:packageDebugResources
+> Task :expo-manifests:packageDebugResources
+> Task :expo-structured-headers:generateDebugResValues
+> Task :expo-updates:generateDebugResValues
+> Task :expo-structured-headers:generateDebugResources
+> Task :expo-updates:generateDebugResources
+> Task :expo-updates:packageDebugResources
+> Task :expo-updates-interface:generateDebugResValues
+> Task :expo-structured-headers:packageDebugResources
+> Task :react-native-async-storage_async-storage:generateDebugResValues
+> Task :expo-updates-interface:generateDebugResources
+> Task :react-native-async-storage_async-storage:generateDebugResources
+> Task :expo-updates-interface:packageDebugResources
+> Task :react-native-async-storage_async-storage:packageDebugResources
+> Task :react-native-gesture-handler:generateDebugResValues
+> Task :react-native-iap:generateDebugResValues
+> Task :react-native-gesture-handler:generateDebugResources
+> Task :react-native-iap:generateDebugResources
+> Task :react-native-iap:packageDebugResources
+> Task :react-native-gesture-handler:packageDebugResources
+> Task :react-native-keyboard-controller:generateDebugResValues
+> Task :react-native-reanimated:generateDebugResValues
+> Task :react-native-reanimated:generateDebugResources
+> Task :react-native-keyboard-controller:generateDebugResources
+> Task :react-native-worklets:generateCodegenSchemaFromJavaScript
+> Task :react-native-reanimated:packageDebugResources
+> Task :react-native-safe-area-context:generateDebugResValues
+> Task :react-native-safe-area-context:generateDebugResources
+> Task :react-native-safe-area-context:packageDebugResources
+> Task :react-native-screens:generateDebugResValues
+> Task :react-native-screens:generateDebugResources
+> Task :react-native-keyboard-controller:packageDebugResources
+> Task :expo:extractDeepLinksDebug
+> Task :react-native-svg:generateCodegenArtifactsFromSchema
+> Task :react-native-svg:preBuild
+> Task :react-native-svg:preDebugBuild
+> Task :react-native-svg:writeDebugAarMetadata
+> Task :react-native-svg:generateDebugResValues
+> Task :react-native-svg:generateDebugResources
+> Task :react-native-svg:packageDebugResources
+> Task :expo-constants:extractDeepLinksDebug
+> Task :expo:processDebugManifest
+> Task :react-native-screens:packageDebugResources
+> Task :expo-eas-client:extractDeepLinksDebug
+> Task :expo-json-utils:extractDeepLinksDebug
+> Task :expo-constants:processDebugManifest
+> Task :expo-eas-client:processDebugManifest
+> Task :expo-json-utils:processDebugManifest
+> Task :expo-manifests:extractDeepLinksDebug
+> Task :expo-modules-core:extractDeepLinksDebug
+> Task :expo-structured-headers:extractDeepLinksDebug
+
+> Task :expo-modules-core:processDebugManifest
+C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\expo-modules-core\android\src\main\AndroidManifest.xml:8:9-11:45 Warning:
+	meta-data#com.facebook.soloader.enabled@android:value was tagged at AndroidManifest.xml:8 to replace other declarations but no other declaration present
+
+> Task :expo-manifests:processDebugManifest
+> Task :expo-structured-headers:processDebugManifest
+> Task :expo-updates:extractDeepLinksDebug
+> Task :expo-updates-interface:extractDeepLinksDebug
+> Task :react-native-async-storage_async-storage:extractDeepLinksDebug
+> Task :expo-updates-interface:processDebugManifest
+> Task :expo-updates:processDebugManifest
+> Task :react-native-iap:extractDeepLinksDebug
+> Task :react-native-gesture-handler:extractDeepLinksDebug
+
+> Task :react-native-async-storage_async-storage:processDebugManifest
+package="com.reactnativecommunity.asyncstorage" found in source AndroidManifest.xml: C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\@react-native-async-storage\async-storage\android\src\main\AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.reactnativecommunity.asyncstorage" from the source AndroidManifest.xml: C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\@react-native-async-storage\async-storage\android\src\main\AndroidManifest.xml.
+
+> Task :react-native-keyboard-controller:extractDeepLinksDebug
+> Task :react-native-iap:processDebugManifest
+> Task :react-native-reanimated:extractDeepLinksDebug
+> Task :react-native-gesture-handler:processDebugManifest
+> Task :react-native-safe-area-context:extractDeepLinksDebug
+
+> Task :react-native-keyboard-controller:processDebugManifest
+package="com.reactnativekeyboardcontroller" found in source AndroidManifest.xml: C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\react-native-keyboard-controller\android\src\main\AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.reactnativekeyboardcontroller" from the source AndroidManifest.xml: C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\react-native-keyboard-controller\android\src\main\AndroidManifest.xml.
+
+> Task :react-native-reanimated:processDebugManifest
+> Task :react-native-screens:extractDeepLinksDebug
+> Task :react-native-svg:extractDeepLinksDebug
+
+> Task :react-native-safe-area-context:processDebugManifest
+package="com.th3rdwave.safeareacontext" found in source AndroidManifest.xml: C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\react-native-safe-area-context\android\src\main\AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.th3rdwave.safeareacontext" from the source AndroidManifest.xml: C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\react-native-safe-area-context\android\src\main\AndroidManifest.xml.
+
+> Task :react-native-svg:processDebugManifest
+> Task :react-native-screens:processDebugManifest
+> Task :expo-constants:compileDebugLibraryResources
+> Task :expo:compileDebugLibraryResources
+> Task :expo-eas-client:compileDebugLibraryResources
+> Task :expo-constants:parseDebugLocalResources
+> Task :expo:parseDebugLocalResources
+> Task :expo-eas-client:parseDebugLocalResources
+> Task :expo:generateDebugRFile
+> Task :expo-eas-client:generateDebugRFile
+> Task :expo-json-utils:compileDebugLibraryResources
+> Task :expo-manifests:compileDebugLibraryResources
+> Task :expo-constants:generateDebugRFile
+> Task :expo-modules-core:compileDebugLibraryResources
+> Task :react-native-worklets:generateCodegenArtifactsFromSchema
+> Task :expo-json-utils:parseDebugLocalResources
+> Task :expo-manifests:parseDebugLocalResources
+> Task :expo-modules-core:parseDebugLocalResources
+> Task :expo-json-utils:generateDebugRFile
+> Task :expo-structured-headers:compileDebugLibraryResources
+> Task :expo-modules-core:generateDebugRFile
+> Task :expo-manifests:generateDebugRFile
+> Task :expo-updates:compileDebugLibraryResources
+> Task :expo-structured-headers:parseDebugLocalResources
+> Task :expo-updates-interface:compileDebugLibraryResources
+> Task :expo-updates:parseDebugLocalResources
+> Task :expo-updates-interface:parseDebugLocalResources
+> Task :expo-updates:generateDebugRFile
+> Task :expo-structured-headers:generateDebugRFile
+> Task :expo-updates-interface:generateDebugRFile
+> Task :react-native-async-storage_async-storage:compileDebugLibraryResources
+> Task :react-native-gesture-handler:compileDebugLibraryResources
+> Task :react-native-gesture-handler:parseDebugLocalResources
+> Task :react-native-iap:compileDebugLibraryResources
+> Task :react-native-async-storage_async-storage:parseDebugLocalResources
+> Task :react-native-iap:parseDebugLocalResources
+> Task :react-native-gesture-handler:generateDebugRFile
+> Task :react-native-async-storage_async-storage:generateDebugRFile
+> Task :react-native-reanimated:compileDebugLibraryResources
+> Task :react-native-keyboard-controller:compileDebugLibraryResources
+> Task :react-native-worklets:prepareWorkletsHeadersForPrefabs
+> Task :react-native-worklets:preBuild
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :react-native-iap:generateDebugRFile
+> Task :react-native-worklets:preDebugBuild
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :react-native-reanimated:parseDebugLocalResources
+> Task :react-native-worklets:writeDebugAarMetadata
+> Task :react-native-worklets:generateDebugResValues
+> Task :app:generateDebugBuildConfig
+> Task :react-native-reanimated:generateDebugRFile
+> Task :react-native-worklets:generateDebugResources
+> Task :react-native-keyboard-controller:parseDebugLocalResources
+> Task :react-native-keyboard-controller:generateDebugRFile
+> Task :react-native-worklets:packageDebugResources
+> Task :react-native-safe-area-context:compileDebugLibraryResources
+> Task :react-native-worklets:extractDeepLinksDebug
+> Task :react-native-worklets:processDebugManifest
+> Task :react-native-screens:parseDebugLocalResources
+> Task :react-native-safe-area-context:parseDebugLocalResources
+> Task :react-native-screens:compileDebugLibraryResources
+> Task :react-native-screens:generateDebugRFile
+> Task :react-native-svg:compileDebugLibraryResources
+> Task :react-native-worklets:compileDebugLibraryResources
+> Task :react-native-svg:parseDebugLocalResources
+> Task :react-native-safe-area-context:generateDebugRFile
+> Task :expo:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-worklets:parseDebugLocalResources
+> Task :react-native-svg:generateDebugRFile
+> Task :expo-constants:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo:generateDebugBuildConfig
+> Task :expo-modules-core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-modules-core:generateDebugBuildConfig
+> Task :expo-constants:generateDebugBuildConfig
+> Task :react-native-worklets:generateDebugRFile
+> Task :app:generateDebugResValues
+> Task :expo-constants:javaPreCompileDebug
+> Task :expo-eas-client:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-eas-client:generateDebugBuildConfig
+> Task :expo-eas-client:javaPreCompileDebug
+> Task :expo-json-utils:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:checkDebugAarMetadata
+> Task :expo-manifests:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-json-utils:generateDebugBuildConfig
+> Task :expo-manifests:generateDebugBuildConfig
+> Task :expo-json-utils:javaPreCompileDebug
+> Task :expo-structured-headers:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-manifests:javaPreCompileDebug
+> Task :expo-updates:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-structured-headers:generateDebugBuildConfig
+> Task :expo-updates:generateDebugBuildConfig
+> Task :expo-updates-interface:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-structured-headers:javaPreCompileDebug
+> Task :expo-updates-interface:generateDebugBuildConfig
+> Task :expo-updates-interface:javaPreCompileDebug
+> Task :expo:javaPreCompileDebug
+> Task :react-native-async-storage_async-storage:generateDebugBuildConfig
+> Task :app:mapDebugSourceSetPaths
+> Task :react-native-async-storage_async-storage:javaPreCompileDebug
+> Task :app:generateDebugResources
+> Task :expo-updates:javaPreCompileDebug
+> Task :react-native-gesture-handler:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-gesture-handler:generateDebugBuildConfig
+> Task :react-native-reanimated:generateDebugBuildConfig
+> Task :react-native-reanimated:javaPreCompileDebug
+> Task :react-native-worklets:generateDebugBuildConfig
+> Task :react-native-worklets:javaPreCompileDebug
+
+> Task :react-native-worklets:compileDebugJavaWithJavac
+Note: C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\react-nati
+ve-worklets\android\src\main\java\com\swmansion\worklets\WorkletsPackage.java uses unchecked or unsafe 
+operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+Note: Some input files use or override a deprecated API.
+> Task :expo-modules-core:javaPreCompileDebug
+
+> Task :react-native-async-storage_async-storage:compileDebugJavaWithJavac
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\@react-nat
+ive-async-storage\async-storage\android\src\javaPackage\java\com\reactnativecommunity\asyncstorage\AsyncStorag
+ePackage.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :react-native-worklets:bundleLibCompileToJarDebug
+> Task :react-native-async-storage_async-storage:bundleLibCompileToJarDebug
+> Task :react-native-svg:generateDebugBuildConfig
+> Task :react-native-svg:javaPreCompileDebug
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :react-native-reanimated:compileDebugJavaWithJavac
+
+> Task :react-native-reanimated:bundleLibCompileToJarDebug
+> Task :react-native-gesture-handler:javaPreCompileDebug
+> Task :react-native-iap:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-iap:generateDebugBuildConfig
+
+> Task :react-native-svg:compileDebugJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :app:mergeDebugResources
+> Task :app:packageDebugResources
+> Task :react-native-svg:bundleLibCompileToJarDebug
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:parseDebugLocalResources
+> Task :app:extractDeepLinksDebug
+> Task :expo-modules-core:compileDebugKotlin
+
+> Task :app:processDebugMainManifest
+C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\debug\AndroidManifest.xml:6:5-162 Warning:
+	application@android:usesCleartextTraffic was tagged at AndroidManifest.xml:6 to replace other declarations but no other declaration present
+C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\debug\AndroidManifest.xml Warning:
+	provider#expo.modules.filesystem.FileSystemFileProvider@android:authorities was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
+C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\debug\AndroidManifest.xml Warning:
+	activity#expo.modules.imagepicker.ExpoCropImageActivity@android:exported was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
+
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :react-native-iap:compileDebugKotlin
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:4:26 Unresolved reference 
+'NitroModules'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:5:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:6:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:74:9 Unresolved reference 
+'NitroModules'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:102:72 Unresolved reference 'await'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:105:82 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:106:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:119:17 Suspend function 'suspend fun 
+<T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:156:45 Suspend function 'suspend fun 
+await(): Boolean' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:265:21 Suspend function 'suspend fun 
+<T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:305:35 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:306:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:308:35 Suspend function 'suspend fun 
+invoke(): Boolean' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:324:68 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:325:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:338:13 Suspend function 'suspend fun 
+ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:353:47 Suspend function 'suspend fun 
+invoke(p1: @ParameterName(...) ProductRequest): FetchProductsResult' can only be called from a coroutine or 
+another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:373:43 Suspend function 'suspend fun 
+invoke(p1: @ParameterName(...) ProductRequest): FetchProductsResult' can only be called from a coroutine or 
+another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:397:66 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:398:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:399:55 Overload resolution ambiguity 
+between candidates:
+fun create(value: <ERROR TYPE REF: Symbol not found for NullType>): RequestPurchaseResult
+fun create(value: Array<Purchase>): RequestPurchaseResult
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:425:17 Suspend function 'suspend fun 
+ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:428:32 Suspend function 'suspend fun 
+<T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:439:17 Suspend function 'suspend fun 
+<T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:448:37 Suspend function 'suspend fun 
+invoke(p1: @ParameterName(...) ProductRequest): FetchProductsResult' can only be called from a coroutine or 
+another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:534:30 Suspend function 'suspend fun 
+<T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:563:83 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:564:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:566:13 Suspend function 'suspend fun 
+ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:598:25 Suspend function 'suspend fun 
+getAvailableItems(type: ProductQueryType): List<Purchase>' can only be called from a coroutine or another 
+suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:601:25 Suspend function 'suspend fun 
+invoke(p1: @ParameterName(...) PurchaseOptions?): List<Purchase>' can only be called from a coroutine or 
+another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:611:75 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:612:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:613:13 Suspend function 'suspend fun 
+ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:623:51 Suspend function 'suspend fun 
+invoke(p1: @ParameterName(...) List<String>?): List<ActiveSubscription>' can only be called from a coroutine 
+or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:666:75 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:667:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:668:13 Suspend function 'suspend fun 
+ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:676:41 Suspend function 'suspend fun 
+invoke(p1: @ParameterName(...) List<String>?): Boolean' can only be called from a coroutine or another 
+suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:694:75 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:695:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:725:17 Suspend function 'suspend fun 
+ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:741:29 Suspend function 'suspend fun 
+invoke(p1: @ParameterName(...) String): Boolean' can only be called from a coroutine or another suspend 
+function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:743:29 Suspend function 'suspend fun 
+invoke(p1: @ParameterName(...) String): Boolean' can only be called from a coroutine or another suspend 
+function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:772:35 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:773:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:775:17 Suspend function 'suspend fun 
+ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:777:37 Suspend function 'suspend fun 
+getStorefront(): String' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:787:5 'memorySize' overrides nothing.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1277:38 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1278:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1284:42 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1285:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1291:88 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1292:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1294:17 Suspend function 'suspend 
+fun ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1298:33 Suspend function 'suspend 
+fun invoke(p1: @ParameterName(...) DeepLinkOptions?): Unit' can only be called from a coroutine or another 
+suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1308:43 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1309:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1310:49 Unresolved reference 
+'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1315:47 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1316:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1319:49 Unresolved reference 
+'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1323:43 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1324:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1330:51 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1331:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1338:41 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1339:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1345:54 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1346:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1349:43 Unresolved reference 
+'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1354:48 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1355:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1357:13 Cannot infer type for this 
+parameter. Specify it explicitly.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1361:48 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1362:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1368:73 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1369:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1407:44 Suspend function 'suspend 
+fun invoke(p1: @ParameterName(...) VerifyPurchaseProps): VerifyPurchaseResult' can only be called from a 
+coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1456:92 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1457:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1481:38 Suspend function 'suspend 
+fun invoke(p1: @ParameterName(...) VerifyPurchaseWithProviderProps): VerifyPurchaseWithProviderResult' can 
+only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1522:54 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1523:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1528:54 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1529:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1534:53 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1535:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1540:47 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1541:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1546:29 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1547:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1554:63 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1555:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1560:39 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1561:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1566:35 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1567:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1572:46 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1573:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1578:57 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1579:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1584:53 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1585:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1594:64 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1595:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1598:35 Suspend function 'suspend 
+fun <T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1611:57 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1612:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1618:36 Suspend function 'suspend 
+fun <T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1632:87 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1633:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1639:29 Suspend function 'suspend 
+fun <T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1643:100 Unresolved reference 
+'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1707:84 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1708:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1711:17 Suspend function 'suspend 
+fun ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1713:43 Suspend function 'suspend 
+fun isBillingProgramAvailable(program: BillingProgramAndroid): BillingProgramAvailabilityResultAndroid' can 
+only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1728:95 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1729:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1732:17 Suspend function 'suspend 
+fun ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1734:43 Suspend function 'suspend 
+fun createBillingProgramReportingDetails(program: BillingProgramAndroid): 
+BillingProgramReportingDetailsAndroid' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1749:91 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1750:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1758:17 Suspend function 'suspend 
+fun ensureConnection(): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1760:32 Suspend function 'suspend 
+fun <T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1771:30 Suspend function 'suspend 
+fun <T> withContext(context: CoroutineContext, block: suspend CoroutineScope.() -> T): T
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1815:57 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1816:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1821:59 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1822:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1827:63 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1828:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1834:64 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1835:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1840:108 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1841:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1846:112 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/android/src/main/java/com/margelo/nitro/iap/HybridRnIap.kt:1847:16 Unresolved reference 
+'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/ExternalPurchaseCustomLinkNoticeResultIO
+S.kt:12:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/ExternalPurchaseCustomLinkTokenResultIOS
+.kt:12:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/ExternalPurchaseLinkResultIOS.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/ExternalPurchaseNoticeResultIOS.kt:12:26
+ Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:13:26 Unresolved 
+reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:14:26 Unresolved 
+reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:15:26 Unresolved 
+reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:28:33 Unresolved 
+reference 'HybridObject'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:35:80 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:39:33 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:43:66 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:47:64 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:51:81 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:55:73 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:59:73 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:63:73 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:121:36 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:125:40 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:129:45 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:133:41 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:137:41 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:141:49 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:145:39 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:149:52 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:153:52 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:157:52 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:161:51 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:165:45 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:169:27 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:173:46 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:177:46 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:181:61 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:185:37 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:189:33 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:193:44 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:197:55 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:201:51 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:205:71 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:209:90 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:213:33 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:217:86 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:221:62 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:225:55 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:229:85 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:273:82 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:277:93 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:281:89 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:285:55 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:289:57 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:293:61 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:297:62 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:301:106 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:305:110 Unresolved 
+reference 'Promise'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:308:3 'toString' 
+overrides nothing.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:315:60 Unresolved 
+reference 'HybridObject'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:317:14 'initHybrid' 
+overrides nothing.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:319:3 
+'createCxxPart' overrides nothing.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/HybridRnIapSpec.kt:319:16 'public' 
+function exposes its 'protected (in HybridRnIapSpec)' return type 'CxxPart'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroActiveSubscription.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroAvailablePurchasesAndroidOptions.kt
+:12:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroAvailablePurchasesIosOptions.kt:12:
+26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroAvailablePurchasesOptions.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroDeepLinkOptionsAndroid.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroDiscountDisplayInfoAndroid.kt:12:26
+ Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroFinishTransactionAndroidParams.kt:1
+2:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroFinishTransactionParams.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroOneTimePurchaseOfferDetail.kt:12:26
+ Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroProduct.kt:12:26 Unresolved 
+reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroPurchase.kt:12:26 Unresolved 
+reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroPurchaseRequest.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroReceiptValidationGoogleOptions.kt:1
+2:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroReceiptValidationParams.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroReceiptValidationResultAndroid.kt:1
+2:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroReceiptValidationResultIOS.kt:12:26
+ Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroRenewalInfoIOS.kt:12:26 Unresolved 
+reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroRentalDetailsAndroid.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroRequestPurchaseAndroid.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroRequestPurchaseIos.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroSubscriptionRenewalInfo.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroSubscriptionStatus.kt:12:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroVerifyPurchaseWithIapkitProps.kt:12
+:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroVerifyPurchaseWithProviderError.kt:
+12:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroVerifyPurchaseWithProviderProps.kt:
+12:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/NitroVerifyPurchaseWithProviderResult.kt
+:12:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/PurchaseAndroid.kt:12:26 Unresolved 
+reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/PurchaseIOS.kt:12:26 Unresolved 
+reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/RenewalInfoIOS.kt:12:26 Unresolved 
+reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/RequestPurchaseResult.kt:11:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/RequestPurchaseResult.kt:20:43 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/RequestPurchaseResult.kt:37:24 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/RequestPurchaseResult.kt:54:32 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/RequestPurchaseResult.kt:66:23 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_AndroidSubscripti
+onOfferInput_.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_AndroidSubscripti
+onOfferInput_.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_AndroidSubscripti
+onOfferInput_.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_AndroidSubscripti
+onOfferInput_.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_AndroidSubscripti
+onOfferInput_.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroOneTimePurch
+aseOfferDetail_.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroOneTimePurch
+aseOfferDetail_.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroOneTimePurch
+aseOfferDetail_.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroOneTimePurch
+aseOfferDetail_.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroOneTimePurch
+aseOfferDetail_.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroSubscription
+Status_.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroSubscription
+Status_.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroSubscription
+Status_.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroSubscription
+Status_.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroSubscription
+Status_.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroVerifyPurcha
+seWithProviderError_.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroVerifyPurcha
+seWithProviderError_.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroVerifyPurcha
+seWithProviderError_.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroVerifyPurcha
+seWithProviderError_.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_NitroVerifyPurcha
+seWithProviderError_.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_String_.kt:11:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_String_.kt:20:43 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_String_.kt:29:24 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_String_.kt:38:32 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Array_String_.kt:48:23 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Boolean.kt:11:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Boolean.kt:20:43 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Boolean.kt:29:24 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Boolean.kt:38:32 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Boolean.kt:48:23 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Double.kt:11:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Double.kt:20:43 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Double.kt:29:24 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Double.kt:38:32 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Double.kt:48:23 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_InitConnectionConfig.kt
+:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_InitConnectionConfig.kt
+:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_InitConnectionConfig.kt
+:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_InitConnectionConfig.kt
+:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_InitConnectionConfig.kt
+:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Map_String__String_.kt:
+11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Map_String__String_.kt:
+20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Map_String__String_.kt:
+29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Map_String__String_.kt:
+38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_Map_String__String_.kt:
+48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+AndroidOptions.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+AndroidOptions.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+AndroidOptions.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+AndroidOptions.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+AndroidOptions.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+IosOptions.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+IosOptions.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+IosOptions.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+IosOptions.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroAvailablePurchases
+IosOptions.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountAmountAndr
+oid.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountAmountAndr
+oid.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountAmountAndr
+oid.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountAmountAndr
+oid.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountAmountAndr
+oid.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountDisplayInf
+oAndroid.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountDisplayInf
+oAndroid.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountDisplayInf
+oAndroid.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountDisplayInf
+oAndroid.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroDiscountDisplayInf
+oAndroid.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionA
+ndroidParams.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionA
+ndroidParams.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionA
+ndroidParams.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionA
+ndroidParams.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionA
+ndroidParams.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionI
+osParams.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionI
+osParams.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionI
+osParams.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionI
+osParams.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroFinishTransactionI
+osParams.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroLimitedQuantityInf
+oAndroid.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroLimitedQuantityInf
+oAndroid.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroLimitedQuantityInf
+oAndroid.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroLimitedQuantityInf
+oAndroid.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroLimitedQuantityInf
+oAndroid.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPreorderDetailsAnd
+roid.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPreorderDetailsAnd
+roid.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPreorderDetailsAnd
+roid.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPreorderDetailsAnd
+roid.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPreorderDetailsAnd
+roid.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroProduct.kt:11:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroProduct.kt:20:43 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroProduct.kt:29:24 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroProduct.kt:38:32 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroProduct.kt:48:23 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPurchase.kt:11:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPurchase.kt:20:43 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPurchase.kt:29:24 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPurchase.kt:38:32 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroPurchase.kt:48:23 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationA
+ppleOptions.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationA
+ppleOptions.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationA
+ppleOptions.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationA
+ppleOptions.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationA
+ppleOptions.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationG
+oogleOptions.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationG
+oogleOptions.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationG
+oogleOptions.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationG
+oogleOptions.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationG
+oogleOptions.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationH
+orizonOptions.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationH
+orizonOptions.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationH
+orizonOptions.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationH
+orizonOptions.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroReceiptValidationH
+orizonOptions.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRenewalInfoIOS.kt:
+11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRenewalInfoIOS.kt:
+20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRenewalInfoIOS.kt:
+29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRenewalInfoIOS.kt:
+38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRenewalInfoIOS.kt:
+48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRentalDetailsAndro
+id.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRentalDetailsAndro
+id.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRentalDetailsAndro
+id.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRentalDetailsAndro
+id.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRentalDetailsAndro
+id.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseAnd
+roid.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseAnd
+roid.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseAnd
+roid.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseAnd
+roid.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseAnd
+roid.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseIos
+.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseIos
+.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseIos
+.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseIos
+.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroRequestPurchaseIos
+.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroSubscriptionRenewa
+lInfo.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroSubscriptionRenewa
+lInfo.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroSubscriptionRenewa
+lInfo.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroSubscriptionRenewa
+lInfo.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroSubscriptionRenewa
+lInfo.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroValidTimeWindowAnd
+roid.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroValidTimeWindowAnd
+roid.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroValidTimeWindowAnd
+roid.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroValidTimeWindowAnd
+roid.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroValidTimeWindowAnd
+roid.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitAppleProps.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitAppleProps.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitAppleProps.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitAppleProps.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitAppleProps.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitGoogleProps.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitGoogleProps.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitGoogleProps.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitGoogleProps.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitGoogleProps.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitProps.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitProps.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitProps.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitProps.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitProps.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitResult.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitResult.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitResult.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitResult.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_NitroVerifyPurchaseWith
+IapkitResult.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PendingPurchaseUpdateAn
+droid.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PendingPurchaseUpdateAn
+droid.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PendingPurchaseUpdateAn
+droid.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PendingPurchaseUpdateAn
+droid.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PendingPurchaseUpdateAn
+droid.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PromotionalOfferJwsInpu
+tIOS.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PromotionalOfferJwsInpu
+tIOS.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PromotionalOfferJwsInpu
+tIOS.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PromotionalOfferJwsInpu
+tIOS.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PromotionalOfferJwsInpu
+tIOS.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PurchaseOfferIOS.kt:11:
+26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PurchaseOfferIOS.kt:20:
+43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PurchaseOfferIOS.kt:29:
+24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PurchaseOfferIOS.kt:38:
+32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_PurchaseOfferIOS.kt:48:
+23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_RenewalInfoIOS.kt:11:26
+ Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_RenewalInfoIOS.kt:20:43
+ Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_RenewalInfoIOS.kt:29:24
+ Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_RenewalInfoIOS.kt:38:32
+ Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_RenewalInfoIOS.kt:48:23
+ Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_String.kt:11:26 
+Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_String.kt:20:43 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_String.kt:29:24 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_String.kt:38:32 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_String.kt:48:23 
+Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_SubscriptionProductRepl
+acementParamsAndroid.kt:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_SubscriptionProductRepl
+acementParamsAndroid.kt:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_SubscriptionProductRepl
+acementParamsAndroid.kt:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_SubscriptionProductRepl
+acementParamsAndroid.kt:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_SubscriptionProductRepl
+acementParamsAndroid.kt:48:23 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_WinBackOfferInputIOS.kt
+:11:26 Unresolved reference 'core'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_WinBackOfferInputIOS.kt
+:20:43 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_WinBackOfferInputIOS.kt
+:29:24 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_WinBackOfferInputIOS.kt
+:38:32 Unresolved reference 'NullType'.
+e: file:///C:/Users/MY%20COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/rea
+ct-native-iap/nitrogen/generated/android/kotlin/com/margelo/nitro/iap/Variant_NullType_WinBackOfferInputIOS.kt
+:48:23 Unresolved reference 'NullType'.
+
+> Task :react-native-iap:compileDebugKotlin FAILED
+> Task :react-native-gesture-handler:compileDebugKotlin
+> Task :app:processDebugResources
+^C

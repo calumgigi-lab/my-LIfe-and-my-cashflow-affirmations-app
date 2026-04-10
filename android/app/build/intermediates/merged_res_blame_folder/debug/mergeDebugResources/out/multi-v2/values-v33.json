@@ -1,0 +1,39 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.mylifemycashflow.app-mergeDebugResources-80:/values-v33/values-v33.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\MY COMPUTER\\.gradle\\caches\\8.14.3\\transforms\\691781beb21a3f434fcb15117fc77c61\\transformed\\core-splashscreen-1.2.0-alpha02\\res\\values-v33\\values-v33.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "284"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\MY COMPUTER\\Downloads\\Global-Affirmation-Hub-1\\Global-Affirmation-Hub-1\\node_modules\\react-native-keyboard-controller\\android\\build\\intermediates\\packaged_res\\debug\\packageDebugResources\\values-v33\\values-v33.xml",
+                    "from": {
+                        "startLines": "2,5,8,12",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,162,269,381",
+                        "endLines": "4,7,11,15",
+                        "endColumns": "10,10,10,10",
+                        "endOffsets": "157,264,376,488"
+                    },
+                    "to": {
+                        "startLines": "6,9,12,16",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "289,396,503,615",
+                        "endLines": "8,11,15,19",
+                        "endColumns": "10,10,10,10",
+                        "endOffsets": "391,498,610,722"
+                    }
+                }
+            ]
+        }
+    ]
+}

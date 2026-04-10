@@ -1,0 +1,748 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.mylifemycashflow"
+4    android:versionCode="2"
+5    android:versionName="1.0.2" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="36" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:7:3-75
+11-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:7:20-73
+12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+12-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:2:3-78
+12-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:2:20-76
+13    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+13-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:3:3-76
+13-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:3:20-74
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:4:3-64
+14-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:4:20-62
+15    <uses-permission
+15-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:5:3-77
+16        android:name="android.permission.READ_EXTERNAL_STORAGE"
+16-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:5:20-75
+17        android:maxSdkVersion="32" />
+17-->[BareExpo:expo.modules.image:3.0.11] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\00807ed39af365062c3c687a9e662376\transformed\expo.modules.image-3.0.11\AndroidManifest.xml:17:9-35
+18    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+18-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:6:3-68
+18-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:6:20-66
+19    <uses-permission android:name="android.permission.VIBRATE" />
+19-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:8:3-63
+19-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:8:20-61
+20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+20-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:9:3-78
+20-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:9:20-76
+21    <uses-permission android:name="com.android.vending.BILLING" />
+21-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:10:3-64
+21-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:10:20-62
+22
+23    <queries>
+23-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:11:3-17:13
+24        <intent>
+24-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:12:5-16:14
+25            <action android:name="android.intent.action.VIEW" />
+25-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:13:7-58
+25-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:13:15-56
+26
+27            <category android:name="android.intent.category.BROWSABLE" />
+27-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:14:7-67
+27-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:14:17-65
+28
+29            <data android:scheme="https" />
+29-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:15:7-37
+29-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:15:13-35
+30        </intent>
+31        <!-- Query open documents -->
+32        <intent>
+32-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:15:9-17:18
+33            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+33-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:16:13-79
+33-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:16:21-76
+34        </intent>
+35        <intent>
+35-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:15:9-19:18
+36
+37            <!-- Required for picking images from the camera roll if targeting API 30 -->
+38            <action android:name="android.media.action.IMAGE_CAPTURE" />
+38-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:18:13-73
+38-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:18:21-70
+39        </intent>
+40        <intent>
+40-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:20:9-24:18
+41
+42            <!-- Required for picking images from the camera if targeting API 30 -->
+43            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" />
+43-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:23:13-80
+43-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:23:21-77
+44        </intent>
+45        <intent>
+45-->[host.exp.exponent:expo.modules.webbrowser:15.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\0ec63f7f25636dfd09f17f8b32f04559\transformed\expo.modules.webbrowser-15.0.10\AndroidManifest.xml:8:9-12:18
+46
+47            <!-- Required for opening tabs if targeting API 30 -->
+48            <action android:name="android.support.customtabs.action.CustomTabsService" />
+48-->[host.exp.exponent:expo.modules.webbrowser:15.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\0ec63f7f25636dfd09f17f8b32f04559\transformed\expo.modules.webbrowser-15.0.10\AndroidManifest.xml:11:13-90
+48-->[host.exp.exponent:expo.modules.webbrowser:15.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\0ec63f7f25636dfd09f17f8b32f04559\transformed\expo.modules.webbrowser-15.0.10\AndroidManifest.xml:11:21-87
+49        </intent>
+50        <intent>
+50-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:8:9-14:18
+51            <action android:name="android.intent.action.GET_CONTENT" />
+51-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:9:13-72
+51-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:9:21-69
+52
+53            <category android:name="android.intent.category.OPENABLE" />
+53-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:11:13-73
+53-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:11:23-70
+54
+55            <data android:mimeType="*/*" />
+55-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:15:7-37
+56        </intent>
+57        <intent>
+57-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:13:9-15:18
+58            <action android:name="com.android.vending.billing.InAppBillingService.BIND" />
+58-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:14:13-91
+58-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:14:21-88
+59        </intent>
+60        <intent>
+60-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:16:9-18:18
+61            <action android:name="com.google.android.apps.play.billingtestcompanion.BillingOverrideService.BIND" />
+61-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:17:13-116
+61-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:17:21-113
+62        </intent>
+63    </queries>
+64
+65    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required for picking images from camera directly -->
+65-->[:expo-updates] C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\expo-updates\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:7:5-79
+65-->[:expo-updates] C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\expo-updates\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:7:22-76
+66    <uses-permission android:name="android.permission.CAMERA" />
+66-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:8:5-65
+66-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:8:22-62
+67    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+67-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:7:5-81
+67-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:7:22-78
+68    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+68-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:8:5-77
+68-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:8:22-74
+69    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+69-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:24:5-68
+69-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:24:22-65
+70    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+70-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:26:5-82
+70-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:26:22-79
+71
+72    <permission
+72-->[androidx.core:core:1.16.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\caeae941013ee11464c41613da9058bc\transformed\core-1.16.0\AndroidManifest.xml:22:5-24:47
+73        android:name="com.mylifemycashflow.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+73-->[androidx.core:core:1.16.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\caeae941013ee11464c41613da9058bc\transformed\core-1.16.0\AndroidManifest.xml:23:9-81
+74        android:protectionLevel="signature" />
+74-->[androidx.core:core:1.16.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\caeae941013ee11464c41613da9058bc\transformed\core-1.16.0\AndroidManifest.xml:24:9-44
+75
+76    <uses-permission android:name="com.mylifemycashflow.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+76-->[androidx.core:core:1.16.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\caeae941013ee11464c41613da9058bc\transformed\core-1.16.0\AndroidManifest.xml:26:5-97
+76-->[androidx.core:core:1.16.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\caeae941013ee11464c41613da9058bc\transformed\core-1.16.0\AndroidManifest.xml:26:22-94
+77    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- for android -->
+77-->[com.android.installreferrer:installreferrer:2.2] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\eb0dd2efccdaf22066de57f1cb8321f4\transformed\installreferrer-2.2\AndroidManifest.xml:9:5-110
+77-->[com.android.installreferrer:installreferrer:2.2] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\eb0dd2efccdaf22066de57f1cb8321f4\transformed\installreferrer-2.2\AndroidManifest.xml:9:22-107
+78    <!-- <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/> -->
+79    <!-- <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/> -->
+80    <!-- <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" /> -->
+81    <!-- <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" /> -->
+82    <!-- for Samsung -->
+83    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+83-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:19:5-86
+83-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:19:22-83
+84    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" /> <!-- for htc -->
+84-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:20:5-87
+84-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:20:22-84
+85    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+85-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:23:5-81
+85-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:23:22-78
+86    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" /> <!-- for sony -->
+86-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:24:5-83
+86-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:24:22-80
+87    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+87-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:27:5-88
+87-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:27:22-85
+88    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" /> <!-- for apex -->
+88-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:28:5-92
+88-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:28:22-89
+89    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" /> <!-- for solid -->
+89-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:31:5-84
+89-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:31:22-81
+90    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" /> <!-- for huawei -->
+90-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:34:5-83
+90-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:34:22-80
+91    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+91-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:37:5-91
+91-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:37:22-88
+92    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+92-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:38:5-92
+92-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:38:22-89
+93    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" /> <!-- for ZUK -->
+93-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:39:5-93
+93-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:39:22-90
+94    <uses-permission android:name="android.permission.READ_APP_BADGE" /> <!-- for OPPO -->
+94-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:42:5-73
+94-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:42:22-70
+95    <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS" />
+95-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:45:5-82
+95-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:45:22-79
+96    <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS" /> <!-- for EvMe -->
+96-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:46:5-83
+96-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:46:22-80
+97    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ" />
+97-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:49:5-88
+97-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:49:22-85
+98    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE" />
+98-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:50:5-89
+98-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\80e263bcf20c5e008f48bec7f689462e\transformed\ShortcutBadger-1.1.22\AndroidManifest.xml:50:22-86
+99
+100    <application
+100-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:18:3-36:17
+101        android:name="com.mylifemycashflow.MainApplication"
+101-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:18:16-47
+102        android:allowBackup="true"
+102-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:18:162-188
+103        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+103-->[androidx.core:core:1.16.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\caeae941013ee11464c41613da9058bc\transformed\core-1.16.0\AndroidManifest.xml:28:18-86
+104        android:debuggable="true"
+105        android:enableOnBackInvokedCallback="false"
+105-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:18:248-291
+106        android:extractNativeLibs="false"
+107        android:icon="@mipmap/ic_launcher"
+107-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:18:81-115
+108        android:label="@string/app_name"
+108-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:18:48-80
+109        android:roundIcon="@mipmap/ic_launcher_round"
+109-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:18:116-161
+110        android:supportsRtl="true"
+110-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:18:221-247
+111        android:theme="@style/AppTheme"
+111-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:18:189-220
+112        android:usesCleartextTraffic="true" >
+112-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\debug\AndroidManifest.xml:6:18-53
+113        <meta-data
+113-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:19:5-82
+114            android:name="expo.modules.updates.ENABLED"
+114-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:19:16-59
+115            android:value="true" />
+115-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:19:60-80
+116        <meta-data
+116-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:20:5-119
+117            android:name="expo.modules.updates.EXPO_RUNTIME_VERSION"
+117-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:20:16-72
+118            android:value="@string/expo_runtime_version" />
+118-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:20:73-117
+119        <meta-data
+119-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:21:5-105
+120            android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH"
+120-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:21:16-80
+121            android:value="ALWAYS" />
+121-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:21:81-103
+122        <meta-data
+122-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:22:5-99
+123            android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS"
+123-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:22:16-79
+124            android:value="0" />
+124-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:22:80-97
+125        <meta-data
+125-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:23:5-141
+126            android:name="expo.modules.updates.EXPO_UPDATE_URL"
+126-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:23:16-67
+127            android:value="https://u.expo.dev/544bfd7d-c1d3-4081-b9f2-dad5263d3fbb" />
+127-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:23:68-139
+128
+129        <activity
+129-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:24:5-35:16
+130            android:name="com.mylifemycashflow.MainActivity"
+130-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:24:15-43
+131            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
+131-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:24:44-134
+132            android:exported="true"
+132-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:24:256-279
+133            android:launchMode="singleTask"
+133-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:24:135-166
+134            android:screenOrientation="portrait"
+134-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:24:280-316
+135            android:theme="@style/Theme.App.SplashScreen"
+135-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:24:210-255
+136            android:windowSoftInputMode="adjustResize" >
+136-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:24:167-209
+137            <intent-filter>
+137-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:25:7-28:23
+138                <action android:name="android.intent.action.MAIN" />
+138-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:26:9-60
+138-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:26:17-58
+139
+140                <category android:name="android.intent.category.LAUNCHER" />
+140-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:27:9-68
+140-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:27:19-66
+141            </intent-filter>
+142            <intent-filter>
+142-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:29:7-34:23
+143                <action android:name="android.intent.action.VIEW" />
+143-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:13:7-58
+143-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:13:15-56
+144
+145                <category android:name="android.intent.category.DEFAULT" />
+145-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:31:9-67
+145-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:31:19-65
+146                <category android:name="android.intent.category.BROWSABLE" />
+146-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:14:7-67
+146-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:14:17-65
+147
+148                <data android:scheme="mylifemycashflow" />
+148-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:15:7-37
+148-->C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\android\app\src\main\AndroidManifest.xml:15:13-35
+149            </intent-filter>
+150        </activity>
+151
+152        <meta-data
+152-->[:expo-modules-core] C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:9:9-11:89
+153            android:name="org.unimodules.core.AppLoader#react-native-headless"
+153-->[:expo-modules-core] C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:10:13-79
+154            android:value="expo.modules.adapters.react.apploader.RNHeadlessAppLoader" />
+154-->[:expo-modules-core] C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:11:13-86
+155        <meta-data
+155-->[:expo-modules-core] C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:12:9-15:45
+156            android:name="com.facebook.soloader.enabled"
+156-->[:expo-modules-core] C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:13:13-57
+157            android:value="true" />
+157-->[:expo-modules-core] C:\Users\MY COMPUTER\Downloads\Global-Affirmation-Hub-1\Global-Affirmation-Hub-1\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:14:13-33
+158
+159        <activity
+159-->[com.facebook.react:react-android:0.81.5] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\86c4502a02865a420bd555f1139b6766\transformed\react-android-0.81.5-debug\AndroidManifest.xml:19:9-21:40
+160            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+160-->[com.facebook.react:react-android:0.81.5] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\86c4502a02865a420bd555f1139b6766\transformed\react-android-0.81.5-debug\AndroidManifest.xml:20:13-77
+161            android:exported="false" />
+161-->[com.facebook.react:react-android:0.81.5] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\86c4502a02865a420bd555f1139b6766\transformed\react-android-0.81.5-debug\AndroidManifest.xml:21:13-37
+162
+163        <provider
+163-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:21:9-30:20
+164            android:name="expo.modules.filesystem.FileSystemFileProvider"
+164-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:22:13-74
+165            android:authorities="com.mylifemycashflow.FileSystemFileProvider"
+165-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:23:13-74
+166            android:exported="false"
+166-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:24:13-37
+167            android:grantUriPermissions="true" >
+167-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:25:13-47
+168            <meta-data
+168-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:27:13-29:70
+169                android:name="android.support.FILE_PROVIDER_PATHS"
+169-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:28:17-67
+170                android:resource="@xml/file_system_provider_paths" />
+170-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:29:17-67
+171        </provider>
+172
+173        <service
+173-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:28:9-40:19
+174            android:name="com.google.android.gms.metadata.ModuleDependencies"
+174-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:29:13-78
+175            android:enabled="false"
+175-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:30:13-36
+176            android:exported="false" >
+176-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:31:13-37
+177            <intent-filter>
+177-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:33:13-35:29
+178                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+178-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:34:17-94
+178-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:34:25-91
+179            </intent-filter>
+180
+181            <meta-data
+181-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:37:13-39:36
+182                android:name="photopicker_activity:0:required"
+182-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:38:17-63
+183                android:value="" />
+183-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:39:17-33
+184        </service>
+185
+186        <activity
+186-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:42:9-46:48
+187            android:name="expo.modules.imagepicker.ExpoCropImageActivity"
+187-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:43:13-74
+188            android:exported="false"
+188-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:44:13-37
+189            android:theme="@style/Base.Theme.AppCompat" /> <!-- https://developer.android.com/guide/topics/manifest/provider-element.html -->
+189-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:45:13-56
+190        <provider
+190-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:48:9-56:20
+191            android:name="expo.modules.imagepicker.fileprovider.ImagePickerFileProvider"
+191-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:49:13-89
+192            android:authorities="com.mylifemycashflow.ImagePickerFileProvider"
+192-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:50:13-75
+193            android:exported="false"
+193-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:51:13-37
+194            android:grantUriPermissions="true" >
+194-->[host.exp.exponent:expo.modules.imagepicker:17.0.10] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c368a4919b72e2086d6dd6ad0d5ac48d\transformed\expo.modules.imagepicker-17.0.10\AndroidManifest.xml:52:13-47
+195            <meta-data
+195-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:27:13-29:70
+196                android:name="android.support.FILE_PROVIDER_PATHS"
+196-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:28:17-67
+197                android:resource="@xml/image_picker_provider_paths" />
+197-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:29:17-67
+198        </provider>
+199
+200        <service
+200-->[host.exp.exponent:expo.modules.location:19.0.8] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\92449a780a95dc1c5db9ef6a41c9c9f9\transformed\expo.modules.location-19.0.8\AndroidManifest.xml:11:9-14:56
+201            android:name="expo.modules.location.services.LocationTaskService"
+201-->[host.exp.exponent:expo.modules.location:19.0.8] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\92449a780a95dc1c5db9ef6a41c9c9f9\transformed\expo.modules.location-19.0.8\AndroidManifest.xml:12:13-78
+202            android:exported="false"
+202-->[host.exp.exponent:expo.modules.location:19.0.8] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\92449a780a95dc1c5db9ef6a41c9c9f9\transformed\expo.modules.location-19.0.8\AndroidManifest.xml:13:13-37
+203            android:foregroundServiceType="location" />
+203-->[host.exp.exponent:expo.modules.location:19.0.8] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\92449a780a95dc1c5db9ef6a41c9c9f9\transformed\expo.modules.location-19.0.8\AndroidManifest.xml:14:13-53
+204        <service
+204-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:11:9-17:19
+205            android:name="expo.modules.notifications.service.ExpoFirebaseMessagingService"
+205-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:12:13-91
+206            android:exported="false" >
+206-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:13:13-37
+207            <intent-filter android:priority="-1" >
+207-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:14:13-16:29
+207-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:14:28-49
+208                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+208-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:15:17-78
+208-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:15:25-75
+209            </intent-filter>
+210        </service>
+211
+212        <receiver
+212-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:19:9-31:20
+213            android:name="expo.modules.notifications.service.NotificationsService"
+213-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:20:13-83
+214            android:enabled="true"
+214-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:21:13-35
+215            android:exported="false" >
+215-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:22:13-37
+216            <intent-filter android:priority="-1" >
+216-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:23:13-30:29
+216-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:23:28-49
+217                <action android:name="expo.modules.notifications.NOTIFICATION_EVENT" />
+217-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:24:17-88
+217-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:24:25-85
+218                <action android:name="android.intent.action.BOOT_COMPLETED" />
+218-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:25:17-79
+218-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:25:25-76
+219                <action android:name="android.intent.action.REBOOT" />
+219-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:26:17-71
+219-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:26:25-68
+220                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+220-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:27:17-82
+220-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:27:25-79
+221                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+221-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:28:17-82
+221-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:28:25-79
+222                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+222-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:29:17-84
+222-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:29:25-81
+223            </intent-filter>
+224        </receiver>
+225
+226        <activity
+226-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:33:9-40:75
+227            android:name="expo.modules.notifications.service.NotificationForwarderActivity"
+227-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:34:13-92
+228            android:excludeFromRecents="true"
+228-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:35:13-46
+229            android:exported="false"
+229-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:36:13-37
+230            android:launchMode="standard"
+230-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:37:13-42
+231            android:noHistory="true"
+231-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:38:13-37
+232            android:taskAffinity=""
+232-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:39:13-36
+233            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+233-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:40:13-72
+234
+235        <service
+235-->[androidx.room:room-runtime:2.6.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\a927402a08038f6056939281cfca4080\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+236            android:name="androidx.room.MultiInstanceInvalidationService"
+236-->[androidx.room:room-runtime:2.6.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\a927402a08038f6056939281cfca4080\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+237            android:directBootAware="true"
+237-->[androidx.room:room-runtime:2.6.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\a927402a08038f6056939281cfca4080\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+238            android:exported="false" />
+238-->[androidx.room:room-runtime:2.6.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\a927402a08038f6056939281cfca4080\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+239
+240        <receiver
+240-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:29:9-40:20
+241            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+241-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:30:13-78
+242            android:exported="true"
+242-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:31:13-36
+243            android:permission="com.google.android.c2dm.permission.SEND" >
+243-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:32:13-73
+244            <intent-filter>
+244-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:33:13-35:29
+245                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+245-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:34:17-81
+245-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:34:25-78
+246            </intent-filter>
+247
+248            <meta-data
+248-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:37:13-39:40
+249                android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED"
+249-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:38:17-92
+250                android:value="true" />
+250-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:39:17-37
+251        </receiver>
+252        <!--
+253             FirebaseMessagingService performs security checks at runtime,
+254             but set to not exported to explicitly avoid allowing another app to call it.
+255        -->
+256        <service
+256-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:46:9-53:19
+257            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+257-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:47:13-82
+258            android:directBootAware="true"
+258-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:48:13-43
+259            android:exported="false" >
+259-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:49:13-37
+260            <intent-filter android:priority="-500" >
+260-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:14:13-16:29
+260-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:14:28-49
+261                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+261-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:15:17-78
+261-->[host.exp.exponent:expo.modules.notifications:0.32.16] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3ed010dbf34d60b380b91bd3c7886133\transformed\expo.modules.notifications-0.32.16\AndroidManifest.xml:15:25-75
+262            </intent-filter>
+263        </service>
+264        <service
+264-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:54:9-63:19
+265            android:name="com.google.firebase.components.ComponentDiscoveryService"
+265-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:55:13-84
+266            android:directBootAware="true"
+266-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:32:13-43
+267            android:exported="false" >
+267-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:56:13-37
+268            <meta-data
+268-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:57:13-59:85
+269                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar"
+269-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:58:17-122
+270                android:value="com.google.firebase.components.ComponentRegistrar" />
+270-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:59:17-82
+271            <meta-data
+271-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:60:13-62:85
+272                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+272-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:61:17-119
+273                android:value="com.google.firebase.components.ComponentRegistrar" />
+273-->[com.google.firebase:firebase-messaging:24.0.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\855db2df847bb4b3ea98a66fc785edc9\transformed\firebase-messaging-24.0.1\AndroidManifest.xml:62:17-82
+274            <meta-data
+274-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\f4e21ff6c991dccc13ac834774971018\transformed\firebase-installations-17.2.0\AndroidManifest.xml:15:13-17:85
+275                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+275-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\f4e21ff6c991dccc13ac834774971018\transformed\firebase-installations-17.2.0\AndroidManifest.xml:16:17-130
+276                android:value="com.google.firebase.components.ComponentRegistrar" />
+276-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\f4e21ff6c991dccc13ac834774971018\transformed\firebase-installations-17.2.0\AndroidManifest.xml:17:17-82
+277            <meta-data
+277-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\f4e21ff6c991dccc13ac834774971018\transformed\firebase-installations-17.2.0\AndroidManifest.xml:18:13-20:85
+278                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+278-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\f4e21ff6c991dccc13ac834774971018\transformed\firebase-installations-17.2.0\AndroidManifest.xml:19:17-127
+279                android:value="com.google.firebase.components.ComponentRegistrar" />
+279-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\f4e21ff6c991dccc13ac834774971018\transformed\firebase-installations-17.2.0\AndroidManifest.xml:20:17-82
+280            <meta-data
+280-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\86de53ab49539a4482f1de2cb1ce282c\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:12:13-14:85
+281                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+281-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\86de53ab49539a4482f1de2cb1ce282c\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:13:17-116
+282                android:value="com.google.firebase.components.ComponentRegistrar" />
+282-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\86de53ab49539a4482f1de2cb1ce282c\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:14:17-82
+283            <meta-data
+283-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:35:13-37:85
+284                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+284-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:36:17-109
+285                android:value="com.google.firebase.components.ComponentRegistrar" />
+285-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:37:17-82
+286            <meta-data
+286-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7edac0595008b82d431b89fd5e0b813e\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:25:13-27:85
+287                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+287-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7edac0595008b82d431b89fd5e0b813e\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:26:17-115
+288                android:value="com.google.firebase.components.ComponentRegistrar" />
+288-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7edac0595008b82d431b89fd5e0b813e\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:27:17-82
+289        </service>
+290
+291        <meta-data
+291-->[com.github.bumptech.glide:okhttp3-integration:4.11.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3779e019188c4682714765a1d7c812dc\transformed\okhttp3-integration-4.11.0\AndroidManifest.xml:11:9-13:43
+292            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+292-->[com.github.bumptech.glide:okhttp3-integration:4.11.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3779e019188c4682714765a1d7c812dc\transformed\okhttp3-integration-4.11.0\AndroidManifest.xml:12:13-84
+293            android:value="GlideModule" />
+293-->[com.github.bumptech.glide:okhttp3-integration:4.11.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3779e019188c4682714765a1d7c812dc\transformed\okhttp3-integration-4.11.0\AndroidManifest.xml:13:13-40
+294
+295        <provider
+295-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:21:9-29:20
+296            android:name="com.canhub.cropper.CropFileProvider"
+296-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:22:13-63
+297            android:authorities="com.mylifemycashflow.cropper.fileprovider"
+297-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:23:13-72
+298            android:exported="false"
+298-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:24:13-37
+299            android:grantUriPermissions="true" >
+299-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:25:13-47
+300            <meta-data
+300-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:27:13-29:70
+301                android:name="android.support.FILE_PROVIDER_PATHS"
+301-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:28:17-67
+302                android:resource="@xml/library_file_paths" />
+302-->[host.exp.exponent:expo.modules.filesystem:19.0.21] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\c6f76e6ade44c67e960f9807154a254e\transformed\expo.modules.filesystem-19.0.21\AndroidManifest.xml:29:17-67
+303        </provider>
+304
+305        <activity
+305-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:31:9-33:39
+306            android:name="com.canhub.cropper.CropImageActivity"
+306-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:32:13-64
+307            android:exported="true" />
+307-->[com.vanniktech:android-image-cropper:4.6.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\e2f99e3180d705f884a9831ca4c799e2\transformed\android-image-cropper-4.6.0\AndroidManifest.xml:33:13-36
+308
+309        <meta-data
+309-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:22:9-24:37
+310            android:name="com.google.android.play.billingclient.version"
+310-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:23:13-73
+311            android:value="8.3.0" />
+311-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:24:13-34
+312
+313        <activity
+313-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:26:9-30:75
+314            android:name="com.android.billingclient.api.ProxyBillingActivity"
+314-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:27:13-78
+315            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+315-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:28:13-96
+316            android:exported="false"
+316-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:29:13-37
+317            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+317-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:30:13-72
+318        <activity
+318-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:31:9-35:75
+319            android:name="com.android.billingclient.api.ProxyBillingActivityV2"
+319-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:32:13-80
+320            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+320-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:33:13-96
+321            android:exported="false"
+321-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:34:13-37
+322            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+322-->[com.android.billingclient:billing:8.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\dc5bfd45f3fa74999c5dc69379dd8267\transformed\billing-8.3.0\AndroidManifest.xml:35:13-72
+323        <activity
+323-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\28d5d046731b79ad85ab35239d4ddbd0\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
+324            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+324-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\28d5d046731b79ad85ab35239d4ddbd0\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:19-85
+325            android:exported="false"
+325-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\28d5d046731b79ad85ab35239d4ddbd0\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:146-170
+326            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+326-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\28d5d046731b79ad85ab35239d4ddbd0\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:86-145
+327
+328        <provider
+328-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
+329            android:name="com.google.firebase.provider.FirebaseInitProvider"
+329-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:24:13-77
+330            android:authorities="com.mylifemycashflow.firebaseinitprovider"
+330-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:25:13-72
+331            android:directBootAware="true"
+331-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:26:13-43
+332            android:exported="false"
+332-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:27:13-37
+333            android:initOrder="100" />
+333-->[com.google.firebase:firebase-common:21.0.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\163ca22bcdb81a8f7e356da68aaa8daf\transformed\firebase-common-21.0.0\AndroidManifest.xml:28:13-36
+334        <provider
+334-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3d5c86c6d3be618433bf6fb57717a709\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+335            android:name="androidx.startup.InitializationProvider"
+335-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3d5c86c6d3be618433bf6fb57717a709\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+336            android:authorities="com.mylifemycashflow.androidx-startup"
+336-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3d5c86c6d3be618433bf6fb57717a709\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+337            android:exported="false" >
+337-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3d5c86c6d3be618433bf6fb57717a709\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+338            <meta-data
+338-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3d5c86c6d3be618433bf6fb57717a709\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+339                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+339-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3d5c86c6d3be618433bf6fb57717a709\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+340                android:value="androidx.startup" />
+340-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3d5c86c6d3be618433bf6fb57717a709\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+341            <meta-data
+341-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\d77198aa3ce2ca03918917a9743221e1\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:29:13-31:52
+342                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+342-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\d77198aa3ce2ca03918917a9743221e1\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:30:17-78
+343                android:value="androidx.startup" />
+343-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\d77198aa3ce2ca03918917a9743221e1\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:31:17-49
+344            <meta-data
+344-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:29:13-31:52
+345                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+345-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:30:17-85
+346                android:value="androidx.startup" />
+346-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:31:17-49
+347        </provider>
+348
+349        <meta-data
+349-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3df45bbba088287123f57851e64ab5b4\transformed\play-services-basement-18.9.0\AndroidManifest.xml:21:9-23:69
+350            android:name="com.google.android.gms.version"
+350-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3df45bbba088287123f57851e64ab5b4\transformed\play-services-basement-18.9.0\AndroidManifest.xml:22:13-58
+351            android:value="@integer/google_play_services_version" />
+351-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\3df45bbba088287123f57851e64ab5b4\transformed\play-services-basement-18.9.0\AndroidManifest.xml:23:13-66
+352
+353        <receiver
+353-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:34:9-52:20
+354            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+354-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:35:13-76
+355            android:directBootAware="false"
+355-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:36:13-44
+356            android:enabled="true"
+356-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:37:13-35
+357            android:exported="true"
+357-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:38:13-36
+358            android:permission="android.permission.DUMP" >
+358-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:39:13-57
+359            <intent-filter>
+359-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:40:13-42:29
+360                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+360-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:41:17-91
+360-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:41:25-88
+361            </intent-filter>
+362            <intent-filter>
+362-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:43:13-45:29
+363                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+363-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:44:17-85
+363-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:44:25-82
+364            </intent-filter>
+365            <intent-filter>
+365-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:46:13-48:29
+366                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+366-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:47:17-88
+366-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:47:25-85
+367            </intent-filter>
+368            <intent-filter>
+368-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:49:13-51:29
+369                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+369-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:50:17-95
+369-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2c9407f02b54fd0b522a868b66eb30bf\transformed\profileinstaller-1.4.1\AndroidManifest.xml:50:25-92
+370            </intent-filter>
+371        </receiver>
+372
+373        <service
+373-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2e32e1b76650aaa3a212c92456cf1fad\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:28:9-34:19
+374            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+374-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2e32e1b76650aaa3a212c92456cf1fad\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:29:13-103
+375            android:exported="false" >
+375-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2e32e1b76650aaa3a212c92456cf1fad\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:30:13-37
+376            <meta-data
+376-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2e32e1b76650aaa3a212c92456cf1fad\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:31:13-33:39
+377                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+377-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2e32e1b76650aaa3a212c92456cf1fad\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:32:17-94
+378                android:value="cct" />
+378-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\2e32e1b76650aaa3a212c92456cf1fad\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:33:17-36
+379        </service>
+380        <service
+380-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7e2e70fd389cb41925a02ff77a3228a8\transformed\transport-runtime-3.1.9\AndroidManifest.xml:26:9-30:19
+381            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+381-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7e2e70fd389cb41925a02ff77a3228a8\transformed\transport-runtime-3.1.9\AndroidManifest.xml:27:13-117
+382            android:exported="false"
+382-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7e2e70fd389cb41925a02ff77a3228a8\transformed\transport-runtime-3.1.9\AndroidManifest.xml:28:13-37
+383            android:permission="android.permission.BIND_JOB_SERVICE" >
+383-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7e2e70fd389cb41925a02ff77a3228a8\transformed\transport-runtime-3.1.9\AndroidManifest.xml:29:13-69
+384        </service>
+385
+386        <receiver
+386-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7e2e70fd389cb41925a02ff77a3228a8\transformed\transport-runtime-3.1.9\AndroidManifest.xml:32:9-34:40
+387            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+387-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7e2e70fd389cb41925a02ff77a3228a8\transformed\transport-runtime-3.1.9\AndroidManifest.xml:33:13-132
+388            android:exported="false" />
+388-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\MY COMPUTER\.gradle\caches\8.14.3\transforms\7e2e70fd389cb41925a02ff77a3228a8\transformed\transport-runtime-3.1.9\AndroidManifest.xml:34:13-37
+389    </application>
+390
+391</manifest>

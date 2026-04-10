@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.mylifemycashflow.app-mergeDebugResources-80:/values-v35/values-v35.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\MY COMPUTER\\Downloads\\Global-Affirmation-Hub-1\\Global-Affirmation-Hub-1\\node_modules\\react-native-keyboard-controller\\android\\build\\intermediates\\packaged_res\\debug\\packageDebugResources\\values-v35\\values-v35.xml",
+                    "from": {
+                        "startLines": "2,6",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,193",
+                        "endLines": "5,9",
+                        "endColumns": "10,10",
+                        "endOffsets": "188,327"
+                    }
+                }
+            ]
+        }
+    ]
+}
