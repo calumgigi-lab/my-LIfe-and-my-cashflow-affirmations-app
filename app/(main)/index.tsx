@@ -23,6 +23,7 @@ import { useThemeColors } from "@/constants/colors";
 import { apiRequest, getApiUrl, queryClient } from "@/lib/query-client";
 import { purchaseBooklet } from "@/lib/booklet-purchases";
 import { PaymentDetailsModal } from "@/components/PaymentDetailsModal";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 
 export default function TodayScreen() {
   const { user } = useAuth();
