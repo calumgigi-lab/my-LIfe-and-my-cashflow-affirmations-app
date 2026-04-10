@@ -1,37 +1,17 @@
-node_modules
-dist
-build
-.next
-.nuxt
-.cache
-.venv
-.env*.local
-.git
-.gitignore
-README.md
-*.md
-.DS_Store
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.expo
-android
-ios
-*.apk
-*.aab
-*.jks
-*.keystore
-.gradle
-migrations
-scripts
-public
-lib
-app
-components
-constants
-assets
-patches
-*.json
-!package.json
-!drizzle.config.ts
+# Ignore everything except api folder and essential files
+**
+
+# Allow API folder
+!api/
 !api/**
+
+# Allow package files for dependency installation
+!package.json
+!package-lock.json
+!yarn.lock
+
+# Allow Vercel config
+!vercel.json
+
+# Allow environment setup
+!.env.local
