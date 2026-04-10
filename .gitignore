@@ -1,15 +1,18 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-# dependencies
+# Dependencies
 node_modules/
+package-lock.json
+yarn.lock
 
-# Expo
+# Expo & React Native
 .expo/
 dist/
 web-build/
 expo-env.d.ts
+.next/
 
-# Native
+# Native builds (too large to upload)
 ios/
 android/
 *.orig.*
@@ -22,36 +25,72 @@ android/
 
 # Gradle
 .gradle/
-build/
-*.apk
-*.aab
-*.dex
-
-# Build artifacts
 android/.gradle/
 android/build/
 android/app/build/
 local.properties
 
+# Build outputs
+build/
+server_dist/
+*.apk
+*.aab
+*.dex
+*.so
+
 # Metro
 .metro-health-check*
 
-# debug
+# Debug logs
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+pip-log.txt
+pip-delete-this-directory.txt
 
-# macOS
+# OS
 .DS_Store
 *.pem
+Thumbs.db
 
-# local env files
+# Environment files
+.env
 .env*.local
 
-# typescript
+# TypeScript
 *.tsbuildinfo
-.vercel
 
-.env
-
+# Vercel
 .vercel
+.vercel/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.cache/
+*.log
+temp/
+tmp/
+.DS_Store
