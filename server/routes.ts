@@ -1,5 +1,4 @@
 import type { Express, Request, Response } from "express";
-import { createServer, type Server } from "node:http";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
 import { pool } from "./db";
@@ -61,7 +60,7 @@ function requireAuth(req: Request, res: Response, next: Function) {
   next();
 }
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<void> {
   const isProduction = process.env.NODE_ENV === "production";
 
   await db.execute(sql`
@@ -913,9 +912,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
     },
   );
-
-  const httpServer = createServer(app);
-  return httpServer;
 }
 
 async function verifyStorePurchase(input: {
