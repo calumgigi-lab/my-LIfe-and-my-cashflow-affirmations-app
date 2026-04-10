@@ -20,6 +20,19 @@ android/
 *.key
 *.mobileprovision
 
+# Gradle
+.gradle/
+build/
+*.apk
+*.aab
+*.dex
+
+# Build artifacts
+android/.gradle/
+android/build/
+android/app/build/
+local.properties
+
 # Metro
 .metro-health-check*
 
