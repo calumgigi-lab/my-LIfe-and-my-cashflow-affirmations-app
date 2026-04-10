@@ -3,7 +3,6 @@ import { View, ActivityIndicator, StyleSheet, useColorScheme, Text } from "react
 import { router } from "expo-router";
 import { useAuth } from "@/lib/auth-context";
 import { useThemeColors } from "@/constants/colors";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 const LOADER_MESSAGES = [
   "creating a new life",
@@ -17,20 +16,20 @@ export default function IndexScreen() {
   const [messageIndex, setMessageIndex] = useState(0);
   const [minDurationElapsed, setMinDurationElapsed] = useState(false);
 
-  // Message rotation interval
+  // Message rotation interval - increased to 4 seconds so text displays longer
   useEffect(() => {
     const interval = setInterval(() => {
       setMessageIndex((prev) => (prev + 1) % LOADER_MESSAGES.length);
-    }, 2500);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Ensure loader shows for minimum 5-6 seconds
+  // Ensure loader shows for minimum 8-9 seconds for text to be read properly
   useEffect(() => {
     const timer = setTimeout(() => {
       setMinDurationElapsed(true);
-    }, 5500);
+    }, 8500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -49,7 +48,7 @@ export default function IndexScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
-        <Animated.View key={messageIndex} entering={FadeIn.duration(500)} exiting={FadeOut.duration(300)}>
+        <View key={messageIndex}>
           <Text
             style={[
               styles.message,
@@ -58,7 +57,7 @@ export default function IndexScreen() {
           >
             {LOADER_MESSAGES[messageIndex]}
           </Text>
-        </Animated.View>
+        </View>
 
         <View style={styles.loaderSection}>
           <ActivityIndicator size="large" color={colors.gold} />

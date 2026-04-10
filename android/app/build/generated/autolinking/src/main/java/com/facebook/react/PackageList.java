@@ -30,6 +30,8 @@ import com.swmansion.rnscreens.RNScreensPackage;
 import com.horcrux.svg.SvgPackage;
 // react-native-worklets
 import com.swmansion.worklets.WorkletsPackage;
+// react-native-nitro-modules
+import com.margelo.nitro.NitroModulesPackage;
 
 @SuppressWarnings("deprecation")
 public class PackageList {
@@ -85,7 +87,8 @@ public class PackageList {
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
       new SvgPackage(),
-      new WorkletsPackage()
+      new WorkletsPackage(),
+      new NitroModulesPackage()
     ));
   }
 }

@@ -16,6 +16,7 @@ add_subdirectory("C:/Users/MY\ COMPUTER/Downloads/Global-Affirmation-Hub-1/Globa
 add_subdirectory("C:/Users/MY\ COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/react-native-screens/android/src/main/jni/" rnscreens_autolinked_build)
 add_subdirectory("C:/Users/MY\ COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/react-native-svg/android/src/main/jni/" rnsvg_autolinked_build)
 add_subdirectory("C:/Users/MY\ COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/react-native-worklets/android/build/generated/source/codegen/jni/" rnworklets_autolinked_build)
+add_subdirectory("C:/Users/MY\ COMPUTER/Downloads/Global-Affirmation-Hub-1/Global-Affirmation-Hub-1/node_modules/react-native-nitro-modules/android/build/generated/source/codegen/jni/" NitroModulesSpec_autolinked_build)
 
 set(AUTOLINKED_LIBRARIES
   react_codegen_rnasyncstorage
@@ -28,4 +29,5 @@ set(AUTOLINKED_LIBRARIES
   react_codegen_rnscreens
   react_codegen_rnsvg
   react_codegen_rnworklets
+  react_codegen_NitroModulesSpec
 )

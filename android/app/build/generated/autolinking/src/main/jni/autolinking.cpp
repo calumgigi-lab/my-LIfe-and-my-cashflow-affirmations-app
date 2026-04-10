@@ -20,6 +20,7 @@
 #include <rnsvg.h>
 #include <react/renderer/components/rnsvg/ComponentDescriptors.h>
 #include <rnworklets.h>
+#include <NitroModulesSpec.h>
 
 namespace facebook {
 namespace react {
@@ -56,6 +57,10 @@ return module_rnsvg;
 auto module_rnworklets = rnworklets_ModuleProvider(moduleName, params);
 if (module_rnworklets != nullptr) {
 return module_rnworklets;
+}
+auto module_NitroModulesSpec = NitroModulesSpec_ModuleProvider(moduleName, params);
+if (module_NitroModulesSpec != nullptr) {
+return module_NitroModulesSpec;
 }
   return nullptr;
 }

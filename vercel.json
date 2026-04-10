@@ -1,15 +1,13 @@
 {
   "version": 2,
-  "functions": {
-    "api/index.ts": {
-      "maxDuration": 30,
-      "memory": 1024
-    }
+  "env": {
+    "DATABASE_URL": "@database_url"
   },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.ts"
+  "functions": {
+    "api/**/*.ts": {
+      "maxDuration": 30,
+      "memory": 512,
+      "runtime": "nodejs20.x"
     }
-  ]
+  }
 }

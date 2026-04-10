@@ -1,0 +1,51 @@
+﻿node.exe : Γÿà eas-cli@18.5.0 is now available.
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Γÿà eas-cli@18.5.0 is now availab 
+   le.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+To upgrade, run:
+npm install -g eas-cli
+Proceeding with outdated version.
+
+Resolved "production" environment for the build. Learn more: https://docs.expo.dev/eas/environment-variables/#setting-the-environment-for-your-builds
+No environment variables with visibility "Plain text" and "Sensitive" found for the "production" environment on EAS.
+Environment variables loaded from the "production" build profile "env" configuration: EXPO_PUBLIC_API_URL.
+
+
+
+Γ£ö Using remote Android credentials (Expo server)
+Γ£ö Using Keystore from configuration: Build Credentials LyVOvDhCwp (default)
+
+Compressing project files and uploading to EAS Build. Learn more: https://expo.fyi/eas-build-archive
+- Compressing project files\ Compressing project files| Compressing project 
+files/ Compressing project files- Compressing project files\ Compressing 
+project files| Compressing project files/ Compressing project files- 
+Compressing project files\ Compressing project files| Compressing project 
+files/ Compressing project files- Compressing project files\ Compressing 
+project files| Compressing project files/ Compressing project files- 
+Compressing project files\ Compressing project files| Compressing project 
+files/ Compressing project files- Compressing project files\ Compressing 
+project files| Compressing project files/ Compressing project files- 
+Compressing project files\ Compressing project files| Compressing project 
+files/ Compressing project files- Compressing project files\ Compressing 
+project files| Compressing project files/ Compressing project files- 
+Compressing project files\ Compressing project files| Compressing project 
+files/ Compressing project files- Compressing project files\ Compressing 
+project files| Compressing project files/ Compressing project files- 
+Compressing project files\ Compressing project files| Compressing project 
+files/ Compressing project files- Compressing project files\ Compressing 
+project files| Compressing project files/ Compressing project files- 
+Compressing project files\ Compressing project files| Compressing project 
+files/ Compressing project files- Compressing project files\ Compressing 
+project files| Compressing project files/ Compressing project files- 
+Compressing project files\ Compressing project files| Compressing project 
+files/ Compressing project files- Compressing project files\ Compressing 
+project files| Compressing project files/ Compressing project files- 
+Compressing project files\ Compressing project files| Compressing project 
+files/ Compressing project files- Compressing project files\ Compressing 
+project files| Compressing project files/ Compressing project files- 
+Compressing project files\ Compressing project files| Compressing project 
+filesΓ£ö Compressed project files 12s (73.0 MB)
