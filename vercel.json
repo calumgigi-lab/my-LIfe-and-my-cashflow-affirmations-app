@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "name": "global-affirmation-hub-api",
   "env": {
     "DATABASE_URL": "@database_url"
   },
