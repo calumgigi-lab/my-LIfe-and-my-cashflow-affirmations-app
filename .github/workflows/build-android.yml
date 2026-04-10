@@ -40,7 +40,6 @@ jobs:
           cd android
           ./gradlew clean assembleRelease
         env:
-          NODE_ENV: production
           EXPO_PUBLIC_API_URL: https://global-affirmation-hub-api.vercel.app
       
       - name: Upload APK artifact

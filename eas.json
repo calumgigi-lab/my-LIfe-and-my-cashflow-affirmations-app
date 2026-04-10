@@ -1,18 +1,32 @@
 {
+  "cli": {
+    "version": ">= 8.0.0",
+    "appVersionSource": "local"
+  },
   "build": {
     "production": {
       "android": {
-        "buildType": "app-bundle"
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://global-affirmation-hub-api.vercel.app"
       }
     },
     "preview": {
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://global-affirmation-hub-api.vercel.app"
       }
     },
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://global-affirmation-hub-api.vercel.app"
+      }
     }
   }
 }
