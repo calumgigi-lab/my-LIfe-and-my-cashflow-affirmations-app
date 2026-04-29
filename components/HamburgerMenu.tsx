@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
+  Image,
   Modal,
   Platform,
   Pressable,
@@ -88,29 +89,37 @@ export default function HamburgerMenu() {
 
   return (
     <>
-      <View style={[styles.fabRow, { top: topOffset }]}> 
-        <Pressable
-          onPress={() => {
-            void goTo("notifications");
-          }}
-          style={[styles.iconBtn, { backgroundColor: colors.surface, borderColor: colors.border }]}
-          hitSlop={8}
-        >
-          <Ionicons name="notifications-outline" size={20} color={colors.text} />
-          {unreadCount > 0 && (
-            <View style={[styles.badge, { backgroundColor: colors.error }]}> 
-              <Text style={styles.badgeText}>{unreadCount > 9 ? "9+" : String(unreadCount)}</Text>
-            </View>
-          )}
-        </Pressable>
+      <View style={[styles.headerBar, { paddingTop: insets.top + (Platform.OS === "web" ? 67 : 0), backgroundColor: colors.background }]}>
+        <Image
+          source={require("@/assets/images/icon.png")}
+          style={styles.headerLogo}
+          resizeMode="contain"
+        />
 
-        <Pressable
-          onPress={() => setOpen(true)}
-          style={[styles.iconBtn, { backgroundColor: colors.surface, borderColor: colors.border }]}
-          hitSlop={8}
-        >
-          <Ionicons name="menu" size={22} color={colors.text} />
-        </Pressable>
+        <View style={styles.headerIcons}>
+          <Pressable
+            onPress={() => {
+              void goTo("notifications");
+            }}
+            style={[styles.iconBtn, { backgroundColor: colors.surface, borderColor: colors.border }]}
+            hitSlop={8}
+          >
+            <Ionicons name="notifications-outline" size={20} color={colors.text} />
+            {unreadCount > 0 && (
+              <View style={[styles.badge, { backgroundColor: colors.error }]}> 
+                <Text style={styles.badgeText}>{unreadCount > 9 ? "9+" : String(unreadCount)}</Text>
+              </View>
+            )}
+          </Pressable>
+
+          <Pressable
+            onPress={() => setOpen(true)}
+            style={[styles.iconBtn, { backgroundColor: colors.surface, borderColor: colors.border }]}
+            hitSlop={8}
+          >
+            <Ionicons name="menu" size={22} color={colors.text} />
+          </Pressable>
+        </View>
       </View>
 
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
@@ -152,23 +161,31 @@ export default function HamburgerMenu() {
               <>
                 <View style={{ height: 1, backgroundColor: colors.border, marginVertical: 12 }} />
                 <Text style={[styles.drawerTitle, { color: colors.gold, fontSize: 14, marginBottom: 8 }]}>Admin</Text>
-                <Pressable
-                  onPress={() => {
-                    setOpen(false);
-                    router.push("/admin-payments" as any);
-                  }}
-                  style={({ pressed }) => [
-                    styles.menuItem,
-                    {
-                      borderColor: colors.border,
-                      backgroundColor: pressed ? colors.surfaceSecondary : colors.surface,
-                    },
-                  ]}
-                >
-                  <Ionicons name="card-outline" size={19} color={colors.text} />
-                  <Text style={[styles.menuLabel, { color: colors.text }]}>Payments</Text>
-                  <Ionicons name="chevron-forward" size={17} color={colors.textSecondary} />
-                </Pressable>
+                {[
+                  { label: "Payments", icon: "card-outline", route: "/admin-payments" },
+                  { label: "Affirmations", icon: "book-outline", route: "/admin-affirmations" },
+                  { label: "Broadcast News", icon: "megaphone-outline", route: "/admin-notifications" },
+                  { label: "User Management", icon: "people-outline", route: "/admin-users" },
+                ].map((item) => (
+                  <Pressable
+                    key={item.route}
+                    onPress={() => {
+                      setOpen(false);
+                      router.push(item.route as any);
+                    }}
+                    style={({ pressed }) => [
+                      styles.menuItem,
+                      {
+                        borderColor: colors.border,
+                        backgroundColor: pressed ? colors.surfaceSecondary : colors.surface,
+                      },
+                    ]}
+                  >
+                    <Ionicons name={item.icon as any} size={19} color={colors.text} />
+                    <Text style={[styles.menuLabel, { color: colors.text }]}>{item.label}</Text>
+                    <Ionicons name="chevron-forward" size={17} color={colors.textSecondary} />
+                  </Pressable>
+                ))}
               </>
             )}
           </Pressable>
@@ -179,12 +196,26 @@ export default function HamburgerMenu() {
 }
 
 const styles = StyleSheet.create({
-  fabRow: {
+  headerBar: {
     position: "absolute",
-    right: 16,
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingBottom: 10,
+  },
+  headerLogo: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+  },
+  headerIcons: {
     flexDirection: "row",
     gap: 10,
-    zIndex: 20,
   },
   iconBtn: {
     width: 42,

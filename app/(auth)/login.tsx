@@ -173,9 +173,19 @@ export default function LoginScreen() {
             </Pressable>
           </View>
 
+          <Pressable
+            onPress={() => router.push("/(auth)/forgot-password" as any)}
+            style={styles.forgotPasswordLink}
+          >
+            <Text style={[styles.forgotPasswordText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
+              Forgot your password?{" "}
+              <Text style={{ color: colors.gold, fontFamily: "DMSans_600SemiBold" }}>Reset it</Text>
+            </Text>
+          </Pressable>
+
           <View style={styles.footer}>
             <Text style={[styles.footerText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-              Don't have an account?
+              Don&apos;t have an account?
             </Text>
             <Pressable onPress={() => router.push("/(auth)/register")}>
               <Text style={[styles.footerLink, { color: colors.gold, fontFamily: "DMSans_600SemiBold" }]}>
@@ -288,5 +298,13 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: "center",
     letterSpacing: 0.3,
+  },
+  forgotPasswordLink: {
+    alignItems: "center",
+    paddingVertical: 10,
+  },
+  forgotPasswordText: {
+    fontSize: 14,
+    textAlign: "center",
   },
 });

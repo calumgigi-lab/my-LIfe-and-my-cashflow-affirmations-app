@@ -32,6 +32,7 @@ interface Payment {
   transactionId: string;
   amountNaira: number;
   status: "pending" | "approved" | "rejected";
+  paymentMethod?: string;
   approvedBy: number | null;
   approvedAt: string | null;
   createdAt: string;
@@ -74,6 +75,14 @@ export default function AdminPaymentsPanel() {
   const [approvalReason, setApprovalReason] = useState("");
   const [rejectionReason, setRejectionReason] = useState("");
 
+  function handleExpandPayment(paymentId: number | null) {
+    if (paymentId !== expandedPaymentId) {
+      setApprovalReason("");
+      setRejectionReason("");
+    }
+    setExpandedPaymentId(paymentId);
+  }
+
   // Fetch payment statistics
   const { data: stats } = useQuery({
     queryKey: ["payment-stats"],
@@ -109,7 +118,7 @@ export default function AdminPaymentsPanel() {
       queryClient.invalidateQueries({ queryKey: ["payment-stats"] });
       Alert.alert("Success", "Payment approved!");
       setApprovalReason("");
-      setExpandedPaymentId(null);
+      handleExpandPayment(null);
     },
     onError: () => {
       Alert.alert("Error", "Failed to approve payment");
@@ -129,7 +138,7 @@ export default function AdminPaymentsPanel() {
       queryClient.invalidateQueries({ queryKey: ["payment-stats"] });
       Alert.alert("Success", "Payment rejected!");
       setRejectionReason("");
-      setExpandedPaymentId(null);
+      handleExpandPayment(null);
     },
     onError: () => {
       Alert.alert("Error", "Failed to reject payment");
@@ -218,6 +227,21 @@ export default function AdminPaymentsPanel() {
                 <Text style={{ color: "white", fontSize: 12, opacity: 0.9 }}>Approved</Text>
                 <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>
                   {stats.approved}
+                </Text>
+              </View>
+
+              <View
+                style={{
+                  flex: 1,
+                  minWidth: 160,
+                  backgroundColor: "#F44336",
+                  padding: 12,
+                  borderRadius: 8,
+                }}
+              >
+                <Text style={{ color: "white", fontSize: 12, opacity: 0.9 }}>Rejected</Text>
+                <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>
+                  {stats.rejected}
                 </Text>
               </View>
 
@@ -315,7 +339,7 @@ export default function AdminPaymentsPanel() {
             >
               <TouchableOpacity
                 onPress={() =>
-                  setExpandedPaymentId(expandedPaymentId === payment.id ? null : payment.id)
+                  handleExpandPayment(expandedPaymentId === payment.id ? null : payment.id)
                 }
                 style={{ padding: 12 }}
               >
@@ -329,6 +353,7 @@ export default function AdminPaymentsPanel() {
                     </Text>
                     <Text style={{ color: colors.text, opacity: 0.6, fontSize: 12 }}>
                       {payment.bookletTitle} • ₦{payment.amountNaira.toLocaleString()}
+                      {payment.paymentMethod === "points" ? "  🏆 Points" : "  💳 Bank"}
                     </Text>
                   </View>
 
@@ -360,6 +385,7 @@ export default function AdminPaymentsPanel() {
                     <DetailRow label="Transaction ID" value={payment.transactionId} />
                     <DetailRow label="Platform" value={payment.platform.toUpperCase()} />
                     <DetailRow label="Product ID" value={payment.productId} />
+                    <DetailRow label="Payment Method" value={payment.paymentMethod === "points" ? "Reward Points" : "Bank Transfer"} />
                     <DetailRow label="Recorded" value={formatDate(payment.createdAt)} />
                     {payment.approvedAt && (
                       <DetailRow label="Approved" value={formatDate(payment.approvedAt)} />

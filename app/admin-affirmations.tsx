@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { View, ScrollView, TextInput, TouchableOpacity, Text, Alert, useColorScheme } from "react-native";
+import { View, ScrollView, TextInput, TouchableOpacity, Text, Alert, useColorScheme, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
 import Colors from "@/constants/colors";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/query-client";
 import { useAuth } from "@/lib/auth-context";
 
 interface Affirmation {
+  id?: number;
   dayNumber: number;
   title: string;
   content: string;
@@ -18,12 +20,27 @@ interface Booklet {
   year: number;
 }
 
+interface DuplicateAffirmation {
+  id: number;
+  bookletId: number;
+  dayNumber: number;
+  title: string;
+  contentPreview: string;
+  bookletTitle: string;
+  month: number;
+  year: number;
+  duplicateCount: number;
+}
+
+type ActiveTab = "edit" | "duplicates";
+
 export default function AdminAffirmationsPanel() {
   const colorScheme = useColorScheme() ?? "light";
   const colors = Colors[colorScheme];
   const queryClient = useQueryClient();
   const { user, isLoading: authLoading } = useAuth();
 
+  const [activeTab, setActiveTab] = useState<ActiveTab>("edit");
   const [selectedBooklet, setSelectedBooklet] = useState<number | null>(null);
   const [selectedDay, setSelectedDay] = useState<number>(1);
   const [affirmationTitle, setAffirmationTitle] = useState("");
@@ -41,8 +58,34 @@ export default function AdminAffirmationsPanel() {
   const { data: bookletsList } = useQuery({
     queryKey: ["booklets"],
     queryFn: async () => {
-      const res = await fetch("/api/booklets");
+      const res = await apiRequest("GET", "/api/booklets");
       return res.json();
+    },
+  });
+
+  // Fetch duplicate affirmations
+  const { data: duplicates = [], isLoading: dupsLoading, refetch: refetchDups } = useQuery<DuplicateAffirmation[]>({
+    queryKey: ["admin-affirmation-duplicates"],
+    queryFn: async () => {
+      const res = await apiRequest("GET", "/api/admin/affirmations/duplicates");
+      return res.json();
+    },
+    enabled: activeTab === "duplicates",
+  });
+
+  // Delete affirmation mutation
+  const deleteMutation = useMutation({
+    mutationFn: async (affId: number) => {
+      const res = await apiRequest("DELETE", `/api/admin/affirmations/${affId}`);
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-affirmation-duplicates"] });
+      queryClient.invalidateQueries({ queryKey: ["affirmations"] });
+      Alert.alert("Deleted", "Affirmation removed.");
+    },
+    onError: () => {
+      Alert.alert("Error", "Failed to delete affirmation.");
     },
   });
 
@@ -51,7 +94,7 @@ export default function AdminAffirmationsPanel() {
     queryKey: ["affirmations", selectedBooklet],
     queryFn: async () => {
       if (!selectedBooklet) return [];
-      const res = await fetch(`/api/booklets/${selectedBooklet}`);
+      const res = await apiRequest("GET", `/api/booklets/${selectedBooklet}`);
       return res.json();
     },
     enabled: !!selectedBooklet,
@@ -87,18 +130,12 @@ export default function AdminAffirmationsPanel() {
 
         const method = existing ? "PUT" : "POST";
 
-        const res = await fetch(endpoint, {
-          method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            bookletId: selectedBooklet,
-            dayNumber: selectedDay,
-            title: affirmationTitle,
-            content: affirmationContent,
-          }),
+        await apiRequest(method, endpoint, {
+          bookletId: selectedBooklet,
+          dayNumber: selectedDay,
+          title: affirmationTitle,
+          content: affirmationContent,
         });
-
-        if (!res.ok) throw new Error("Failed to save");
 
         queryClient.invalidateQueries({ queryKey: ["affirmations", selectedBooklet] });
         Alert.alert("Success", `Day ${selectedDay} affirmation saved!`);
@@ -125,12 +162,35 @@ export default function AdminAffirmationsPanel() {
             fontSize: 28,
             fontWeight: "bold",
             color: colors.text,
-            marginBottom: 24,
+            marginBottom: 16,
             fontFamily: "PlayfairDisplay_700Bold",
           }}
         >
-          📚 Add Affirmations
+          Affirmations
         </Text>
+
+        {/* Tab Selector */}
+        <View style={{ flexDirection: "row", gap: 10, marginBottom: 20 }}>
+          {(["edit", "duplicates"] as ActiveTab[]).map((tab) => (
+            <TouchableOpacity
+              key={tab}
+              onPress={() => setActiveTab(tab)}
+              style={{
+                flex: 1,
+                paddingVertical: 10,
+                borderRadius: 10,
+                alignItems: "center",
+                backgroundColor: activeTab === tab ? colors.tint : colors.surface,
+                borderWidth: 1,
+                borderColor: activeTab === tab ? colors.tint : colors.border,
+              }}
+            >
+              <Text style={{ color: activeTab === tab ? "#fff" : colors.text, fontWeight: "600", fontSize: 13, textTransform: "capitalize" }}>
+                {tab === "edit" ? "Edit / Add" : "Find Duplicates"}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
         {/* Booklet Selection */}
         <View style={{ marginBottom: 24 }}>
@@ -180,7 +240,7 @@ export default function AdminAffirmationsPanel() {
           </ScrollView>
         </View>
 
-        {selectedBooklet && (
+        {activeTab === "edit" && selectedBooklet && (
           <>
             {/* Day Selection */}
             <View style={{ marginBottom: 24 }}>
@@ -362,6 +422,85 @@ export default function AdminAffirmationsPanel() {
               </Text>
             </View>
           </>
+        )}
+
+        {/* Duplicates Tab */}
+        {activeTab === "duplicates" && (
+          <View>
+            <View style={{ backgroundColor: "#FF980015", borderRadius: 10, padding: 12, marginBottom: 16, borderWidth: 1, borderColor: "#FF980040" }}>
+              <Text style={{ color: "#FF9800", fontSize: 13, lineHeight: 20 }}>
+                These affirmations share identical content across booklets. Keep the original and delete the duplicates.
+              </Text>
+            </View>
+
+            {dupsLoading ? (
+              <ActivityIndicator size="large" color={colors.tint} style={{ paddingVertical: 40 }} />
+            ) : duplicates.length === 0 ? (
+              <View style={{ alignItems: "center", paddingVertical: 60, gap: 10 }}>
+                <Text style={{ fontSize: 36 }}>✅</Text>
+                <Text style={{ color: colors.text, opacity: 0.5, textAlign: "center", fontSize: 15 }}>
+                  No duplicate affirmations found.
+                </Text>
+                <TouchableOpacity onPress={() => void refetchDups()} style={{ backgroundColor: colors.tint + "20", paddingHorizontal: 16, paddingVertical: 8, borderRadius: 8, marginTop: 8 }}>
+                  <Text style={{ color: colors.tint, fontWeight: "600" }}>Refresh</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <>
+                <Text style={{ color: colors.textSecondary, fontSize: 13, marginBottom: 12 }}>
+                  Found {duplicates.length} duplicate entr{duplicates.length === 1 ? "y" : "ies"} across booklets
+                </Text>
+                {duplicates.map((dup) => (
+                  <View
+                    key={dup.id}
+                    style={{
+                      backgroundColor: colors.surface,
+                      borderRadius: 10, padding: 12, marginBottom: 10,
+                      borderLeftWidth: 3, borderLeftColor: "#FF9800",
+                      borderWidth: 1, borderColor: colors.border,
+                    }}
+                  >
+                    <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
+                      <View style={{ flex: 1 }}>
+                        <Text style={{ color: colors.text, fontWeight: "700", fontSize: 14, marginBottom: 2 }}>{dup.title}</Text>
+                        <Text style={{ color: colors.textSecondary, fontSize: 12, marginBottom: 4 }}>
+                          {dup.bookletTitle} · Day {dup.dayNumber} · {dup.month}/{dup.year}
+                        </Text>
+                        <Text style={{ color: colors.text, opacity: 0.6, fontSize: 12, lineHeight: 18 }} numberOfLines={3}>
+                          {dup.contentPreview}...
+                        </Text>
+                        <View style={{ backgroundColor: "#FF980025", paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6, alignSelf: "flex-start", marginTop: 6 }}>
+                          <Text style={{ color: "#FF9800", fontSize: 10, fontWeight: "700" }}>
+                            {dup.duplicateCount}x DUPLICATE
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                    <TouchableOpacity
+                      onPress={() =>
+                        Alert.alert(
+                          "Delete this affirmation?",
+                          `Day ${dup.dayNumber} from "${dup.bookletTitle}" will be permanently removed.`,
+                          [
+                            { text: "Cancel", style: "cancel" },
+                            { text: "Delete", style: "destructive", onPress: () => deleteMutation.mutate(dup.id) },
+                          ],
+                        )
+                      }
+                      disabled={deleteMutation.isPending}
+                      style={{
+                        backgroundColor: "#F4433620", borderRadius: 8, paddingVertical: 8,
+                        alignItems: "center", borderWidth: 1, borderColor: "#F4433640",
+                        marginTop: 8, flexDirection: "row", justifyContent: "center", gap: 6,
+                      }}
+                    >
+                      <Text style={{ color: "#F44336", fontWeight: "600", fontSize: 13 }}>Delete Duplicate</Text>
+                    </TouchableOpacity>
+                  </View>
+                ))}
+              </>
+            )}
+          </View>
         )}
       </View>
     </ScrollView>
