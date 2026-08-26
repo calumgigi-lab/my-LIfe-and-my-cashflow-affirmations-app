@@ -1,9 +1,6 @@
 {
   "version": 2,
   "buildCommand": "npm install --production=false && npm prune --production",
-  "env": {
-    "DATABASE_URL": "$database_url"
-  },
   "routes": [
     {
       "src": "/api/(.*)",
