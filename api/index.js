@@ -18,6 +18,36 @@ function hashPasswordSHA256(password) {
   return hash.digest("hex");
 }
 
+// ── Flutterwave V4 OAuth2 Helper ──
+let _flwToken = null;
+let _flwTokenExpiry = 0;
+async function flutterwaveApi(method, endpoint, body) {
+  const clientId = process.env.FLW_CLIENT_ID;
+  const clientSecret = process.env.FLW_CLIENT_SECRET;
+  if (!clientId || !clientSecret) throw new Error("Flutterwave credentials not configured");
+
+  const now = Date.now();
+  if (!_flwToken || now >= _flwTokenExpiry) {
+    const tokenRes = await fetch("https://idp.flutterwave.com/realms/flutterwave/protocol/openid-connect/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ client_id: clientId, client_secret: clientSecret, grant_type: "client_credentials" }).toString(),
+    });
+    if (!tokenRes.ok) throw new Error(`Flutterwave auth failed: ${tokenRes.status}`);
+    const tokenData = await tokenRes.json();
+    _flwToken = tokenData.access_token;
+    _flwTokenExpiry = now + ((tokenData.expires_in || 600) - 60) * 1000;
+  }
+
+  const res = await fetch(`https://api.flutterwave.com/v3${endpoint}`, {
+    method,
+    headers: { "Authorization": `Bearer ${_flwToken}`, "Content-Type": "application/json" },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const data = await res.json();
+  return data;
+}
+
 // Verify admin from X-User-Id header
 async function verifyAdmin(req, sql) {
   const userId = req.headers["x-user-id"];
@@ -389,7 +419,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // ── Completions: Check if affirmation is completed today ──
+    // ── Completions: Check if affirmation is completed (permanent) ──
     const completionCheckMatch = path.match(/^\/api\/completions\/check\/(\d+)$/);
     if (completionCheckMatch && method === "GET") {
       const sql = getSQL();
@@ -397,16 +427,15 @@ module.exports = async function handler(req, res) {
       const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
       if (!userId) return res.json({ completed: false });
 
-      const today = new Date().toISOString().split("T")[0];
       const result = await sql`
         SELECT id FROM affirmation_completions
-        WHERE user_id = ${userId} AND affirmation_id = ${affirmationId} AND completed_date = ${today}
+        WHERE user_id = ${userId} AND affirmation_id = ${affirmationId}
         LIMIT 1
       `;
       return res.json({ completed: result.length > 0 });
     }
 
-    // ── Completions: Complete an affirmation ──
+    // ── Completions: Complete an affirmation (permanent, one-time only) ──
     const completeMatch = path.match(/^\/api\/affirmations\/(\d+)\/complete$/);
     if (completeMatch && method === "POST") {
       const sql = getSQL();
@@ -416,21 +445,31 @@ module.exports = async function handler(req, res) {
 
       const today = new Date().toISOString().split("T")[0];
 
-      // Check if already completed today
+      // Permanent check — once affirmed, never again (across all days)
       const existing = await sql`
         SELECT id FROM affirmation_completions
-        WHERE user_id = ${userId} AND affirmation_id = ${affirmationId} AND completed_date = ${today}
+        WHERE user_id = ${userId} AND affirmation_id = ${affirmationId}
         LIMIT 1
       `;
       if (existing.length > 0) {
-        return res.json({ message: "Already completed today", completed: true });
+        return res.json({ message: "Already affirmed", completed: true });
       }
 
-      // Insert completion
-      await sql`
+      // Ensure unique constraint exists to prevent race-condition duplicates
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_affirmation_completions_user_affirm ON affirmation_completions (user_id, affirmation_id)`.catch(() => {});
+
+      // Insert completion — only proceed if a new row was actually inserted
+      const insertResult = await sql`
         INSERT INTO affirmation_completions (user_id, affirmation_id, completed_date)
         VALUES (${userId}, ${affirmationId}, ${today})
-      `;
+        ON CONFLICT (user_id, affirmation_id) DO NOTHING
+        RETURNING id
+      `.catch(() => []);
+
+      // If ON CONFLICT fired (insertResult is empty), someone already completed it
+      if (!insertResult.length) {
+        return res.json({ message: "Already affirmed", completed: true });
+      }
 
       // Award 50 reward points
       await sql`
@@ -495,6 +534,18 @@ module.exports = async function handler(req, res) {
               total_affirmed = total_affirmed + 1, last_active_date = ${today}
           WHERE user_id = ${userId}
         `;
+
+        // Streak milestone bonus: +10 points at 7, +25 at 14, +50 at 30
+        let milestoneBonus = 0;
+        if (newStreak === 7) milestoneBonus = 10;
+        else if (newStreak === 14) milestoneBonus = 25;
+        else if (newStreak === 30) milestoneBonus = 50;
+        if (milestoneBonus > 0) {
+          await sql`UPDATE reward_points SET points = points + ${milestoneBonus}, total_earned = total_earned + ${milestoneBonus}, updated_at = NOW() WHERE user_id = ${userId}`;
+          await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${milestoneBonus}, 'streak_milestone', ${`Streak milestone: ${newStreak} days`})`;
+        }
+
+        return res.json({ message: "Completed", completed: true, pointsAwarded: 50, streakMilestoneBonus: milestoneBonus, currentStreak: newStreak });
       } else {
         await sql`
           INSERT INTO user_streaks (user_id, current_streak, longest_streak, total_affirmed, last_active_date)
@@ -502,7 +553,7 @@ module.exports = async function handler(req, res) {
         `;
       }
 
-      return res.json({ message: "Completed", completed: true, pointsAwarded: 50 });
+      return res.json({ message: "Completed", completed: true, pointsAwarded: 50, streakMilestoneBonus: 0 });
     }
 
     // ── Reward Points: Get balance ──
@@ -561,6 +612,33 @@ module.exports = async function handler(req, res) {
         description: r.description,
         createdAt: r.created_at,
       })));
+    }
+
+    // ── Rewards: Daily Check-in ──
+    if (path === "/api/rewards/daily-checkin" && method === "POST") {
+      const sql = getSQL();
+      const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
+      if (!userId) return res.status(401).json({ error: "Authentication required" });
+
+      const today = new Date().toISOString().split("T")[0];
+      const existing = await sql`
+        SELECT id FROM reward_history
+        WHERE user_id = ${userId} AND action = 'daily_checkin' AND created_at::date = ${today}::date
+        LIMIT 1
+      `.catch(() => []);
+
+      if (existing.length) return res.json({ alreadyCheckedIn: true, pointsAwarded: 0 });
+
+      const checkInPts = 10;
+      const existingPts = await sql`SELECT id FROM reward_points WHERE user_id = ${userId} LIMIT 1`.catch(() => []);
+      if (existingPts.length) {
+        await sql`UPDATE reward_points SET points = points + ${checkInPts}, total_earned = total_earned + ${checkInPts}, updated_at = NOW() WHERE user_id = ${userId}`;
+      } else {
+        await sql`INSERT INTO reward_points (user_id, points, total_earned, total_spent) VALUES (${userId}, ${checkInPts}, ${checkInPts}, 0)`;
+      }
+      await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${checkInPts}, 'daily_checkin', 'Daily check-in bonus')`;
+
+      return res.json({ alreadyCheckedIn: false, pointsAwarded: checkInPts });
     }
 
     // ── Leaderboard ──
@@ -695,7 +773,23 @@ module.exports = async function handler(req, res) {
       }
 
       await sql`UPDATE users SET profile_picture_url = ${pictureUrl} WHERE id = ${userId}`;
-      return res.json({ message: "Profile picture updated", profilePictureUrl: pictureUrl });
+
+      // One-time profile picture upload bonus
+      let bonusAwarded = 0;
+      const alreadyBonused = await sql`SELECT id FROM reward_history WHERE user_id = ${userId} AND action = 'profile_picture' LIMIT 1`.catch(() => []);
+      if (!alreadyBonused.length) {
+        const profPicPts = 100;
+        bonusAwarded = profPicPts;
+        const existingPts = await sql`SELECT id FROM reward_points WHERE user_id = ${userId} LIMIT 1`.catch(() => []);
+        if (existingPts.length) {
+          await sql`UPDATE reward_points SET points = points + ${profPicPts}, total_earned = total_earned + ${profPicPts}, updated_at = NOW() WHERE user_id = ${userId}`;
+        } else {
+          await sql`INSERT INTO reward_points (user_id, points, total_earned, total_spent) VALUES (${userId}, ${profPicPts}, ${profPicPts}, 0)`;
+        }
+        await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${profPicPts}, 'profile_picture', 'Profile picture upload bonus')`;
+      }
+
+      return res.json({ message: "Profile picture updated", profilePictureUrl: pictureUrl, bonusAwarded });
     }
 
     // ── Profile Picture: Delete ──
@@ -825,6 +919,152 @@ module.exports = async function handler(req, res) {
         RETURNING *
       `;
       return res.json(result[0]);
+    }
+
+    // ── Public: Payment Provider Settings ──
+    if (path === "/api/payment-provider" && method === "GET") {
+      return res.json({
+        provider: "flutterwave",
+        publicKey: process.env.FLW_PUBLIC_KEY || "",
+        currency: "NGN",
+      });
+    }
+
+    // ── Flutterwave: Initialize Payment ──
+    if (path === "/api/payments/flutterwave/initialize" && method === "POST") {
+      const sql = getSQL();
+      const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
+      if (!userId) return res.status(401).json({ error: "Authentication required" });
+
+      const { bookletId, amount, email, name } = req.body || {};
+      if (!bookletId || !amount || !email) {
+        return res.status(400).json({ error: "bookletId, amount, and email are required" });
+      }
+
+      const txRef = `affirm-${userId}-${bookletId}-${Date.now()}`;
+      const baseUrl = req.headers.origin || `https://${req.headers.host}`;
+      const redirectUrl = `${baseUrl}/api/payments/flutterwave/callback?tx_ref=${txRef}&bookletId=${bookletId}&userId=${userId}`;
+
+      const flwRes = await flutterwaveApi("POST", "/payments", {
+        tx_ref: txRef,
+        amount: String(amount),
+        currency: "NGN",
+        redirect_url: redirectUrl,
+        customer: { email, name: name || email },
+        customizations: {
+          title: "My Life and My Cash Flow",
+          description: `Monthly Booklet Access`,
+        },
+        meta: { userId, bookletId },
+      });
+
+      if (flwRes.status === "success") {
+        return res.json({ status: "success", checkoutUrl: flwRes.data.link, txRef });
+      }
+      return res.status(500).json({ error: "Failed to initialize payment", details: flwRes });
+    }
+
+    // ── Flutterwave: Callback (user redirected here after payment) ──
+    const flwCallbackMatch = path.match(/^\/api\/payments\/flutterwave\/callback$/);
+    if (flwCallbackMatch && method === "GET") {
+      const sql = getSQL();
+      const txRef = req.query.tx_ref;
+      const bookletId = parseInt(req.query.bookletId) || null;
+      const userId = parseInt(req.query.userId) || null;
+
+      if (txRef) {
+        const flwRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${txRef}`);
+        if (flwRes.status === "success" && flwRes.data && flwRes.data.status === "successful") {
+          if (bookletId && userId) {
+            await sql`
+              INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+              VALUES (${userId}, ${bookletId}, 'web', 'flutterwave', ${txRef}, 'approved', 'flutterwave', ${parseInt(req.query.amount) || 1500})
+              ON CONFLICT DO NOTHING
+            `.catch(() => {});
+          }
+        }
+      }
+
+      const frontendUrl = process.env.APP_URL || "https://global-affirmation-hub-1.vercel.app";
+      const params = new URLSearchParams();
+      if (txRef) params.set("reference", txRef);
+      if (bookletId) params.set("bookletId", String(bookletId));
+      params.set("unlocked", "1");
+      return res.redirect(`${frontendUrl}/payment-complete?${params.toString()}`);
+    }
+
+    // ── Flutterwave: Sync Payment Status ──
+    if (path === "/api/payments/flutterwave/sync" && method === "POST") {
+      const sql = getSQL();
+      const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
+      const { reference, bookletId } = req.body || {};
+
+      if (!reference) {
+        return res.status(400).json({ error: "reference is required" });
+      }
+
+      const flwRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${reference}`);
+      if (flwRes.status === "success" && flwRes.data && flwRes.data.status === "successful") {
+        const uid = userId || flwRes.data.meta?.userId;
+        const bid = bookletId || flwRes.data.meta?.bookletId;
+        if (uid && bid) {
+          await sql`
+            INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+            VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${reference}, 'approved', 'flutterwave', ${flwRes.data.amount || 1500})
+            ON CONFLICT DO NOTHING
+          `.catch(() => {});
+        }
+        return res.json({ status: "success", verified: true });
+      }
+      return res.json({ status: "pending", verified: false });
+    }
+
+    // ── Flutterwave: Verify by Transaction ID ──
+    if (path === "/api/payments/flutterwave/verify" && method === "POST") {
+      const sql = getSQL();
+      const { transactionId } = req.body || {};
+      if (!transactionId) return res.status(400).json({ error: "transactionId is required" });
+
+      const flwRes = await flutterwaveApi("GET", `/transactions/${transactionId}`);
+      if (flwRes.status === "success" && flwRes.data) {
+        const tx = flwRes.data;
+        if (tx.status === "successful" && tx.meta?.userId && tx.meta?.bookletId) {
+          await sql`
+            INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+            VALUES (${tx.meta.userId}, ${tx.meta.bookletId}, 'web', 'flutterwave', ${tx.flw_ref || tx.tx_ref}, 'approved', 'flutterwave', ${tx.amount})
+            ON CONFLICT DO NOTHING
+          `.catch(() => {});
+        }
+        return res.json({ status: tx.status, data: tx });
+      }
+      return res.status(404).json({ error: "Transaction not found" });
+    }
+
+    // ── Flutterwave: Webhook ──
+    if (path === "/api/payments/flutterwave/webhook" && method === "POST") {
+      const sql = getSQL();
+      const secretHash = process.env.FLW_SECRET_HASH;
+      const signature = req.headers["verif-hash"] || req.headers["x-flutterwave-signature"];
+      const body = req.body;
+
+      // Verify webhook signature
+      if (secretHash && signature !== secretHash) {
+        console.warn("Flutterwave webhook: invalid signature");
+      }
+
+      if (body?.event === "charge.completed" && body?.data) {
+        const tx = body.data;
+        const uid = tx.meta?.userId;
+        const bid = tx.meta?.bookletId;
+        if (uid && bid && tx.status === "successful") {
+          await sql`
+            INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+            VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${tx.flw_ref || tx.tx_ref || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
+            ON CONFLICT DO NOTHING
+          `.catch(() => {});
+        }
+      }
+      return res.json({ status: "ok" });
     }
 
     // ══════════════════════════════════════

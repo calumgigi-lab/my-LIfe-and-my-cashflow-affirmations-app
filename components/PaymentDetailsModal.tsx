@@ -10,17 +10,21 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { apiRequest } from "@/lib/query-client";
 import Colors from "@/constants/colors";
+
+type PaymentProvider = "flutterwave" | "bank_transfer";
 
 interface PaymentDetailsModalProps {
   visible: boolean;
   bookletTitle: string;
   amount: number;
+  paymentProvider?: PaymentProvider;
   onConfirmPayment: () => Promise<void>;
   onCancel: () => void;
+  bookletId?: number;
 }
 
-// Organization payment account
 const PAYMENT_ACCOUNT = {
   bankName: "United Bank for Africa",
   bankShort: "UBA",
@@ -33,8 +37,10 @@ export function PaymentDetailsModal({
   visible,
   bookletTitle,
   amount,
+  paymentProvider = "bank_transfer",
   onConfirmPayment,
   onCancel,
+  bookletId,
 }: PaymentDetailsModalProps) {
   const colorScheme = useColorScheme() ?? "light";
   const colors = Colors[colorScheme];
@@ -43,7 +49,11 @@ export function PaymentDetailsModal({
   const handleConfirm = async () => {
     setIsLoading(true);
     try {
-      await onConfirmPayment();
+      if (paymentProvider === "flutterwave") {
+        await handleFlutterwavePay();
+      } else {
+        await onConfirmPayment();
+      }
     } catch (error) {
       Alert.alert(
         "Error",
@@ -53,6 +63,171 @@ export function PaymentDetailsModal({
       setIsLoading(false);
     }
   };
+
+  const handleFlutterwavePay = async () => {
+    try {
+      const res = await apiRequest("POST", "/api/payments/flutterwave/initialize", {
+        bookletId: bookletId,
+        amount: amount,
+        email: "user@globalaffirmationhub.com",
+        name: "User",
+      });
+      const data = await res.json();
+      if (data.checkoutUrl) {
+        const { Linking } = require("react-native");
+        await Linking.openURL(data.checkoutUrl);
+      } else {
+        throw new Error(data.error || "Failed to create payment link");
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  if (paymentProvider === "flutterwave") {
+    return (
+      <Modal visible={visible} transparent={true} animationType="fade">
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0,0,0,0.6)",
+            justifyContent: "flex-end",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: colors.background,
+              borderTopLeftRadius: 24,
+              borderTopRightRadius: 24,
+              padding: 24,
+              maxHeight: "90%",
+              paddingBottom: 32,
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 24,
+              }}
+            >
+              <View>
+                <Text style={{ fontSize: 24, fontWeight: "700", color: colors.text }}>
+                  Pay with Flutterwave
+                </Text>
+                <Text style={{ color: colors.text, opacity: 0.6, fontSize: 13, marginTop: 2 }}>
+                  {bookletTitle}
+                </Text>
+              </View>
+              <TouchableOpacity onPress={onCancel} disabled={isLoading} hitSlop={8}>
+                <Ionicons name="close" size={28} color={colors.text} />
+              </TouchableOpacity>
+            </View>
+
+            <View
+              style={{
+                backgroundColor: colors.gold + "15",
+                borderRadius: 16,
+                padding: 20,
+                marginBottom: 24,
+                alignItems: "center",
+                borderWidth: 1,
+                borderColor: colors.gold + "30",
+              }}
+            >
+              <Text style={{ color: colors.text, opacity: 0.7, fontSize: 13, marginBottom: 8 }}>
+                Amount
+              </Text>
+              <Text
+                style={{
+                  color: colors.gold,
+                  fontSize: 36,
+                  fontWeight: "700",
+                  fontFamily: "DMSans_700Bold",
+                }}
+              >
+                ₦{amount.toLocaleString()}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                backgroundColor: colors.gold + "10",
+                borderRadius: 12,
+                padding: 16,
+                marginBottom: 24,
+                borderLeftWidth: 4,
+                borderLeftColor: colors.gold,
+              }}
+            >
+              <Text style={{ color: colors.text, fontSize: 13, lineHeight: 20, opacity: 0.8 }}>
+                You will be redirected to Flutterwave secure checkout to complete your payment via card, bank transfer, or USSD.
+              </Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 12,
+                marginTop: 20,
+              }}
+            >
+              <TouchableOpacity
+                onPress={onCancel}
+                disabled={isLoading}
+                style={{
+                  flex: 1,
+                  paddingVertical: 14,
+                  borderRadius: 12,
+                  borderWidth: 1.5,
+                  borderColor: colors.text + "20",
+                }}
+              >
+                <Text
+                  style={{
+                    color: colors.text,
+                    fontWeight: "600",
+                    fontSize: 14,
+                    textAlign: "center",
+                  }}
+                >
+                  Cancel
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={handleConfirm}
+                disabled={isLoading}
+                style={{
+                  flex: 1,
+                  paddingVertical: 14,
+                  borderRadius: 12,
+                  backgroundColor: colors.gold,
+                  opacity: isLoading ? 0.7 : 1,
+                }}
+              >
+                {isLoading ? (
+                  <ActivityIndicator size="small" color={colors.background} />
+                ) : (
+                  <Text
+                    style={{
+                      color: colors.background,
+                      fontWeight: "700",
+                      fontSize: 14,
+                      textAlign: "center",
+                    }}
+                  >
+                    Pay ₦{amount.toLocaleString()}
+                  </Text>
+                )}
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    );
+  }
 
   return (
     <Modal visible={visible} transparent={true} animationType="fade">
@@ -73,7 +248,6 @@ export function PaymentDetailsModal({
             paddingBottom: 32,
           }}
         >
-          {/* Header */}
           <View
             style={{
               flexDirection: "row",
@@ -96,7 +270,6 @@ export function PaymentDetailsModal({
           </View>
 
           <ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: 16 }}>
-            {/* Amount Section */}
             <View
               style={{
                 backgroundColor: colors.gold + "15",
@@ -123,7 +296,6 @@ export function PaymentDetailsModal({
               </Text>
             </View>
 
-            {/* Bank Details Section */}
             <Text
               style={{
                 color: colors.text,
@@ -136,7 +308,6 @@ export function PaymentDetailsModal({
               Bank Details
             </Text>
 
-            {/* Bank Name & Code */}
             <View style={{ marginBottom: 16, gap: 12 }}>
               <View
                 style={{
@@ -179,7 +350,6 @@ export function PaymentDetailsModal({
               </View>
             </View>
 
-            {/* Account Number */}
             <View style={{ marginBottom: 16 }}>
               <View
                 style={{
@@ -216,7 +386,6 @@ export function PaymentDetailsModal({
               </View>
             </View>
 
-            {/* Account Name */}
             <View style={{ marginBottom: 24 }}>
               <View
                 style={{
@@ -251,7 +420,6 @@ export function PaymentDetailsModal({
               </View>
             </View>
 
-            {/* Instructions */}
             <View
               style={{
                 backgroundColor: colors.gold + "10",
@@ -280,7 +448,6 @@ export function PaymentDetailsModal({
               </Text>
             </View>
 
-            {/* Info */}
             <View
               style={{
                 backgroundColor: "#2196F320",
@@ -297,7 +464,6 @@ export function PaymentDetailsModal({
             </View>
           </ScrollView>
 
-          {/* Action Buttons */}
           <View
             style={{
               flexDirection: "row",
@@ -362,7 +528,6 @@ export function PaymentDetailsModal({
 }
 
 function copyToClipboard(text: string) {
-  // Use React Native's Share API or Clipboard API if available
   try {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(text).catch(() => {

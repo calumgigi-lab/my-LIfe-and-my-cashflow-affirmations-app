@@ -142,6 +142,13 @@ export default function LibraryScreen() {
     queryKey: ["/api/booklets/access"],
   });
 
+  const { data: providerData } = useQuery<{ provider: string }>({
+    queryKey: ["/api/payment-provider"],
+    staleTime: 300_000,
+  });
+
+  const paymentProvider = (providerData?.provider === "flutterwave" ? "flutterwave" : "bank_transfer") as "flutterwave" | "bank_transfer";
+
   const verifyPurchaseMutation = useMutation({
     mutationFn: async (booklet: { id: number; month: number; year: number }) => {
       await purchaseBooklet(booklet);
@@ -247,6 +254,8 @@ export default function LibraryScreen() {
         visible={showPaymentModal}
         bookletTitle={selectedBooklet ? `${monthNames[selectedBooklet.month]} ${selectedBooklet.year}` : ""}
         amount={monthlyPriceNaira}
+        paymentProvider={paymentProvider}
+        bookletId={selectedBooklet?.id}
         onConfirmPayment={handleConfirmPayment}
         onCancel={() => {
           setShowPaymentModal(false);
