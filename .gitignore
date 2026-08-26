@@ -84,6 +84,16 @@ Thumbs.db
 .env.development.local
 .env.test.local
 .env.production.local
+.env.vercel
+.env.vercel.prod
+.env.vercel.test
+credentials.json
+keystore.b64
+keystore_new.b64
+keystore_p12.b64
+bundle-final.bin
+bundle-response.txt
+qr-dev-server.png
 
 # IDE & Editor
 .vscode/*
