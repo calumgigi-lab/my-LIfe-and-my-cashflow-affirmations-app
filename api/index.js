@@ -1005,8 +1005,14 @@ module.exports = async function handler(req, res) {
 
       const flwRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${reference}`);
       if (flwRes.status === "success" && flwRes.data && flwRes.data.status === "successful") {
-        const uid = userId || flwRes.data.meta?.userId;
-        const bid = bookletId || flwRes.data.meta?.bookletId;
+        let uid = userId || flwRes.data.meta?.userId;
+        let bid = bookletId || flwRes.data.meta?.bookletId;
+        // Fallback: parse tx_ref format affirm-{userId}-{bookletId}-{timestamp}
+        if ((!uid || !bid) && reference && reference.startsWith("affirm-")) {
+          const parts = reference.split("-");
+          uid = uid || parseInt(parts[1]) || null;
+          bid = bid || parseInt(parts[2]) || null;
+        }
         if (uid && bid) {
           await sql`
             INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
@@ -1028,12 +1034,22 @@ module.exports = async function handler(req, res) {
       const flwRes = await flutterwaveApi("GET", `/transactions/${transactionId}`);
       if (flwRes.status === "success" && flwRes.data) {
         const tx = flwRes.data;
-        if (tx.status === "successful" && tx.meta?.userId && tx.meta?.bookletId) {
-          await sql`
-            INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
-            VALUES (${tx.meta.userId}, ${tx.meta.bookletId}, 'web', 'flutterwave', ${tx.flw_ref || tx.tx_ref}, 'approved', 'flutterwave', ${tx.amount})
-            ON CONFLICT DO NOTHING
-          `.catch(() => {});
+        if (tx.status === "successful") {
+          let uid = tx.meta?.userId;
+          let bid = tx.meta?.bookletId;
+          // Fallback: parse tx_ref format affirm-{userId}-{bookletId}-{timestamp}
+          if ((!uid || !bid) && tx.tx_ref && tx.tx_ref.startsWith("affirm-")) {
+            const parts = tx.tx_ref.split("-");
+            uid = uid || parseInt(parts[1]) || null;
+            bid = bid || parseInt(parts[2]) || null;
+          }
+          if (uid && bid) {
+            await sql`
+              INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+              VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${tx.flw_ref || tx.tx_ref}, 'approved', 'flutterwave', ${tx.amount})
+              ON CONFLICT DO NOTHING
+            `.catch(() => {});
+          }
         }
         return res.json({ status: tx.status, data: tx });
       }
@@ -1044,27 +1060,65 @@ module.exports = async function handler(req, res) {
     if (path === "/api/payments/flutterwave/webhook" && method === "POST") {
       const sql = getSQL();
       const secretHash = process.env.FLW_SECRET_HASH;
-      const signature = req.headers["verif-hash"] || req.headers["x-flutterwave-signature"];
+      const signature = req.headers["flutterwave-signature"];
       const body = req.body;
 
-      // Verify webhook signature
-      if (secretHash && signature !== secretHash) {
-        console.warn("Flutterwave webhook: invalid signature");
+      // Verify webhook signature (HMAC-SHA256 or direct match)
+      let sigValid = false;
+      if (secretHash && signature) {
+        // Try HMAC-SHA256 first (Flutterwave V4 standard)
+        try {
+          const rawBody = JSON.stringify(body);
+          const expected = crypto.createHmac("sha256", secretHash).update(rawBody).digest("base64");
+          sigValid = expected === signature;
+        } catch (_) {}
+        // Fallback: direct hash comparison (Flutterwave examples)
+        if (!sigValid) sigValid = signature === secretHash;
+      }
+      if (secretHash && !sigValid) {
+        console.warn("Flutterwave webhook: invalid signature — still returning 200 per Flutterwave docs");
       }
 
-      if (body?.event === "charge.completed" && body?.data) {
+      // Flutterwave sends type="charge.completed", NOT event
+      if (body?.type === "charge.completed" && body?.data) {
         const tx = body.data;
-        const uid = tx.meta?.userId;
-        const bid = tx.meta?.bookletId;
+        const txRef = tx.tx_ref || tx.reference;
+
+        // Parse tx_ref format: affirm-{userId}-{bookletId}-{timestamp}
+        let uid = null, bid = null;
+        if (txRef && txRef.startsWith("affirm-")) {
+          const parts = txRef.split("-");
+          uid = parseInt(parts[1]) || null;
+          bid = parseInt(parts[2]) || null;
+        }
+
+        // Also try meta (may be empty in webhook but worth checking)
+        if (!uid || !bid) {
+          uid = uid || tx.meta?.userId || tx.customer?.id;
+          bid = bid || tx.meta?.bookletId;
+        }
+
         if (uid && bid && tx.status === "successful") {
+          // Re-verify via API as Flutterwave recommends
+          try {
+            const verifyRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${txRef}`);
+            if (verifyRes?.data?.status !== "successful") {
+              console.warn("Flutterwave webhook: re-verification failed, skipping");
+              return res.json({ status: "ok", note: "verification_failed" });
+            }
+          } catch (e) {
+            console.warn("Flutterwave webhook: re-verify API error:", e.message);
+          }
+
           await sql`
             INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
-            VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${tx.flw_ref || tx.tx_ref || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
+            VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${tx.flw_ref || txRef || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
             ON CONFLICT DO NOTHING
           `.catch(() => {});
         }
       }
-      return res.json({ status: "ok" });
+      // Must return 200 within 60 seconds per Flutterwave docs
+      return res.status(200).json({ status: "ok" });
     }
 
     // ══════════════════════════════════════
