@@ -956,9 +956,12 @@ module.exports = async function handler(req, res) {
       const bookletId = parseInt(req.query.bookletId) || null;
       const userId = parseInt(req.query.userId) || null;
 
+      let paymentSuccessful = false;
+
       if (txRef) {
         const flwRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${txRef}`);
         if (flwRes.status === "success" && flwRes.data && flwRes.data.status === "successful") {
+          paymentSuccessful = true;
           if (bookletId && userId) {
             await sql`
               INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
@@ -973,7 +976,8 @@ module.exports = async function handler(req, res) {
       const params = new URLSearchParams();
       if (txRef) params.set("reference", txRef);
       if (bookletId) params.set("bookletId", String(bookletId));
-      params.set("unlocked", "1");
+      if (userId) params.set("userId", String(userId));
+      params.set("status", paymentSuccessful ? "success" : "cancelled");
       return res.redirect(`${frontendUrl}/payment-complete?${params.toString()}`);
     }
 
