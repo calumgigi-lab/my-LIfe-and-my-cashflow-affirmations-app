@@ -18,30 +18,14 @@ function hashPasswordSHA256(password) {
   return hash.digest("hex");
 }
 
-// ── Flutterwave V4 OAuth2 Helper ──
-let _flwToken = null;
-let _flwTokenExpiry = 0;
+// ── Flutterwave V3 API Helper ──
 async function flutterwaveApi(method, endpoint, body) {
-  const clientId = process.env.FLW_CLIENT_ID;
-  const clientSecret = process.env.FLW_CLIENT_SECRET;
-  if (!clientId || !clientSecret) throw new Error("Flutterwave credentials not configured");
-
-  const now = Date.now();
-  if (!_flwToken || now >= _flwTokenExpiry) {
-    const tokenRes = await fetch("https://idp.flutterwave.com/realms/flutterwave/protocol/openid-connect/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ client_id: clientId, client_secret: clientSecret, grant_type: "client_credentials" }).toString(),
-    });
-    if (!tokenRes.ok) throw new Error(`Flutterwave auth failed: ${tokenRes.status}`);
-    const tokenData = await tokenRes.json();
-    _flwToken = tokenData.access_token;
-    _flwTokenExpiry = now + ((tokenData.expires_in || 600) - 60) * 1000;
-  }
+  const secretKey = process.env.FLW_SECRET_KEY;
+  if (!secretKey) throw new Error("FLW_SECRET_KEY not configured");
 
   const res = await fetch(`https://api.flutterwave.com/v3${endpoint}`, {
     method,
-    headers: { "Authorization": `Bearer ${_flwToken}`, "Content-Type": "application/json" },
+    headers: { "Authorization": `Bearer ${secretKey}`, "Content-Type": "application/json" },
     body: body ? JSON.stringify(body) : undefined,
   });
   const data = await res.json();
