@@ -80,8 +80,9 @@ export default function TodayScreen() {
       const res = await apiRequest("POST", `/api/affirmations/${affirmationId}/complete`);
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (data: any) => {
       setCompletedAffirmation(true);
+      queryClient.setQueryData(["/api/completions/check", todayAff?.id?.toString()], { completed: true });
       queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
       queryClient.invalidateQueries({ queryKey: ["/api/completions"] });
       queryClient.invalidateQueries({ queryKey: ["/api/completions/check"] });
@@ -500,8 +501,12 @@ export default function TodayScreen() {
                         </Pressable>
                       ) : !isCompleted ? (
                         <Pressable
-                          onPress={() => completeMutation.mutate(todayAff.id)}
-                          disabled={completeMutation.isPending}
+                          onPress={() => {
+                            if (!isCompleted && !completeMutation.isPending) {
+                              completeMutation.mutate(todayAff.id);
+                            }
+                          }}
+                          disabled={completeMutation.isPending || isCompleted}
                           style={({ pressed }) => [
                             styles.markCompleteBtn,
                             { opacity: pressed ? 0.9 : 1 },

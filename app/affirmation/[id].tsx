@@ -99,8 +99,9 @@ export default function AffirmationDetailScreen() {
       const res = await apiRequest("POST", `/api/affirmations/${affirmationId}/complete`);
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (data: any) => {
       setCompletedAffirmation(true);
+      queryClient.setQueryData(["/api/completions/check", id], { completed: true });
       queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
       queryClient.invalidateQueries({ queryKey: ["/api/completions"] });
       queryClient.invalidateQueries({ queryKey: ["/api/completions/check"] });
@@ -277,8 +278,12 @@ export default function AffirmationDetailScreen() {
               <View style={styles.actionSection}>
                 {!isCompleted ? (
                 <Pressable
-                  onPress={() => completeMutation.mutate(aff.id)}
-                  disabled={completeMutation.isPending}
+                  onPress={() => {
+                    if (!isCompleted && !completeMutation.isPending) {
+                      completeMutation.mutate(aff.id);
+                    }
+                  }}
+                  disabled={completeMutation.isPending || isCompleted}
                   style={({ pressed }) => [
                     styles.affirmButton,
                     { opacity: pressed ? 0.9 : 1 },
