@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
 import { useThemeColors } from "@/constants/colors";
 import { apiRequest } from "@/lib/query-client";
 import { purchaseBooklet } from "@/lib/booklet-purchases";
@@ -145,14 +146,6 @@ export default function StoreScreen() {
           <Text style={[styles.navTitle, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
             Store
           </Text>
-          <Pressable
-            style={[styles.navCart, { backgroundColor: colors.surface, borderColor: colors.border + "30" }]}
-          >
-            <Ionicons name="bag-outline" size={20} color={colors.text} />
-            <View style={[styles.navBadge, { backgroundColor: colors.gold }]}>
-              <Text style={[styles.navBadgeText, { color: colors.background }]}>0</Text>
-            </View>
-          </Pressable>
         </Animated.View>
 
         {/* Hero Banner */}
@@ -468,6 +461,22 @@ export default function StoreScreen() {
           bookletId={selectedBooklet.id > 0 ? selectedBooklet.id : undefined}
         />
       )}
+
+      {/* Coming Soon Blur Overlay */}
+      <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
+        <BlurView intensity={60} tint="dark" style={StyleSheet.absoluteFill} />
+        <View style={styles.comingSoonOverlay}>
+          <View style={styles.comingSoonCard}>
+            <Ionicons name="lock-closed" size={40} color={colors.gold} />
+            <Text style={[styles.comingSoonTitle, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
+              Coming Soon
+            </Text>
+            <Text style={[styles.comingSoonText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
+              The store is being prepared. Check back soon for premium booklets and bundles!
+            </Text>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
@@ -742,4 +751,28 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   footerText: { fontSize: 13, textAlign: "center", lineHeight: 20 },
+  comingSoonOverlay: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  comingSoonCard: {
+    alignItems: "center",
+    padding: 32,
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 28, 50, 0.85)",
+    borderWidth: 1,
+    borderColor: "rgba(212, 168, 83, 0.3)",
+    marginHorizontal: 40,
+    gap: 12,
+  },
+  comingSoonTitle: {
+    fontSize: 24,
+    textAlign: "center",
+  },
+  comingSoonText: {
+    fontSize: 14,
+    textAlign: "center",
+    lineHeight: 20,
+  },
 });

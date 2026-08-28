@@ -176,7 +176,7 @@ export default function LibraryScreen() {
       <ScrollView
         contentContainerStyle={[
           styles.scrollContent,
-          { paddingTop: insets.top + 16, paddingBottom: 120 },
+          { paddingTop: insets.top + 72, paddingBottom: 120 },
         ]}
         showsVerticalScrollIndicator={false}
         refreshControl={

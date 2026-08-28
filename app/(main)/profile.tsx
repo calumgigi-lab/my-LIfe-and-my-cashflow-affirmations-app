@@ -17,6 +17,7 @@ import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import i18n, { SUPPORTED_LANGUAGES } from "@/lib/i18n";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
 import { useAuth } from "@/lib/auth-context";
@@ -55,6 +56,8 @@ export default function ProfileScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [intervalMinutes, setIntervalMinutes] = useState(30);
   const [showIntervalModal, setShowIntervalModal] = useState(false);
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
+  const [currentLang, setCurrentLang] = useState(i18n.language);
 
   useEffect(() => {
     if (notifSettings) {
@@ -649,24 +652,6 @@ export default function ProfileScreen() {
                       color={colors.success}
                     />
                   </View>
-                  <View
-                    style={[
-                      styles.statTrend,
-                      styles.statTrendUp,
-                      { backgroundColor: "rgba(48,209,88,0.1)" },
-                    ]}
-                  >
-                    <Ionicons
-                      name="trending-up"
-                      size={12}
-                      color={colors.success}
-                    />
-                    <Text
-                      style={[styles.statTrendText, { color: colors.success }]}
-                    >
-                      +12%
-                    </Text>
-                  </View>
                 </View>
                 <Text
                   style={[
@@ -1012,7 +997,13 @@ export default function ProfileScreen() {
             </Pressable>
 
             {/* Language */}
-            <View style={styles.settingsItem}>
+            <Pressable
+              onPress={() => setShowLanguageModal(true)}
+              style={({ pressed }) => [
+                styles.settingsItem,
+                { opacity: pressed ? 0.7 : 1 },
+              ]}
+            >
               <View
                 style={[
                   styles.settingsIcon,
@@ -1043,7 +1034,7 @@ export default function ProfileScreen() {
                     { color: colors.textSecondary },
                   ]}
                 >
-                  English
+                  {SUPPORTED_LANGUAGES.find(l => l.code === currentLang)?.name ?? "English"}
                 </Text>
                 <Ionicons
                   name="chevron-forward"
@@ -1051,7 +1042,48 @@ export default function ProfileScreen() {
                   color={colors.textSecondary}
                 />
               </View>
-            </View>
+            </Pressable>
+
+            {/* Language Picker Modal */}
+            <Modal visible={showLanguageModal} transparent animationType="slide" onRequestClose={() => setShowLanguageModal(false)}>
+              <Pressable style={styles.modalBackdrop} onPress={() => setShowLanguageModal(false)}>
+                <Pressable style={[styles.modalContent, { backgroundColor: colors.surface }]} onPress={() => {}}>
+                  <Text style={[styles.modalTitle, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
+                    Select Language
+                  </Text>
+                  <ScrollView style={{ maxHeight: 400 }} showsVerticalScrollIndicator={false}>
+                    {SUPPORTED_LANGUAGES.map((lang) => (
+                      <Pressable
+                        key={lang.code}
+                        onPress={() => {
+                          i18n.changeLanguage(lang.code);
+                          setCurrentLang(lang.code);
+                          setShowLanguageModal(false);
+                        }}
+                        style={({ pressed }) => [
+                          styles.languageItem,
+                          {
+                            backgroundColor: currentLang === lang.code ? colors.gold + "20" : colors.surface,
+                            borderColor: currentLang === lang.code ? colors.gold : colors.border,
+                            opacity: pressed ? 0.7 : 1,
+                          },
+                        ]}
+                      >
+                        <Text style={[styles.languageName, { color: colors.text, fontFamily: "DMSans_500Medium" }]}>
+                          {lang.name}
+                        </Text>
+                        <Text style={[styles.languageNative, { color: colors.textSecondary }]}>
+                          {lang.nativeName}
+                        </Text>
+                        {currentLang === lang.code && (
+                          <Ionicons name="checkmark-circle" size={20} color={colors.gold} />
+                        )}
+                      </Pressable>
+                    ))}
+                  </ScrollView>
+                </Pressable>
+              </Pressable>
+            </Modal>
 
             {/* Help & Support */}
             <Pressable
@@ -1941,5 +1973,37 @@ const styles = StyleSheet.create({
   },
   modalCloseText: {
     fontSize: 16,
+  },
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    padding: 24,
+    paddingBottom: 40,
+  },
+  modalTitle: {
+    fontSize: 22,
+    marginBottom: 16,
+    textAlign: "center",
+  },
+  languageItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    marginBottom: 8,
+    gap: 12,
+  },
+  languageName: {
+    flex: 1,
+    fontSize: 16,
+  },
+  languageNative: {
+    fontSize: 14,
   },
 });

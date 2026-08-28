@@ -400,14 +400,17 @@ module.exports = async function handler(req, res) {
       let currentStreak = 0, longestStreak = 0, totalAffirmed = 0;
       if (userId) {
         const streakRow = await sql`
-          SELECT current_streak, longest_streak, total_affirmed
+          SELECT current_streak, longest_streak
           FROM user_streaks WHERE user_id = ${userId} LIMIT 1
         `.catch(() => []);
         if (streakRow.length) {
           currentStreak = streakRow[0].current_streak || 0;
           longestStreak = streakRow[0].longest_streak || 0;
-          totalAffirmed = streakRow[0].total_affirmed || 0;
         }
+        const completionsRow = await sql`
+          SELECT count(*) as count FROM affirmation_completions WHERE user_id = ${userId}
+        `.catch(() => []);
+        totalAffirmed = completionsRow.length ? Number(completionsRow[0].count) : 0;
       }
 
       return res.json({
@@ -631,14 +634,16 @@ module.exports = async function handler(req, res) {
 
       if (existing.length) return res.json({ alreadyCheckedIn: true, pointsAwarded: 0 });
 
-      const checkInPts = 10;
+      const userRow = await sql`SELECT is_admin FROM users WHERE id = ${userId} LIMIT 1`.catch(() => []);
+      const isAdmin = userRow.length && userRow[0].is_admin;
+      const checkInPts = isAdmin ? 1000 : 10;
       const existingPts = await sql`SELECT id FROM reward_points WHERE user_id = ${userId} LIMIT 1`.catch(() => []);
       if (existingPts.length) {
         await sql`UPDATE reward_points SET points = points + ${checkInPts}, total_earned = total_earned + ${checkInPts}, updated_at = NOW() WHERE user_id = ${userId}`;
       } else {
         await sql`INSERT INTO reward_points (user_id, points, total_earned, total_spent) VALUES (${userId}, ${checkInPts}, ${checkInPts}, 0)`;
       }
-      await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${checkInPts}, 'daily_checkin', 'Daily check-in bonus')`;
+      await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${checkInPts}, 'daily_checkin', ${isAdmin ? 'Admin daily bonus' : 'Daily check-in bonus'})`;
 
       return res.json({ alreadyCheckedIn: false, pointsAwarded: checkInPts });
     }

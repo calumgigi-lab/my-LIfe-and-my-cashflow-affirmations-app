@@ -9,7 +9,7 @@ import {
   useColorScheme,
   View,
 } from "react-native";
-import { router } from "expo-router";
+import { router, usePathname } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -43,6 +43,10 @@ export default function HamburgerMenu() {
   const colors = useThemeColors(scheme);
   const insets = useSafeAreaInsets();
   const { user } = useAuth();
+  const pathname = usePathname();
+
+  const isProfilePage = pathname === "/(main)/profile" || pathname === "/profile";
+  if (isProfilePage) return null;
 
   const topOffset = insets.top + (Platform.OS === "web" ? 67 : 0) + 10;
 
