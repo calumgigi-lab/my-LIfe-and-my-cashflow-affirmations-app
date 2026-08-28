@@ -277,13 +277,11 @@ export default function TodayScreen() {
         </Animated.View>
 
         {/* Stats Row */}
-        <Animated.View entering={FadeInDown.duration(600).delay(240)} style={styles.statsRow}>
-          <View
-            style={[
-              styles.statItem,
-              { backgroundColor: colors.surface, borderColor: colors.border },
-            ]}
-          >
+        <Animated.View
+          entering={FadeInDown.duration(600).delay(240)}
+          style={[styles.statsRow, { backgroundColor: colors.surface, borderColor: "rgba(255,255,255,0.12)" }]}
+        >
+          <View style={[styles.statItem]}>
             <Text
               style={[
                 styles.statValue,
@@ -301,13 +299,8 @@ export default function TodayScreen() {
               Affirmed
             </Text>
           </View>
-          <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
-          <View
-            style={[
-              styles.statItem,
-              { backgroundColor: colors.surface, borderColor: colors.border },
-            ]}
-          >
+          <View style={[styles.statDivider, { backgroundColor: "rgba(255,255,255,0.1)" }]} />
+          <View style={[styles.statItem]}>
             <Text
               style={[
                 styles.statValue,
@@ -325,13 +318,8 @@ export default function TodayScreen() {
               Booklets
             </Text>
           </View>
-          <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
-          <View
-            style={[
-              styles.statItem,
-              { backgroundColor: colors.surface, borderColor: colors.border },
-            ]}
-          >
+          <View style={[styles.statDivider, { backgroundColor: "rgba(255,255,255,0.1)" }]} />
+          <View style={[styles.statItem]}>
             <Text
               style={[
                 styles.statValue,
@@ -989,29 +977,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    borderRadius: 14,
+    borderRadius: 16,
     borderWidth: 1,
-    padding: 16,
+    paddingVertical: 20,
+    paddingHorizontal: 16,
     width: "100%",
   },
   statItem: {
     flex: 1,
     alignItems: "center",
-    gap: 4,
-    paddingVertical: 6,
+    gap: 6,
+    paddingVertical: 4,
     borderRadius: 10,
   },
   statValue: {
     fontSize: 26,
   },
   statLabel: {
-    fontSize: 11.5,
+    fontSize: 11,
     textTransform: "uppercase" as const,
-    letterSpacing: 0.5,
+    letterSpacing: 0.8,
   },
   statDivider: {
     width: 1,
     height: 36,
+    opacity: 0.6,
   },
 
   // Hero Affirmation Card
