@@ -548,7 +548,7 @@ export default function LibraryScreen() {
                         <Image
                           source={getBookletCover(booklet.month, booklet.year)!}
                           style={StyleSheet.absoluteFill}
-                          resizeMode="cover"
+                          resizeMode="contain"
                         />
                         {!isUnlocked && <View style={styles.lockedOverlay} />}
                         <Text
