@@ -7,6 +7,7 @@ import {
   useColorScheme,
   ScrollView,
   Alert,
+  RefreshControl,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -50,21 +51,22 @@ export default function StoreScreen() {
 
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [selectedBooklet, setSelectedBooklet] = useState<{
     id: number;
     title: string;
     amount: number;
   } | null>(null);
 
-  const { data: bookletsData } = useQuery<{ id: number; title: string; month: number; year: number; description: string; coverColor: string }[]>({
+  const { data: bookletsData, refetch: refetchBooklets } = useQuery<{ id: number; title: string; month: number; year: number; description: string; coverColor: string }[]>({
     queryKey: ["/api/booklets"],
   });
 
-  const { data: rewardsData } = useQuery<{ points: number; totalEarned: number; totalSpent: number }>({
+  const { data: rewardsData, refetch: refetchRewards } = useQuery<{ points: number; totalEarned: number; totalSpent: number }>({
     queryKey: ["/api/rewards/balance"],
   });
 
-  const { data: accessData } = useQuery<{ unlockedBookletIds: number[]; previewDays: number; monthlyPriceNaira: number }>({
+  const { data: accessData, refetch: refetchAccess } = useQuery<{ unlockedBookletIds: number[]; previewDays: number; monthlyPriceNaira: number }>({
     queryKey: ["/api/booklets/access"],
   });
 
@@ -79,6 +81,12 @@ export default function StoreScreen() {
     if (activeCategory === "New Arrivals") return b.month === 8 && b.year === 2026;
     return true;
   });
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await Promise.all([refetchBooklets(), refetchRewards(), refetchAccess()]);
+    setRefreshing(false);
+  };
 
   const featuredBooklets = booklets.slice(0, 3);
 
@@ -123,6 +131,14 @@ export default function StoreScreen() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: insets.bottom + 40 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.gold}
+            colors={[colors.gold]}
+          />
+        }
       >
         {/* Nav Header */}
         <Animated.View entering={FadeInDown.duration(500).delay(50)} style={styles.nav}>

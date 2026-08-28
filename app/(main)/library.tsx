@@ -8,6 +8,8 @@ import {
   ScrollView,
   ActivityIndicator,
   TextInput,
+  Image,
+  RefreshControl,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -49,6 +51,7 @@ export default function LibraryScreen() {
   const insets = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+  const [refreshing, setRefreshing] = useState(false);
   const [selectedBooklet, setSelectedBooklet] = useState<{
     id: number;
     month: number;
@@ -56,11 +59,11 @@ export default function LibraryScreen() {
   } | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
 
-  const { data: bookletList, isLoading } = useQuery<any[]>({
+  const { data: bookletList, isLoading, refetch: refetchBooklets } = useQuery<any[]>({
     queryKey: ["/api/booklets"],
   });
 
-  const { data: accessData } = useQuery<{
+  const { data: accessData, refetch: refetchAccess } = useQuery<{
     unlockedBookletIds: number[];
     previewDays: number;
     monthlyPriceNaira: number;
@@ -73,9 +76,15 @@ export default function LibraryScreen() {
     staleTime: 300_000,
   });
 
-  const { data: rewardsData } = useQuery<{ points: number }>({
+  const { data: rewardsData, refetch: refetchRewards } = useQuery<{ points: number }>({
     queryKey: ["/api/rewards/balance"],
   });
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await Promise.all([refetchBooklets(), refetchAccess(), refetchRewards()]);
+    setRefreshing(false);
+  };
 
   const paymentProvider =
     providerData?.provider === "flutterwave" ? "flutterwave" : "bank_transfer";
@@ -170,6 +179,14 @@ export default function LibraryScreen() {
           { paddingTop: insets.top + 16, paddingBottom: 120 },
         ]}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.gold}
+            colors={[colors.gold]}
+          />
+        }
       >
         <Animated.View entering={FadeInDown.duration(500)}>
           <View style={styles.nav}>
@@ -532,6 +549,13 @@ export default function LibraryScreen() {
                       end={{ x: 1, y: 0 }}
                       style={styles.bookletCover}
                     >
+                      {getBookletCover(booklet.month, booklet.year) && (
+                        <Image
+                          source={getBookletCover(booklet.month, booklet.year)!}
+                          style={styles.coverImage}
+                          resizeMode="cover"
+                        />
+                      )}
                       {!isUnlocked && <View style={styles.lockedOverlay} />}
 
                       <Text
@@ -843,7 +867,12 @@ const styles = StyleSheet.create({
     height: 130,
     justifyContent: "flex-end",
     padding: 12,
-    position: "relative",
+  },
+  coverImage: {
+    ...StyleSheet.absoluteFillObject,
+    width: "100%",
+    height: "100%",
+    borderRadius: 0,
   },
   lockedOverlay: {
     ...StyleSheet.absoluteFillObject,

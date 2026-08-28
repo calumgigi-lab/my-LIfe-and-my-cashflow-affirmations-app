@@ -11,6 +11,7 @@ import {
   Switch,
   Modal,
   TextInput,
+  RefreshControl,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -34,11 +35,11 @@ export default function ProfileScreen() {
   const colors = useThemeColors();
   const insets = useSafeAreaInsets();
 
-  const { data: stats, isLoading } = useQuery<any>({
+  const { data: stats, isLoading, refetch: refetchStats } = useQuery<any>({
     queryKey: ["/api/stats"],
   });
 
-  const { data: rewardBalance } = useQuery<{
+  const { data: rewardBalance, refetch: refetchRewards } = useQuery<{
     points: number;
     totalEarned: number;
     totalSpent: number;
@@ -46,11 +47,12 @@ export default function ProfileScreen() {
     queryKey: ["/api/rewards/balance"],
   });
 
-  const { data: notifSettings } = useQuery<any>({
+  const { data: notifSettings, refetch: refetchNotifs } = useQuery<any>({
     queryKey: ["/api/notification-settings"],
   });
 
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [intervalMinutes, setIntervalMinutes] = useState(30);
   const [showIntervalModal, setShowIntervalModal] = useState(false);
 
@@ -187,6 +189,12 @@ export default function ProfileScreen() {
     ? Math.min((currentStreak / longestStreak) * 100, 100)
     : 0;
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await Promise.all([refetchStats(), refetchRewards(), refetchNotifs()]);
+    setRefreshing(false);
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <ScrollView
@@ -195,6 +203,14 @@ export default function ProfileScreen() {
           paddingBottom: 100,
         }}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.gold}
+            colors={[colors.gold]}
+          />
+        }
       >
         {/* Nav Header */}
         <View style={styles.navHeader}>

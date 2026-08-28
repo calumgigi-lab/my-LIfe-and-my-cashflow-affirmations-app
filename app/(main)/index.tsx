@@ -39,6 +39,7 @@ export default function TodayScreen() {
   const [savedHero, setSavedHero] = useState(false);
   const [completedAffirmation, setCompletedAffirmation] = useState(false);
   const [expandedAff, setExpandedAff] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const cardRef = useRef<View>(null);
 
   const { data: todayAff, isLoading: affLoading, refetch: refetchAff } = useQuery<any>({
@@ -121,9 +122,10 @@ export default function TodayScreen() {
     : null;
   const isLoading = affLoading || statsLoading;
 
-  const onRefresh = useCallback(() => {
-    refetchAff();
-    refetchStats();
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await Promise.all([refetchAff(), refetchStats()]);
+    setRefreshing(false);
   }, []);
 
   const now = new Date();
@@ -200,7 +202,7 @@ export default function TodayScreen() {
         ]}
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl refreshing={false} onRefresh={onRefresh} tintColor={colors.gold} />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.gold} colors={[colors.gold]} />
         }
       >
         {/* Greeting Header */}

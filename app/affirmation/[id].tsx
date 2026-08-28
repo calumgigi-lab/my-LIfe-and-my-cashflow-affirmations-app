@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   Image,
   Alert,
+  RefreshControl,
 } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -34,16 +35,16 @@ export default function AffirmationDetailScreen() {
     borderColor: isDark ? "rgba(48, 209, 88, 0.32)" : "rgba(52, 199, 89, 0.24)",
   };
 
-  const { data: aff, isLoading } = useQuery<any>({
+  const { data: aff, isLoading, refetch: refetchAff } = useQuery<any>({
     queryKey: ["/api/affirmations", id],
   });
 
-  const { data: completionCheck } = useQuery<any>({
+  const { data: completionCheck, refetch: refetchCompletion } = useQuery<any>({
     queryKey: ["/api/completions/check", id],
     enabled: !!id,
   });
 
-  const { data: accessData } = useQuery<{
+  const { data: accessData, refetch: refetchAccess } = useQuery<{
     bookletId: number;
     unlocked: boolean;
     previewDays: number;
@@ -56,6 +57,13 @@ export default function AffirmationDetailScreen() {
       return response.json();
     },
   });
+
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await Promise.all([refetchAff(), refetchCompletion(), refetchAccess()]);
+    setRefreshing(false);
+  };
 
   const unlockMutation = useMutation({
     mutationFn: async () => {
@@ -95,6 +103,18 @@ export default function AffirmationDetailScreen() {
   const previewDays = accessData?.previewDays ?? 2;
   const isLocked = !!aff && accessData?.unlocked === false && aff.dayNumber > previewDays;
   const monthlyPriceNaira = accessData?.monthlyPriceNaira ?? 1500;
+
+  const dayOfWeek = React.useMemo(() => {
+    if (!aff?.bookletMonth || !aff?.bookletYear || !aff?.dayNumber) return null;
+    const d = new Date(aff.bookletYear, aff.bookletMonth - 1, aff.dayNumber);
+    return d.toLocaleDateString("en-US", { weekday: "long" });
+  }, [aff?.bookletMonth, aff?.bookletYear, aff?.dayNumber]);
+
+  const dayDate = React.useMemo(() => {
+    if (!aff?.bookletMonth || !aff?.bookletYear || !aff?.dayNumber) return null;
+    const d = new Date(aff.bookletYear, aff.bookletMonth - 1, aff.dayNumber);
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  }, [aff?.bookletMonth, aff?.bookletYear, aff?.dayNumber]);
   const affirmationImageUrl = aff?.imageUrl
     ? (aff.imageUrl.startsWith("http") || aff.imageUrl.startsWith("data:")
       ? aff.imageUrl
@@ -129,6 +149,14 @@ export default function AffirmationDetailScreen() {
             { paddingBottom: insets.bottom + (Platform.OS === "web" ? 34 : 0) + 120 },
           ]}
           showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor={colors.gold}
+              colors={[colors.gold]}
+            />
+          }
         >
           <Animated.View entering={FadeInDown.duration(600).delay(50)}>
             <View style={[styles.logoContainer, { marginBottom: 24 }]}>
@@ -141,10 +169,25 @@ export default function AffirmationDetailScreen() {
           </Animated.View>
 
           <Animated.View entering={FadeInDown.duration(600).delay(100)}>
-            <View style={[styles.dayBadge, { backgroundColor: colors.gold }]}>
-              <Text style={[styles.dayBadgeText, { fontFamily: "DMSans_700Bold" }]}>
-                DAY {aff.dayNumber}
-              </Text>
+            <View style={styles.dayHeaderRow}>
+              <View style={[styles.dayBadge, { backgroundColor: colors.gold }]}>
+                <Text style={[styles.dayBadgeText, { fontFamily: "DMSans_700Bold" }]}>
+                  DAY {aff.dayNumber}
+                </Text>
+              </View>
+              {dayOfWeek && (
+                <View style={[styles.dayOfWeekBadge, { backgroundColor: colors.surfaceSecondary, borderColor: colors.border }]}>
+                  <Ionicons name="calendar-outline" size={13} color={colors.gold} />
+                  <Text style={[styles.dayOfWeekText, { color: colors.text, fontFamily: "DMSans_600SemiBold" }]}>
+                    {dayOfWeek}
+                  </Text>
+                  {dayDate && (
+                    <Text style={[styles.dayDateText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
+                      {dayDate}
+                    </Text>
+                  )}
+                </View>
+              )}
             </View>
           </Animated.View>
 
@@ -281,13 +324,29 @@ const styles = StyleSheet.create({
   loadingContainer: { flex: 1, justifyContent: "center", alignItems: "center", gap: 16 },
   scrollContent: { paddingHorizontal: 24 },
   dayBadge: {
-    alignSelf: "flex-start",
     paddingHorizontal: 14,
     paddingVertical: 6,
     borderRadius: 10,
-    marginBottom: 16,
   },
   dayBadgeText: { color: "#fff", fontSize: 12, letterSpacing: 1.5 },
+  dayHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 16,
+    flexWrap: "wrap",
+  },
+  dayOfWeekBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  dayOfWeekText: { fontSize: 13 },
+  dayDateText: { fontSize: 12 },
   affirmationImage: {
     width: "100%",
     height: 280,
