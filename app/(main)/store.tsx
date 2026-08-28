@@ -85,7 +85,7 @@ export default function StoreScreen() {
   const handleUnlock = useCallback(
     (booklet: { id: number; title: string }) => {
       if (unlockedIds.has(booklet.id)) {
-        router.push({ pathname: "/(main)/booklet/[id]", params: { id: booklet.id.toString() } });
+        router.push({ pathname: "/booklet/[id]", params: { id: booklet.id.toString() } });
         return;
       }
       setSelectedBooklet({ id: booklet.id, title: booklet.title, amount: 1500 });

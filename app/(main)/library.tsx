@@ -316,7 +316,7 @@ export default function LibraryScreen() {
             <Pressable
               onPress={() =>
                 router.push({
-                  pathname: "/(main)/booklet/[id]",
+                  pathname: "/booklet/[id]",
                   params: { id: featuredBooklet.id.toString() },
                 })
               }
@@ -512,7 +512,7 @@ export default function LibraryScreen() {
                   <Pressable
                     onPress={() =>
                       router.push({
-                        pathname: "/(main)/booklet/[id]",
+                        pathname: "/booklet/[id]",
                         params: { id: booklet.id.toString() },
                       })
                     }

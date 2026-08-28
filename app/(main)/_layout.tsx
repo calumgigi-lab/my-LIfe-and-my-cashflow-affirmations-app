@@ -34,8 +34,6 @@ function NativeTabLayout() {
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="settings" />
       <NativeTabs.Trigger name="edit-profile" />
-      <NativeTabs.Trigger name="booklet-[id]" />
-      <NativeTabs.Trigger name="affirmation-[id]" />
       <NativeTabs.Trigger name="cart" />
       <NativeTabs.Trigger name="library-filter" />
       <NativeTabs.Trigger name="ranks-info" />
@@ -128,8 +126,6 @@ function ClassicTabLayout() {
       />
       <Tabs.Screen name="settings" options={{ href: null }} />
       <Tabs.Screen name="edit-profile" options={{ href: null }} />
-      <Tabs.Screen name="booklet-[id]" options={{ href: null }} />
-      <Tabs.Screen name="affirmation-[id]" options={{ href: null }} />
       <Tabs.Screen name="cart" options={{ href: null }} />
       <Tabs.Screen name="library-filter" options={{ href: null }} />
       <Tabs.Screen name="ranks-info" options={{ href: null }} />

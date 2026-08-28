@@ -763,7 +763,7 @@ export default function TodayScreen() {
                 <Pressable
                   key={aff.id ?? index}
                   onPress={() =>
-                    router.push({ pathname: "/(main)/affirmation/[id]", params: { id: aff.id.toString() } })
+                    router.push({ pathname: "/affirmation/[id]", params: { id: aff.id.toString() } })
                   }
                   style={({ pressed }) => [
                     styles.recentCard,
