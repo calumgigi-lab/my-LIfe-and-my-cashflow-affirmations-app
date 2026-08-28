@@ -548,7 +548,11 @@ export default function LibraryScreen() {
                         <Image
                           source={getBookletCover(booklet.month, booklet.year)!}
                           style={StyleSheet.absoluteFill}
-                          resizeMode="contain"
+                          resizeMode="cover"
+                        />
+                        <LinearGradient
+                          colors={["transparent", "rgba(15,44,79,0.85)"]}
+                          style={StyleSheet.absoluteFill}
                         />
                         {!isUnlocked && <View style={styles.lockedOverlay} />}
                         <Text
@@ -889,10 +893,12 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   bookletCoverImage: {
-    height: 130,
+    height: 160,
     justifyContent: "flex-end",
     padding: 12,
     overflow: "hidden",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
   coverImage: {
     ...StyleSheet.absoluteFillObject,

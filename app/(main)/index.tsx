@@ -75,7 +75,8 @@ export default function TodayScreen() {
 
   const completeMutation = useMutation({
     mutationFn: async (affirmationId: number) => {
-      await apiRequest("POST", `/api/affirmations/${affirmationId}/complete`);
+      const res = await apiRequest("POST", `/api/affirmations/${affirmationId}/complete`);
+      return res.json();
     },
     onSuccess: () => {
       setCompletedAffirmation(true);
@@ -83,9 +84,13 @@ export default function TodayScreen() {
       queryClient.invalidateQueries({ queryKey: ["/api/completions"] });
       queryClient.invalidateQueries({ queryKey: ["/api/completions/check"] });
       queryClient.invalidateQueries({ queryKey: ["/api/streak"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/rewards/balance"] });
       if (Platform.OS !== "web") {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       }
+    },
+    onError: (error: any) => {
+      Alert.alert("Error", error?.message || "Could not mark as affirmed. Please try again.");
     },
   });
 
