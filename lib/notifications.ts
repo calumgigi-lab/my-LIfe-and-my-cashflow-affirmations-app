@@ -46,7 +46,10 @@ export async function scheduleAffirmationReminders(
   for (let dayOffset = 0; dayOffset < daysAhead; dayOffset++) {
     const targetDate = new Date(now);
     targetDate.setDate(now.getDate() + dayOffset);
-    const dateKey = targetDate.toISOString().split("T")[0];
+    const y = targetDate.getFullYear();
+    const m = String(targetDate.getMonth() + 1).padStart(2, "0");
+    const d = String(targetDate.getDate()).padStart(2, "0");
+    const dateKey = `${y}-${m}-${d}`;
 
     const message = await getAffirmationSnippetForDate(dateKey);
 
@@ -105,6 +108,7 @@ async function getAffirmationSnippetForDate(date: string): Promise<string> {
       return "Your daily affirmation is waiting. Open now and speak life over your day.";
     }
 
+    const title = aff.title || "";
     const firstParagraph = String(aff.content)
       .split("\n\n")[0]
       .replace(/\s+/g, " ")
@@ -114,7 +118,10 @@ async function getAffirmationSnippetForDate(date: string): Promise<string> {
       ? `${firstParagraph.slice(0, 137).trimEnd()}...`
       : firstParagraph;
 
-    return `"${snippet}" — Read & affirm now 🙏`;
+    if (title) {
+      return `"${title}: ${snippet}" — Read & affirm now`;
+    }
+    return `"${snippet}" — Read & affirm now`;
   } catch {
     return "Your daily affirmation is waiting. Open now and speak life over your day.";
   }
