@@ -513,35 +513,62 @@ export default function LibraryScreen() {
             </Text>
           </View>
         ) : (
-          <View style={styles.grid}>
-            {filteredBooklets.map((booklet: any, index: number) => {
-              const isUnlocked = unlockedSet.has(booklet.id);
-              const coverColors: [string, string] = booklet.coverColor
-                ? [booklet.coverColor, booklet.coverColor + "CC"]
-                : [colors.surface, colors.surfaceSecondary];
+          <View>
+            {(() => {
+              const yearGroups: Record<number, any[]> = {};
+              filteredBooklets.forEach((b: any) => {
+                const y = b.year || 0;
+                if (!yearGroups[y]) yearGroups[y] = [];
+                yearGroups[y].push(b);
+              });
+              const sortedYears = Object.keys(yearGroups)
+                .map(Number)
+                .sort((a, b) => b - a);
 
-              return (
-                <Animated.View
-                  key={booklet.id}
-                  entering={FadeInDown.duration(400).delay(500 + index * 80)}
-                  style={styles.gridItem}
-                >
-                  <Pressable
-                    onPress={() =>
-                      router.push({
-                        pathname: "/booklet/[id]",
-                        params: { id: booklet.id.toString() },
-                      })
-                    }
-                    style={({ pressed }) => [
-                      styles.bookletCard,
-                      {
-                        backgroundColor: colors.surface,
-                        borderColor: colors.border + "30",
-                        opacity: pressed ? 0.92 : 1,
-                        transform: [{ scale: pressed ? 0.97 : 1 }],
-                      },
-                    ]}
+              let globalIndex = 0;
+              return sortedYears.map((year) => (
+                <View key={year}>
+                  <View style={[styles.yearHeader, { borderBottomColor: colors.gold + "40" }]}>
+                    <View style={[styles.yearBadge, { backgroundColor: colors.gold }]}>
+                      <Ionicons name="calendar" size={14} color="#0A1E38" />
+                    </View>
+                    <Text style={[styles.yearText, { color: colors.gold, fontFamily: "PlayfairDisplay_700Bold" }]}>
+                      {year} Affirmations
+                    </Text>
+                    <Text style={[styles.yearCount, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
+                      {yearGroups[year].length} booklets
+                    </Text>
+                  </View>
+                  <View style={styles.grid}>
+                    {yearGroups[year].map((booklet: any) => {
+                      const isUnlocked = unlockedSet.has(booklet.id);
+                      const coverColors: [string, string] = booklet.coverColor
+                        ? [booklet.coverColor, booklet.coverColor + "CC"]
+                        : [colors.surface, colors.surfaceSecondary];
+                      const idx = globalIndex++;
+
+                      return (
+                        <Animated.View
+                          key={booklet.id}
+                          entering={FadeInDown.duration(400).delay(300 + idx * 60)}
+                          style={styles.gridItem}
+                        >
+                          <Pressable
+                            onPress={() =>
+                              router.push({
+                                pathname: "/booklet/[id]",
+                                params: { id: booklet.id.toString() },
+                              })
+                            }
+                            style={({ pressed }) => [
+                              styles.bookletCard,
+                              {
+                                backgroundColor: colors.surface,
+                                borderColor: colors.border + "30",
+                                opacity: pressed ? 0.92 : 1,
+                                transform: [{ scale: pressed ? 0.97 : 1 }],
+                              },
+                            ]}
                   >
                     {getBookletCover(booklet.month, booklet.year) ? (
                       <View style={styles.bookletCoverImage}>
@@ -671,6 +698,10 @@ export default function LibraryScreen() {
                 </Animated.View>
               );
             })}
+                  </View>
+                </View>
+              ));
+            })()}
           </View>
         )}
 
@@ -875,6 +906,24 @@ const styles = StyleSheet.create({
   },
   sectionTitle: { fontSize: 18 },
   sectionCount: { fontSize: 13 },
+  yearHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginTop: 20,
+    marginBottom: 14,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+  },
+  yearBadge: {
+    width: 28,
+    height: 28,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  yearText: { fontSize: 18, flex: 1 },
+  yearCount: { fontSize: 13 },
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",

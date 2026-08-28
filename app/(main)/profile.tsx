@@ -766,7 +766,7 @@ export default function ProfileScreen() {
                     { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
                   ]}
                 >
-                  {stats?.totalBooklets ?? 0}
+                  {stats?.unlockedBooklets ?? 0}
                 </Text>
                 <Text
                   style={[styles.statLabel, { color: colors.textSecondary }]}
@@ -809,13 +809,7 @@ export default function ProfileScreen() {
                       size={12}
                       color={colors.success}
                     />
-                    <Text
-                      style={[styles.statTrendText, { color: colors.success }]}
-                    >
-                      +80
-                    </Text>
                   </View>
-                </View>
                 <Text
                   style={[
                     styles.statValue,

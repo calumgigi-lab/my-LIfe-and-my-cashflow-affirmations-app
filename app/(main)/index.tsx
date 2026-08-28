@@ -318,7 +318,7 @@ export default function TodayScreen() {
                 { color: colors.gold, fontFamily: "PlayfairDisplay_700Bold" },
               ]}
             >
-              {stats?.totalBooklets ?? 0}
+              {stats?.unlockedBooklets ?? 0}
             </Text>
             <Text
               style={[

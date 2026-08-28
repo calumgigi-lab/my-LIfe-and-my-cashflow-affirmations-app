@@ -436,6 +436,7 @@ module.exports = async function handler(req, res) {
 
       let currentStreak = 0, longestStreak = 0, totalAffirmed = 0;
       let thisMonth = 0, totalDays = 0, level = "Bronze", completedToday = false;
+      let unlockedBooklets = 0;
       const now = new Date();
       const currentMonth = now.getMonth() + 1;
       const currentYear = now.getFullYear();
@@ -476,6 +477,12 @@ module.exports = async function handler(req, res) {
         `.catch(() => []);
         completedToday = todayCheck.length > 0;
 
+        const unlockedRow = await sql`
+          SELECT count(*) as count FROM monthly_purchases
+          WHERE user_id = ${userId} AND status = 'approved'
+        `.catch(() => []);
+        unlockedBooklets = unlockedRow.length ? Number(unlockedRow[0].count) : 0;
+
         if (totalAffirmed >= 100) level = "Diamond";
         else if (totalAffirmed >= 50) level = "Platinum";
         else if (totalAffirmed >= 20) level = "Gold";
@@ -491,6 +498,7 @@ module.exports = async function handler(req, res) {
         totalBooklets: Number(b[0].count),
         totalAffirmations: Number(a[0].count),
         totalUsers: Number(u[0].count),
+        unlockedBooklets,
         currentStreak,
         longestStreak,
         totalAffirmed,
