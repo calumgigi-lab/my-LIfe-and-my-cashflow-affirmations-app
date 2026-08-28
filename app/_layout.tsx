@@ -34,6 +34,12 @@ function RootLayoutNav() {
       <Stack.Screen name="menu" options={{ headerShown: false }} />
       <Stack.Screen name="booklet/[id]" options={{ headerShown: false }} />
       <Stack.Screen name="affirmation/[id]" options={{ headerShown: false }} />
+      <Stack.Screen name="settings" options={{ headerShown: false }} />
+      <Stack.Screen name="edit-profile" options={{ headerShown: false }} />
+      <Stack.Screen name="cart" options={{ headerShown: false }} />
+      <Stack.Screen name="library-filter" options={{ headerShown: false }} />
+      <Stack.Screen name="ranks-info" options={{ headerShown: false }} />
+      <Stack.Screen name="journal" options={{ headerShown: false }} />
     </Stack>
   );
 }

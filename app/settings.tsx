@@ -184,7 +184,7 @@ export default function SettingsScreen() {
   }
 
   function handleEditProfile() {
-    router.push("/(main)/edit-profile");
+    router.push("/edit-profile");
   }
 
   function handleEmail() {

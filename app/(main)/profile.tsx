@@ -224,7 +224,7 @@ export default function ProfileScreen() {
           </Text>
           <View style={styles.navActions}>
             <Pressable
-              onPress={() => router.push("/(main)/settings")}
+              onPress={() => router.push("/settings")}
               style={({ pressed }) => [
                 styles.navBtn,
                 {

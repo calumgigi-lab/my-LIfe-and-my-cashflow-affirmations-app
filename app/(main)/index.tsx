@@ -843,7 +843,7 @@ export default function TodayScreen() {
           </Pressable>
 
           <Pressable
-            onPress={() => router.push("/(main)/journal")}
+            onPress={() => router.push("/journal")}
             style={({ pressed }) => [
               styles.quickActionBtn,
               {

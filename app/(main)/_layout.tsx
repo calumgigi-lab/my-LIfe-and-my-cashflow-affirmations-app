@@ -32,12 +32,6 @@ function NativeTabLayout() {
         <Icon sf={{ default: "person", selected: "person.fill" }} />
         <Label>Profile</Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="settings" />
-      <NativeTabs.Trigger name="edit-profile" />
-      <NativeTabs.Trigger name="cart" />
-      <NativeTabs.Trigger name="library-filter" />
-      <NativeTabs.Trigger name="ranks-info" />
-      <NativeTabs.Trigger name="journal" />
     </NativeTabs>
   );
 }
@@ -124,12 +118,6 @@ function ClassicTabLayout() {
           ),
         }}
       />
-      <Tabs.Screen name="settings" options={{ href: null }} />
-      <Tabs.Screen name="edit-profile" options={{ href: null }} />
-      <Tabs.Screen name="cart" options={{ href: null }} />
-      <Tabs.Screen name="library-filter" options={{ href: null }} />
-      <Tabs.Screen name="ranks-info" options={{ href: null }} />
-      <Tabs.Screen name="journal" options={{ href: null }} />
     </Tabs>
   );
 }

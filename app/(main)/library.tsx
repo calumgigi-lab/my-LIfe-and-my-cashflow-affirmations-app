@@ -543,39 +543,59 @@ export default function LibraryScreen() {
                       },
                     ]}
                   >
-                    <LinearGradient
-                      colors={coverColors}
-                      start={{ x: 0, y: 1 }}
-                      end={{ x: 1, y: 0 }}
-                      style={styles.bookletCover}
-                    >
-                      {getBookletCover(booklet.month, booklet.year) && (
+                    {getBookletCover(booklet.month, booklet.year) ? (
+                      <View style={styles.bookletCoverImage}>
                         <Image
                           source={getBookletCover(booklet.month, booklet.year)!}
-                          style={styles.coverImage}
+                          style={StyleSheet.absoluteFill}
                           resizeMode="cover"
                         />
-                      )}
-                      {!isUnlocked && <View style={styles.lockedOverlay} />}
-
-                      <Text
-                        style={[
-                          styles.coverMonth,
-                          { fontFamily: "DMSans_600SemiBold" },
-                        ]}
+                        {!isUnlocked && <View style={styles.lockedOverlay} />}
+                        <Text
+                          style={[
+                            styles.coverMonth,
+                            { fontFamily: "DMSans_600SemiBold" },
+                          ]}
+                        >
+                          {monthNames[booklet.month]} {booklet.year}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.coverTitle,
+                            { fontFamily: "PlayfairDisplay_600SemiBold" },
+                          ]}
+                          numberOfLines={2}
+                        >
+                          {booklet.title}
+                        </Text>
+                      </View>
+                    ) : (
+                      <LinearGradient
+                        colors={coverColors}
+                        start={{ x: 0, y: 1 }}
+                        end={{ x: 1, y: 0 }}
+                        style={styles.bookletCover}
                       >
-                        {monthNames[booklet.month]} {booklet.year}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.coverTitle,
-                          { fontFamily: "PlayfairDisplay_600SemiBold" },
-                        ]}
-                        numberOfLines={2}
-                      >
-                        {booklet.title}
-                      </Text>
-                    </LinearGradient>
+                        {!isUnlocked && <View style={styles.lockedOverlay} />}
+                        <Text
+                          style={[
+                            styles.coverMonth,
+                            { fontFamily: "DMSans_600SemiBold" },
+                          ]}
+                        >
+                          {monthNames[booklet.month]} {booklet.year}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.coverTitle,
+                            { fontFamily: "PlayfairDisplay_600SemiBold" },
+                          ]}
+                          numberOfLines={2}
+                        >
+                          {booklet.title}
+                        </Text>
+                      </LinearGradient>
+                    )}
 
                     <View style={styles.bookletBody}>
                       {isUnlocked ? (
@@ -867,6 +887,12 @@ const styles = StyleSheet.create({
     height: 130,
     justifyContent: "flex-end",
     padding: 12,
+  },
+  bookletCoverImage: {
+    height: 130,
+    justifyContent: "flex-end",
+    padding: 12,
+    overflow: "hidden",
   },
   coverImage: {
     ...StyleSheet.absoluteFillObject,

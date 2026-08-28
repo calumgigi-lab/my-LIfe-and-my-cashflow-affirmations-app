@@ -63,7 +63,7 @@ export async function scheduleAffirmationReminders(
 
         await Notifications.scheduleNotificationAsync({
           content: {
-            title: "My Life & My Cash Flow",
+            title: "✨ Today's Affirmation",
             body: message,
             sound: true,
             ...(Platform.OS === "ios" && {
@@ -97,12 +97,12 @@ async function getAffirmationSnippetForDate(date: string): Promise<string> {
     const url = new URL(`/api/affirmations/by-date?date=${encodeURIComponent(date)}`, getApiUrl());
     const res = await fetch(url.toString(), { credentials: "include" });
     if (!res.ok) {
-      return "Your date-specific affirmation is ready. Tap to affirm it fully now.";
+      return "Your daily affirmation is waiting. Open now and speak life over your day.";
     }
 
     const aff = await res.json();
     if (!aff || !aff.content) {
-      return "Your date-specific affirmation is ready. Tap to affirm it fully now.";
+      return "Your daily affirmation is waiting. Open now and speak life over your day.";
     }
 
     const firstParagraph = String(aff.content)
@@ -110,12 +110,12 @@ async function getAffirmationSnippetForDate(date: string): Promise<string> {
       .replace(/\s+/g, " ")
       .trim();
 
-    const snippet = firstParagraph.length > 120
-      ? `${firstParagraph.slice(0, 117).trimEnd()}...`
+    const snippet = firstParagraph.length > 140
+      ? `${firstParagraph.slice(0, 137).trimEnd()}...`
       : firstParagraph;
 
-    return `${snippet} Tap to affirm it fully.`;
+    return `"${snippet}" — Read & affirm now 🙏`;
   } catch {
-    return "Your date-specific affirmation is ready. Tap to affirm it fully now.";
+    return "Your daily affirmation is waiting. Open now and speak life over your day.";
   }
 }
