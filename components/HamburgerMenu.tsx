@@ -45,11 +45,6 @@ export default function HamburgerMenu() {
   const { user } = useAuth();
   const pathname = usePathname();
 
-  const isProfilePage = pathname === "/(main)/profile" || pathname === "/profile";
-  if (isProfilePage) return null;
-
-  const topOffset = insets.top + (Platform.OS === "web" ? 67 : 0) + 10;
-
   const { data: newsItems = [] } = useQuery<NewsItem[]>({
     queryKey: ["/api/news"],
   });
@@ -76,6 +71,11 @@ export default function HamburgerMenu() {
       active = false;
     };
   }, []);
+
+  const isProfilePage = pathname === "/(main)/profile" || pathname === "/profile";
+  if (isProfilePage) return null;
+
+  const topOffset = insets.top + (Platform.OS === "web" ? 67 : 0) + 10;
 
   async function markNewsAsSeen() {
     const now = new Date().toISOString();
