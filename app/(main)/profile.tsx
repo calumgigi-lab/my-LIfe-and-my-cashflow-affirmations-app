@@ -18,6 +18,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import i18n, { SUPPORTED_LANGUAGES } from "@/lib/i18n";
+import { useTranslation } from "react-i18next";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
 import { useAuth } from "@/lib/auth-context";
@@ -35,6 +36,7 @@ export default function ProfileScreen() {
   const { user, logout } = useAuth();
   const colors = useThemeColors();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   const { data: stats, isLoading, refetch: refetchStats } = useQuery<any>({
     queryKey: ["/api/stats"],
@@ -1015,7 +1017,7 @@ export default function ProfileScreen() {
                 <Text
                   style={[styles.settingsLabel, { color: colors.text }]}
                 >
-                  Language
+                  {t("settings.language")}
                 </Text>
                 <Text
                   style={[
@@ -1048,7 +1050,7 @@ export default function ProfileScreen() {
               <Pressable style={styles.modalBackdrop} onPress={() => setShowLanguageModal(false)}>
                 <Pressable style={[styles.modalContent, { backgroundColor: colors.surface }]} onPress={() => {}}>
                   <Text style={[styles.modalTitle, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
-                    Select Language
+                    {t("settings.select_language")}
                   </Text>
                   <ScrollView style={{ maxHeight: 400 }} showsVerticalScrollIndicator={false}>
                     {SUPPORTED_LANGUAGES.map((lang) => (

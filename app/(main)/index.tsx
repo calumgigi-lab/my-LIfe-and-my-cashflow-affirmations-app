@@ -27,6 +27,7 @@ import { apiRequest, getApiUrl, queryClient } from "@/lib/query-client";
 import { purchaseBooklet } from "@/lib/booklet-purchases";
 import { PaymentDetailsModal } from "@/components/PaymentDetailsModal";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
 
 const PREVIEW_LINES = 4;
 
@@ -35,6 +36,7 @@ export default function TodayScreen() {
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [savedHero, setSavedHero] = useState(false);
   const [completedAffirmation, setCompletedAffirmation] = useState(false);
@@ -136,7 +138,7 @@ export default function TodayScreen() {
 
   const now = new Date();
   const greeting =
-    now.getHours() < 12 ? "Good Morning" : now.getHours() < 17 ? "Good Afternoon" : "Good Evening";
+    now.getHours() < 12 ? t("today.greeting_morning") : now.getHours() < 17 ? t("today.greeting_afternoon") : t("today.greeting_evening");
   const monthNames = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December",
@@ -391,7 +393,7 @@ export default function TodayScreen() {
                           { color: colors.gold, fontFamily: "DMSans_600SemiBold" },
                         ]}
                       >
-                        {todayAff.title || "Today's Affirmation"}
+                        {todayAff.title || t("today.todays_affirmation")}
                       </Text>
                     </View>
 
