@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,14 +11,12 @@ import {
   Image,
   Alert,
   RefreshControl,
-  Animated as RNAnimated,
 } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import * as Haptics from "expo-haptics";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useThemeColors } from "@/constants/colors";
@@ -38,7 +36,6 @@ export default function AffirmationDetailScreen() {
   };
 
   const [completedAffirmation, setCompletedAffirmation] = useState(false);
-  const swipeX = useRef(new RNAnimated.Value(0)).current;
 
   const { data: aff, isLoading, refetch: refetchAff } = useQuery<any>({
     queryKey: ["/api/affirmations", id],
@@ -142,24 +139,8 @@ export default function AffirmationDetailScreen() {
     : null;
 
   const navigateTo = (affId: number) => {
-    router.replace({ pathname: "/affirmation/[id]", params: { id: affId.toString() } });
+    router.push({ pathname: "/affirmation/[id]", params: { id: affId.toString() } });
   };
-
-  const swipeGesture = Gesture.Pan()
-    .activeOffsetX([-40, 40])
-    .onUpdate((e) => {
-      swipeX.setValue(e.translationX);
-    })
-    .onEnd((e) => {
-      if (e.translationX < -60 && nextAff) {
-        Haptics.selectionAsync();
-        navigateTo(nextAff.id);
-      } else if (e.translationX > 60 && prevAff) {
-        Haptics.selectionAsync();
-        navigateTo(prevAff.id);
-      }
-      RNAnimated.spring(swipeX, { toValue: 0, useNativeDriver: true }).start();
-    });
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -183,8 +164,7 @@ export default function AffirmationDetailScreen() {
           <ActivityIndicator size="large" color={colors.gold} />
         </View>
       ) : aff ? (
-        <GestureDetector gesture={swipeGesture}>
-          <ScrollView
+        <ScrollView
             contentContainerStyle={[
               styles.scrollContent,
               { paddingBottom: insets.bottom + (Platform.OS === "web" ? 34 : 0) + 120 },
@@ -367,13 +347,12 @@ export default function AffirmationDetailScreen() {
             )}
 
             <View style={styles.swipeHint}>
-              <Ionicons name="swap-horizontal-outline" size={16} color={colors.textSecondary} />
+              <Ionicons name="book-outline" size={16} color={colors.textSecondary} />
               <Text style={[styles.swipeHintText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-                Swipe left or right to turn pages
+                Use the buttons above to turn pages
               </Text>
             </View>
           </ScrollView>
-        </GestureDetector>
       ) : (
         <View style={styles.loadingContainer}>
           <Ionicons name="alert-circle-outline" size={48} color={colors.textSecondary} />
