@@ -12,6 +12,18 @@ function getSQL() {
   return _sql;
 }
 
+// Ensure profile columns exist
+async function ensureProfileColumns() {
+  try {
+    const sql = getSQL();
+    await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS bio text`;
+    await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS phone text`;
+    await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS gender text`;
+    await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS date_of_birth text`;
+  } catch {}
+}
+ensureProfileColumns();
+
 function hashPasswordSHA256(password) {
   const hash = crypto.createHash("sha256");
   hash.update(password + "global-affirmation-salt-2026");
@@ -147,7 +159,8 @@ module.exports = async function handler(req, res) {
       const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
       if (!userId) return res.status(401).json({ error: "Not authenticated" });
       const result = await sql`
-        SELECT id, username, email, display_name, profile_picture_url, is_admin, created_at
+        SELECT id, username, email, display_name, profile_picture_url, is_admin, created_at,
+               bio, phone, gender, date_of_birth
         FROM users WHERE id = ${userId}
       `;
       if (!result.length) return res.status(401).json({ error: "User not found" });
@@ -160,7 +173,31 @@ module.exports = async function handler(req, res) {
         profilePictureUrl: u.profile_picture_url,
         isAdmin: u.is_admin,
         createdAt: u.created_at,
+        bio: u.bio || null,
+        phone: u.phone || null,
+        gender: u.gender || null,
+        dateOfBirth: u.date_of_birth || null,
       });
+    }
+
+    // ── Auth: Update Profile ──
+    if (path === "/api/auth/profile" && method === "PUT") {
+      const sql = getSQL();
+      const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
+      if (!userId) return res.status(401).json({ error: "Not authenticated" });
+      const { displayName, username, email, bio, phone, gender, dateOfBirth } = req.body || {};
+      await sql`
+        UPDATE users SET
+          display_name = COALESCE(${displayName || null}, display_name),
+          username = COALESCE(${username || null}, username),
+          email = COALESCE(${email || null}, email),
+          bio = COALESCE(${bio || null}, bio),
+          phone = COALESCE(${phone || null}, phone),
+          gender = COALESCE(${gender || null}, gender),
+          date_of_birth = COALESCE(${dateOfBirth || null}, date_of_birth)
+        WHERE id = ${userId}
+      `;
+      return res.json({ message: "Profile updated" });
     }
 
     // ── Auth: Logout ──
@@ -398,6 +435,12 @@ module.exports = async function handler(req, res) {
       ]);
 
       let currentStreak = 0, longestStreak = 0, totalAffirmed = 0;
+      let thisMonth = 0, totalDays = 0, level = "Bronze", completedToday = false;
+      const now = new Date();
+      const currentMonth = now.getMonth() + 1;
+      const currentYear = now.getFullYear();
+      const todayStr = `${currentYear}-${String(currentMonth).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
       if (userId) {
         const streakRow = await sql`
           SELECT current_streak, longest_streak
@@ -411,7 +454,38 @@ module.exports = async function handler(req, res) {
           SELECT count(*) as count FROM affirmation_completions WHERE user_id = ${userId}
         `.catch(() => []);
         totalAffirmed = completionsRow.length ? Number(completionsRow[0].count) : 0;
+
+        const thisMonthRow = await sql`
+          SELECT count(*) as count FROM affirmation_completions
+          WHERE user_id = ${userId}
+          AND EXTRACT(MONTH FROM completed_date) = ${currentMonth}
+          AND EXTRACT(YEAR FROM completed_date) = ${currentYear}
+        `.catch(() => []);
+        thisMonth = thisMonthRow.length ? Number(thisMonthRow[0].count) : 0;
+
+        const totalDaysRow = await sql`
+          SELECT count(DISTINCT completed_date) as count FROM affirmation_completions
+          WHERE user_id = ${userId}
+        `.catch(() => []);
+        totalDays = totalDaysRow.length ? Number(totalDaysRow[0].count) : 0;
+
+        const todayCheck = await sql`
+          SELECT id FROM affirmation_completions
+          WHERE user_id = ${userId} AND completed_date = ${todayStr}
+          LIMIT 1
+        `.catch(() => []);
+        completedToday = todayCheck.length > 0;
+
+        if (totalAffirmed >= 100) level = "Diamond";
+        else if (totalAffirmed >= 50) level = "Platinum";
+        else if (totalAffirmed >= 20) level = "Gold";
+        else if (totalAffirmed >= 5) level = "Silver";
+        else level = "Bronze";
       }
+
+      const nextLevelThreshold = level === "Bronze" ? 5 : level === "Silver" ? 20 : level === "Gold" ? 50 : level === "Platinum" ? 100 : 100;
+      const prevLevelThreshold = level === "Bronze" ? 0 : level === "Silver" ? 5 : level === "Gold" ? 20 : level === "Platinum" ? 50 : 100;
+      const levelProgress = Math.min(((totalAffirmed - prevLevelThreshold) / (nextLevelThreshold - prevLevelThreshold)) * 100, 100);
 
       return res.json({
         totalBooklets: Number(b[0].count),
@@ -420,6 +494,11 @@ module.exports = async function handler(req, res) {
         currentStreak,
         longestStreak,
         totalAffirmed,
+        thisMonth,
+        totalDays,
+        level,
+        levelProgress,
+        completedToday,
         timestamp: new Date().toISOString(),
       });
     }
@@ -558,7 +637,7 @@ module.exports = async function handler(req, res) {
         `;
       }
 
-      return res.json({ message: "Completed", completed: true, pointsAwarded: 50, streakMilestoneBonus: 0 });
+      return res.json({ message: "Completed", completed: true, pointsAwarded: 50, streakMilestoneBonus: 0, currentStreak: 1 });
     }
 
     // ── Reward Points: Get balance ──

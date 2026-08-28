@@ -550,10 +550,12 @@ const styles = StyleSheet.create({
     fontFamily: "DMSans_400Regular",
   },
   navTitle: {
-    fontSize: 17,
+    fontSize: 19,
+    fontFamily: "PlayfairDisplay_700Bold",
     position: "absolute",
-    left: "50%",
-    transform: [{ translateX: -40 }],
+    left: 0,
+    right: 0,
+    textAlign: "center",
   },
   navSave: {
     paddingVertical: 4,

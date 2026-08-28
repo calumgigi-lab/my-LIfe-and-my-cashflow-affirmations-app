@@ -188,13 +188,12 @@ export default function ProfileScreen() {
 
   const currentStreak = stats?.currentStreak ?? 0;
   const longestStreak = stats?.longestStreak ?? 0;
-  const streakProgress = longestStreak > 0
-    ? Math.min((currentStreak / longestStreak) * 100, 100)
-    : 0;
+  const levelProgress = stats?.levelProgress ?? 0;
 
   const onRefresh = async () => {
     setRefreshing(true);
     await Promise.all([refetchStats(), refetchRewards(), refetchNotifs()]);
+    await new Promise((r) => setTimeout(r, 800));
     setRefreshing(false);
   };
 
@@ -565,7 +564,7 @@ export default function ProfileScreen() {
                     { color: colors.textSecondary },
                   ]}
                 >
-                  Progress to Diamond tier
+                  Progress to next tier
                 </Text>
                 <Text
                   style={[
@@ -573,7 +572,7 @@ export default function ProfileScreen() {
                     { color: colors.gold, fontFamily: "DMSans_700Bold" },
                   ]}
                 >
-                  {streakProgress.toFixed(0)}%
+                    {levelProgress.toFixed(0)}%
                 </Text>
               </View>
               <View
@@ -588,7 +587,7 @@ export default function ProfileScreen() {
                   end={{ x: 1, y: 0 }}
                   style={[
                     styles.streakProgressFill,
-                    { width: `${streakProgress}%` },
+                    { width: `${levelProgress}%` },
                   ]}
                 />
               </View>

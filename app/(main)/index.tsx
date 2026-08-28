@@ -130,6 +130,7 @@ export default function TodayScreen() {
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     await Promise.all([refetchAff(), refetchStats()]);
+    await new Promise((r) => setTimeout(r, 800));
     setRefreshing(false);
   }, []);
 
