@@ -1,5 +1,22 @@
 import { fetch } from "expo/fetch";
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+let authUserId: number | null = null;
+export function setAuthUserId(id: number | null) {
+  authUserId = id;
+}
+async function getUserId(): Promise<number | null> {
+  if (authUserId) return authUserId;
+  try {
+    const raw = await AsyncStorage.getItem("auth_user");
+    if (raw) {
+      const u = JSON.parse(raw);
+      if (u?.id) return u.id as number;
+    }
+  } catch {}
+  return null;
+}
 
 /**
  * Gets the base URL for the Express API server (e.g., "http://localhost:3000")
@@ -7,7 +24,7 @@ import { QueryClient, QueryFunction } from "@tanstack/react-query";
  */
 export function getApiUrl(): string {
   // Production backend URL - baked into APK
-  const productionUrl = "https://global-affirmation-hub-api.vercel.app/";
+  const productionUrl = "https://global-affirmation-hub-1.vercel.app/";
   
   // Use production URL by default, or allow environment override for development
   const explicitUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -40,12 +57,14 @@ export async function apiRequest(
   const baseUrl = getApiUrl();
   const url = new URL(route, baseUrl);
   const tunnelHeaders = getTunnelHeaders(baseUrl);
+  const uid = await getUserId();
+  const authHeader = uid ? { "X-User-Id": String(uid) } : {};
 
   const res = await fetch(url.toString(), {
     method,
     headers: data
-      ? { ...tunnelHeaders, "Content-Type": "application/json" }
-      : tunnelHeaders,
+      ? { ...tunnelHeaders, ...authHeader, "Content-Type": "application/json" }
+      : { ...tunnelHeaders, ...authHeader },
     body: data ? JSON.stringify(data) : undefined,
     credentials: "include",
   });
@@ -63,10 +82,12 @@ export const getQueryFn: <T>(options: {
     const baseUrl = getApiUrl();
     const url = new URL(queryKey.join("/") as string, baseUrl);
     const tunnelHeaders = getTunnelHeaders(baseUrl);
+    const uid = await getUserId();
+    const authHeader = uid ? { "X-User-Id": String(uid) } : {};
 
     const res = await fetch(url.toString(), {
       credentials: "include",
-      headers: tunnelHeaders,
+      headers: { ...tunnelHeaders, ...authHeader },
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {

@@ -7,7 +7,7 @@ function getSQL() {
   if (!_sql) {
     const url = process.env.DATABASE_URL;
     if (!url) throw new Error("DATABASE_URL not configured");
-    _sql = postgres(url, { ssl: "require", max: 1 });
+    _sql = postgres(url, { ssl: "require", max: 1, prepareThreshold: 0 });
   }
   return _sql;
 }
@@ -53,6 +53,24 @@ module.exports = async function handler(req, res) {
   const method = req.method || "GET";
 
   try {
+    // ── Images: Serve affirmation images from DB ──
+    const imgMatch = path.match(/^\/api\/images\/(\d+)$/);
+    if (imgMatch && method === "GET") {
+      const sql = getSQL();
+      const affId = parseInt(imgMatch[1]);
+      const rows = await sql`SELECT image_data FROM affirmations WHERE id = ${affId}`;
+      if (!rows.length || !rows[0].image_data) {
+        return res.status(404).json({ error: "Image not found" });
+      }
+      const dataUri = rows[0].image_data;
+      const base64 = dataUri.split(",")[1];
+      const mime = dataUri.split(";")[0].replace("data:", "");
+      const buffer = Buffer.from(base64, "base64");
+      res.setHeader("Content-Type", mime);
+      res.setHeader("Cache-Control", "public, max-age=86400");
+      return res.send(buffer);
+    }
+
     // ── Health (tests DB connection) ──
     if (path === "/api/health" || path === "/api") {
       const sql = getSQL();
@@ -192,7 +210,7 @@ module.exports = async function handler(req, res) {
           dayNumber: a.day_number,
           title: a.title,
           content: a.content,
-          imageUrl: a.image_url,
+          imageUrl: a.image_data ? `/api/images/${a.id}` : a.image_url,
           createdAt: a.created_at,
         })),
       });
@@ -212,7 +230,7 @@ module.exports = async function handler(req, res) {
         dayNumber: a.day_number,
         title: a.title,
         content: a.content,
-        imageUrl: a.image_url,
+        imageUrl: a.image_data ? `/api/images/${a.id}` : a.image_url,
         createdAt: a.created_at,
       })));
     }
@@ -308,7 +326,7 @@ module.exports = async function handler(req, res) {
         dayNumber: a.day_number,
         title: a.title,
         content: a.content,
-        imageUrl: a.image_url,
+        imageUrl: a.image_data ? `/api/images/${a.id}` : a.image_url,
         createdAt: a.created_at,
         bookletMonth: booklet[0].month,
         bookletYear: booklet[0].year,
@@ -361,7 +379,7 @@ module.exports = async function handler(req, res) {
         dayNumber: a.day_number,
         title: a.title,
         content: a.content,
-        imageUrl: a.image_url,
+        imageUrl: a.image_data ? `/api/images/${a.id}` : a.image_url,
         createdAt: a.created_at,
         bookletMonth: a.booklet_month,
         bookletYear: a.booklet_year,
@@ -927,7 +945,9 @@ module.exports = async function handler(req, res) {
 
       const txRef = `affirm-${userId}-${bookletId}-${Date.now()}`;
       const baseUrl = req.headers.origin || `https://${req.headers.host}`;
-      const redirectUrl = `${baseUrl}/api/payments/flutterwave/callback?tx_ref=${txRef}&bookletId=${bookletId}&userId=${userId}`;
+      const callbackUrl = `${baseUrl}/api/payments/flutterwave/callback?tx_ref=${txRef}&bookletId=${bookletId}&userId=${userId}`;
+      const deepLinkUrl = `mylifemycashflow://payment-complete?tx_ref=${txRef}&bookletId=${bookletId}&userId=${userId}`;
+      const redirectUrl = callbackUrl;
 
       const flwRes = await flutterwaveApi("POST", "/payments", {
         tx_ref: txRef,
@@ -972,13 +992,13 @@ module.exports = async function handler(req, res) {
         }
       }
 
-      const frontendUrl = process.env.APP_URL || "https://global-affirmation-hub-1.vercel.app";
       const params = new URLSearchParams();
-      if (txRef) params.set("reference", txRef);
+      if (txRef) params.set("tx_ref", txRef);
       if (bookletId) params.set("bookletId", String(bookletId));
       if (userId) params.set("userId", String(userId));
       params.set("status", paymentSuccessful ? "success" : "cancelled");
-      return res.redirect(`${frontendUrl}/payment-complete?${params.toString()}`);
+      const deepLinkUrl = `mylifemycashflow://payment-complete?${params.toString()}`;
+      return res.redirect(deepLinkUrl);
     }
 
     // ── Flutterwave: Sync Payment Status ──

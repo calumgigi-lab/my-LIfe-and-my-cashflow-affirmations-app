@@ -24,7 +24,6 @@ components/
 constants/
 shared/
 scripts/
-public/
 patches/
 migrations/
 android/

@@ -37,7 +37,7 @@ const bookletCovers: Partial<Record<number, ImageSourcePropType>> = {
 
 function AffirmationItem({ aff, index, colors, locked }: any) {
   const affirmationImageUrl = aff.imageUrl
-    ? (aff.imageUrl.startsWith("http")
+    ? (aff.imageUrl.startsWith("http") || aff.imageUrl.startsWith("data:")
       ? aff.imageUrl
       : new URL(aff.imageUrl, getApiUrl()).toString())
     : null;

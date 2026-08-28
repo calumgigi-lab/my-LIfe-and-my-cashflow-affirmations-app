@@ -96,7 +96,7 @@ export default function AffirmationDetailScreen() {
   const isLocked = !!aff && accessData?.unlocked === false && aff.dayNumber > previewDays;
   const monthlyPriceNaira = accessData?.monthlyPriceNaira ?? 1500;
   const affirmationImageUrl = aff?.imageUrl
-    ? (aff.imageUrl.startsWith("http")
+    ? (aff.imageUrl.startsWith("http") || aff.imageUrl.startsWith("data:")
       ? aff.imageUrl
       : new URL(aff.imageUrl, getApiUrl()).toString())
     : null;

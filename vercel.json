@@ -1,6 +1,7 @@
 {
   "version": 2,
   "buildCommand": "npm install --production=false && npm prune --production",
+  "outputDirectory": ".",
   "routes": [
     {
       "src": "/api/(.*)",

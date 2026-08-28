@@ -10,7 +10,7 @@
         "gradleCommand": ":app:assembleRelease"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://global-affirmation-hub-api.vercel.app"
+        "EXPO_PUBLIC_API_URL": "https://global-affirmation-hub-1.vercel.app"
       }
     },
     "preview": {
@@ -18,14 +18,14 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://global-affirmation-hub-api.vercel.app"
+        "EXPO_PUBLIC_API_URL": "https://global-affirmation-hub-1.vercel.app"
       }
     },
     "development": {
       "developmentClient": true,
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://global-affirmation-hub-api.vercel.app"
+        "EXPO_PUBLIC_API_URL": "https://global-affirmation-hub-1.vercel.app"
       }
     }
   }

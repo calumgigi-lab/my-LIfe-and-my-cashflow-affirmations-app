@@ -20,10 +20,26 @@ function NativeTabLayout() {
         <Icon sf={{ default: "book", selected: "book.fill" }} />
         <Label>Library</Label>
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="leaderboard">
+        <Icon sf={{ default: "trophy", selected: "trophy.fill" }} />
+        <Label>Ranks</Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="store">
+        <Icon sf={{ default: "storefront", selected: "storefront.fill" }} />
+        <Label>Store</Label>
+      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="profile">
         <Icon sf={{ default: "person", selected: "person.fill" }} />
         <Label>Profile</Label>
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="settings" />
+      <NativeTabs.Trigger name="edit-profile" />
+      <NativeTabs.Trigger name="booklet-[id]" />
+      <NativeTabs.Trigger name="affirmation-[id]" />
+      <NativeTabs.Trigger name="cart" />
+      <NativeTabs.Trigger name="library-filter" />
+      <NativeTabs.Trigger name="ranks-info" />
+      <NativeTabs.Trigger name="journal" />
     </NativeTabs>
   );
 }
@@ -84,6 +100,24 @@ function ClassicTabLayout() {
         }}
       />
       <Tabs.Screen
+        name="leaderboard"
+        options={{
+          title: "Ranks",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="trophy" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="store"
+        options={{
+          title: "Store",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="storefront" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",
@@ -92,6 +126,14 @@ function ClassicTabLayout() {
           ),
         }}
       />
+      <Tabs.Screen name="settings" options={{ href: undefined }} />
+      <Tabs.Screen name="edit-profile" options={{ href: undefined }} />
+      <Tabs.Screen name="booklet-[id]" options={{ href: undefined }} />
+      <Tabs.Screen name="affirmation-[id]" options={{ href: undefined }} />
+      <Tabs.Screen name="cart" options={{ href: undefined }} />
+      <Tabs.Screen name="library-filter" options={{ href: undefined }} />
+      <Tabs.Screen name="ranks-info" options={{ href: undefined }} />
+      <Tabs.Screen name="journal" options={{ href: undefined }} />
     </Tabs>
   );
 }
