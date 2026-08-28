@@ -797,19 +797,7 @@ export default function ProfileScreen() {
                   >
                     <Ionicons name="star" size={20} color={colors.gold} />
                   </View>
-                  <View
-                    style={[
-                      styles.statTrend,
-                      styles.statTrendUp,
-                      { backgroundColor: "rgba(48,209,88,0.1)" },
-                    ]}
-                  >
-                    <Ionicons
-                      name="trending-up"
-                      size={12}
-                      color={colors.success}
-                    />
-                  </View>
+                </View>
                 <Text
                   style={[
                     styles.statValue,
