@@ -6,7 +6,7 @@ import { useAuth } from "@/lib/auth-context";
 import { scheduleAffirmationReminders } from "@/lib/notifications";
 
 const NOTIF_VERSION_KEY = "notif_schedule_version";
-const CURRENT_NOTIF_VERSION = "2";
+const CURRENT_NOTIF_VERSION = "3";
 
 /**
  * Keeps the one-time (per-date) affirmation reminders topped up.
