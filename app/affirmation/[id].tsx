@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
@@ -11,12 +11,14 @@ import {
   Image,
   Alert,
   RefreshControl,
+  Animated as RNAnimated,
 } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import * as Haptics from "expo-haptics";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useThemeColors } from "@/constants/colors";
@@ -34,6 +36,9 @@ export default function AffirmationDetailScreen() {
     backgroundColor: isDark ? "rgba(48, 209, 88, 0.16)" : "rgba(52, 199, 89, 0.12)",
     borderColor: isDark ? "rgba(48, 209, 88, 0.32)" : "rgba(52, 199, 89, 0.24)",
   };
+
+  const [completedAffirmation, setCompletedAffirmation] = useState(false);
+  const swipeX = useRef(new RNAnimated.Value(0)).current;
 
   const { data: aff, isLoading, refetch: refetchAff } = useQuery<any>({
     queryKey: ["/api/affirmations", id],
@@ -58,7 +63,16 @@ export default function AffirmationDetailScreen() {
     },
   });
 
-  const [refreshing, setRefreshing] = React.useState(false);
+  const { data: bookletAffirmations = [] } = useQuery<any[]>({
+    queryKey: ["/api/booklets", aff?.bookletId, "affirmations"],
+    enabled: !!aff?.bookletId,
+  });
+
+  const currentIndex = bookletAffirmations.findIndex((a: any) => a.id === Number(id));
+  const prevAff = currentIndex > 0 ? bookletAffirmations[currentIndex - 1] : null;
+  const nextAff = currentIndex < bookletAffirmations.length - 1 ? bookletAffirmations[currentIndex + 1] : null;
+
+  const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
     await Promise.all([refetchAff(), refetchCompletion(), refetchAccess()]);
@@ -85,20 +99,26 @@ export default function AffirmationDetailScreen() {
 
   const completeMutation = useMutation({
     mutationFn: async (affirmationId: number) => {
-      await apiRequest("POST", `/api/affirmations/${affirmationId}/complete`);
+      const res = await apiRequest("POST", `/api/affirmations/${affirmationId}/complete`);
+      return res.json();
     },
     onSuccess: () => {
+      setCompletedAffirmation(true);
       queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
       queryClient.invalidateQueries({ queryKey: ["/api/completions"] });
       queryClient.invalidateQueries({ queryKey: ["/api/completions/check"] });
       queryClient.invalidateQueries({ queryKey: ["/api/streak"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/rewards/balance"] });
       if (Platform.OS !== "web") {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       }
     },
+    onError: (error: any) => {
+      Alert.alert("Error", error?.message || "Could not mark as affirmed. Please try again.");
+    },
   });
 
-  const isCompleted = completionCheck?.completed === true;
+  const isCompleted = completionCheck?.completed === true || completedAffirmation || completeMutation.isSuccess;
   const paragraphs = aff?.content?.split("\n\n") || [];
   const previewDays = accessData?.previewDays ?? 2;
   const isLocked = !!aff && accessData?.unlocked === false && aff.dayNumber > previewDays;
@@ -120,6 +140,26 @@ export default function AffirmationDetailScreen() {
       ? aff.imageUrl
       : new URL(aff.imageUrl, getApiUrl()).toString())
     : null;
+
+  const navigateTo = (affId: number) => {
+    router.replace({ pathname: "/affirmation/[id]", params: { id: affId.toString() } });
+  };
+
+  const swipeGesture = Gesture.Pan()
+    .activeOffsetX([-40, 40])
+    .onUpdate((e) => {
+      swipeX.setValue(e.translationX);
+    })
+    .onEnd((e) => {
+      if (e.translationX < -60 && nextAff) {
+        Haptics.selectionAsync();
+        navigateTo(nextAff.id);
+      } else if (e.translationX > 60 && prevAff) {
+        Haptics.selectionAsync();
+        navigateTo(prevAff.id);
+      }
+      RNAnimated.spring(swipeX, { toValue: 0, useNativeDriver: true }).start();
+    });
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -143,154 +183,197 @@ export default function AffirmationDetailScreen() {
           <ActivityIndicator size="large" color={colors.gold} />
         </View>
       ) : aff ? (
-        <ScrollView
-          contentContainerStyle={[
-            styles.scrollContent,
-            { paddingBottom: insets.bottom + (Platform.OS === "web" ? 34 : 0) + 120 },
-          ]}
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              tintColor={colors.gold}
-              colors={[colors.gold]}
-            />
-          }
-        >
-          <Animated.View entering={FadeInDown.duration(600).delay(50)}>
-            <View style={[styles.logoContainer, { marginBottom: 24 }]}>
-              <Image
-                source={require("@/assets/images/app-logo.png")}
-                style={styles.pageHeaderLogo}
-                resizeMode="contain"
+        <GestureDetector gesture={swipeGesture}>
+          <ScrollView
+            contentContainerStyle={[
+              styles.scrollContent,
+              { paddingBottom: insets.bottom + (Platform.OS === "web" ? 34 : 0) + 120 },
+            ]}
+            showsVerticalScrollIndicator={false}
+            scrollEventThrottle={16}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                tintColor={colors.gold}
+                colors={[colors.gold]}
               />
-            </View>
-          </Animated.View>
-
-          <Animated.View entering={FadeInDown.duration(600).delay(100)}>
-            <View style={styles.dayHeaderRow}>
-              <View style={[styles.dayBadge, { backgroundColor: colors.gold }]}>
-                <Text style={[styles.dayBadgeText, { fontFamily: "DMSans_700Bold" }]}>
-                  DAY {aff.dayNumber}
-                </Text>
+            }
+          >
+            <Animated.View entering={FadeInDown.duration(600).delay(50)}>
+              <View style={[styles.logoContainer, { marginBottom: 24 }]}>
+                <Image
+                  source={require("@/assets/images/app-logo.png")}
+                  style={styles.pageHeaderLogo}
+                  resizeMode="contain"
+                />
               </View>
-              {dayOfWeek && (
-                <View style={[styles.dayOfWeekBadge, { backgroundColor: colors.surfaceSecondary, borderColor: colors.border }]}>
-                  <Ionicons name="calendar-outline" size={13} color={colors.gold} />
-                  <Text style={[styles.dayOfWeekText, { color: colors.text, fontFamily: "DMSans_600SemiBold" }]}>
-                    {dayOfWeek}
-                  </Text>
-                  {dayDate && (
-                    <Text style={[styles.dayDateText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-                      {dayDate}
-                    </Text>
-                  )}
-                </View>
-              )}
-            </View>
-          </Animated.View>
-
-          {affirmationImageUrl && (
-            <Animated.View entering={FadeInDown.duration(600).delay(150)}>
-              <Image
-                source={{ uri: affirmationImageUrl }}
-                style={[styles.affirmationImage, { backgroundColor: colors.surfaceSecondary }]}
-                resizeMode="cover"
-              />
             </Animated.View>
-          )}
 
-          <Animated.View entering={FadeInDown.duration(600).delay(200)}>
-            <Text style={[styles.affTitle, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
-              {aff.title}
-            </Text>
-          </Animated.View>
-
-          <View style={[styles.divider, { backgroundColor: colors.gold + "40" }]} />
-
-          {isLocked ? (
-            <View style={[styles.lockedContentCard, { backgroundColor: colors.surfaceSecondary, borderColor: colors.border }]}> 
-              <Ionicons name="lock-closed" size={24} color={colors.gold} />
-              <Text style={[styles.lockedTitle, { color: colors.text, fontFamily: "DMSans_700Bold" }]}> 
-                This day is locked
-              </Text>
-              <Text style={[styles.lockedText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}> 
-                Days 1-{previewDays} are free previews. Unlock this monthly booklet for ₦{monthlyPriceNaira} to read and affirm this page fully.
-              </Text>
-              <Pressable
-                onPress={() => unlockMutation.mutate()}
-                disabled={unlockMutation.isPending}
-                style={({ pressed }) => [
-                  styles.unlockButton,
-                  { backgroundColor: colors.tint, opacity: pressed || unlockMutation.isPending ? 0.85 : 1 },
-                ]}
-              >
-                {unlockMutation.isPending ? (
-                  <ActivityIndicator color="#fff" />
-                ) : (
-                  <Text style={styles.unlockButtonText}>Unlock for ₦{monthlyPriceNaira}</Text>
+            <Animated.View entering={FadeInDown.duration(600).delay(100)}>
+              <View style={styles.dayHeaderRow}>
+                <View style={[styles.dayBadge, { backgroundColor: colors.gold }]}>
+                  <Text style={[styles.dayBadgeText, { fontFamily: "DMSans_700Bold" }]}>
+                    DAY {aff.dayNumber}
+                  </Text>
+                </View>
+                {dayOfWeek && (
+                  <View style={[styles.dayOfWeekBadge, { backgroundColor: colors.surfaceSecondary, borderColor: colors.border }]}>
+                    <Ionicons name="calendar-outline" size={13} color={colors.gold} />
+                    <Text style={[styles.dayOfWeekText, { color: colors.text, fontFamily: "DMSans_600SemiBold" }]}>
+                      {dayOfWeek}
+                    </Text>
+                    {dayDate && (
+                      <Text style={[styles.dayDateText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
+                        {dayDate}
+                      </Text>
+                    )}
+                  </View>
                 )}
-              </Pressable>
-            </View>
-          ) : (
-            paragraphs.map((paragraph: string, index: number) => (
-              <Animated.View
-                key={index}
-                entering={FadeInUp.duration(600).delay(300 + index * 150)}
-              >
-                <Text
-                  style={[
-                    styles.paragraph,
-                    { color: colors.text, fontFamily: "DMSans_400Regular" },
+              </View>
+            </Animated.View>
+
+            {affirmationImageUrl && (
+              <Animated.View entering={FadeInDown.duration(600).delay(150)}>
+                <Image
+                  source={{ uri: affirmationImageUrl }}
+                  style={[styles.affirmationImage, { backgroundColor: colors.surfaceSecondary }]}
+                  resizeMode="cover"
+                />
+              </Animated.View>
+            )}
+
+            <Animated.View entering={FadeInDown.duration(600).delay(200)}>
+              <Text style={[styles.affTitle, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
+                {aff.title}
+              </Text>
+            </Animated.View>
+
+            <View style={[styles.divider, { backgroundColor: colors.gold + "40" }]} />
+
+            {isLocked ? (
+              <View style={[styles.lockedContentCard, { backgroundColor: colors.surfaceSecondary, borderColor: colors.border }]}>
+                <Ionicons name="lock-closed" size={24} color={colors.gold} />
+                <Text style={[styles.lockedTitle, { color: colors.text, fontFamily: "DMSans_700Bold" }]}>
+                  This day is locked
+                </Text>
+                <Text style={[styles.lockedText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
+                  Days 1-{previewDays} are free previews. Unlock this monthly booklet for ₦{monthlyPriceNaira} to read and affirm this page fully.
+                </Text>
+                <Pressable
+                  onPress={() => unlockMutation.mutate()}
+                  disabled={unlockMutation.isPending}
+                  style={({ pressed }) => [
+                    styles.unlockButton,
+                    { backgroundColor: colors.tint, opacity: pressed || unlockMutation.isPending ? 0.85 : 1 },
                   ]}
                 >
-                  {paragraph}
-                </Text>
-              </Animated.View>
-            ))
-          )}
-
-          {!isLocked && (
-            <View style={styles.actionSection}>
-              {!isCompleted ? (
-              <Pressable
-                onPress={() => completeMutation.mutate(aff.id)}
-                disabled={completeMutation.isPending}
-                style={({ pressed }) => [
-                  styles.affirmButton,
-                  { opacity: pressed ? 0.9 : 1 },
-                ]}
-              >
-                <LinearGradient
-                  colors={primaryActionGradient}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  style={styles.affirmButtonGradient}
-                >
-                  {completeMutation.isPending ? (
+                  {unlockMutation.isPending ? (
                     <ActivityIndicator color="#fff" />
                   ) : (
-                    <>
-                      <Ionicons name="checkmark-circle" size={22} color="#fff" />
-                      <Text style={[styles.affirmButtonText, { fontFamily: "DMSans_700Bold" }]}>
-                        I Have Affirmed
-                      </Text>
-                    </>
+                    <Text style={styles.unlockButtonText}>Unlock for ₦{monthlyPriceNaira}</Text>
                   )}
-                </LinearGradient>
-              </Pressable>
-              ) : (
-              <View style={[styles.completedBanner, completedBannerStyle]}>
-                <Ionicons name="checkmark-circle" size={22} color={colors.success} />
-                <Text style={[styles.completedText, { color: colors.success, fontFamily: "DMSans_600SemiBold" }]}>
-                  Affirmed for today
-                </Text>
+                </Pressable>
               </View>
-              )}
+            ) : (
+              paragraphs.map((paragraph: string, index: number) => (
+                <Animated.View
+                  key={index}
+                  entering={FadeInUp.duration(600).delay(300 + index * 150)}
+                >
+                  <Text
+                    style={[
+                      styles.paragraph,
+                      { color: colors.text, fontFamily: "DMSans_400Regular" },
+                    ]}
+                  >
+                    {paragraph}
+                  </Text>
+                </Animated.View>
+              ))
+            )}
+
+            {!isLocked && (
+              <View style={styles.actionSection}>
+                {!isCompleted ? (
+                <Pressable
+                  onPress={() => completeMutation.mutate(aff.id)}
+                  disabled={completeMutation.isPending}
+                  style={({ pressed }) => [
+                    styles.affirmButton,
+                    { opacity: pressed ? 0.9 : 1 },
+                  ]}
+                >
+                  <LinearGradient
+                    colors={primaryActionGradient}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={styles.affirmButtonGradient}
+                  >
+                    {completeMutation.isPending ? (
+                      <ActivityIndicator color="#fff" />
+                    ) : (
+                      <>
+                        <Ionicons name="checkmark-circle" size={22} color="#fff" />
+                        <Text style={[styles.affirmButtonText, { fontFamily: "DMSans_700Bold" }]}>
+                          I Have Affirmed
+                        </Text>
+                      </>
+                    )}
+                  </LinearGradient>
+                </Pressable>
+                ) : (
+                <View style={[styles.completedBanner, completedBannerStyle]}>
+                  <Ionicons name="checkmark-circle" size={22} color={colors.success} />
+                  <Text style={[styles.completedText, { color: colors.success, fontFamily: "DMSans_600SemiBold" }]}>
+                    Affirmed for today
+                  </Text>
+                </View>
+                )}
+              </View>
+            )}
+
+            {(prevAff || nextAff) && (
+              <View style={styles.navRow}>
+                {prevAff ? (
+                  <Pressable
+                    onPress={() => navigateTo(prevAff.id)}
+                    style={({ pressed }) => [
+                      styles.navBtn,
+                      { borderColor: colors.border, opacity: pressed ? 0.7 : 1 },
+                    ]}
+                  >
+                    <Ionicons name="chevron-back" size={18} color={colors.gold} />
+                    <Text style={[styles.navBtnText, { color: colors.text, fontFamily: "DMSans_500Medium" }]} numberOfLines={1}>
+                      Day {prevAff.dayNumber}
+                    </Text>
+                  </Pressable>
+                ) : <View style={{ flex: 1 }} />}
+                {nextAff ? (
+                  <Pressable
+                    onPress={() => navigateTo(nextAff.id)}
+                    style={({ pressed }) => [
+                      styles.navBtn,
+                      { borderColor: colors.border, alignItems: "flex-end", opacity: pressed ? 0.7 : 1 },
+                    ]}
+                  >
+                    <Text style={[styles.navBtnText, { color: colors.text, fontFamily: "DMSans_500Medium" }]} numberOfLines={1}>
+                      Day {nextAff.dayNumber}
+                    </Text>
+                    <Ionicons name="chevron-forward" size={18} color={colors.gold} />
+                  </Pressable>
+                ) : <View style={{ flex: 1 }} />}
+              </View>
+            )}
+
+            <View style={styles.swipeHint}>
+              <Ionicons name="swap-horizontal-outline" size={16} color={colors.textSecondary} />
+              <Text style={[styles.swipeHintText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
+                Swipe left or right to turn pages
+              </Text>
             </View>
-          )}
-        </ScrollView>
+          </ScrollView>
+        </GestureDetector>
       ) : (
         <View style={styles.loadingContainer}>
           <Ionicons name="alert-circle-outline" size={48} color={colors.textSecondary} />
@@ -416,4 +499,30 @@ const styles = StyleSheet.create({
   },
   completedText: { fontSize: 16 },
   errorText: { fontSize: 18 },
+  navRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 24,
+    gap: 12,
+  },
+  navBtn: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+  },
+  navBtnText: { fontSize: 14 },
+  swipeHint: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    marginTop: 20,
+    paddingVertical: 10,
+  },
+  swipeHintText: { fontSize: 13 },
 });

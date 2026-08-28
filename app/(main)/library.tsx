@@ -547,8 +547,8 @@ export default function LibraryScreen() {
                       <View style={styles.bookletCoverImage}>
                         <Image
                           source={getBookletCover(booklet.month, booklet.year)!}
-                          style={StyleSheet.absoluteFill}
-                          resizeMode="cover"
+                          style={styles.coverImageFit}
+                          resizeMode="contain"
                         />
                         <LinearGradient
                           colors={["transparent", "rgba(15,44,79,0.85)"]}
@@ -902,6 +902,11 @@ const styles = StyleSheet.create({
   },
   coverImage: {
     ...StyleSheet.absoluteFillObject,
+    width: "100%",
+    height: "100%",
+    borderRadius: 0,
+  },
+  coverImageFit: {
     width: "100%",
     height: "100%",
     borderRadius: 0,

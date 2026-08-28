@@ -116,7 +116,7 @@ export default function TodayScreen() {
     },
   });
 
-  const isCompleted = completionCheck?.completed === true || completedAffirmation;
+  const isCompleted = completionCheck?.completed === true || completedAffirmation || completeMutation.isSuccess;
   const previewDays = todayAccess?.previewDays ?? 2;
   const isTodayLocked = !!todayAff && todayAccess?.unlocked === false && todayAff.dayNumber > previewDays;
   const monthlyPriceNaira = todayAccess?.monthlyPriceNaira ?? 1500;
