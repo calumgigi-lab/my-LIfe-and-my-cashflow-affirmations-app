@@ -1,0 +1,52 @@
+{
+  "app": { "name": "私の人生とキャッシュフローのアファメーション" },
+  "tabs": { "today": "今日", "library": "ライブラリ", "ranks": "ランキング", "profile": "プロフィール" },
+  "today": {
+    "greeting_morning": "おはようございます", "greeting_afternoon": "こんにちは", "greeting_evening": "こんばんは",
+    "day_streak": "連続日数", "affirmed": "確認済み", "best_streak": "最高連続記録",
+    "loading_stats": "統計を読み込み中...", "todays_affirmation": "今日のアファメーション", "day": "日目",
+    "read_full": "全文を読む", "browse_library": "ライブラリを見る",
+    "browse_subtitle": "毎月のアファメーションブックレットを探索", "daily_checkin": "デイリーチェックイン",
+    "checkin_subtitle": "今日の参加だけで10ポイント獲得",
+    "no_affirmation_title": "今日のアファメーションはありません", "no_affirmation_subtitle": "後でもう一度確認するか、ライブラリをご覧ください",
+    "locked_message": "このアファメーションはロックされています。1〜{{previewDays}}日目は無料プレビューです。今月をアンロックして完全に読み、アファームしましょう。",
+    "unlock_for": "₦{{price}}でアンロック", "i_have_affirmed": "アファームしました", "affirmed_for_today": "今日アファーム済み",
+    "loading_error": "読み込みエラー", "failed_to_load": "データの読み込みに失敗しました",
+    "already_checked_in": "チェックイン済み", "already_checked_in_msg": "今日はすでにチェックインしています。また明日！",
+    "checkin_complete": "チェックイン完了！", "checkin_earned": "今日のチェックインで{{points}}ポイント獲得しました。",
+    "error_title": "エラー", "checkin_error": "チェックインを記録できませんでした。もう一度お試しください。",
+    "streak_milestone": "🔥 連続記録達成！", "streak_milestone_msg": "すごい！連続記録達成で+{{bonus}}ポイントのボーナスを獲得しました！この調子で続けましょう！"
+  },
+  "affirmation": {
+    "this_day_is_locked": "この日はロックされています",
+    "locked_description": "1〜{{previewDays}}日目は無料プレビューです。このブックレットを₦{{price}}でアンロックして、完全に読み、アファームしましょう。",
+    "unlock_for": "₦{{price}}でアンロック",
+    "payment_recorded": "お支払いを記録しました", "payment_recorded_msg": "お支払いは管理者の確認待ちです。承認され次第、完全な月にアクセスできるようになります。",
+    "payment_error": "支払いエラー", "payment_error_msg": "お支払いを記録できませんでした。もう一度お試しください。",
+    "i_have_affirmed": "アファームしました", "affirmed_for_today": "今日アファーム済み",
+    "streak_milestone": "🔥 連続記録達成！", "streak_milestone_msg": "すごい！連続記録達成で+{{bonus}}ポイントのボーナスを獲得しました！この調子で続けましょう！",
+    "not_found": "アファメーションが見つかりません"
+  },
+  "booklet": {
+    "locked_preview": "ロック中 - プレビューは1日目と2日目のみ利用可能", "locked_banner": "1〜{{previewDays}}日目は無料。完全な月を₦{{price}}でアンロック。", "day": "日",
+    "unlock_for": "₦{{price}}でアンロック", "unlock": "アンロック", "view_all": "すべて表示", "loading": "読み込み中..."
+  },
+  "library": {
+    "title": "ライブラリ", "subtitle": "毎月のアファメーションブックレットを探索",
+    "no_booklets_title": "まだ利用可能なブックレットはありません", "no_booklets_subtitle": "新しいコンテンツのために後でまた来てください",
+    "unlock_title": "{{month}}をアンロック", "choose_method": "このブックレットのアンロック方法を選択",
+    "pay_with": "{{provider}}で支払う", "pay_desc": "カード、銀行、USSD — 即時アンロック",
+    "reward_points": "ポイント", "points_desc": "{{points}}ポイント", "points_needed": "現在{{balance}}",
+    "earn_points_hint": "毎日のアファメーション、チェックイン、連続記録でポイントを獲得。あと{{needed}}ポイント必要です。",
+    "cancel": "キャンセル", "unlocked": "アンロック完了！", "unlocked_msg": "ブックレットをポイントでアンロックしました。",
+    "unlock_error": "エラー", "unlock_error_msg": "ポイントを交換できませんでした。もう一度お試しください。",
+    "one_year_wonders": "1年間の驚異", "special_edition": "特別版"
+  },
+  "settings": { "language": "言語", "select_language": "言語を選択" },
+  "payment": {
+    "admin_pending": "管理者の承認待ち",
+    "admin_pending_detail": "銀行振込の証明を受け取りました。確認後、このブックレットをアンロックします。",
+    "confirming_payment": "お支払いを確認中",
+    "confirming_payment_detail": "お支払いを受け取りました。下にスワイプして更新 — アクセスは通常1分以内にアンロックされます。"
+  }
+}

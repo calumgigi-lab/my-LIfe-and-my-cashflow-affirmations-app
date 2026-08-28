@@ -1,0 +1,97 @@
+{
+  "app": {
+    "name": "My Life & My Cashflow Affirmations"
+  },
+  "tabs": {
+    "today": "Today",
+    "library": "Library",
+    "ranks": "Ranks",
+    "profile": "Profile"
+  },
+  "today": {
+    "greeting_morning": "Good Morning",
+    "greeting_afternoon": "Good Afternoon",
+    "greeting_evening": "Good Evening",
+    "day_streak": "Day Streak",
+    "affirmed": "Affirmed",
+    "best_streak": "Best Streak",
+    "loading_stats": "Loading stats...",
+    "todays_affirmation": "Today's Affirmation",
+    "day": "DAY",
+    "read_full": "Read Full Affirmation",
+    "browse_library": "Browse Library",
+    "browse_subtitle": "Explore all monthly affirmation booklets",
+    "daily_checkin": "Daily Check-in",
+    "checkin_subtitle": "Earn 10 pts just for showing up today",
+    "no_affirmation_title": "No affirmation for today",
+    "no_affirmation_subtitle": "Check back soon or browse the library",
+    "locked_message": "This daily affirmation is locked. Days 1-{{previewDays}} are free previews. Unlock this month to read and affirm fully.",
+    "unlock_for": "Unlock for ₦{{price}}",
+    "i_have_affirmed": "I Have Affirmed",
+    "affirmed_for_today": "Affirmed for today",
+    "loading_error": "Loading Error",
+    "failed_to_load": "Failed to load data",
+    "already_checked_in": "Already Checked In",
+    "already_checked_in_msg": "You have already checked in today. Come back tomorrow!",
+    "checkin_complete": "Check-in Complete!",
+    "checkin_earned": "You earned {{points}} pts for checking in today.",
+    "error_title": "Error",
+    "checkin_error": "Could not record check-in. Please try again.",
+    "streak_milestone": "🔥 Streak Milestone!",
+    "streak_milestone_msg": "Incredible! You earned a bonus +{{bonus}} pts for your streak milestone! Keep it up!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "This day is locked",
+    "locked_description": "Days 1-{{previewDays}} are free previews. Unlock this monthly booklet for ₦{{price}} to read and affirm this page fully.",
+    "unlock_for": "Unlock for ₦{{price}}",
+    "payment_recorded": "Payment Recorded",
+    "payment_recorded_msg": "Your payment is pending admin verification. You'll be able to access the full month once approved.",
+    "payment_error": "Payment Error",
+    "payment_error_msg": "Could not record payment. Please try again.",
+    "i_have_affirmed": "I Have Affirmed",
+    "affirmed_for_today": "Affirmed for today",
+    "streak_milestone": "🔥 Streak Milestone!",
+    "streak_milestone_msg": "Incredible! You earned a bonus +{{bonus}} pts for your streak milestone! Keep it up!",
+    "not_found": "Affirmation not found"
+  },
+  "booklet": {
+    "locked_preview": "Locked - Preview available for Day 1 and 2 only",
+    "locked_banner": "Days 1-{{previewDays}} are free. Unlock full month for ₦{{price}}.",
+    "day": "Day",
+    "unlock_for": "Unlock for ₦{{price}}",
+    "unlock": "Unlock",
+    "view_all": "View All",
+    "loading": "Loading..."
+  },
+  "library": {
+    "title": "Library",
+    "subtitle": "Explore all monthly affirmation booklets",
+    "no_booklets_title": "No booklets available yet",
+    "no_booklets_subtitle": "Check back soon for new content",
+    "unlock_title": "Unlock {{month}}",
+    "choose_method": "Choose how you would like to unlock this booklet",
+    "pay_with": "Pay with {{provider}}",
+    "pay_desc": "Card, bank, USSD — instant unlock",
+    "reward_points": "Reward Points",
+    "points_desc": "{{points}} pts",
+    "points_needed": "You have {{balance}}",
+    "earn_points_hint": "Earn points by affirming daily, daily check-ins, and streaks. You need {{needed}} more pts.",
+    "cancel": "Cancel",
+    "unlocked": "Unlocked!",
+    "unlocked_msg": "Booklet unlocked with your reward points.",
+    "unlock_error": "Error",
+    "unlock_error_msg": "Could not redeem points. Please try again.",
+    "one_year_wonders": "1 YEAR OF WONDERS",
+    "special_edition": "SPECIAL EDITION"
+  },
+  "settings": {
+    "language": "Language",
+    "select_language": "Select Language"
+  },
+  "payment": {
+    "admin_pending": "Pending admin approval",
+    "admin_pending_detail": "We received your bank transfer proof and will unlock this booklet once verified.",
+    "confirming_payment": "Confirming payment",
+    "confirming_payment_detail": "Your payment was received. Pull down to refresh — access usually unlocks within a minute."
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "app": {
+    "name": "Mis Afirmaciones de Vida y Flujo de Efectivo"
+  },
+  "tabs": {
+    "today": "Hoy",
+    "library": "Biblioteca",
+    "ranks": "Rangos",
+    "profile": "Perfil"
+  },
+  "today": {
+    "greeting_morning": "Buenos Días",
+    "greeting_afternoon": "Buenas Tardes",
+    "greeting_evening": "Buenas Noches",
+    "day_streak": "Racha de Días",
+    "affirmed": "Afirmado",
+    "best_streak": "Mejor Racha",
+    "loading_stats": "Cargando estadísticas...",
+    "todays_affirmation": "Afirmación de Hoy",
+    "day": "DÍA",
+    "read_full": "Leer Afirmación Completa",
+    "browse_library": "Explorar Biblioteca",
+    "browse_subtitle": "Explora todos los folletos mensuales",
+    "daily_checkin": "Registro Diario",
+    "checkin_subtitle": "Gana 10 pts solo por presentarte hoy",
+    "no_affirmation_title": "Sin afirmación para hoy",
+    "no_affirmation_subtitle": "Vuelve pronto o explora la biblioteca",
+    "locked_message": "Esta afirmación está bloqueada. Los días 1-{{previewDays}} son vista previa gratuita. Desbloquea este mes para leer y afirmar completamente.",
+    "unlock_for": "Desbloquear por ₦{{price}}",
+    "i_have_affirmed": "He Afirmado",
+    "affirmed_for_today": "Afirmado por hoy",
+    "loading_error": "Error al Cargar",
+    "failed_to_load": "Error al cargar datos",
+    "already_checked_in": "Ya Registrado",
+    "already_checked_in_msg": "Ya te registraste hoy. ¡Vuelve mañana!",
+    "checkin_complete": "¡Registro Completo!",
+    "checkin_earned": "Ganaste {{points}} pts por registrarte hoy.",
+    "error_title": "Error",
+    "checkin_error": "No se pudo registrar. Intenta de nuevo.",
+    "streak_milestone": "🔥 ¡Hito de Racha!",
+    "streak_milestone_msg": "¡Increíble! Ganaste un bono de +{{bonus}} pts por tu hito. ¡Sigue así!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "Este día está bloqueado",
+    "locked_description": "Los días 1-{{previewDays}} son vista previa gratuita. Desbloquea este folleto por ₦{{price}} para leer y afirmar completamente.",
+    "unlock_for": "Desbloquear por ₦{{price}}",
+    "payment_recorded": "Pago Registrado",
+    "payment_recorded_msg": "Tu pago está pendiente de verificación administrativa. Podrás acceder al mes completo una vez aprobado.",
+    "payment_error": "Error de Pago",
+    "payment_error_msg": "No se pudo registrar el pago. Intenta de nuevo.",
+    "i_have_affirmed": "He Afirmado",
+    "affirmed_for_today": "Afirmado por hoy",
+    "streak_milestone": "🔥 ¡Hito de Racha!",
+    "streak_milestone_msg": "¡Increíble! Ganaste un bono de +{{bonus}} pts por tu hito. ¡Sigue así!",
+    "not_found": "Afirmación no encontrada"
+  },
+  "booklet": {
+    "locked_preview": "Bloqueado - Vista previa solo para Días 1 y 2",
+    "locked_banner": "Días 1-{{previewDays}} son gratis. Desbloquea el mes completo por ₦{{price}}.",
+    "day": "Día",
+    "unlock_for": "Desbloquear por ₦{{price}}",
+    "unlock": "Desbloquear",
+    "view_all": "Ver Todo",
+    "loading": "Cargando..."
+  },
+  "library": {
+    "title": "Biblioteca",
+    "subtitle": "Explora todos los folletos mensuales",
+    "no_booklets_title": "No hay folletos disponibles aún",
+    "no_booklets_subtitle": "Vuelve pronto para nuevo contenido",
+    "unlock_title": "Desbloquear {{month}}",
+    "choose_method": "Elige cómo desbloquear este folleto",
+    "pay_with": "Pagar con {{provider}}",
+    "pay_desc": "Tarjeta, banco, USSD — desbloqueo instantáneo",
+    "reward_points": "Puntos de Recompensa",
+    "points_desc": "{{points}} pts",
+    "points_needed": "Tienes {{balance}}",
+    "earn_points_hint": "Gana puntos afirmando diariamente, registros y rachas. Necesitas {{needed}} pts más.",
+    "cancel": "Cancelar",
+    "unlocked": "¡Desbloqueado!",
+    "unlocked_msg": "Folleto desbloqueado con tus puntos de recompensa.",
+    "unlock_error": "Error",
+    "unlock_error_msg": "No se pudieron canjear los puntos. Intenta de nuevo.",
+    "one_year_wonders": "1 AÑO DE MARAVILLAS",
+    "special_edition": "EDICIÓN ESPECIAL"
+  },
+  "settings": {
+    "language": "Idioma",
+    "select_language": "Seleccionar Idioma"
+  },
+  "payment": {
+    "admin_pending": "Pendiente de aprobación administrativa",
+    "admin_pending_detail": "Recibimos tu comprobante de transferencia y desbloquearemos este folleto una vez verificado.",
+    "confirming_payment": "Confirmando pago",
+    "confirming_payment_detail": "Tu pago fue recibido. Desliza hacia abajo para actualizar — el acceso generalmente se desbloquea en un minuto."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "app": { "name": "Ndụ M & Ego M Na-akpata Nkwupụta" },
+  "tabs": { "today": "Taa", "library": "Ọbá Akwụkwọ", "ranks": "Ọkwa", "profile": "Profaịlụ" },
+  "today": {
+    "greeting_morning": "Ụtụtụ Ọma", "greeting_afternoon": "Ehihie Ọma", "greeting_evening": "Anyasị Ọma",
+    "day_streak": "Ụbọchị Streak", "affirmed": "Ekwenyere", "best_streak": "Streak Kasị Mma",
+    "loading_stats": "Na-ebugo ọnụ ọgụgụ...", "todays_affirmation": "Nkwupụta Taa", "day": "ỤBỌCHỊ",
+    "read_full": "Gụọ Nkwupụta Ahụ Niile", "browse_library": "Chọgharịa Ọbá Akwụkwọ",
+    "browse_subtitle": "Chọgharịa akwụkwọ ọnwa niile", "daily_checkin": "Nbanye Kwa Ụbọchị",
+    "checkin_subtitle": "Nweta 10 pts naanị maka ịbịa taa",
+    "no_affirmation_title": "Enweghị nkwupụta maka taa", "no_affirmation_subtitle": "Laghachi n'oge na-adịghị anya ma ọ bụ chọgharịa ọbá akwụkwọ",
+    "locked_message": "Nkwupụta ụbọchị a akpọchiela. Ụbọchị 1-{{previewDays}} bụ nlele efu. Mepee ọnwa a ka ị gụọ ma kwenyere n'ụzọ zuru ezu.",
+    "unlock_for": "Mepee maka ₦{{price}}", "i_have_affirmed": "Ekwenyela M", "affirmed_for_today": "Ekwenyere maka taa",
+    "loading_error": "Njehie Ibugo", "failed_to_load": "Ọdara ibu data",
+    "already_checked_in": "Emeela Nbanye", "already_checked_in_msg": "Ị banyelarị taa. Lọghachi echi!",
+    "checkin_complete": "Nbanye Emechara!", "checkin_earned": "Ị nwetala {{points}} pts maka nbanye taa.",
+    "error_title": "Njehie", "checkin_error": "Enweghị ike ịdekọ nbanye. Biko nwaa ọzọ.",
+    "streak_milestone": "🔥 Streak Milestone!", "streak_milestone_msg": "Ijuanya! Ị nwetala ego mgbakwunye +{{bonus}} pts maka streak milestone gị! Nọgide!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "Ụbọchị a akpọchiela",
+    "locked_description": "Ụbọchị 1-{{previewDays}} bụ nlele efu. Mepee akwụkwọ a maka ₦{{price}} ka ị gụọ ma kwenyere n'ụzọ zuru ezu.",
+    "unlock_for": "Mepee maka ₦{{price}}",
+    "payment_recorded": "Edere Ịkwụ Ụgwọ", "payment_recorded_msg": "Ịkwụ ụgwọ gị na-eche nkwenye nchịkwa. Ị ga-enweta ohere ịnweta ọnwa zuru ezu ozugbo akwadoro.",
+    "payment_error": "Njehie Ịkwụ Ụgwọ", "payment_error_msg": "Enweghị ike ịdekọ ịkwụ ụgwọ. Biko nwaa ọzọ.",
+    "i_have_affirmed": "Ekwenyela M", "affirmed_for_today": "Ekwenyere maka taa",
+    "streak_milestone": "🔥 Streak Milestone!", "streak_milestone_msg": "Ijuanya! Ị nwetala ego mgbakwunye +{{bonus}} pts maka streak milestone gị! Nọgide!",
+    "not_found": "Achọtaghị nkwupụta"
+  },
+  "booklet": {
+    "locked_preview": "Akpọchiela - Nlele dị naanị maka Ụbọchị 1 na 2", "locked_banner": "Ụbọchị 1-{{previewDays}} bụ efu. Mepee ọnwa zuru ezu maka ₦{{price}}.", "day": "Ụbọchị",
+    "unlock_for": "Mepee maka ₦{{price}}", "unlock": "Mepee", "view_all": "Lee Niile", "loading": "Na-ebugo..."
+  },
+  "library": {
+    "title": "Ọbá Akwụkwọ", "subtitle": "Chọgharịa akwụkwọ ọnwa niile",
+    "no_booklets_title": "Enweghị akwụkwọ ọ bụla dị", "no_booklets_subtitle": "Laghachi n'oge na-adịghị anya maka ọdịnaya ọhụrụ",
+    "unlock_title": "Mepee {{month}}", "choose_method": "Họrọ otu ị ga-esi mepee akwụkwọ a",
+    "pay_with": "Kwụọ ụgwọ site na {{provider}}", "pay_desc": "Kaadị, ụlọ akụ, USSD — mepe ozugbo",
+    "reward_points": "Isi Ihe Nkwụghachi", "points_desc": "{{points}} pts", "points_needed": "Ị nwere {{balance}}",
+    "earn_points_hint": "Nweta isi ihe site na nkwupụta kwa ụbọchị, nbanye na streak. Ị chọrọ {{needed}} pts ọzọ.",
+    "cancel": "Kagbuo", "unlocked": "Emeghela!", "unlocked_msg": "E mepela akwụkwọ site na isi ihe nkwụghachi gị.",
+    "unlock_error": "Njehie", "unlock_error_msg": "Enweghị ike ịgbanwere isi ihe. Biko nwaa ọzọ.",
+    "one_year_wonders": "AFỌ 1 NKE IJUANYA", "special_edition": "MBIPỌ PỤRỤ ICHE"
+  },
+  "settings": { "language": "Asụsụ", "select_language": "Họrọ Asụsụ" },
+  "payment": {
+    "admin_pending": "Na-eche nkwado nchịkwa",
+    "admin_pending_detail": "Anyị anatala ihe akaebe mbufe ụlọ akụ gị ma mepee akwụkwọ a ozugbo enyochachara ya.",
+    "confirming_payment": "Na-ekwenye ịkwụ ụgwọ",
+    "confirming_payment_detail": "Anatala ịkwụ ụgwọ gị. Dọrọ ala iji megharịa — ohere na-emeghekarị n'ime otu nkeji."
+  }
+}

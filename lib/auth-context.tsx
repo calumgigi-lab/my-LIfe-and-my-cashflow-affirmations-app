@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, ReactNode } from "react";
-import { apiRequest } from "@/lib/query-client";
+import { apiRequest, setAuthUserId } from "@/lib/query-client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthUser {
   id: number;
@@ -33,7 +34,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await apiRequest("GET", "/api/auth/me");
       const data = await res.json();
       setUser(data);
+      setAuthUserId(data?.id ?? null);
+      if (data?.id) await AsyncStorage.setItem("auth_user", JSON.stringify(data));
     } catch {
+      // fallback to cached user for header auth
+      try {
+        const cached = await AsyncStorage.getItem("auth_user");
+        if (cached) {
+          const u = JSON.parse(cached);
+          if (u?.id) setAuthUserId(u.id);
+        }
+      } catch {}
     } finally {
       setIsLoading(false);
     }
@@ -43,6 +54,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const res = await apiRequest("POST", "/api/auth/login", { email, password });
     const data = await res.json();
     setUser(data);
+    setAuthUserId(data?.id ?? null);
+    if (data?.id) await AsyncStorage.setItem("auth_user", JSON.stringify(data));
   }
 
   async function register(username: string, email: string, password: string, displayName?: string) {
@@ -54,11 +67,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
     const data = await res.json();
     setUser(data);
+    setAuthUserId(data?.id ?? null);
+    if (data?.id) await AsyncStorage.setItem("auth_user", JSON.stringify(data));
   }
 
   async function logout() {
     await apiRequest("POST", "/api/auth/logout");
     setUser(null);
+    setAuthUserId(null);
+    await AsyncStorage.removeItem("auth_user");
   }
 
   const value = useMemo(

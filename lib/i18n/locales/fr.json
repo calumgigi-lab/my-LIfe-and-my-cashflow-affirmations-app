@@ -1,0 +1,97 @@
+{
+  "app": {
+    "name": "Mes Affirmations de Vie et de Trésorerie"
+  },
+  "tabs": {
+    "today": "Aujourd'hui",
+    "library": "Bibliothèque",
+    "ranks": "Rangs",
+    "profile": "Profil"
+  },
+  "today": {
+    "greeting_morning": "Bonjour",
+    "greeting_afternoon": "Bon Après-Midi",
+    "greeting_evening": "Bonsoir",
+    "day_streak": "Série de Jours",
+    "affirmed": "Affirmé",
+    "best_streak": "Meilleure Série",
+    "loading_stats": "Chargement des statistiques...",
+    "todays_affirmation": "Affirmation du Jour",
+    "day": "JOUR",
+    "read_full": "Lire l'Affirmation Complète",
+    "browse_library": "Parcourir la Bibliothèque",
+    "browse_subtitle": "Explorez tous les livrets mensuels",
+    "daily_checkin": "Pointage Quotidien",
+    "checkin_subtitle": "Gagnez 10 pts juste pour vous présenter aujourd'hui",
+    "no_affirmation_title": "Pas d'affirmation pour aujourd'hui",
+    "no_affirmation_subtitle": "Revenez bientôt ou parcourez la bibliothèque",
+    "locked_message": "Cette affirmation est verrouillée. Les jours 1-{{previewDays}} sont des aperçus gratuits. Déverrouillez ce mois pour lire et affirmer pleinement.",
+    "unlock_for": "Déverrouiller pour ₦{{price}}",
+    "i_have_affirmed": "J'ai Affirmé",
+    "affirmed_for_today": "Affirmé pour aujourd'hui",
+    "loading_error": "Erreur de Chargement",
+    "failed_to_load": "Échec du chargement des données",
+    "already_checked_in": "Déjà Pointé",
+    "already_checked_in_msg": "Vous vous êtes déjà pointé aujourd'hui. Revenez demain !",
+    "checkin_complete": "Pointage Terminé !",
+    "checkin_earned": "Vous avez gagné {{points}} pts pour votre pointage aujourd'hui.",
+    "error_title": "Erreur",
+    "checkin_error": "Impossible d'enregistrer le pointage. Veuillez réessayer.",
+    "streak_milestone": "🔥 Étape de Série !",
+    "streak_milestone_msg": "Incroyable ! Vous avez gagné un bonus de +{{bonus}} pts pour votre étape de série ! Continuez !"
+  },
+  "affirmation": {
+    "this_day_is_locked": "Ce jour est verrouillé",
+    "locked_description": "Les jours 1-{{previewDays}} sont des aperçus gratuits. Déverrouillez ce livret pour ₦{{price}} pour lire et affirmer pleinement.",
+    "unlock_for": "Déverrouiller pour ₦{{price}}",
+    "payment_recorded": "Paiement Enregistré",
+    "payment_recorded_msg": "Votre paiement est en attente de vérification administrative. Vous pourrez accéder au mois complet une fois approuvé.",
+    "payment_error": "Erreur de Paiement",
+    "payment_error_msg": "Impossible d'enregistrer le paiement. Veuillez réessayer.",
+    "i_have_affirmed": "J'ai Affirmé",
+    "affirmed_for_today": "Affirmé pour aujourd'hui",
+    "streak_milestone": "🔥 Étape de Série !",
+    "streak_milestone_msg": "Incroyable ! Vous avez gagné un bonus de +{{bonus}} pts pour votre étape de série ! Continuez !",
+    "not_found": "Affirmation non trouvée"
+  },
+  "booklet": {
+    "locked_preview": "Verrouillé - Aperçu disponible seulement pour les Jours 1 et 2",
+    "locked_banner": "Les jours 1-{{previewDays}} sont gratuits. Déverrouillez le mois complet pour ₦{{price}}.",
+    "day": "Jour",
+    "unlock_for": "Déverrouiller pour ₦{{price}}",
+    "unlock": "Déverrouiller",
+    "view_all": "Voir Tout",
+    "loading": "Chargement..."
+  },
+  "library": {
+    "title": "Bibliothèque",
+    "subtitle": "Explorez tous les livrets mensuels",
+    "no_booklets_title": "Aucun livret disponible pour le moment",
+    "no_booklets_subtitle": "Revenez bientôt pour du nouveau contenu",
+    "unlock_title": "Déverrouiller {{month}}",
+    "choose_method": "Choisissez comment déverrouiller ce livret",
+    "pay_with": "Payer avec {{provider}}",
+    "pay_desc": "Carte, banque, USSD — déverrouillage instantané",
+    "reward_points": "Points de Récompense",
+    "points_desc": "{{points}} pts",
+    "points_needed": "Vous avez {{balance}}",
+    "earn_points_hint": "Gagnez des points en affirmant quotidiennement, pointages et séries. Il vous faut {{needed}} pts de plus.",
+    "cancel": "Annuler",
+    "unlocked": "Déverrouillé !",
+    "unlocked_msg": "Livret déverrouillé avec vos points de récompense.",
+    "unlock_error": "Erreur",
+    "unlock_error_msg": "Impossible d'échanger les points. Veuillez réessayer.",
+    "one_year_wonders": "1 AN DE MERVEILLES",
+    "special_edition": "ÉDITION SPÉCIALE"
+  },
+  "settings": {
+    "language": "Langue",
+    "select_language": "Choisir la Langue"
+  },
+  "payment": {
+    "admin_pending": "En attente d'approbation administrative",
+    "admin_pending_detail": "Nous avons reçu votre preuve de virement et déverrouillerons ce livret une fois vérifiée.",
+    "confirming_payment": "Confirmation du paiement",
+    "confirming_payment_detail": "Votre paiement a été reçu. Tirez vers le bas pour actualiser — l'accès se déverrouille généralement en une minute."
+  }
+}

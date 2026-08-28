@@ -1,0 +1,97 @@
+{
+  "app": {
+    "name": "Mein Leben & Mein Cashflow Affirmationen"
+  },
+  "tabs": {
+    "today": "Heute",
+    "library": "Bibliothek",
+    "ranks": "Ränge",
+    "profile": "Profil"
+  },
+  "today": {
+    "greeting_morning": "Guten Morgen",
+    "greeting_afternoon": "Guten Nachmittag",
+    "greeting_evening": "Guten Abend",
+    "day_streak": "Tagesserie",
+    "affirmed": "Bestätigt",
+    "best_streak": "Beste Serie",
+    "loading_stats": "Statistiken werden geladen...",
+    "todays_affirmation": "Heutige Affirmation",
+    "day": "TAG",
+    "read_full": "Vollständige Affirmation Lesen",
+    "browse_library": "Bibliothek Durchsuchen",
+    "browse_subtitle": "Alle monatlichen Affirmationshefte entdecken",
+    "daily_checkin": "Tägliches Einchecken",
+    "checkin_subtitle": "Verdiene 10 Punkte, nur weil du heute da bist",
+    "no_affirmation_title": "Keine Affirmation für heute",
+    "no_affirmation_subtitle": "Schau bald wieder vorbei oder durchstöbere die Bibliothek",
+    "locked_message": "Diese tägliche Affirmation ist gesperrt. Tage 1-{{previewDays}} sind kostenlose Vorschauen. Schalte diesen Monat frei, um vollständig zu lesen und zu affirmieren.",
+    "unlock_for": "Entsperren für ₦{{price}}",
+    "i_have_affirmed": "Ich Habe Affirmiert",
+    "affirmed_for_today": "Für heute affirmiert",
+    "loading_error": "Ladefehler",
+    "failed_to_load": "Daten konnten nicht geladen werden",
+    "already_checked_in": "Bereits Eingcheckt",
+    "already_checked_in_msg": "Du hast heute bereits eingecheckt. Komm morgen wieder!",
+    "checkin_complete": "Check-in Abgeschlossen!",
+    "checkin_earned": "Du hast {{points}} Punkte für das heutige Einchecken verdient.",
+    "error_title": "Fehler",
+    "checkin_error": "Check-in konnte nicht aufgezeichnet werden. Bitte versuche es erneut.",
+    "streak_milestone": "🔥 Serien-Meilenstein!",
+    "streak_milestone_msg": "Unglaublich! Du hast einen Bonus von +{{bonus}} Punkten für deinen Serien-Meilenstein verdient! Weiter so!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "Dieser Tag ist gesperrt",
+    "locked_description": "Tage 1-{{previewDays}} sind kostenlose Vorschauen. Schalte dieses Heft für ₦{{price}} frei, um vollständig zu lesen und zu affirmieren.",
+    "unlock_for": "Entsperren für ₦{{price}}",
+    "payment_recorded": "Zahlung Aufgezeichnet",
+    "payment_recorded_msg": "Deine Zahlung wartet auf administrative Bestätigung. Du erhältst Zugriff auf den vollen Monat, sobald sie genehmigt ist.",
+    "payment_error": "Zahlungsfehler",
+    "payment_error_msg": "Zahlung konnte nicht aufgezeichnet werden. Bitte versuche es erneut.",
+    "i_have_affirmed": "Ich Habe Affirmiert",
+    "affirmed_for_today": "Für heute affirmiert",
+    "streak_milestone": "🔥 Serien-Meilenstein!",
+    "streak_milestone_msg": "Unglaublich! Du hast einen Bonus von +{{bonus}} Punkten für deinen Serien-Meilenstein verdient! Weiter so!",
+    "not_found": "Affirmation nicht gefunden"
+  },
+  "booklet": {
+    "locked_preview": "Gesperrt - Vorschau nur für Tag 1 und 2 verfügbar",
+    "locked_banner": "Tage 1-{{previewDays}} sind kostenlos. Entsperre den vollen Monat für ₦{{price}}.",
+    "day": "Tag",
+    "unlock_for": "Entsperren für ₦{{price}}",
+    "unlock": "Entsperren",
+    "view_all": "Alle Anzeigen",
+    "loading": "Laden..."
+  },
+  "library": {
+    "title": "Bibliothek",
+    "subtitle": "Alle monatlichen Affirmationshefte entdecken",
+    "no_booklets_title": "Noch keine Hefte verfügbar",
+    "no_booklets_subtitle": "Schau bald wieder vorbei für neue Inhalte",
+    "unlock_title": "{{month}} Entsperren",
+    "choose_method": "Wähle, wie du dieses Heft entsperren möchtest",
+    "pay_with": "Bezahlen mit {{provider}}",
+    "pay_desc": "Karte, Bank, USSD — sofortige Freischaltung",
+    "reward_points": "Belohnungspunkte",
+    "points_desc": "{{points}} Punkte",
+    "points_needed": "Du hast {{balance}}",
+    "earn_points_hint": "Verdiene Punkte durch tägliches Affirmieren, Einchecken und Serien. Du brauchst noch {{needed}} Punkte.",
+    "cancel": "Abbrechen",
+    "unlocked": "Entsperrt!",
+    "unlocked_msg": "Heft mit deinen Belohnungspunkten entsperrt.",
+    "unlock_error": "Fehler",
+    "unlock_error_msg": "Punkte konnten nicht eingelöst werden. Bitte versuche es erneut.",
+    "one_year_wonders": "1 JAHR DER WUNDER",
+    "special_edition": "SONDERAUSGABE"
+  },
+  "settings": {
+    "language": "Sprache",
+    "select_language": "Sprache Auswählen"
+  },
+  "payment": {
+    "admin_pending": "Wartet auf administrative Bestätigung",
+    "admin_pending_detail": "Wir haben deinen Überweisungsbeleg erhalten und werden dieses Heft nach Überprüfung freischalten.",
+    "confirming_payment": "Zahlung wird bestätigt",
+    "confirming_payment_detail": "Deine Zahlung wurde empfangen. Ziehe nach unten, um zu aktualisieren — der Zugang wird normalerweise innerhalb einer Minute freigeschaltet."
+  }
+}

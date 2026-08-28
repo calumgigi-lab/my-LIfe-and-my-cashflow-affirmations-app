@@ -1,0 +1,52 @@
+{
+  "app": { "name": "我的生活与现金流肯定语" },
+  "tabs": { "today": "今天", "library": "文库", "ranks": "排名", "profile": "个人资料" },
+  "today": {
+    "greeting_morning": "早上好", "greeting_afternoon": "下午好", "greeting_evening": "晚上好",
+    "day_streak": "连续天数", "affirmed": "已肯定", "best_streak": "最佳连续",
+    "loading_stats": "正在加载统计数据...", "todays_affirmation": "今日肯定语", "day": "第",
+    "read_full": "阅读完整肯定语", "browse_library": "浏览文库",
+    "browse_subtitle": "探索所有月度肯定语手册", "daily_checkin": "每日签到",
+    "checkin_subtitle": "今天只需签到即可获得10积分",
+    "no_affirmation_title": "今天没有肯定语", "no_affirmation_subtitle": "请稍后再来或浏览文库",
+    "locked_message": "此日常肯定语已锁定。第1-{{previewDays}}天为免费预览。解锁本月以完整阅读和肯定。",
+    "unlock_for": "₦{{price}}解锁", "i_have_affirmed": "我已肯定", "affirmed_for_today": "今日已肯定",
+    "loading_error": "加载错误", "failed_to_load": "数据加载失败",
+    "already_checked_in": "已签到", "already_checked_in_msg": "您今天已经签到过了。明天再来吧！",
+    "checkin_complete": "签到完成！", "checkin_earned": "您今天签到获得了{{points}}积分。",
+    "error_title": "错误", "checkin_error": "无法记录签到。请重试。",
+    "streak_milestone": "🔥 连续里程碑！", "streak_milestone_msg": "太棒了！您因连续里程碑获得了+{{bonus}}积分奖励！继续加油！"
+  },
+  "affirmation": {
+    "this_day_is_locked": "此日已锁定",
+    "locked_description": "第1-{{previewDays}}天为免费预览。解锁此手册需₦{{price}}，即可完整阅读和肯定。",
+    "unlock_for": "₦{{price}}解锁",
+    "payment_recorded": "付款已记录", "payment_recorded_msg": "您的付款正在等待管理验证。一旦批准，您将可以访问完整月份。",
+    "payment_error": "付款错误", "payment_error_msg": "无法记录付款。请重试。",
+    "i_have_affirmed": "我已肯定", "affirmed_for_today": "今日已肯定",
+    "streak_milestone": "🔥 连续里程碑！", "streak_milestone_msg": "太棒了！您因连续里程碑获得了+{{bonus}}积分奖励！继续加油！",
+    "not_found": "未找到肯定语"
+  },
+  "booklet": {
+    "locked_preview": "已锁定 - 仅第1天和第2天可预览", "locked_banner": "第1-{{previewDays}}天免费。₦{{price}}解锁完整月份。", "day": "天",
+    "unlock_for": "₦{{price}}解锁", "unlock": "解锁", "view_all": "查看全部", "loading": "加载中..."
+  },
+  "library": {
+    "title": "文库", "subtitle": "探索所有月度肯定语手册",
+    "no_booklets_title": "暂无可用手册", "no_booklets_subtitle": "请稍后再来查看新内容",
+    "unlock_title": "解锁{{month}}", "choose_method": "选择解锁此手册的方式",
+    "pay_with": "使用{{provider}}支付", "pay_desc": "银行卡、银行转账、USSD — 即时解锁",
+    "reward_points": "奖励积分", "points_desc": "{{points}}积分", "points_needed": "您有{{balance}}",
+    "earn_points_hint": "通过每日肯定、签到和连续打卡赚取积分。您还需要{{needed}}积分。",
+    "cancel": "取消", "unlocked": "已解锁！", "unlocked_msg": "手册已用您的奖励积分解锁。",
+    "unlock_error": "错误", "unlock_error_msg": "无法兑换积分。请重试。",
+    "one_year_wonders": "奇迹一周年", "special_edition": "特别版"
+  },
+  "settings": { "language": "语言", "select_language": "选择语言" },
+  "payment": {
+    "admin_pending": "等待管理批准",
+    "admin_pending_detail": "我们已收到您的银行转账凭证，验证后将解锁此手册。",
+    "confirming_payment": "正在确认付款",
+    "confirming_payment_detail": "您的付款已收到。下拉刷新 — 访问权限通常在一分钟内解锁。"
+  }
+}

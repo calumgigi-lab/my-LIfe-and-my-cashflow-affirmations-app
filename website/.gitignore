@@ -1,0 +1,11 @@
+# credentials — never commit these
+.ftp-credentials
+*.env
+.env*
+
+# build artefacts
+.deploy-staging/
+zionhouse-spaceship-deploy.zip
+
+# dependencies
+node_modules/

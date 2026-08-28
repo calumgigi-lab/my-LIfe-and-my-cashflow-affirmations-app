@@ -4,7 +4,6 @@ import {
   Text,
   Pressable,
   StyleSheet,
-  useColorScheme,
   ScrollView,
   Platform,
   ActivityIndicator,
@@ -32,16 +31,18 @@ import {
 
 export default function ProfileScreen() {
   const { user, logout } = useAuth();
-  const scheme = useColorScheme();
-  const colors = useThemeColors(scheme);
+  const colors = useThemeColors();
   const insets = useSafeAreaInsets();
-  const isDark = scheme === "dark";
 
   const { data: stats, isLoading } = useQuery<any>({
     queryKey: ["/api/stats"],
   });
 
-  const { data: rewardBalance } = useQuery<{ points: number; totalEarned: number; totalSpent: number }>({
+  const { data: rewardBalance } = useQuery<{
+    points: number;
+    totalEarned: number;
+    totalSpent: number;
+  }>({
     queryKey: ["/api/rewards/balance"],
   });
 
@@ -67,7 +68,7 @@ export default function ProfileScreen() {
         if (!granted) {
           Alert.alert(
             "Notifications Disabled",
-            "Please enable notifications in your device settings to receive affirmation reminders.",
+            "Please enable notifications in your device settings to receive affirmation reminders."
           );
           return;
         }
@@ -78,8 +79,13 @@ export default function ProfileScreen() {
       } else {
         await cancelAllReminders();
       }
-      await apiRequest("PUT", "/api/notification-settings", { enabled, intervalMinutes });
-      queryClient.invalidateQueries({ queryKey: ["/api/notification-settings"] });
+      await apiRequest("PUT", "/api/notification-settings", {
+        enabled,
+        intervalMinutes,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["/api/notification-settings"],
+      });
     },
   });
 
@@ -92,8 +98,12 @@ export default function ProfileScreen() {
         const endHour = notifSettings?.endHour ?? 21;
         await scheduleAffirmationReminders(startHour, endHour, minutes);
       }
-      await apiRequest("PUT", "/api/notification-settings", { intervalMinutes: minutes });
-      queryClient.invalidateQueries({ queryKey: ["/api/notification-settings"] });
+      await apiRequest("PUT", "/api/notification-settings", {
+        intervalMinutes: minutes,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["/api/notification-settings"],
+      });
     },
   });
 
@@ -116,7 +126,8 @@ export default function ProfileScreen() {
   const changePwMutation = useMutation({
     mutationFn: async () => {
       if (!currentPw || !newPw) throw new Error("All fields are required");
-      if (newPw.length < 6) throw new Error("New password must be at least 6 characters");
+      if (newPw.length < 6)
+        throw new Error("New password must be at least 6 characters");
       if (newPw !== confirmPw) throw new Error("Passwords do not match");
       const res = await apiRequest("PUT", "/api/auth/change-password", {
         currentPassword: currentPw,
@@ -126,7 +137,10 @@ export default function ProfileScreen() {
     },
     onSuccess: () => {
       setShowChangePw(false);
-      setCurrentPw(""); setNewPw(""); setConfirmPw(""); setPwError("");
+      setCurrentPw("");
+      setNewPw("");
+      setConfirmPw("");
+      setPwError("");
       Alert.alert("Success", "Your password has been changed.");
     },
     onError: (err: any) => {
@@ -167,64 +181,426 @@ export default function ProfileScreen() {
     .toUpperCase()
     .slice(0, 2);
 
+  const currentStreak = stats?.currentStreak ?? 0;
+  const longestStreak = stats?.longestStreak ?? 0;
+  const streakProgress = longestStreak > 0
+    ? Math.min((currentStreak / longestStreak) * 100, 100)
+    : 0;
+
   return (
-    <View style={[styles.container, { backgroundColor: colors.background, paddingTop: insets.top + 52 }]}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <ScrollView
-        contentContainerStyle={[
-          styles.scrollContent,
-          {
-            paddingTop: 0,
-            paddingBottom: 120,
-          },
-        ]}
+        contentContainerStyle={{
+          paddingTop: insets.top + 12,
+          paddingBottom: 100,
+        }}
         showsVerticalScrollIndicator={false}
       >
-        <Text
-          style={[
-            styles.pageTitle,
-            { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
-          ]}
-        >
-          Profile
-        </Text>
+        {/* Nav Header */}
+        <View style={styles.navHeader}>
+          <Text
+            style={[
+              styles.pageTitle,
+              { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
+            ]}
+          >
+            Profile
+          </Text>
+          <View style={styles.navActions}>
+            <Pressable
+              onPress={() => router.push("/(main)/settings")}
+              style={({ pressed }) => [
+                styles.navBtn,
+                {
+                  backgroundColor: colors.surface,
+                  borderColor: colors.border + "30",
+                  opacity: pressed ? 0.7 : 1,
+                },
+              ]}
+            >
+              <Ionicons
+                name="settings-outline"
+                size={20}
+                color={colors.textSecondary}
+              />
+            </Pressable>
+          </View>
+        </View>
 
-        <Animated.View
-          entering={FadeInDown.duration(600).delay(100)}
-          style={styles.profileSection}
-        >
-          <ProfilePictureUpload
-            currentImageUrl={user?.profilePictureUrl || undefined}
-            displayName={user?.displayName || user?.username || "U"}
-            size={100}
-            editable={true}
-          />
-          <Text
-            style={[
-              styles.displayName,
-              { color: colors.text, fontFamily: "DMSans_700Bold" },
-            ]}
-          >
-            {user?.displayName || user?.username}
-          </Text>
-          <Text
-            style={[
-              styles.emailText,
-              { color: colors.textSecondary, fontFamily: "DMSans_400Regular" },
-            ]}
-          >
-            @{user?.username}
-          </Text>
+        {/* Profile Hero Card */}
+        <Animated.View entering={FadeInDown.duration(600).delay(80)}>
+          <View style={styles.profileHeroOuter}>
+            <LinearGradient
+              colors={["#1A3A5C", "#14324E", "#1C4060"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.profileHeroBg}
+            >
+              <View style={styles.profileTop}>
+                <View style={styles.avatarContainer}>
+                  <LinearGradient
+                    colors={[colors.gold, colors.goldDark, colors.gold]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={styles.avatarRing}
+                  >
+                    <View style={styles.avatarInner}>
+                      <ProfilePictureUpload
+                        currentImageUrl={
+                          user?.profilePictureUrl || undefined
+                        }
+                        displayName={user?.displayName || user?.username || "U"}
+                        size={82}
+                        editable
+                      />
+                    </View>
+                  </LinearGradient>
+                  <View style={[styles.avatarBadge, { backgroundColor: colors.success, borderColor: "#1A3A5C" }]}>
+                    <Ionicons name="checkmark" size={12} color="#fff" />
+                  </View>
+                </View>
+
+                <View style={styles.profileInfo}>
+                  <View style={styles.profileNameRow}>
+                    <Text
+                      style={[
+                        styles.profileName,
+                        { color: colors.text, fontFamily: "DMSans_700Bold" },
+                      ]}
+                      numberOfLines={1}
+                    >
+                      {user?.displayName || user?.username}
+                    </Text>
+                    <View style={styles.verifiedBadge}>
+                      <Ionicons name="checkmark" size={12} color="#0F2C4F" />
+                    </View>
+                  </View>
+                  <Text
+                    style={[
+                      styles.profileUsername,
+                      { color: colors.textSecondary },
+                    ]}
+                  >
+                    @{user?.username}
+                  </Text>
+                  <View style={styles.profileTags}>
+                    <View
+                      style={[
+                        styles.tag,
+                        styles.tagGold,
+                        {
+                          backgroundColor: "rgba(212,168,83,0.12)",
+                          borderColor: "rgba(212,168,83,0.25)",
+                        },
+                      ]}
+                    >
+                      <Ionicons name="diamond" size={12} color={colors.gold} />
+                      <Text style={[styles.tagText, { color: colors.gold }]}>
+                        Premium
+                      </Text>
+                    </View>
+                    <View
+                      style={[
+                        styles.tag,
+                        styles.tagBlue,
+                        {
+                          backgroundColor: "rgba(100,181,246,0.1)",
+                          borderColor: "rgba(100,181,246,0.2)",
+                        },
+                      ]}
+                    >
+                      <Ionicons name="flame" size={12} color="#64B5F6" />
+                      <Text
+                        style={[styles.tagText, { color: "#64B5F6" }]}
+                      >
+                        {currentStreak} Day Streak
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </LinearGradient>
+          </View>
         </Animated.View>
 
-        <Animated.View entering={FadeInDown.duration(600).delay(200)}>
-          <Text
-            style={[
-              styles.sectionTitle,
-              { color: colors.text, fontFamily: "PlayfairDisplay_600SemiBold" },
+        {/* Quick Actions Row */}
+        <Animated.View
+          entering={FadeInDown.duration(600).delay(160)}
+          style={styles.quickActions}
+        >
+          <Pressable
+            onPress={() => router.push("/(main)/library")}
+            style={({ pressed }) => [
+              styles.quickAction,
+              {
+                backgroundColor: colors.surface,
+                borderColor: colors.border + "30",
+                opacity: pressed ? 0.85 : 1,
+              },
             ]}
           >
-            Your Journey
-          </Text>
+            <View
+              style={[
+                styles.quickActionIcon,
+                { backgroundColor: "rgba(212,168,83,0.12)" },
+              ]}
+            >
+              <Ionicons name="book" size={18} color={colors.gold} />
+            </View>
+            <Text
+              style={[
+                styles.quickActionLabel,
+                { color: colors.textSecondary },
+              ]}
+            >
+              My Booklets
+            </Text>
+          </Pressable>
+
+          <Pressable
+            onPress={() => Alert.alert("Coming Soon", "Rewards feature is coming soon!")}
+            style={({ pressed }) => [
+              styles.quickAction,
+              {
+                backgroundColor: colors.surface,
+                borderColor: colors.border + "30",
+                opacity: pressed ? 0.85 : 1,
+              },
+            ]}
+          >
+            <View
+              style={[
+                styles.quickActionIcon,
+                { backgroundColor: "rgba(48,209,88,0.1)" },
+              ]}
+            >
+              <Ionicons name="trophy" size={18} color={colors.success} />
+            </View>
+            <Text
+              style={[
+                styles.quickActionLabel,
+                { color: colors.textSecondary },
+              ]}
+            >
+              Rewards
+            </Text>
+          </Pressable>
+
+          <Pressable
+            onPress={() => Alert.alert("Coming Soon", "Achievements feature is coming soon!")}
+            style={({ pressed }) => [
+              styles.quickAction,
+              {
+                backgroundColor: colors.surface,
+                borderColor: colors.border + "30",
+                opacity: pressed ? 0.85 : 1,
+              },
+            ]}
+          >
+            <View
+              style={[
+                styles.quickActionIcon,
+                { backgroundColor: "rgba(191,90,242,0.1)" },
+              ]}
+            >
+              <Ionicons name="ribbon" size={18} color="#BF5AF2" />
+            </View>
+            <Text
+              style={[
+                styles.quickActionLabel,
+                { color: colors.textSecondary },
+              ]}
+            >
+              Achievements
+            </Text>
+          </Pressable>
+        </Animated.View>
+
+        {/* Streak Hero Card */}
+        <Animated.View
+          entering={FadeInDown.duration(600).delay(240)}
+          style={styles.streakSection}
+        >
+          <LinearGradient
+            colors={["#1A3A5C", "#122D4A", "#1A4060"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.streakCard}
+          >
+            <View style={styles.streakTop}>
+              <View
+                style={[
+                  styles.streakBadge,
+                  {
+                    backgroundColor: "rgba(212,168,83,0.12)",
+                    borderColor: "rgba(212,168,83,0.25)",
+                  },
+                ]}
+              >
+                <Ionicons name="flame" size={14} color={colors.gold} />
+                <Text style={[styles.streakBadgeText, { color: colors.gold }]}>
+                  Active Streak
+                </Text>
+              </View>
+              <View
+                style={[
+                  styles.streakBadge,
+                  {
+                    backgroundColor: "rgba(212,168,83,0.12)",
+                    borderColor: "rgba(212,168,83,0.25)",
+                  },
+                ]}
+              >
+                <Ionicons name="trophy" size={14} color={colors.gold} />
+                <Text style={[styles.streakBadgeText, { color: colors.gold }]}>
+                  Best: {longestStreak}
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.streakMain}>
+              <View
+                style={[
+                  styles.streakFlame,
+                  {
+                    backgroundColor: "rgba(212,168,83,0.2)",
+                    borderColor: "rgba(212,168,83,0.15)",
+                  },
+                ]}
+              >
+                <Ionicons name="flame" size={30} color={colors.gold} />
+              </View>
+              <View style={styles.streakNumbers}>
+                <Text
+                  style={[
+                    styles.streakCount,
+                    { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
+                  ]}
+                >
+                  {currentStreak}
+                </Text>
+                <Text
+                  style={[
+                    styles.streakCountLabel,
+                    { color: colors.textSecondary },
+                  ]}
+                >
+                  consecutive days
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.streakMeta}>
+              <View style={styles.streakMetaItem}>
+                <Text
+                  style={[styles.streakMetaLabel, { color: colors.textSecondary }]}
+                >
+                  This Month
+                </Text>
+                <Text
+                  style={[
+                    styles.streakMetaValue,
+                    { color: colors.text, fontFamily: "DMSans_700Bold" },
+                  ]}
+                >
+                  {stats?.thisMonth ?? 0}
+                </Text>
+              </View>
+              <View style={styles.streakMetaItem}>
+                <Text
+                  style={[styles.streakMetaLabel, { color: colors.textSecondary }]}
+                >
+                  Total Days
+                </Text>
+                <Text
+                  style={[
+                    styles.streakMetaValue,
+                    { color: colors.text, fontFamily: "DMSans_700Bold" },
+                  ]}
+                >
+                  {stats?.totalDays ?? 0}
+                </Text>
+              </View>
+              <View style={styles.streakMetaItem}>
+                <Text
+                  style={[styles.streakMetaLabel, { color: colors.textSecondary }]}
+                >
+                  Level
+                </Text>
+                <Text
+                  style={[
+                    styles.streakMetaValue,
+                    { color: colors.gold, fontFamily: "DMSans_700Bold" },
+                  ]}
+                >
+                  {stats?.level ?? "Gold"}
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.streakProgressSection}>
+              <View style={styles.streakProgressHeader}>
+                <Text
+                  style={[
+                    styles.streakProgressLabel,
+                    { color: colors.textSecondary },
+                  ]}
+                >
+                  Progress to Diamond tier
+                </Text>
+                <Text
+                  style={[
+                    styles.streakProgressPct,
+                    { color: colors.gold, fontFamily: "DMSans_700Bold" },
+                  ]}
+                >
+                  {streakProgress.toFixed(0)}%
+                </Text>
+              </View>
+              <View
+                style={[
+                  styles.streakProgressTrack,
+                  { backgroundColor: "rgba(255,255,255,0.08)" },
+                ]}
+              >
+                <LinearGradient
+                  colors={[colors.goldDark, colors.gold, "#E8C56A"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={[
+                    styles.streakProgressFill,
+                    { width: `${streakProgress}%` },
+                  ]}
+                />
+              </View>
+            </View>
+          </LinearGradient>
+        </Animated.View>
+
+        {/* Stats Section — Your Journey */}
+        <Animated.View
+          entering={FadeInDown.duration(600).delay(320)}
+          style={styles.statsSection}
+        >
+          <View style={styles.sectionHeader}>
+            <Text
+              style={[
+                styles.sectionTitle,
+                { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
+              ]}
+            >
+              Your Journey
+            </Text>
+            <Pressable
+              onPress={() => Alert.alert("Coming Soon", "Detailed stats coming soon!")}
+              style={styles.sectionLink}
+            >
+              <Text style={[styles.sectionLinkText, { color: colors.gold }]}>
+                View All
+              </Text>
+              <Ionicons name="chevron-forward" size={14} color={colors.gold} />
+            </Pressable>
+          </View>
 
           {isLoading ? (
             <ActivityIndicator
@@ -232,348 +608,577 @@ export default function ProfileScreen() {
               style={{ paddingVertical: 20 }}
             />
           ) : (
-            <>
-              {/* Enterprise Streak Hero */}
-              <View style={styles.heroCardOuter}>
-                <LinearGradient
-                  colors={isDark ? ["#1A2A40", "#0F2040", "#1A1A30"] : ["#FFF8E7", "#FFF0D0", "#FFE8B8"]}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  style={[styles.heroCard, { borderColor: colors.gold + "30" }]}
-                >
-                  <View style={styles.heroTopRow}>
-                    <View style={styles.heroStreakSection}>
-                      <View style={[styles.heroFireGlow, { backgroundColor: colors.gold + "18" }]}>
-                        <View style={[styles.heroFireInner, { backgroundColor: colors.gold + "30" }]}>
-                          <Ionicons name="flame" size={28} color={colors.gold} />
-                        </View>
-                      </View>
-                      <View style={styles.heroStreakNumbers}>
-                        <Text style={[styles.heroStreakBig, { color: colors.text, fontFamily: "DMSans_700Bold" }]}>
-                          {stats?.currentStreak ?? 0}
-                        </Text>
-                        <Text style={[styles.heroStreakUnit, { color: colors.gold, fontFamily: "DMSans_600SemiBold" }]}>
-                          day streak
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={[styles.heroBestBadge, { backgroundColor: colors.gold + "15", borderColor: colors.gold + "30" }]}>
-                      <Ionicons name="trophy" size={14} color={colors.gold} />
-                      <Text style={[styles.heroBestText, { color: colors.gold, fontFamily: "DMSans_600SemiBold" }]}>
-                        Best: {stats?.longestStreak ?? 0}
-                      </Text>
-                    </View>
-                  </View>
-                  <View style={styles.heroProgressSection}>
-                    <View style={[styles.heroProgressTrack, { backgroundColor: colors.gold + "15" }]}>
-                      <LinearGradient
-                        colors={[colors.gold, "#FFB800"]}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 0 }}
-                        style={[
-                          styles.heroProgressFill,
-                          {
-                            width: `${Math.min(((stats?.currentStreak ?? 0) / Math.max(stats?.longestStreak ?? 1, 1)) * 100, 100)}%`,
-                          },
-                        ]}
-                      />
-                    </View>
-                    <Text style={[styles.heroProgressLabel, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-                      {Math.min(((stats?.currentStreak ?? 0) / Math.max(stats?.longestStreak ?? 1, 1)) * 100, 100).toFixed(0)}% of personal best
-                    </Text>
-                  </View>
-                </LinearGradient>
-              </View>
-
-              {/* Enterprise Stats Grid — 2×2 */}
-              <View style={styles.statsGrid}>
-                <View style={[styles.statCard, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-                  <View style={styles.statCardTop}>
-                    <View style={[styles.statIconCircle, { backgroundColor: isDark ? "rgba(48,209,88,0.12)" : "rgba(52,199,89,0.1)" }]}>
-                      <Ionicons name="checkmark-done" size={20} color={colors.success} />
-                    </View>
-                    <View style={[styles.statAccentLine, { backgroundColor: colors.success }]} />
-                  </View>
-                  <Text style={[styles.statNumber, { color: colors.text, fontFamily: "DMSans_700Bold" }]}>
-                    {stats?.totalAffirmed ?? 0}
-                  </Text>
-                  <Text style={[styles.statLabel, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-                    Total Affirmed
-                  </Text>
-                </View>
-
-                <View style={[styles.statCard, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-                  <View style={styles.statCardTop}>
-                    <View style={[styles.statIconCircle, { backgroundColor: isDark ? "rgba(139,92,246,0.12)" : "rgba(139,92,246,0.1)" }]}>
-                      <Ionicons name="today" size={20} color="#8B5CF6" />
-                    </View>
-                    <View style={[styles.statAccentLine, { backgroundColor: "#8B5CF6" }]} />
-                  </View>
-                  <Text style={[styles.statNumber, { color: stats?.completedToday ? colors.success : colors.text, fontFamily: "DMSans_700Bold" }]}>
-                    {stats?.completedToday ? "Done" : "Pending"}
-                  </Text>
-                  <Text style={[styles.statLabel, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-                    Today&apos;s Status
-                  </Text>
-                </View>
-
-                <View style={[styles.statCard, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-                  <View style={styles.statCardTop}>
-                    <View style={[styles.statIconCircle, { backgroundColor: isDark ? "rgba(59,130,246,0.12)" : "rgba(59,130,246,0.1)" }]}>
-                      <Ionicons name="library" size={20} color="#3B82F6" />
-                    </View>
-                    <View style={[styles.statAccentLine, { backgroundColor: "#3B82F6" }]} />
-                  </View>
-                  <Text style={[styles.statNumber, { color: colors.text, fontFamily: "DMSans_700Bold" }]}>
-                    {stats?.totalBooklets ?? 0}
-                  </Text>
-                  <Text style={[styles.statLabel, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-                    Booklets
-                  </Text>
-                </View>
-
-                <Pressable
-                  onPress={() => router.push("/(main)/leaderboard")}
-                  style={({ pressed }) => [styles.statCard, styles.pointsCard, {
-                    borderColor: colors.gold + "50",
-                    opacity: pressed ? 0.92 : 1,
-                  }]}
-                >
-                  <LinearGradient
-                    colors={isDark ? ["#2A2010", "#1A1508"] : ["#FFF8E7", "#FFF0D0"]}
-                    style={styles.pointsCardGradient}
-                  >
-                    <View style={styles.statCardTop}>
-                      <View style={[styles.statIconCircle, { backgroundColor: colors.gold + "20" }]}>
-                        <Ionicons name="star" size={20} color={colors.gold} />
-                      </View>
-                      <View style={[styles.statAccentLine, { backgroundColor: colors.gold }]} />
-                    </View>
-                    <Text style={[styles.statNumber, { color: colors.gold, fontFamily: "DMSans_700Bold" }]}>
-                      {rewardBalance?.points ?? 0}
-                    </Text>
-                    <Text style={[styles.statLabel, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-                      Reward Points
-                    </Text>
-                    <View style={styles.pointsChevron}>
-                      <Ionicons name="chevron-forward" size={14} color={colors.gold} />
-                    </View>
-                  </LinearGradient>
-                </Pressable>
-              </View>
-            </>
-          )}
-        </Animated.View>
-
-        <Animated.View entering={FadeInDown.duration(600).delay(300)}>
-          <Text
-            style={[
-              styles.sectionTitle,
-              {
-                color: colors.text,
-                fontFamily: "PlayfairDisplay_600SemiBold",
-                marginTop: 32,
-              },
-            ]}
-          >
-            Reminders
-          </Text>
-
-          <View
-            style={[
-              styles.settingCard,
-              { backgroundColor: colors.surface, borderColor: colors.border },
-            ]}
-          >
-            <View style={styles.settingRow}>
-              <View style={styles.settingInfo}>
-                <View
-                  style={[
-                    styles.settingIconBg,
-                    { backgroundColor: colors.goldLight },
-                  ]}
-                >
-                  <Ionicons
-                    name="notifications"
-                    size={22}
-                    color={colors.gold}
-                  />
-                </View>
-                <View style={{ flex: 1, flexShrink: 1 }}>
-                  <Text
-                    style={[
-                      styles.settingLabel,
-                      { color: colors.text, fontFamily: "DMSans_600SemiBold" },
-                    ]}
-                    numberOfLines={1}
-                  >
-                    Daily Reminders
-                  </Text>
-                  <Text
-                    style={[
-                      styles.settingDesc,
-                      {
-                        color: colors.textSecondary,
-                        fontFamily: "DMSans_400Regular",
-                      },
-                    ]}
-                    numberOfLines={1}
-                  >
-                    Every {intervalMinutes} min, 8am-9pm
-                  </Text>
-                </View>
-              </View>
-              <Switch
-                value={notificationsEnabled}
-                onValueChange={handleToggleNotifications}
-                trackColor={{ false: colors.border, true: colors.gold + "80" }}
-                thumbColor={notificationsEnabled ? colors.gold : "#ccc"}
-              />
-            </View>
-          </View>
-
-          {notificationsEnabled && (
-            <View
-              style={[
-                styles.settingCard,
-                { backgroundColor: colors.surface, borderColor: colors.border, marginTop: 12 },
-              ]}
-            >
-              <Pressable
-                onPress={() => setShowIntervalModal(true)}
-                style={({ pressed }) => [
-                  styles.settingRow,
-                  { opacity: pressed ? 0.7 : 1 },
+            <View style={styles.statsGrid}>
+              {/* Affirmations Completed */}
+              <View
+                style={[
+                  styles.statCard,
+                  {
+                    backgroundColor: colors.surface,
+                    borderColor: colors.border + "30",
+                  },
                 ]}
               >
-                <View style={styles.settingInfo}>
+                <View style={styles.statCardAccentGreen} />
+                <View style={styles.statIconRow}>
                   <View
                     style={[
-                      styles.settingIconBg,
-                      { backgroundColor: colors.tintLight + "40" },
+                      styles.statIconBox,
+                      { backgroundColor: "rgba(48,209,88,0.1)" },
                     ]}
                   >
                     <Ionicons
-                      name="time"
-                      size={22}
-                      color={colors.tint}
+                      name="checkmark-circle"
+                      size={20}
+                      color={colors.success}
                     />
                   </View>
-                  <View style={{ flex: 1, flexShrink: 1 }}>
+                  <View
+                    style={[
+                      styles.statTrend,
+                      styles.statTrendUp,
+                      { backgroundColor: "rgba(48,209,88,0.1)" },
+                    ]}
+                  >
+                    <Ionicons
+                      name="trending-up"
+                      size={12}
+                      color={colors.success}
+                    />
                     <Text
-                      style={[
-                        styles.settingLabel,
-                        { color: colors.text, fontFamily: "DMSans_600SemiBold" },
-                      ]}
-                      numberOfLines={1}
+                      style={[styles.statTrendText, { color: colors.success }]}
                     >
-                      Frequency
-                    </Text>
-                    <Text
-                      style={[
-                        styles.settingDesc,
-                        {
-                          color: colors.textSecondary,
-                          fontFamily: "DMSans_400Regular",
-                        },
-                      ]}
-                      numberOfLines={2}
-                    >
-                      Customize how often you receive notifications
+                      +12%
                     </Text>
                   </View>
                 </View>
-                <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
-              </Pressable>
+                <Text
+                  style={[
+                    styles.statValue,
+                    { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
+                  ]}
+                >
+                  {stats?.totalAffirmed ?? 0}
+                </Text>
+                <Text
+                  style={[styles.statLabel, { color: colors.textSecondary }]}
+                >
+                  Affirmations Completed
+                </Text>
+              </View>
 
+              {/* Daily Check-in */}
+              <View
+                style={[
+                  styles.statCard,
+                  {
+                    backgroundColor: colors.surface,
+                    borderColor: colors.border + "30",
+                  },
+                ]}
+              >
+                <View style={styles.statCardAccentPurple} />
+                <View style={styles.statIconRow}>
+                  <View
+                    style={[
+                      styles.statIconBox,
+                      { backgroundColor: "rgba(191,90,242,0.1)" },
+                    ]}
+                  >
+                    <Ionicons name="calendar" size={20} color="#BF5AF2" />
+                  </View>
+                  <View
+                    style={[
+                      styles.statTrend,
+                      styles.statTrendUp,
+                      { backgroundColor: "rgba(48,209,88,0.1)" },
+                    ]}
+                  >
+                    <Ionicons
+                      name="checkmark"
+                      size={12}
+                      color={colors.success}
+                    />
+                    <Text
+                      style={[styles.statTrendText, { color: colors.success }]}
+                    >
+                      {stats?.completedToday ? "Done" : "Pending"}
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={[
+                    styles.statValue,
+                    { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
+                  ]}
+                >
+                  {stats?.completedToday ? "Today" : "-"}
+                </Text>
+                <Text
+                  style={[styles.statLabel, { color: colors.textSecondary }]}
+                >
+                  Daily Check-in
+                </Text>
+              </View>
+
+              {/* Booklets Unlocked */}
+              <View
+                style={[
+                  styles.statCard,
+                  {
+                    backgroundColor: colors.surface,
+                    borderColor: colors.border + "30",
+                  },
+                ]}
+              >
+                <View style={styles.statCardAccentBlue} />
+                <View style={styles.statIconRow}>
+                  <View
+                    style={[
+                      styles.statIconBox,
+                      { backgroundColor: "rgba(100,181,246,0.1)" },
+                    ]}
+                  >
+                    <Ionicons name="library" size={20} color="#64B5F6" />
+                  </View>
+                  <View
+                    style={[
+                      styles.statTrend,
+                      { backgroundColor: "rgba(255,255,255,0.05)" },
+                    ]}
+                  >
+                    <Ionicons name="add" size={12} color={colors.textSecondary} />
+                    <Text
+                      style={[
+                        styles.statTrendText,
+                        { color: colors.textSecondary },
+                      ]}
+                    >
+                      New
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={[
+                    styles.statValue,
+                    { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
+                  ]}
+                >
+                  {stats?.totalBooklets ?? 0}
+                </Text>
+                <Text
+                  style={[styles.statLabel, { color: colors.textSecondary }]}
+                >
+                  Booklets Unlocked
+                </Text>
+              </View>
+
+              {/* Reward Points */}
+              <Pressable
+            onPress={() => router.push("/(main)/store")}
+                style={({ pressed }) => [
+                  styles.statCard,
+                  styles.statCardGold,
+                  {
+                    borderColor: "rgba(212,168,83,0.25)",
+                    opacity: pressed ? 0.92 : 1,
+                  },
+                ]}
+              >
+                <View style={styles.statCardAccentGold} />
+                <View style={styles.statIconRow}>
+                  <View
+                    style={[
+                      styles.statIconBox,
+                      { backgroundColor: "rgba(212,168,83,0.12)" },
+                    ]}
+                  >
+                    <Ionicons name="star" size={20} color={colors.gold} />
+                  </View>
+                  <View
+                    style={[
+                      styles.statTrend,
+                      styles.statTrendUp,
+                      { backgroundColor: "rgba(48,209,88,0.1)" },
+                    ]}
+                  >
+                    <Ionicons
+                      name="trending-up"
+                      size={12}
+                      color={colors.success}
+                    />
+                    <Text
+                      style={[styles.statTrendText, { color: colors.success }]}
+                    >
+                      +80
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={[
+                    styles.statValue,
+                    {
+                      color: colors.gold,
+                      fontFamily: "PlayfairDisplay_700Bold",
+                    },
+                  ]}
+                >
+                  {(rewardBalance?.points ?? 0).toLocaleString()}
+                </Text>
+                <Text
+                  style={[styles.statLabel, { color: colors.textSecondary }]}
+                >
+                  Reward Points
+                </Text>
+              </Pressable>
             </View>
           )}
         </Animated.View>
 
-        {/* Change Password Button */}
-        <Animated.View entering={FadeInDown.duration(600).delay(380)}>
-          <Pressable
-            onPress={() => {
-              setShowChangePw(true);
-              setCurrentPw(""); setNewPw(""); setConfirmPw(""); setPwError("");
-            }}
-            style={({ pressed }) => [{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-              paddingVertical: 14,
-              borderRadius: 16,
-              borderWidth: 1,
-              marginTop: 16,
-              backgroundColor: colors.surface,
-              borderColor: colors.border,
-              opacity: pressed ? 0.8 : 1,
-            }]}
-          >
-            <Ionicons name="lock-closed-outline" size={22} color={colors.text} />
-            <Text style={{ color: colors.text, fontSize: 16, fontFamily: "DMSans_600SemiBold" }}>
-              Change Password
+        {/* Settings Section */}
+        <Animated.View
+          entering={FadeInDown.duration(600).delay(400)}
+          style={styles.settingsSection}
+        >
+          <View style={styles.sectionHeader}>
+            <Text
+              style={[
+                styles.sectionTitle,
+                { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
+              ]}
+            >
+              Settings
             </Text>
-          </Pressable>
-        </Animated.View>
-
-        <Animated.View entering={FadeInDown.duration(600).delay(400)}>
-          <Pressable
-            onPress={handleLogout}
-            style={({ pressed }) => [
-              styles.logoutButton,
+          </View>
+          <View
+            style={[
+              styles.settingsGroup,
               {
                 backgroundColor: colors.surface,
-                borderColor: colors.error + "40",
-                opacity: pressed ? 0.9 : 1,
+                borderColor: colors.border + "30",
               },
             ]}
           >
-            <Ionicons name="log-out-outline" size={22} color={colors.error} />
-            <Text
-              style={[
-                styles.logoutText,
-                { color: colors.error, fontFamily: "DMSans_600SemiBold" },
+            {/* Push Notifications */}
+            <View style={styles.settingsItem}>
+              <View
+                style={[
+                  styles.settingsIcon,
+                  { backgroundColor: "rgba(212,168,83,0.12)" },
+                ]}
+              >
+                <Ionicons
+                  name="notifications"
+                  size={20}
+                  color={colors.gold}
+                />
+              </View>
+              <View style={styles.settingsContent}>
+                <Text
+                  style={[styles.settingsLabel, { color: colors.text }]}
+                >
+                  Push Notifications
+                </Text>
+                <Text
+                  style={[
+                    styles.settingsDesc,
+                    { color: colors.textSecondary },
+                  ]}
+                >
+                  Daily affirmation reminders
+                </Text>
+              </View>
+              <View style={styles.settingsRight}>
+                <Switch
+                  value={notificationsEnabled}
+                  onValueChange={handleToggleNotifications}
+                  trackColor={{
+                    false: colors.border,
+                    true: colors.gold + "80",
+                  }}
+                  thumbColor={notificationsEnabled ? colors.gold : "#ccc"}
+                />
+              </View>
+            </View>
+
+            {/* Reminder Frequency */}
+            <Pressable
+              onPress={() => setShowIntervalModal(true)}
+              style={({ pressed }) => [
+                styles.settingsItem,
+                { opacity: pressed ? 0.7 : 1 },
               ]}
             >
-              Sign Out
-            </Text>
+              <View
+                style={[
+                  styles.settingsIcon,
+                  { backgroundColor: "rgba(100,181,246,0.1)" },
+                ]}
+              >
+                <Ionicons name="time" size={20} color="#64B5F6" />
+              </View>
+              <View style={styles.settingsContent}>
+                <Text
+                  style={[styles.settingsLabel, { color: colors.text }]}
+                >
+                  Reminder Frequency
+                </Text>
+                <Text
+                  style={[
+                    styles.settingsDesc,
+                    { color: colors.textSecondary },
+                  ]}
+                >
+                  How often to receive notifications
+                </Text>
+              </View>
+              <View style={styles.settingsRight}>
+                <Text
+                  style={[
+                    styles.settingsValue,
+                    { color: colors.textSecondary },
+                  ]}
+                >
+                  Every {intervalMinutes} min
+                </Text>
+                <Ionicons
+                  name="chevron-forward"
+                  size={18}
+                  color={colors.textSecondary}
+                />
+              </View>
+            </Pressable>
+
+            {/* Change Password */}
+            <Pressable
+              onPress={() => {
+                setShowChangePw(true);
+                setCurrentPw("");
+                setNewPw("");
+                setConfirmPw("");
+                setPwError("");
+              }}
+              style={({ pressed }) => [
+                styles.settingsItem,
+                { opacity: pressed ? 0.7 : 1 },
+              ]}
+            >
+              <View
+                style={[
+                  styles.settingsIcon,
+                  { backgroundColor: "rgba(48,209,88,0.1)" },
+                ]}
+              >
+                <Ionicons name="lock-closed" size={20} color={colors.success} />
+              </View>
+              <View style={styles.settingsContent}>
+                <Text
+                  style={[styles.settingsLabel, { color: colors.text }]}
+                >
+                  Change Password
+                </Text>
+                <Text
+                  style={[
+                    styles.settingsDesc,
+                    { color: colors.textSecondary },
+                  ]}
+                >
+                  Update your account password
+                </Text>
+              </View>
+              <View style={styles.settingsRight}>
+                <Ionicons
+                  name="chevron-forward"
+                  size={18}
+                  color={colors.textSecondary}
+                />
+              </View>
+            </Pressable>
+
+            {/* Language */}
+            <View style={styles.settingsItem}>
+              <View
+                style={[
+                  styles.settingsIcon,
+                  { backgroundColor: "rgba(191,90,242,0.1)" },
+                ]}
+              >
+                <Ionicons name="language" size={20} color="#BF5AF2" />
+              </View>
+              <View style={styles.settingsContent}>
+                <Text
+                  style={[styles.settingsLabel, { color: colors.text }]}
+                >
+                  Language
+                </Text>
+                <Text
+                  style={[
+                    styles.settingsDesc,
+                    { color: colors.textSecondary },
+                  ]}
+                >
+                  Select your preferred language
+                </Text>
+              </View>
+              <View style={styles.settingsRight}>
+                <Text
+                  style={[
+                    styles.settingsValue,
+                    { color: colors.textSecondary },
+                  ]}
+                >
+                  English
+                </Text>
+                <Ionicons
+                  name="chevron-forward"
+                  size={18}
+                  color={colors.textSecondary}
+                />
+              </View>
+            </View>
+
+            {/* Help & Support */}
+            <Pressable
+              onPress={() => Alert.alert("Support", "Contact us at support@mylifemycashflow.com")}
+              style={({ pressed }) => [
+                styles.settingsItem,
+                {
+                  borderBottomWidth: 0,
+                  opacity: pressed ? 0.7 : 1,
+                },
+              ]}
+            >
+              <View
+                style={[
+                  styles.settingsIcon,
+                  { backgroundColor: "rgba(100,181,246,0.1)" },
+                ]}
+              >
+                <Ionicons name="help-circle" size={20} color="#64B5F6" />
+              </View>
+              <View style={styles.settingsContent}>
+                <Text
+                  style={[styles.settingsLabel, { color: colors.text }]}
+                >
+                  Help & Support
+                </Text>
+                <Text
+                  style={[
+                    styles.settingsDesc,
+                    { color: colors.textSecondary },
+                  ]}
+                >
+                  FAQs and contact support
+                </Text>
+              </View>
+              <View style={styles.settingsRight}>
+                <Ionicons
+                  name="chevron-forward"
+                  size={18}
+                  color={colors.textSecondary}
+                />
+              </View>
+            </Pressable>
+          </View>
+        </Animated.View>
+
+        {/* Danger Zone — Sign Out */}
+        <Animated.View
+          entering={FadeInDown.duration(600).delay(480)}
+          style={styles.dangerSection}
+        >
+          <Pressable
+            onPress={handleLogout}
+            style={({ pressed }) => [
+              styles.dangerCard,
+              {
+                backgroundColor: colors.surface,
+                opacity: pressed ? 0.85 : 1,
+              },
+            ]}
+          >
+            <View
+              style={[
+                styles.settingsIcon,
+                { backgroundColor: "rgba(240,100,100,0.08)" },
+              ]}
+            >
+              <Ionicons name="log-out" size={20} color={colors.error} />
+            </View>
+            <View style={styles.settingsContent}>
+              <Text
+                style={[styles.settingsLabel, { color: colors.error }]}
+              >
+                Sign Out
+              </Text>
+              <Text
+                style={[
+                  styles.settingsDesc,
+                  { color: colors.textSecondary },
+                ]}
+              >
+                Sign out of your account
+              </Text>
+            </View>
+            <View style={styles.settingsRight}>
+              <Ionicons
+                name="chevron-forward"
+                size={18}
+                color={colors.textSecondary}
+              />
+            </View>
           </Pressable>
         </Animated.View>
 
-        <View style={styles.brandingFooter}>
+        {/* Footer */}
+        <View style={styles.footer}>
           <Text
             style={[
-              styles.brandingText,
-              { color: colors.textSecondary + "80", fontFamily: "DMSans_400Regular" },
+              styles.footerBrand,
+              { color: colors.textSecondary },
             ]}
           >
             My Life & My Cash Flow Affirmations
           </Text>
           <Text
             style={[
-              styles.brandingSubtext,
-              { color: colors.textSecondary + "60", fontFamily: "DMSans_400Regular" },
+              styles.footerSub,
+              { color: colors.textSecondary },
             ]}
           >
             A subsidiary of Zion House INT&apos;L
           </Text>
+          <Text
+            style={[styles.footerVersion, { color: colors.textSecondary }]}
+          >
+            Version 1.0.2
+          </Text>
         </View>
       </ScrollView>
 
+      {/* Interval Modal */}
       <Modal
         visible={showIntervalModal}
         transparent
         animationType="fade"
         onRequestClose={() => setShowIntervalModal(false)}
       >
-        <View style={[styles.modalOverlay, { backgroundColor: "rgba(0,0,0,0.5)" }]}>
-          <View style={[styles.intervalModal, { backgroundColor: colors.surface }]}> 
+        <View
+          style={[
+            styles.modalOverlay,
+            { backgroundColor: "rgba(0,0,0,0.5)" },
+          ]}
+        >
+          <View
+            style={[styles.intervalModal, { backgroundColor: colors.surface }]}
+          >
             <Text
               style={[
                 styles.modalTitle,
-                { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
+                {
+                  color: colors.text,
+                  fontFamily: "PlayfairDisplay_700Bold",
+                },
               ]}
             >
               Notification Frequency
@@ -581,7 +1186,10 @@ export default function ProfileScreen() {
             <Text
               style={[
                 styles.modalSubtitle,
-                { color: colors.textSecondary, fontFamily: "DMSans_400Regular" },
+                {
+                  color: colors.textSecondary,
+                  fontFamily: "DMSans_400Regular",
+                },
               ]}
             >
               How often would you like to receive affirmation reminders?
@@ -598,7 +1206,10 @@ export default function ProfileScreen() {
                       intervalMinutes === interval
                         ? colors.gold + "20"
                         : colors.inputBg,
-                    borderColor: intervalMinutes === interval ? colors.gold : colors.border,
+                    borderColor:
+                      intervalMinutes === interval
+                        ? colors.gold
+                        : colors.border,
                     opacity: pressed ? 0.7 : 1,
                   },
                 ]}
@@ -607,7 +1218,10 @@ export default function ProfileScreen() {
                   style={[
                     styles.intervalText,
                     {
-                      color: intervalMinutes === interval ? colors.gold : colors.text,
+                      color:
+                        intervalMinutes === interval
+                          ? colors.gold
+                          : colors.text,
                       fontFamily: "DMSans_600SemiBold",
                     },
                   ]}
@@ -615,19 +1229,29 @@ export default function ProfileScreen() {
                   Every {interval} minutes
                 </Text>
                 {intervalMinutes === interval && (
-                  <Ionicons name="checkmark-circle" size={20} color={colors.gold} />
+                  <Ionicons
+                    name="checkmark-circle"
+                    size={20}
+                    color={colors.gold}
+                  />
                 )}
               </Pressable>
             ))}
 
             <Pressable
               onPress={() => setShowIntervalModal(false)}
-              style={({ pressed }) => [styles.modalCloseButton, { opacity: pressed ? 0.7 : 1 }]}
+              style={({ pressed }) => [
+                styles.modalCloseButton,
+                { opacity: pressed ? 0.7 : 1 },
+              ]}
             >
               <Text
                 style={[
                   styles.modalCloseText,
-                  { color: colors.text, fontFamily: "DMSans_600SemiBold" },
+                  {
+                    color: colors.text,
+                    fontFamily: "DMSans_600SemiBold",
+                  },
                 ]}
               >
                 Done
@@ -644,57 +1268,157 @@ export default function ProfileScreen() {
         animationType="slide"
         onRequestClose={() => setShowChangePw(false)}
       >
-        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "flex-end" }}>
-          <View style={{ backgroundColor: colors.background, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 20 }}>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-              <Text style={{ color: colors.text, fontSize: 20, fontFamily: "PlayfairDisplay_700Bold" }}>Change Password</Text>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            justifyContent: "flex-end",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: colors.background,
+              borderTopLeftRadius: 24,
+              borderTopRightRadius: 24,
+              padding: 20,
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 20,
+              }}
+            >
+              <Text
+                style={{
+                  color: colors.text,
+                  fontSize: 20,
+                  fontFamily: "PlayfairDisplay_700Bold",
+                }}
+              >
+                Change Password
+              </Text>
               <Pressable onPress={() => setShowChangePw(false)}>
                 <Ionicons name="close" size={24} color={colors.text} />
               </Pressable>
             </View>
 
             {[
-              { label: "Current Password", value: currentPw, setter: setCurrentPw, show: showCurrentPw, toggleShow: () => setShowCurrentPw(!showCurrentPw) },
-              { label: "New Password", value: newPw, setter: setNewPw, show: showNewPw, toggleShow: () => setShowNewPw(!showNewPw) },
-              { label: "Confirm New Password", value: confirmPw, setter: setConfirmPw, show: showNewPw, toggleShow: () => setShowNewPw(!showNewPw) },
+              {
+                label: "Current Password",
+                value: currentPw,
+                setter: setCurrentPw,
+                show: showCurrentPw,
+                toggleShow: () => setShowCurrentPw(!showCurrentPw),
+              },
+              {
+                label: "New Password",
+                value: newPw,
+                setter: setNewPw,
+                show: showNewPw,
+                toggleShow: () => setShowNewPw(!showNewPw),
+              },
+              {
+                label: "Confirm New Password",
+                value: confirmPw,
+                setter: setConfirmPw,
+                show: showNewPw,
+                toggleShow: () => setShowNewPw(!showNewPw),
+              },
             ].map((field) => (
-              <View key={field.label} style={{ flexDirection: "row", alignItems: "center", borderRadius: 12, borderWidth: 1, paddingHorizontal: 14, height: 52, marginBottom: 12, backgroundColor: colors.inputBg || colors.surface, borderColor: colors.border }}>
+              <View
+                key={field.label}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  borderRadius: 12,
+                  borderWidth: 1,
+                  paddingHorizontal: 14,
+                  height: 52,
+                  marginBottom: 12,
+                  backgroundColor: colors.inputBg || colors.surface,
+                  borderColor: colors.border,
+                }}
+              >
                 <TextInput
                   placeholder={field.label}
                   placeholderTextColor={colors.textSecondary}
                   value={field.value}
                   onChangeText={field.setter}
                   secureTextEntry={!field.show}
-                  style={{ flex: 1, color: colors.text, fontSize: 15, fontFamily: "DMSans_400Regular" }}
+                  style={{
+                    flex: 1,
+                    color: colors.text,
+                    fontSize: 15,
+                    fontFamily: "DMSans_400Regular",
+                  }}
                 />
                 <Pressable onPress={field.toggleShow} hitSlop={12}>
-                  <Ionicons name={field.show ? "eye-off-outline" : "eye-outline"} size={20} color={colors.textSecondary} />
+                  <Ionicons
+                    name={field.show ? "eye-off-outline" : "eye-outline"}
+                    size={20}
+                    color={colors.textSecondary}
+                  />
                 </Pressable>
               </View>
             ))}
 
             {!!pwError && (
-              <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 10 }}>
-                <Ionicons name="alert-circle" size={16} color={colors.error} />
-                <Text style={{ color: colors.error, fontSize: 13, fontFamily: "DMSans_400Regular", flex: 1 }}>{pwError}</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 6,
+                  marginBottom: 10,
+                }}
+              >
+                <Ionicons
+                  name="alert-circle"
+                  size={16}
+                  color={colors.error}
+                />
+                <Text
+                  style={{
+                    color: colors.error,
+                    fontSize: 13,
+                    fontFamily: "DMSans_400Regular",
+                    flex: 1,
+                  }}
+                >
+                  {pwError}
+                </Text>
               </View>
             )}
 
             <Pressable
               onPress={() => changePwMutation.mutate()}
               disabled={changePwMutation.isPending}
-              style={({ pressed }) => [{
+              style={({ pressed }) => ({
                 backgroundColor: colors.tint,
-                borderRadius: 14, height: 52,
-                alignItems: "center", justifyContent: "center",
-                marginTop: 4, marginBottom: 20,
-                opacity: pressed || changePwMutation.isPending ? 0.85 : 1,
-              }]}
+                borderRadius: 14,
+                height: 52,
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: 4,
+                marginBottom: 20,
+                opacity:
+                  pressed || changePwMutation.isPending ? 0.85 : 1,
+              })}
             >
               {changePwMutation.isPending ? (
                 <ActivityIndicator color="#fff" />
               ) : (
-                <Text style={{ color: "#fff", fontSize: 16, fontFamily: "DMSans_700Bold" }}>Save Password</Text>
+                <Text
+                  style={{
+                    color: "#fff",
+                    fontSize: 16,
+                    fontFamily: "DMSans_700Bold",
+                  }}
+                >
+                  Save Password
+                </Text>
               )}
             </Pressable>
           </View>
@@ -705,223 +1429,458 @@ export default function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  scrollContent: { paddingHorizontal: 20 },
-  pageTitle: { fontSize: 32, lineHeight: 38, marginBottom: 24 },
-  profileSection: {
-    alignItems: "center",
-    marginBottom: 36,
+  container: {
+    flex: 1,
   },
-  avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 14,
-  },
-  avatarText: { color: "#fff", fontSize: 28 },
-  displayName: { fontSize: 22, marginBottom: 4 },
-  emailText: { fontSize: 14 },
-  sectionTitle: { fontSize: 22, marginBottom: 16 },
-  heroCardOuter: {
-    marginBottom: 16,
-    borderRadius: 22,
-    overflow: "hidden",
-    // shadow
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
-    elevation: 6,
-  },
-  heroCard: {
-    borderRadius: 22,
-    borderWidth: 1,
-    padding: 22,
-  },
-  heroTopRow: {
+  navHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 18,
+    paddingHorizontal: 20,
+    marginBottom: 16,
   },
-  heroStreakSection: {
+  pageTitle: {
+    fontSize: 28,
+    lineHeight: 34,
+  },
+  navActions: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  navBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  // Profile Hero
+  profileHeroOuter: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+    borderRadius: 24,
+    overflow: "hidden",
+  },
+  profileHeroBg: {
+    padding: 28,
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: "rgba(72,118,168,0.18)",
+  },
+  profileTop: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 14,
+    gap: 16,
   },
-  heroFireGlow: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+  avatarContainer: {
+    position: "relative",
+  },
+  avatarRing: {
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+    padding: 3,
     alignItems: "center",
     justifyContent: "center",
   },
-  heroFireInner: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+  avatarInner: {
+    width: 82,
+    height: 82,
+    borderRadius: 41,
+    overflow: "hidden",
+  },
+  avatarBadge: {
+    position: "absolute",
+    bottom: 2,
+    right: 2,
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    borderWidth: 3,
     alignItems: "center",
     justifyContent: "center",
   },
-  heroStreakNumbers: {
-    gap: 2,
+  profileInfo: {
+    flex: 1,
+    minWidth: 0,
   },
-  heroStreakBig: {
-    fontSize: 38,
-    lineHeight: 42,
+  profileNameRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: 2,
   },
-  heroStreakUnit: {
-    fontSize: 12,
-    textTransform: "uppercase" as const,
-    letterSpacing: 1.2,
+  profileName: {
+    fontSize: 20,
+    flexShrink: 1,
   },
-  heroBestBadge: {
+  verifiedBadge: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: "#D4A853",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  profileUsername: {
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  profileTags: {
+    flexDirection: "row",
+    gap: 6,
+    flexWrap: "wrap",
+  },
+  tag: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  tagGold: {},
+  tagBlue: {},
+  tagText: {
+    fontSize: 11,
+    fontWeight: "600",
+    letterSpacing: 0.3,
+  },
+
+  // Quick Actions
+  quickActions: {
+    flexDirection: "row",
+    gap: 10,
+    marginHorizontal: 20,
+    marginBottom: 20,
+  },
+  quickAction: {
+    flex: 1,
+    alignItems: "center",
+    gap: 6,
+    paddingVertical: 14,
+    paddingHorizontal: 8,
+    borderRadius: 14,
+    borderWidth: 1,
+  },
+  quickActionIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  quickActionLabel: {
+    fontSize: 11,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+
+  // Streak Card
+  streakSection: {
+    marginHorizontal: 20,
+    marginBottom: 24,
+  },
+  streakCard: {
+    borderRadius: 24,
+    padding: 28,
+    borderWidth: 1,
+    borderColor: "rgba(212,168,83,0.25)",
+  },
+  streakTop: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginBottom: 20,
+  },
+  streakBadge: {
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
     paddingVertical: 6,
     borderRadius: 20,
     borderWidth: 1,
   },
-  heroBestText: {
+  streakBadgeText: {
     fontSize: 12,
+    fontWeight: "600",
   },
-  heroProgressSection: {
-    gap: 8,
-  },
-  heroProgressTrack: {
-    height: 6,
-    borderRadius: 3,
-    overflow: "hidden",
-  },
-  heroProgressFill: {
-    height: 6,
-    borderRadius: 3,
-    minWidth: 6,
-  },
-  heroProgressLabel: {
-    fontSize: 11,
-    letterSpacing: 0.3,
-  },
-  statsGrid: {
+  streakMain: {
     flexDirection: "row",
-    flexWrap: "wrap",
+    alignItems: "flex-end",
+    gap: 16,
+    marginBottom: 24,
+  },
+  streakFlame: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  streakNumbers: {
+    flex: 1,
+  },
+  streakCount: {
+    fontSize: 52,
+    lineHeight: 56,
+  },
+  streakCountLabel: {
+    fontSize: 14,
+    fontWeight: "500",
+    marginTop: 2,
+  },
+  streakMeta: {
+    flexDirection: "row",
     gap: 12,
+    marginBottom: 20,
+  },
+  streakMetaItem: {
+    flex: 1,
+    backgroundColor: "rgba(255,255,255,0.04)",
+    borderRadius: 14,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.06)",
+  },
+  streakMetaLabel: {
+    fontSize: 11,
+    fontWeight: "500",
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
     marginBottom: 4,
   },
-  statCard: {
-    width: "47.5%",
-    borderRadius: 18,
-    borderWidth: 1,
-    padding: 18,
-    gap: 6,
-    // shadow
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
+  streakMetaValue: {
+    fontSize: 20,
   },
-  statCardTop: {
+  streakProgressSection: {},
+  streakProgressHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 8,
   },
-  statIconCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
+  streakProgressLabel: {
+    fontSize: 12,
+    fontWeight: "500",
   },
-  statAccentLine: {
-    width: 28,
-    height: 3,
-    borderRadius: 1.5,
-    opacity: 0.6,
+  streakProgressPct: {
+    fontSize: 12,
   },
-  statNumber: {
-    fontSize: 26,
-    lineHeight: 30,
-  },
-  statLabel: {
-    fontSize: 11,
-    textTransform: "uppercase" as const,
-    letterSpacing: 0.8,
-  },
-  pointsCard: {
-    borderWidth: 1.5,
-    padding: 0,
+  streakProgressTrack: {
+    height: 6,
+    borderRadius: 3,
     overflow: "hidden",
   },
-  pointsCardGradient: {
-    padding: 18,
-    gap: 6,
-    flex: 1,
+  streakProgressFill: {
+    height: 6,
+    borderRadius: 3,
+    minWidth: 6,
   },
-  pointsChevron: {
-    position: "absolute" as const,
-    bottom: 16,
-    right: 16,
+
+  // Stats Section
+  statsSection: {
+    marginHorizontal: 20,
+    marginBottom: 24,
   },
-  settingCard: {
-    borderRadius: 16,
-    borderWidth: 1,
-    padding: 16,
-  },
-  settingRow: {
+  sectionHeader: {
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
   },
-  settingInfo: {
+  sectionTitle: {
+    fontSize: 20,
+  },
+  sectionLink: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 14,
-    flex: 1,
+    gap: 2,
+  },
+  sectionLinkText: {
+    fontSize: 13,
+    fontWeight: "600",
+  },
+  statsGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 12,
+  },
+  statCard: {
+    width: "47.5%",
+    borderRadius: 20,
+    borderWidth: 1,
+    padding: 20,
     overflow: "hidden",
   },
-  settingIconBg: {
-    width: 44,
-    height: 44,
+  statCardGold: {
+    backgroundColor: "linear-gradient(160deg, #1D4260, #193A54)",
+  },
+  statCardAccentGreen: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: 3,
+    backgroundColor: "#30D158",
+  },
+  statCardAccentPurple: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: 3,
+    backgroundColor: "#BF5AF2",
+  },
+  statCardAccentBlue: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: 3,
+    backgroundColor: "#64B5F6",
+  },
+  statCardAccentGold: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: 3,
+    backgroundColor: "#D4A853",
+  },
+  statIconRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  statIconBox: {
+    width: 42,
+    height: 42,
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
   },
-  settingLabel: { fontSize: 16, marginBottom: 2 },
-  settingDesc: { fontSize: 12 },
-  logoutButton: {
+  statTrend: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    gap: 10,
-    height: 56,
-    borderRadius: 16,
-    borderWidth: 1,
-    marginTop: 32,
+    gap: 2,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
   },
-  logoutText: { fontSize: 16 },
-  brandingFooter: {
-    alignItems: "center",
-    marginTop: 40,
-    gap: 4,
-  },
-  brandingText: {
+  statTrendUp: {},
+  statTrendText: {
     fontSize: 11,
-    textAlign: "center",
-    letterSpacing: 0.3,
+    fontWeight: "600",
   },
-  brandingSubtext: {
+  statValue: {
+    fontSize: 28,
+    lineHeight: 32,
+    marginBottom: 4,
+  },
+  statLabel: {
+    fontSize: 12,
+    fontWeight: "500",
+  },
+
+  // Settings Section
+  settingsSection: {
+    marginHorizontal: 20,
+    marginBottom: 24,
+  },
+  settingsGroup: {
+    borderRadius: 20,
+    borderWidth: 1,
+    overflow: "hidden",
+  },
+  settingsItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(72,118,168,0.18)",
+  },
+  settingsIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  settingsContent: {
+    flex: 1,
+    minWidth: 0,
+  },
+  settingsLabel: {
+    fontSize: 15,
+    fontWeight: "600",
+    marginBottom: 2,
+  },
+  settingsDesc: {
+    fontSize: 12,
+  },
+  settingsRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    flexShrink: 0,
+  },
+  settingsValue: {
+    fontSize: 13,
+    fontWeight: "500",
+  },
+
+  // Danger Zone
+  dangerSection: {
+    marginHorizontal: 20,
+    marginBottom: 24,
+  },
+  dangerCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+    padding: 18,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "rgba(240,100,100,0.15)",
+  },
+
+  // Footer
+  footer: {
+    alignItems: "center",
+    borderTopWidth: 1,
+    borderTopColor: "rgba(72,118,168,0.18)",
+    marginHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 40,
+  },
+  footerBrand: {
+    fontSize: 13,
+    fontWeight: "600",
+    marginBottom: 4,
+    opacity: 0.6,
+  },
+  footerSub: {
+    fontSize: 11,
+    opacity: 0.5,
+  },
+  footerVersion: {
     fontSize: 10,
-    textAlign: "center",
-    letterSpacing: 0.3,
+    opacity: 0.3,
+    marginTop: 8,
   },
+
+  // Modals
   modalOverlay: {
-    position: "absolute" as const,
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
@@ -934,15 +1893,15 @@ const styles = StyleSheet.create({
     width: "85%",
     borderRadius: 24,
     padding: 24,
-    gap: 16,
+    gap: 12,
   },
   modalTitle: {
     fontSize: 24,
-    marginBottom: 8,
+    marginBottom: 4,
   },
   modalSubtitle: {
     fontSize: 14,
-    marginBottom: 16,
+    marginBottom: 12,
   },
   intervalOption: {
     flexDirection: "row",
@@ -962,7 +1921,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderRadius: 12,
     alignItems: "center",
-    marginTop: 12,
+    marginTop: 8,
   },
   modalCloseText: {
     fontSize: 16,

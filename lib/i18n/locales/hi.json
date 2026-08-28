@@ -1,0 +1,52 @@
+{
+  "app": { "name": "मेरा जीवन और मेरा नकदी प्रवाह पुष्टिकरण" },
+  "tabs": { "today": "आज", "library": "पुस्तकालय", "ranks": "रैंक", "profile": "प्रोफ़ाइल" },
+  "today": {
+    "greeting_morning": "सुप्रभात", "greeting_afternoon": "शुभ दोपहर", "greeting_evening": "शुभ संध्या",
+    "day_streak": "दिनों का सिलसिला", "affirmed": "पुष्टि की गई", "best_streak": "सर्वश्रेष्ठ सिलसिला",
+    "loading_stats": "आँकड़े लोड हो रहे हैं...", "todays_affirmation": "आज की पुष्टि", "day": "दिन",
+    "read_full": "पूरी पुष्टि पढ़ें", "browse_library": "पुस्तकालय ब्राउज़ करें",
+    "browse_subtitle": "सभी मासिक पुष्टिकरण पुस्तिकाएं देखें", "daily_checkin": "दैनिक चेक-इन",
+    "checkin_subtitle": "आज बस उपस्थित होने पर 10 अंक कमाएं",
+    "no_affirmation_title": "आज के लिए कोई पुष्टि नहीं", "no_affirmation_subtitle": "बाद में पुनः आएं या पुस्तकालय देखें",
+    "locked_message": "यह दैनिक पुष्टि लॉक है। दिन 1-{{previewDays}} मुफ़्त पूर्वावलोकन हैं। पूरी तरह पढ़ने और पुष्टि करने के लिए इस महीने को अनलॉक करें।",
+    "unlock_for": "₦{{price}} में अनलॉक करें", "i_have_affirmed": "मैंने पुष्टि की", "affirmed_for_today": "आज के लिए पुष्टि की गई",
+    "loading_error": "लोडिंग त्रुटि", "failed_to_load": "डेटा लोड करने में विफल",
+    "already_checked_in": "पहले ही चेक-इन किया", "already_checked_in_msg": "आप पहले ही चेक-इन कर चुके हैं। कल आएं!",
+    "checkin_complete": "चेक-इन पूर्ण!", "checkin_earned": "आपको आज चेक-इन करने पर {{points}} अंक मिले।",
+    "error_title": "त्रुटि", "checkin_error": "चेक-इन रिकॉर्ड नहीं कर सका। कृपया पुनः प्रयास करें।",
+    "streak_milestone": "🔥 सिलसिला माइलस्टोन!", "streak_milestone_msg": "अविश्वसनीय! आपको अपने सिलसिले के लिए +{{bonus}} बोनस अंक मिले! ऐसे ही जारी रखें!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "यह दिन लॉक है",
+    "locked_description": "दिन 1-{{previewDays}} मुफ़्त पूर्वावलोकन हैं। ₦{{price}} में इस पुस्तिका को अनलॉक करें और पूरी तरह पढ़ें व पुष्टि करें।",
+    "unlock_for": "₦{{price}} में अनलॉक करें",
+    "payment_recorded": "भुगतान रिकॉर्ड किया गया", "payment_recorded_msg": "आपका भुगतान प्रशासनिक सत्यापन की प्रतीक्षा में है। अनुमोदन के बाद आप पूरे महीने तक पहुंच पाएंगे।",
+    "payment_error": "भुगतान त्रुटि", "payment_error_msg": "भुगतान रिकॉर्ड नहीं कर सका। कृपया पुनः प्रयास करें।",
+    "i_have_affirmed": "मैंने पुष्टि की", "affirmed_for_today": "आज के लिए पुष्टि की गई",
+    "streak_milestone": "🔥 सिलसिला माइलस्टोन!", "streak_milestone_msg": "अविश्वसनीय! आपको अपने सिलसिले के लिए +{{bonus}} बोनस अंक मिले! ऐसे ही जारी रखें!",
+    "not_found": "पुष्टि नहीं मिली"
+  },
+  "booklet": {
+    "locked_preview": "लॉक - पूर्वावलोकन केवल दिन 1 और 2 के लिए उपलब्ध", "locked_banner": "दिन 1-{{previewDays}} मुफ़्त हैं। ₦{{price}} में पूरा महीना अनलॉक करें।", "day": "दिन",
+    "unlock_for": "₦{{price}} में अनलॉक करें", "unlock": "अनलॉक", "view_all": "सभी देखें", "loading": "लोड हो रहा है..."
+  },
+  "library": {
+    "title": "पुस्तकालय", "subtitle": "सभी मासिक पुष्टिकरण पुस्तिकाएं देखें",
+    "no_booklets_title": "अभी तक कोई पुस्तिका उपलब्ध नहीं", "no_booklets_subtitle": "नई सामग्री के लिए जल्द आएं",
+    "unlock_title": "{{month}} अनलॉक करें", "choose_method": "इस पुस्तिका को अनलॉक करने का तरीका चुनें",
+    "pay_with": "{{provider}} से भुगतान करें", "pay_desc": "कार्ड, बैंक, USSD — तत्काल अनलॉक",
+    "reward_points": "पुरस्कार अंक", "points_desc": "{{points}} अंक", "points_needed": "आपके पास {{balance}} हैं",
+    "earn_points_hint": "दैनिक पुष्टि, चेक-इन और सिलसिलों से अंक कमाएं। आपको {{needed}} और अंक चाहिए।",
+    "cancel": "रद्द करें", "unlocked": "अनलॉक!", "unlocked_msg": "आपके पुरस्कार अंकों से पुस्तिका अनलॉक हुई।",
+    "unlock_error": "त्रुटि", "unlock_error_msg": "अंक रिडीम नहीं कर सके। कृपया पुनः प्रयास करें।",
+    "one_year_wonders": "चमत्कारों का 1 वर्ष", "special_edition": "विशेष संस्करण"
+  },
+  "settings": { "language": "भाषा", "select_language": "भाषा चुनें" },
+  "payment": {
+    "admin_pending": "प्रशासनिक अनुमोदन की प्रतीक्षा",
+    "admin_pending_detail": "हमें आपका बैंक हस्तांतरण प्रमाण प्राप्त हो गया है और सत्यापन के बाद यह पुस्तिका अनलॉक कर दी जाएगी।",
+    "confirming_payment": "भुगतान की पुष्टि हो रही है",
+    "confirming_payment_detail": "आपका भुगतान प्राप्त हो गया है। ताज़ा करने के लिए नीचे खींचें — आमतौर पर एक मिनट में पहुंच अनलॉक हो जाती है।"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "Marketing site for **zionhouse.org** — church home, live services, booklet store, app download, testimonies, and social links.",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node scripts/deploy-spaceship.js",
+    "package": "node scripts/package-spaceship.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "basic-ftp": "^6.0.1"
+  }
+}

@@ -126,14 +126,14 @@ function ClassicTabLayout() {
           ),
         }}
       />
-      <Tabs.Screen name="settings" options={{ href: undefined }} />
-      <Tabs.Screen name="edit-profile" options={{ href: undefined }} />
-      <Tabs.Screen name="booklet-[id]" options={{ href: undefined }} />
-      <Tabs.Screen name="affirmation-[id]" options={{ href: undefined }} />
-      <Tabs.Screen name="cart" options={{ href: undefined }} />
-      <Tabs.Screen name="library-filter" options={{ href: undefined }} />
-      <Tabs.Screen name="ranks-info" options={{ href: undefined }} />
-      <Tabs.Screen name="journal" options={{ href: undefined }} />
+      <Tabs.Screen name="settings" options={{ href: null }} />
+      <Tabs.Screen name="edit-profile" options={{ href: null }} />
+      <Tabs.Screen name="booklet-[id]" options={{ href: null }} />
+      <Tabs.Screen name="affirmation-[id]" options={{ href: null }} />
+      <Tabs.Screen name="cart" options={{ href: null }} />
+      <Tabs.Screen name="library-filter" options={{ href: null }} />
+      <Tabs.Screen name="ranks-info" options={{ href: null }} />
+      <Tabs.Screen name="journal" options={{ href: null }} />
     </Tabs>
   );
 }

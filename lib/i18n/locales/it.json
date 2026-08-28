@@ -1,0 +1,52 @@
+{
+  "app": { "name": "Le Mie Affermazioni di Vita e Flusso di Cassa" },
+  "tabs": { "today": "Oggi", "library": "Biblioteca", "ranks": "Classifiche", "profile": "Profilo" },
+  "today": {
+    "greeting_morning": "Buongiorno", "greeting_afternoon": "Buon Pomeriggio", "greeting_evening": "Buona Sera",
+    "day_streak": "Serie di Giorni", "affirmed": "Affermato", "best_streak": "Miglior Serie",
+    "loading_stats": "Caricamento statistiche...", "todays_affirmation": "Affermazione di Oggi", "day": "GIORNO",
+    "read_full": "Leggi l'Affermazione Completa", "browse_library": "Sfoglia Biblioteca",
+    "browse_subtitle": "Esplora tutti i libretti mensili", "daily_checkin": "Check-in Giornaliero",
+    "checkin_subtitle": "Guadagna 10 punti solo per esserti presentato oggi",
+    "no_affirmation_title": "Nessuna affermazione per oggi", "no_affirmation_subtitle": "Torna presto o sfoglia la biblioteca",
+    "locked_message": "Questa affermazione è bloccata. I giorni 1-{{previewDays}} sono anteprime gratuite. Sblocca questo mese per leggere e affermare completamente.",
+    "unlock_for": "Sblocca per ₦{{price}}", "i_have_affirmed": "Ho Affermato", "affirmed_for_today": "Affermato per oggi",
+    "loading_error": "Errore di Caricamento", "failed_to_load": "Caricamento dati fallito",
+    "already_checked_in": "Check-in Già Effettuato", "already_checked_in_msg": "Hai già fatto check-in oggi. Torna domani!",
+    "checkin_complete": "Check-in Completato!", "checkin_earned": "Hai guadagnato {{points}} punti per il check-in di oggi.",
+    "error_title": "Errore", "checkin_error": "Impossibile registrare il check-in. Riprova.",
+    "streak_milestone": "🔥 Traguardo della Serie!", "streak_milestone_msg": "Incredibile! Hai guadagnato un bonus di +{{bonus}} punti per il tuo traguardo! Continua così!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "Questo giorno è bloccato",
+    "locked_description": "I giorni 1-{{previewDays}} sono anteprime gratuite. Sblocca questo libretto per ₦{{price}} per leggere e affermare completamente.",
+    "unlock_for": "Sblocca per ₦{{price}}",
+    "payment_recorded": "Pagamento Registrato", "payment_recorded_msg": "Il tuo pagamento è in attesa di verifica amministrativa. Potrai accedere al mese completo una volta approvato.",
+    "payment_error": "Errore di Pagamento", "payment_error_msg": "Impossibile registrare il pagamento. Riprova.",
+    "i_have_affirmed": "Ho Affermato", "affirmed_for_today": "Affermato per oggi",
+    "streak_milestone": "🔥 Traguardo della Serie!", "streak_milestone_msg": "Incredibile! Hai guadagnato un bonus di +{{bonus}} punti per il tuo traguardo! Continua così!",
+    "not_found": "Affermazione non trovata"
+  },
+  "booklet": {
+    "locked_preview": "Bloccato - Anteprima disponibile solo per Giorni 1 e 2", "locked_banner": "I giorni 1-{{previewDays}} sono gratuiti. Sblocca il mese intero per ₦{{price}}.", "day": "Giorno",
+    "unlock_for": "Sblocca per ₦{{price}}", "unlock": "Sblocca", "view_all": "Vedi Tutto", "loading": "Caricamento..."
+  },
+  "library": {
+    "title": "Biblioteca", "subtitle": "Esplora tutti i libretti mensili",
+    "no_booklets_title": "Nessun libretto ancora disponibile", "no_booklets_subtitle": "Torna presto per nuovi contenuti",
+    "unlock_title": "Sblocca {{month}}", "choose_method": "Scegli come sbloccare questo libretto",
+    "pay_with": "Paga con {{provider}}", "pay_desc": "Carta, banca, USSD — sblocco immediato",
+    "reward_points": "Punti Fedeltà", "points_desc": "{{points}} punti", "points_needed": "Hai {{balance}}",
+    "earn_points_hint": "Guadagna punti affermando quotidianamente, check-in e serie. Ti servono ancora {{needed}} punti.",
+    "cancel": "Annulla", "unlocked": "Sbloccato!", "unlocked_msg": "Libretto sbloccato con i tuoi punti fedeltà.",
+    "unlock_error": "Errore", "unlock_error_msg": "Impossibile riscattare i punti. Riprova.",
+    "one_year_wonders": "1 ANNO DI MERAVIGLIE", "special_edition": "EDIZIONE SPECIALE"
+  },
+  "settings": { "language": "Lingua", "select_language": "Seleziona Lingua" },
+  "payment": {
+    "admin_pending": "In attesa di approvazione amministrativa",
+    "admin_pending_detail": "Abbiamo ricevuto la prova del tuo bonifico e sbloccheremo questo libretto dopo la verifica.",
+    "confirming_payment": "Conferma pagamento",
+    "confirming_payment_detail": "Il tuo pagamento è stato ricevuto. Tira verso il basso per aggiornare — l'accesso viene solitamente sbloccato entro un minuto."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "installCommand": "node scripts/prepare-images.js && node scripts/prepare-booklets.js && node scripts/prepare-app-assets.js && node scripts/sync-youtube.js",
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "package": "com.mylifemycashflow",
+  "playUrl": "https://play.google.com/store/apps/details?id=com.mylifemycashflow",
+  "updatedAt": "2026-07-08T01:10:31.968Z",
+  "screenshots": [
+    {
+      "file": "screenshot-library.webp",
+      "label": "Library",
+      "caption": "Browse & unlock monthly booklets",
+      "source": "https://play-lh.googleusercontent.com/GJbbC8dynET2s58-6sUP0fxYIvlckKqrLROB2nyCzz6R2TLcNH4A_dICn5ZvDEWZ5XY3_Dwd-LYdZw5Xq4U2=w1052-h592-rw"
+    },
+    {
+      "file": "screenshot-today.webp",
+      "label": "Today",
+      "caption": "Daily affirmation on your home screen",
+      "source": "https://play-lh.googleusercontent.com/vEGbcf9TEzieim4WIHHkLPaqsuD8FLZQa0ODqLK1_ZOk5f8Wb0WNDYhjrmQx-rr6FWEcbQvIvvJd3StWPsm3=w1052-h592-rw"
+    },
+    {
+      "file": "screenshot-profile.webp",
+      "label": "Profile",
+      "caption": "Track streaks and your journey",
+      "source": "https://play-lh.googleusercontent.com/IlA6t7pvLjQFY884G5TBCc-NeqsHwbBu1V3YwHxrBlWZ5OmqQPv6iF7p0vKWc6YTpLeNne3_o1BWuLW-C1KnCg=w1052-h592-rw"
+    },
+    {
+      "file": "screenshot-leaderboard.webp",
+      "label": "Leaderboard",
+      "caption": "Points, ranks & community",
+      "source": "https://play-lh.googleusercontent.com/_Jme3arfMNiOoOHpCSJ5yTcIUoRGIWz1XTL68IzaTP9OaewXoLj3RjkoIYJ_OKm_d25IcsCSFp1leRlOeSHPcg=w1052-h592-rw"
+    }
+  ]
+}

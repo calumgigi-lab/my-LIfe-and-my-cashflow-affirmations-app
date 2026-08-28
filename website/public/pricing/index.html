@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — My Life &amp; My Cashflow Affirmations · Zion House INT'L</title>
+  <meta name="description" content="Get your monthly affirmation booklet from Zion House INT'L. 31 days of Spirit-led declarations for ₦1,500/month. Unlock instantly in the app." />
+  <link rel="canonical" href="https://zionhouse.org/pricing" />
+  <link rel="icon" href="/assets/zionhouse-favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/zionhouse-logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://zionhouse.org/pricing" />
+  <meta property="og:title" content="Pricing — My Life &amp; My Cashflow Affirmations" />
+  <meta property="og:description" content="Monthly affirmation booklets from Zion House INT'L. 31 days of life-changing declarations — ₦1,500/month." />
+  <meta property="og:image" content="https://zionhouse.org/assets/og-image.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/site.css" />
+  <style>
+    /* ── Pricing-specific styles ── */
+    .pricing-hero {
+      padding: 7rem 0 4rem;
+      text-align: center;
+      background: linear-gradient(180deg, #0c1224 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-hero .section-kicker { margin-bottom: 1rem; }
+    .pricing-hero h1 { color: var(--text); margin-bottom: 1rem; }
+    .pricing-hero p { color: var(--text-soft); max-width: 540px; margin: 0 auto; }
+
+    /* ── Plan cards grid ── */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .plan-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+    }
+    .plan-card.is-featured {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold-dim), var(--shadow);
+    }
+    .plan-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+    .plan-header h2 {
+      font-family: var(--font-body);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 0.4rem;
+    }
+    .plan-header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .plan-price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
+    }
+    .plan-price .amount {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .plan-price .currency {
+      font-size: 1.4rem;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+    .plan-price .period {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-left: 0.2rem;
+    }
+    .plan-price .usd-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+    .plan-includes {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .plan-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.45;
+    }
+    .plan-includes li .check {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      background: rgba(212, 168, 67, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      color: var(--gold);
+      font-size: 0.7rem;
+    }
+    .plan-cta { margin-top: auto; }
+    .plan-cta .btn { width: 100%; justify-content: center; }
+    .plan-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 0.6rem;
+    }
+
+    /* ── How it works ── */
+    .how-section {
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 0;
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 860px;
+      margin: 2.5rem auto 0;
+      padding: 0 1.5rem;
+    }
+    .how-step {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .how-step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+      color: #000;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .how-step h3 {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+    .how-step p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 4rem 0; }
+    .faq-list {
+      max-width: 680px;
+      margin: 2.5rem auto 0;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+    }
+    .faq-item h3 {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 0.5rem;
+    }
+    .faq-item p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .faq-item a { color: var(--gold); text-decoration: underline; }
+
+    /* ── Booklet sample strip ── */
+    .sample-strip {
+      padding: 4rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .sample-covers {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      padding: 0 1.5rem;
+    }
+    .sample-covers img {
+      width: 100px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.2s var(--ease);
+    }
+    .sample-covers img:hover { transform: scale(1.07); }
+
+    @media (max-width: 600px) {
+      .plan-price .amount { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="top">
+    <div class="header-shell">
+      <a class="brand" href="/">
+        <span class="brand-emblem" aria-hidden="true">
+          <img src="/assets/zionhouse-logo.png" alt="" width="44" height="44" />
+        </span>
+        <span class="brand-copy">
+          <strong>Zion House</strong>
+          <span>International</span>
+        </span>
+      </a>
+      <nav class="nav-desktop" aria-label="Primary">
+        <a href="/#about">About</a>
+        <a href="/#live">Live</a>
+        <a href="/#booklets">Booklets</a>
+        <a href="/#pastor">Library</a>
+        <a href="/#testimonies">Stories</a>
+        <a href="/#connect">Connect</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-primary btn-sm" href="/#app">Get the App</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="pricing-hero">
+      <div class="container">
+        <span class="section-kicker">My Life &amp; My Cashflow Affirmations</span>
+        <h1>Simple, Spirit-led pricing.</h1>
+        <p>One monthly booklet. 31 days of life-changing declarations for your health, finances, and destiny. Unlock instantly in the app.</p>
+      </div>
+    </section>
+
+    <!-- PLAN CARDS -->
+    <section aria-label="Pricing plans">
+      <div class="plans-grid">
+
+        <!-- Monthly plan -->
+        <div class="plan-card is-featured">
+          <div class="plan-badge">Most Popular</div>
+          <div class="plan-header">
+            <h2>Monthly Affirmation Booklet</h2>
+            <p>One new booklet every month — 31 powerful daily declarations</p>
+          </div>
+          <div>
+            <div class="plan-price">
+              <span class="currency">₦</span>
+              <span class="amount">1,500</span>
+              <span class="period">/ month</span>
+            </div>
+            <p class="usd-note">≈ $1 USD · billed per booklet</p>
+          </div>
+          <ul class="plan-includes">
+            <li><span class="check">✓</span>31 daily affirmations — one for each day of the month</li>
+            <li><span class="check">✓</span>Instant digital access after payment — no waiting</li>
+            <li><span class="check">✓</span>Booklet stays in your library forever — read offline anytime</li>
+            <li><span class="check">✓</span>Daily reminder notifications to keep your confession sharp</li>
+            <li><span class="check">✓</span>Streak tracker and affirmers leaderboard</li>
+            <li><span class="check">✓</span>New fresh content every month from Pst. Chinedum Ilechukwu</li>
+          </ul>
+          <div class="plan-cta">
+            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.mylifemycashflow" target="_blank" rel="noopener">
+              Get the App — it's free
+            </a>
+            <p class="plan-note">Download free · purchase inside the app via OasisPay</p>
+          </div>
+        </div>
+
+        <!-- Web access plan -->
+        <div class="plan-card">
+          <div class="plan-header">
+            <h2>Web Access</h2>
+            <p>Access booklets directly from your browser — no app required</p>
+          </div>
+          <div>
+            <div class="plan-price">
+              <span class="currency">₦</span>
+              <span class="amount">1,500</span>
+              <span class="period">/ month</span>
+            </div>
+            <p class="usd-note">≈ $1 USD · secure checkout via Paddle</p>
+          </div>
+          <ul class="plan-includes">
+            <li><span class="check">✓</span>Same 31 daily declarations as the app booklet</li>
+            <li><span class="check">✓</span>Instant digital delivery to your email</li>
+            <li><span class="check">✓</span>Pay securely via card, bank transfer, or mobile money (via Paddle)</li>
+            <li><span class="check">✓</span>International cards and currencies accepted</li>
+            <li><span class="check">✓</span>Downloadable PDF — read anywhere, share with family</li>
+          </ul>
+          <div class="plan-cta">
+            <a class="btn btn-secondary" href="/#booklets">Browse Booklets</a>
+            <p class="plan-note">Checkout powered by Paddle · <a href="/refund">refund policy</a></p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+      <div class="container">
+        <header class="section-header centered">
+          <span class="section-kicker">How it works</span>
+          <h2>Up and affirming in <em>4 simple steps</em></h2>
+        </header>
+        <div class="how-grid">
+          <div class="how-step">
+            <div class="how-step-num">1</div>
+            <h3>Download the App</h3>
+            <p>Free on Google Play — takes under a minute to install and set up</p>
+          </div>
+          <div class="how-step">
+            <div class="how-step-num">2</div>
+            <h3>Create Your Account</h3>
+            <p>Sign up with your name and email — quick and easy</p>
+          </div>
+          <div class="how-step">
+            <div class="how-step-num">3</div>
+            <h3>Purchase a Booklet</h3>
+            <p>Tap the current month and pay securely via OasisPay inside the app</p>
+          </div>
+          <div class="how-step">
+            <div class="how-step-num">4</div>
+            <h3>Affirm Daily</h3>
+            <p>Open today's declaration every morning — watch your world shift</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKLET SAMPLE COVERS -->
+    <section class="sample-strip">
+      <div class="container">
+        <header class="section-header centered">
+          <span class="section-kicker">The Collection</span>
+          <h2>A new booklet <em>every single month</em></h2>
+          <p>Each month brings fresh Spirit-led content written by Pst. Chinedum Ilechukwu — from Zion House INT'L, Port Harcourt, to the nations.</p>
+        </header>
+        <div class="sample-covers">
+          <img src="/assets/booklets/january.png"    alt="January 2026 Affirmations booklet cover" loading="lazy" />
+          <img src="/assets/booklets/february.png"   alt="February 2026 Affirmations booklet cover" loading="lazy" />
+          <img src="/assets/booklets/march.png"      alt="March 2026 Affirmations booklet cover" loading="lazy" />
+          <img src="/assets/booklets/april.png"      alt="April 2026 Affirmations booklet cover" loading="lazy" />
+          <img src="/assets/booklets/may-2026.png"   alt="May 2026 Affirmations booklet cover" loading="lazy" />
+          <img src="/assets/booklets/june-2026.png"  alt="June 2026 — 1 Year of Wonders booklet cover" loading="lazy" />
+          <img src="/assets/booklets/july-2026.png"  alt="July 2026 Affirmations booklet cover" loading="lazy" />
+        </div>
+        <div style="margin-top:2.5rem;">
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.mylifemycashflow" target="_blank" rel="noopener">Get the App — Free Download</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+        <header class="section-header centered">
+          <span class="section-kicker">FAQs</span>
+          <h2>Common <em>questions</em></h2>
+        </header>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3>Is the app free to download?</h3>
+            <p>Yes — the app is completely free to download on Google Play. You only pay when you unlock a monthly booklet (₦1,500 per booklet).</p>
+          </div>
+          <div class="faq-item">
+            <h3>Can I access old months after purchasing?</h3>
+            <p>Absolutely. Once you unlock a booklet, it lives in your library forever and can be read offline at any time.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What payment methods are accepted?</h3>
+            <p>In the app, payments are processed via <strong>OasisPay</strong> (Nigerian bank transfers and cards). On the web, we use <strong>Paddle</strong>, which accepts major international cards, PayPal, and more.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Is this a recurring subscription?</h3>
+            <p>No automatic subscription — you choose and purchase each month's booklet individually when you're ready.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What is your refund policy?</h3>
+            <p>We offer refunds within 7 days of purchase if you have not yet accessed the booklet, or in the case of a technical failure. See our full <a href="/refund">Refund Policy</a>.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Who writes the affirmations?</h3>
+            <p>Every declaration is crafted by <strong>Pst. Chinedum Ilechukwu</strong>, Man of God and voice to nations, based at Zion House INT'L, Port Harcourt, Nigeria.</p>
+          </div>
+          <div class="faq-item">
+            <h3>I have another question.</h3>
+            <p>Reach us at <a href="tel:07068323030">0706 832 3030</a> or email us via the <a href="/#connect">Connect</a> section. We're happy to help.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col footer-brand">
+          <a class="footer-brand-lockup" href="/">
+            <img src="/assets/zionhouse-logo.png" alt="" class="footer-logo" width="64" height="64" />
+            <div>
+              <strong>Zion House INT'L</strong>
+              <span>More than a church — it's a Life!</span>
+            </div>
+          </a>
+          <p class="footer-tagline">Networking the world with the Spirit Life.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#booklets">Affirmations Store</a></li>
+            <li><a href="/#app">Get the App</a></li>
+            <li><a href="/#connect">Connect</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/refund">Refund Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-contact">
+            <li><a href="tel:07068323030">0706 832 3030</a></li>
+            <li><a href="tel:08078159774">0807 815 9774</a></li>
+          </ul>
+          <p class="footer-label" style="margin-top:0.75rem;">Address</p>
+          <address class="footer-address">265 Aba Road by Lagos Street<br />Rumuomasi, Port Harcourt, Nigeria</address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© <span id="year"></span> Zion House INT'L. All rights reserved.</p>
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;margin:0.5rem 0;">
+          <a href="/terms" style="color:var(--text-muted);font-size:0.85rem;">Terms of Service</a>
+          <a href="/privacy" style="color:var(--text-muted);font-size:0.85rem;">Privacy Policy</a>
+          <a href="/refund" style="color:var(--text-muted);font-size:0.85rem;">Refund Policy</a>
+        </div>
+        <a class="footer-top-link" href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

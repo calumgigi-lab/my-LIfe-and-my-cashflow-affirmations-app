@@ -8,7 +8,8 @@ import { invalidateQueryKeys } from "@/lib/screen-refresh";
 export default function PaymentCompleteScreen() {
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
-  const params = useLocalSearchParams<{ reference?: string; status?: string; bookletId?: string; userId?: string }>();
+  const params = useLocalSearchParams<{ reference?: string; tx_ref?: string; status?: string; bookletId?: string; userId?: string }>();
+  const reference = params.reference || params.tx_ref;
   const [message, setMessage] = useState("Confirming your payment…");
 
   useEffect(() => {
@@ -23,13 +24,13 @@ export default function PaymentCompleteScreen() {
       }
 
       try {
-        if (params.reference) {
+        if (reference) {
           for (let attempt = 0; attempt < 8; attempt += 1) {
             if (attempt > 0) {
               await new Promise((resolve) => setTimeout(resolve, 2000));
             }
             const syncRes = await apiRequest("POST", "/api/payments/flutterwave/sync", {
-              reference: params.reference,
+              reference: reference,
               bookletId: params.bookletId ? parseInt(String(params.bookletId), 10) : undefined,
             });
             if (syncRes.ok) break;
@@ -44,7 +45,7 @@ export default function PaymentCompleteScreen() {
         setMessage(
           params.status === "success"
             ? "Booklet unlocked!"
-            : params.reference
+            : reference
               ? "Payment received — pull down on Library to refresh."
               : "Library updated.",
         );
@@ -59,7 +60,7 @@ export default function PaymentCompleteScreen() {
     return () => {
       active = false;
     };
-  }, [params.reference, params.status, params.bookletId]);
+  }, [reference, params.status, params.bookletId]);
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: colors.background, padding: 24 }}>

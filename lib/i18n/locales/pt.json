@@ -1,0 +1,52 @@
+{
+  "app": { "name": "Minhas Afirmações de Vida e Fluxo de Caixa" },
+  "tabs": { "today": "Hoje", "library": "Biblioteca", "ranks": "Ranques", "profile": "Perfil" },
+  "today": {
+    "greeting_morning": "Bom Dia", "greeting_afternoon": "Boa Tarde", "greeting_evening": "Boa Noite",
+    "day_streak": "Sequência de Dias", "affirmed": "Afirmado", "best_streak": "Melhor Sequência",
+    "loading_stats": "Carregando estatísticas...", "todays_affirmation": "Afirmação de Hoje", "day": "DIA",
+    "read_full": "Ler Afirmação Completa", "browse_library": "Explorar Biblioteca",
+    "browse_subtitle": "Explore todos os folhetos mensais", "daily_checkin": "Check-in Diário",
+    "checkin_subtitle": "Ganhe 10 pts só por aparecer hoje", "no_affirmation_title": "Nenhuma afirmação para hoje",
+    "no_affirmation_subtitle": "Volte mais tarde ou explore a biblioteca",
+    "locked_message": "Esta afirmação está bloqueada. Dias 1-{{previewDays}} são prévias grátis. Desbloqueie este mês para ler e afirmar completamente.",
+    "unlock_for": "Desbloquear por ₦{{price}}", "i_have_affirmed": "Eu Afirmei", "affirmed_for_today": "Afirmado por hoje",
+    "loading_error": "Erro ao Carregar", "failed_to_load": "Falha ao carregar dados",
+    "already_checked_in": "Check-in já Realizado", "already_checked_in_msg": "Você já fez check-in hoje. Volte amanhã!",
+    "checkin_complete": "Check-in Completo!", "checkin_earned": "Você ganhou {{points}} pts por fazer check-in hoje.",
+    "error_title": "Erro", "checkin_error": "Não foi possível registrar o check-in. Tente novamente.",
+    "streak_milestone": "🔥 Marco de Sequência!", "streak_milestone_msg": "Incrível! Você ganhou um bônus de +{{bonus}} pts pelo seu marco! Continue assim!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "Este dia está bloqueado",
+    "locked_description": "Dias 1-{{previewDays}} são prévias grátis. Desbloqueie este folheto por ₦{{price}} para ler e afirmar completamente.",
+    "unlock_for": "Desbloquear por ₦{{price}}",
+    "payment_recorded": "Pagamento Registrado", "payment_recorded_msg": "Seu pagamento está pendente de verificação administrativa. Você poderá acessar o mês completo após aprovação.",
+    "payment_error": "Erro de Pagamento", "payment_error_msg": "Não foi possível registrar o pagamento. Tente novamente.",
+    "i_have_affirmed": "Eu Afirmei", "affirmed_for_today": "Afirmado por hoje",
+    "streak_milestone": "🔥 Marco de Sequência!", "streak_milestone_msg": "Incrível! Você ganhou um bônus de +{{bonus}} pts pelo seu marco! Continue assim!",
+    "not_found": "Afirmação não encontrada"
+  },
+  "booklet": {
+    "locked_preview": "Bloqueado - Prévia disponível apenas para Dias 1 e 2", "locked_banner": "Dias 1-{{previewDays}} são grátis. Desbloqueie o mês completo por ₦{{price}}.", "day": "Dia",
+    "unlock_for": "Desbloquear por ₦{{price}}", "unlock": "Desbloquear", "view_all": "Ver Tudo", "loading": "Carregando..."
+  },
+  "library": {
+    "title": "Biblioteca", "subtitle": "Explore todos os folhetos mensais",
+    "no_booklets_title": "Nenhum folheto disponível ainda", "no_booklets_subtitle": "Volte em breve para novos conteúdos",
+    "unlock_title": "Desbloquear {{month}}", "choose_method": "Escolha como desbloquear este folheto",
+    "pay_with": "Pagar com {{provider}}", "pay_desc": "Cartão, banco, USSD — desbloqueio instantâneo",
+    "reward_points": "Pontos de Recompensa", "points_desc": "{{points}} pts", "points_needed": "Você tem {{balance}}",
+    "earn_points_hint": "Ganhe pontos afirmando diariamente, check-ins e sequências. Você precisa de mais {{needed}} pts.",
+    "cancel": "Cancelar", "unlocked": "Desbloqueado!", "unlocked_msg": "Folheto desbloqueado com seus pontos de recompensa.",
+    "unlock_error": "Erro", "unlock_error_msg": "Não foi possível resgatar os pontos. Tente novamente.",
+    "one_year_wonders": "1 ANO DE MARAVILHAS", "special_edition": "EDIÇÃO ESPECIAL"
+  },
+  "settings": { "language": "Idioma", "select_language": "Selecionar Idioma" },
+  "payment": {
+    "admin_pending": "Pendente de aprovação administrativa",
+    "admin_pending_detail": "Recebemos seu comprovante de transferência e desbloquearemos este folheto após verificação.",
+    "confirming_payment": "Confirmando pagamento",
+    "confirming_payment_detail": "Seu pagamento foi recebido. Puxe para baixo para atualizar — o acesso geralmente é desbloqueado em um minuto."
+  }
+}

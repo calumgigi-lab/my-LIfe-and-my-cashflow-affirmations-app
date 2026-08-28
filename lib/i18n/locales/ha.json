@@ -1,0 +1,52 @@
+{
+  "app": { "name": "Tabbatattun Rayuwata da Tsabar Kudi" },
+  "tabs": { "today": "Yau", "library": "Laburare", "ranks": "Matsayi", "profile": "Bayanan Kai" },
+  "today": {
+    "greeting_morning": "Barka da Safiya", "greeting_afternoon": "Barka da Rana", "greeting_evening": "Barka da Yamma",
+    "day_streak": "Jeren Kwanaki", "affirmed": "An Tabbatar", "best_streak": "Mafi Kyawun Jere",
+    "loading_stats": "Ana loda ƙididdiga...", "todays_affirmation": "Tabbacin Yau", "day": "RANA",
+    "read_full": "Karanta Cikakken Tabbacin", "browse_library": "Bincika Laburare",
+    "browse_subtitle": "Bincika duk littattafan wata", "daily_checkin": "Rajista na Yau da Kullum",
+    "checkin_subtitle": "Sami maki 10 kawai don zuwa yau",
+    "no_affirmation_title": "Babu tabbaci na yau", "no_affirmation_subtitle": "Dawo daga baya ko bincika laburare",
+    "locked_message": "Wannan tabbacin na yau a kulle yake. Kwanaki 1-{{previewDays}} samfoti ne kyauta. Buše wannan wata don karantawa da tabbatarwa gabaɗaya.",
+    "unlock_for": "Buše don ₦{{price}}", "i_have_affirmed": "Na Tabbatar", "affirmed_for_today": "An tabbatar don yau",
+    "loading_error": "Kuskuren Lodi", "failed_to_load": "An kasa loda bayanai",
+    "already_checked_in": "An Rigaya Ya Rajista", "already_checked_in_msg": "Kun riga kun rajista yau. Ku dawo gobe!",
+    "checkin_complete": "Rajista Ya Cika!", "checkin_earned": "Kun sami {{points}} maki don rajista yau.",
+    "error_title": "Kuskure", "checkin_error": "An kasa yin rajista. Da fatan za a sake gwadawa.",
+    "streak_milestone": "🔥 Matsayin Jere!", "streak_milestone_msg": "Mai ban mamaki! Kun sami kari +{{bonus}} maki don matsakin jeren ku! Ci gaba!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "Wannan rana a kulle take",
+    "locked_description": "Kwanaki 1-{{previewDays}} samfoti ne kyauta. Buše wannan littafin don ₦{{price}} don karantawa da tabbatarwa gabaɗaya.",
+    "unlock_for": "Buše don ₦{{price}}",
+    "payment_recorded": "An Yi Rikodin Biyan Kuɗi", "payment_recorded_msg": "Biyan kuɗin ku yana jiran tabbatarwar gudanarwa. Za ku iya samun damar cikakken watan bayan an amince.",
+    "payment_error": "Kuskuren Biya", "payment_error_msg": "An kasa yin rikodin biyan kuɗi. Da fatan za a sake gwadawa.",
+    "i_have_affirmed": "Na Tabbatar", "affirmed_for_today": "An tabbatar don yau",
+    "streak_milestone": "🔥 Matsayin Jere!", "streak_milestone_msg": "Mai ban mamaki! Kun sami kari +{{bonus}} maki don matsakin jeren ku! Ci gaba!",
+    "not_found": "Ba a sami tabbaci ba"
+  },
+  "booklet": {
+    "locked_preview": "A Kulle - Samfoti yana samuwa ne kawai don Kwanaki 1 da 2", "locked_banner": "Kwanaki 1-{{previewDays}} kyauta ne. Buše cikakken wata don ₦{{price}}.", "day": "Rana",
+    "unlock_for": "Buše don ₦{{price}}", "unlock": "Buše", "view_all": "Duba Duka", "loading": "Ana loda..."
+  },
+  "library": {
+    "title": "Laburare", "subtitle": "Bincika duk littattafan wata",
+    "no_booklets_title": "Babu littattafai da suke nan tukuna", "no_booklets_subtitle": "Dawo daga baya don sabon abun ciki",
+    "unlock_title": "Buše {{month}}", "choose_method": "Zaɓi yadda kuke son buše wannan littafin",
+    "pay_with": "Biya ta {{provider}}", "pay_desc": "Kati, banki, USSD — buše nan take",
+    "reward_points": "Makokin Kyauta", "points_desc": "{{points}} maki", "points_needed": "Kuna da {{balance}}",
+    "earn_points_hint": "Sami maki ta hanyar tabbatarwa kullum, rajista, da jere. Kuna buƙatar {{needed}} maki kari.",
+    "cancel": "Soke", "unlocked": "An Buše!", "unlocked_msg": "An buše littafin da makokin kyautar ku.",
+    "unlock_error": "Kuskure", "unlock_error_msg": "An kasa fansar maki. Da fatan za a sake gwadawa.",
+    "one_year_wonders": "SHEKARA 1 NA AL'AJA'IBU", "special_edition": "Bugu Na Musamman"
+  },
+  "settings": { "language": "Harshe", "select_language": "Zaɓi Harshe" },
+  "payment": {
+    "admin_pending": "Ana jiran amincewar gudanarwa",
+    "admin_pending_detail": "Mun karɓi shaidar canja wurin bankin ku kuma za mu buše wannan littafin bayan an duba.",
+    "confirming_payment": "Ana tabbatar da biyan kuɗi",
+    "confirming_payment_detail": "An karɓi biyan kuɗin ku. Ja ƙasa don sabuntawa — yawanci ana buše damar shiga cikin minti ɗaya."
+  }
+}

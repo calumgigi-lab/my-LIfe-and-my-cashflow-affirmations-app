@@ -1,0 +1,52 @@
+{
+  "app": { "name": "Igbesi Aye Mi & Owo Sisan Mi Awọn Idaniloju" },
+  "tabs": { "today": "Loni", "library": "Ile-ikawe", "ranks": "Awọn Ipele", "profile": "Profaili" },
+  "today": {
+    "greeting_morning": "E Kaaro", "greeting_afternoon": "E Kaasan", "greeting_evening": "E Kaaale",
+    "day_streak": "Ọjọ Streak", "affirmed": "Ti Fiidi Mulẹ", "best_streak": "Streak Ti O Dara Ju",
+    "loading_stats": "Ti n gbe awọn iṣiro...", "todays_affirmation": "Idaniloju Oni", "day": "ỌJỌ",
+    "read_full": "Ka Idaniloju Ni Kikun", "browse_library": "Ṣawari Ile-ikawe",
+    "browse_subtitle": "Ṣawari gbogbo awọn iwe-ọṣọ osù", "daily_checkin": "Wọle Ojoojumọ",
+    "checkin_subtitle": "Gba 10 pts nìkan nipa jijẹ loni",
+    "no_affirmation_title": "Ko si idaniloju fun oni", "no_affirmation_subtitle": "Pada laipẹ tabi ṣawari ile-ikawe",
+    "locked_message": "Idaniloju ojoojumọ yii ti wa ni titiipa. Awọn ọjọ 1-{{previewDays}} jẹ awọn iṣaaju ọfẹ. Ṣii oṣu yii lati ka ki o si fiidi mulẹ ni kikun.",
+    "unlock_for": "Ṣii silẹ fun ₦{{price}}", "i_have_affirmed": "Mo Ti Fiidi Mulẹ", "affirmed_for_today": "Ti fiidi mulẹ fun oni",
+    "loading_error": "Aṣiṣe Gbigbe", "failed_to_load": "Kuna lati gbe data",
+    "already_checked_in": "Ti Wọle Tẹlẹ", "already_checked_in_msg": "O ti wọle tẹlẹ loni. Pada ọla!",
+    "checkin_complete": "Wiwọle Ayẹyẹ!", "checkin_earned": "O ti gba {{points}} pts fun wiwọle loni.",
+    "error_title": "Aṣiṣe", "checkin_error": "Ko le ṣe igbasilẹ wiwọle. Jọwọ gbiyanju lẹẹkansi.",
+    "streak_milestone": "🔥 Aṣeyọri Streak!", "streak_milestone_msg": "Iyalẹnu! O ti gba ẹbun +{{bonus}} pts fun aṣeyọri streak rẹ! Tẹsiwaju!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "Ọjọ yii ti wa ni titiipa",
+    "locked_description": "Awọn ọjọ 1-{{previewDays}} jẹ awọn iṣaaju ọfẹ. Ṣii iwe-ọṣọ yii fun ₦{{price}} lati ka ati fiidi mulẹ ni kikun.",
+    "unlock_for": "Ṣii silẹ fun ₦{{price}}",
+    "payment_recorded": "Isanwo Ti Gba Silẹ", "payment_recorded_msg": "Isanwo rẹ n duro de ijẹrisi iṣakoso. Iwọ yoo ni anfani lati wọle si oṣu kikun ni kete ti a ba fọwọsi.",
+    "payment_error": "Aṣiṣe Isanwo", "payment_error_msg": "Ko le gba isanwo silẹ. Jọwọ gbiyanju lẹẹkansi.",
+    "i_have_affirmed": "Mo Ti Fiidi Mulẹ", "affirmed_for_today": "Ti fiidi mulẹ fun oni",
+    "streak_milestone": "🔥 Aṣeyọri Streak!", "streak_milestone_msg": "Iyalẹnu! O ti gba ẹbun +{{bonus}} pts fun aṣeyọri streak rẹ! Tẹsiwaju!",
+    "not_found": "Idaniloju ko ri"
+  },
+  "booklet": {
+    "locked_preview": "Titiipa - Iṣaaju wa fun Awọn Ọjọ 1 ati 2 nikan", "locked_banner": "Awọn ọjọ 1-{{previewDays}} jẹ ọfẹ. Ṣii oṣu ni kikun fun ₦{{price}}.", "day": "Ọjọ",
+    "unlock_for": "Ṣii silẹ fun ₦{{price}}", "unlock": "Ṣii silẹ", "view_all": "Wo Gbogbo", "loading": "Ti n gbe..."
+  },
+  "library": {
+    "title": "Ile-ikawe", "subtitle": "Ṣawari gbogbo awọn iwe-ọṣọ osù",
+    "no_booklets_title": "Ko si awọn iwe-ọṣọ to wa sibẹsibẹ", "no_booklets_subtitle": "Pada laipẹ fun akoonu tuntun",
+    "unlock_title": "Ṣii {{month}}", "choose_method": "Yan bi o ṣe fẹ ṣii iwe-ọṣọ yii",
+    "pay_with": "San pẹlu {{provider}}", "pay_desc": "Kaadi, banki, USSD — ṣiṣi lẹsẹkẹsẹ",
+    "reward_points": "Awọn Ojuami Ẹsan", "points_desc": "{{points}} pts", "points_needed": "O ni {{balance}}",
+    "earn_points_hint": "Gba awọn ojuami nipa fifiidi mulẹ ojoojumọ, wiwọle ati awọn streak. O nilo {{needed}} pts sii.",
+    "cancel": "Fagilee", "unlocked": "Ṣiṣi Silẹ!", "unlocked_msg": "Iwe-ọṣọ ti ṣi silẹ pẹlu awọn ojuami ẹsan rẹ.",
+    "unlock_error": "Aṣiṣe", "unlock_error_msg": "Ko le ra awọn ojuami. Jọwọ gbiyanju lẹẹkansi.",
+    "one_year_wonders": "ỌDUN 1 TI IYANU", "special_edition": "ẸDA PATAKI"
+  },
+  "settings": { "language": "Ede", "select_language": "Yan Ede" },
+  "payment": {
+    "admin_pending": "Nduro fun ifọwọsi iṣakoso",
+    "admin_pending_detail": "A ti gba ẹri gbigbe banki rẹ ati pe yoo ṣii iwe-ọṣọ yii ni kete ti a ba rii daju.",
+    "confirming_payment": "Ti n jẹrisi isanwo",
+    "confirming_payment_detail": "A ti gba isanwo rẹ. Fa si isalẹ lati tunse — wiwọle maa n ṣii laarin iṣẹju kan."
+  }
+}

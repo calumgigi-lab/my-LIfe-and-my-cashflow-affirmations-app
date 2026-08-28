@@ -1,0 +1,52 @@
+{
+  "app": { "name": "تأكيدات حياتي وتدفقاتي النقدية" },
+  "tabs": { "today": "اليوم", "library": "المكتبة", "ranks": "التصنيفات", "profile": "الملف الشخصي" },
+  "today": {
+    "greeting_morning": "صباح الخير", "greeting_afternoon": "مساء الخير", "greeting_evening": "مساء الخير",
+    "day_streak": "سلسلة الأيام", "affirmed": "تم التأكيد", "best_streak": "أفضل سلسلة",
+    "loading_stats": "جاري تحميل الإحصائيات...", "todays_affirmation": "تأكيد اليوم", "day": "اليوم",
+    "read_full": "قراءة التأكيد كاملاً", "browse_library": "تصفح المكتبة",
+    "browse_subtitle": "استكشف جميع الكتيبات الشهرية", "daily_checkin": "تسجيل الدخول اليومي",
+    "checkin_subtitle": "اربح 10 نقاط فقط لمجرد حضورك اليوم",
+    "no_affirmation_title": "لا يوجد تأكيد لليوم", "no_affirmation_subtitle": "تعد لاحقاً أو تصفح المكتبة",
+    "locked_message": "هذا التأكيد اليومي مقفل. الأيام 1-{{previewDays}} معاينة مجانية. افتح هذا الشهر للقراءة والتأكيد بالكامل.",
+    "unlock_for": "افتح مقابل ₦{{price}}", "i_have_affirmed": "لقد أكدت", "affirmed_for_today": "تم التأكيد لليوم",
+    "loading_error": "خطأ في التحميل", "failed_to_load": "فشل تحميل البيانات",
+    "already_checked_in": "تم تسجيل الدخول مسبقاً", "already_checked_in_msg": "لقد سجلت دخولك اليوم بالفعل. عد غداً!",
+    "checkin_complete": "تم تسجيل الدخول!", "checkin_earned": "لقد ربحت {{points}} نقطة لتسجيل دخولك اليوم.",
+    "error_title": "خطأ", "checkin_error": "تعذر تسجيل الدخول. حاول مرة أخرى.",
+    "streak_milestone": "🔥 إنجاز السلسلة!", "streak_milestone_msg": "رائع! لقد ربحت مكافأة +{{bonus}} نقطة لإنجاز سلسلتك! استمر!"
+  },
+  "affirmation": {
+    "this_day_is_locked": "هذا اليوم مقفل",
+    "locked_description": "الأيام 1-{{previewDays}} معاينة مجانية. افتح هذا الكتيب مقابل ₦{{price}} للقراءة والتأكيد بالكامل.",
+    "unlock_for": "افتح مقابل ₦{{price}}",
+    "payment_recorded": "تم تسجيل الدفع", "payment_recorded_msg": "دفعتك قيد انتظار التحقق الإداري. ستتمكن من الوصول إلى الشهر الكامل بمجرد الموافقة.",
+    "payment_error": "خطأ في الدفع", "payment_error_msg": "تعذر تسجيل الدفع. حاول مرة أخرى.",
+    "i_have_affirmed": "لقد أكدت", "affirmed_for_today": "تم التأكيد لليوم",
+    "streak_milestone": "🔥 إنجاز السلسلة!", "streak_milestone_msg": "رائع! لقد ربحت مكافأة +{{bonus}} نقطة لإنجاز سلسلتك! استمر!",
+    "not_found": "التأكيد غير موجود"
+  },
+  "booklet": {
+    "locked_preview": "مقفل - المعاينة متاحة فقط لليومين 1 و 2", "locked_banner": "الأيام 1-{{previewDays}} مجانية. افتح الشهر الكامل مقابل ₦{{price}}.", "day": "اليوم",
+    "unlock_for": "افتح مقابل ₦{{price}}", "unlock": "فتح", "view_all": "عرض الكل", "loading": "جاري التحميل..."
+  },
+  "library": {
+    "title": "المكتبة", "subtitle": "استكشف جميع الكتيبات الشهرية",
+    "no_booklets_title": "لا توجد كتيبات متاحة بعد", "no_booklets_subtitle": "تعد لاحقاً لمحتوى جديد",
+    "unlock_title": "افتح {{month}}", "choose_method": "اختر كيف تريد فتح هذا الكتيب",
+    "pay_with": "ادفع عبر {{provider}}", "pay_desc": "بطاقة، بنك، USSD — فتح فوري",
+    "reward_points": "نقاط المكافأة", "points_desc": "{{points}} نقطة", "points_needed": "لديك {{balance}}",
+    "earn_points_hint": "اربح نقاطاً بالتأكيد اليومي، تسجيل الدخول، والسلاسل. تحتاج {{needed}} نقطة إضافية.",
+    "cancel": "إلغاء", "unlocked": "تم الفتح!", "unlocked_msg": "تم فتح الكتيب بنقاط مكافأتك.",
+    "unlock_error": "خطأ", "unlock_error_msg": "تعذر استبدال النقاط. حاول مرة أخرى.",
+    "one_year_wonders": "عام من العجائب", "special_edition": "إصدار خاص"
+  },
+  "settings": { "language": "اللغة", "select_language": "اختر اللغة" },
+  "payment": {
+    "admin_pending": "في انتظار الموافقة الإدارية",
+    "admin_pending_detail": "لقد تلقينا إثبات التحويل البنكي الخاص بك وسنفتح هذا الكتيب بمجرد التحقق.",
+    "confirming_payment": "جاري تأكيد الدفع",
+    "confirming_payment_detail": "تم استلام دفعتك. اسحب لأسفل للتحديث — عادةً ما يتم فتح الوصول في غضون دقيقة."
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Modal,
   View,
@@ -8,10 +8,13 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { apiRequest } from "@/lib/query-client";
 import Colors from "@/constants/colors";
+import { useRouter } from "expo-router";
+import * as WebBrowser from "expo-web-browser";
 
 type PaymentProvider = "flutterwave" | "bank_transfer";
 
@@ -45,6 +48,54 @@ export function PaymentDetailsModal({
   const colorScheme = useColorScheme() ?? "light";
   const colors = Colors[colorScheme];
   const [isLoading, setIsLoading] = useState(false);
+  const [paymentPending, setPaymentPending] = useState(false);
+  const [pendingTxRef, setPendingTxRef] = useState<string | null>(null);
+  const router = useRouter();
+
+  const checkPaymentStatus = useCallback(async (txRef: string) => {
+    try {
+      const syncRes = await apiRequest("POST", "/api/payments/flutterwave/sync", {
+        reference: txRef,
+        bookletId: bookletId,
+      });
+      if (syncRes.ok) {
+        const syncData = await syncRes.json();
+        return syncData;
+      }
+    } catch (e) {
+      console.log("Sync check failed:", e);
+    }
+    return null;
+  }, [bookletId]);
+
+  const handlePaymentReturn = useCallback(async (txRef: string) => {
+    setPaymentPending(false);
+    setPendingTxRef(null);
+    const result = await checkPaymentStatus(txRef);
+    if (result?.status === "success") {
+      onCancel();
+      router.push("/(main)/library");
+    } else {
+      Alert.alert("Payment Status", "Return to Library and pull down to refresh.");
+      onCancel();
+    }
+  }, [checkPaymentStatus, onCancel, router]);
+
+  useEffect(() => {
+    if (!paymentPending || !pendingTxRef) return;
+
+    const handleDeepLink = (event: { url: string }) => {
+      if (event.url.includes("payment-complete")) {
+        handlePaymentReturn(pendingTxRef);
+      }
+    };
+
+    const linkingSubscription = Linking.addEventListener("url", handleDeepLink);
+
+    return () => {
+      linkingSubscription.remove();
+    };
+  }, [paymentPending, pendingTxRef, handlePaymentReturn]);
 
   const handleConfirm = async () => {
     setIsLoading(true);
@@ -73,9 +124,13 @@ export function PaymentDetailsModal({
         name: "User",
       });
       const data = await res.json();
-      if (data.checkoutUrl) {
-        const { Linking } = require("react-native");
-        await Linking.openURL(data.checkoutUrl);
+      if (data.checkoutUrl && data.txRef) {
+        setPendingTxRef(data.txRef);
+        setPaymentPending(true);
+        const result = await WebBrowser.openBrowserAsync(data.checkoutUrl);
+        if (result.type === "cancel" || result.type === "dismiss") {
+          handlePaymentReturn(data.txRef);
+        }
       } else {
         throw new Error(data.error || "Failed to create payment link");
       }
@@ -85,6 +140,81 @@ export function PaymentDetailsModal({
   };
 
   if (paymentProvider === "flutterwave") {
+    if (paymentPending) {
+      return (
+        <Modal visible={visible} transparent={true} animationType="fade">
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "rgba(0,0,0,0.6)",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: colors.background,
+                borderRadius: 24,
+                padding: 32,
+                width: "80%",
+                alignItems: "center",
+              }}
+            >
+              <ActivityIndicator size="large" color={colors.gold} />
+              <Text
+                style={{
+                  marginTop: 20,
+                  fontSize: 18,
+                  fontWeight: "700",
+                  color: colors.text,
+                  textAlign: "center",
+                }}
+              >
+                Payment in Progress
+              </Text>
+              <Text
+                style={{
+                  marginTop: 8,
+                  fontSize: 14,
+                  color: colors.text,
+                  opacity: 0.6,
+                  textAlign: "center",
+                  lineHeight: 20,
+                }}
+              >
+                Complete your payment in the browser.{"\n"}We'll detect it automatically.
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setPaymentPending(false);
+                  setPendingTxRef(null);
+                  onCancel();
+                }}
+                style={{
+                  marginTop: 24,
+                  paddingVertical: 12,
+                  paddingHorizontal: 24,
+                  borderRadius: 12,
+                  borderWidth: 1.5,
+                  borderColor: colors.text + "20",
+                }}
+              >
+                <Text
+                  style={{
+                    color: colors.text,
+                    fontWeight: "600",
+                    fontSize: 14,
+                  }}
+                >
+                  Cancel Payment
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      );
+    }
+
     return (
       <Modal visible={visible} transparent={true} animationType="fade">
         <View
@@ -114,7 +244,7 @@ export function PaymentDetailsModal({
             >
               <View>
                 <Text style={{ fontSize: 24, fontWeight: "700", color: colors.text }}>
-                  Pay with Flutterwave
+                  Complete Payment
                 </Text>
                 <Text style={{ color: colors.text, opacity: 0.6, fontSize: 13, marginTop: 2 }}>
                   {bookletTitle}
@@ -162,7 +292,7 @@ export function PaymentDetailsModal({
               }}
             >
               <Text style={{ color: colors.text, fontSize: 13, lineHeight: 20, opacity: 0.8 }}>
-                You will be redirected to Flutterwave secure checkout to complete your payment via card, bank transfer, or USSD.
+                You will be redirected to secure checkout to complete your payment via card, bank transfer, or USSD.
               </Text>
             </View>
 
@@ -218,7 +348,7 @@ export function PaymentDetailsModal({
                       textAlign: "center",
                     }}
                   >
-                    Pay ₦{amount.toLocaleString()}
+                    Pay to Unlock
                   </Text>
                 )}
               </TouchableOpacity>
