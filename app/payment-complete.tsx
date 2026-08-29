@@ -71,9 +71,10 @@ export default function PaymentCompleteScreen() {
       } catch {
         if (active) setMessage("Return to Library and pull down to refresh.");
       } finally {
+        const redirectDelay = params.status === "success" ? 3500 : 800;
         setTimeout(() => {
           if (active) router.replace("/(main)/library");
-        }, 800);
+        }, redirectDelay);
       }
     })();
     return () => {

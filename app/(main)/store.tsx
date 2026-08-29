@@ -283,7 +283,7 @@ export default function StoreScreen() {
                     style={[styles.btnUnlockSm, { backgroundColor: colors.gold }]}
                     onPress={() => handleUnlock({ id: b.id, title: b.title })}
                   >
-                    <Text style={[styles.btnUnlockSmText, { color: colors.background }]}>Unlock</Text>
+                    <Text style={[styles.btnUnlockSmText, { color: colors.background }]}>{t("booklet.unlock")}</Text>
                   </Pressable>
                 </View>
               </Pressable>
@@ -329,7 +329,7 @@ export default function StoreScreen() {
                     onPress={() => handleUnlock({ id: b.id, title: b.title })}
                   >
                     <Text style={[styles.btnUnlockText, { color: colors.background }]}>
-                      {isUnlocked ? "Open" : "Unlock"}
+                      {isUnlocked ? "Open" : t("booklet.unlock")}
                     </Text>
                   </Pressable>
                 </View>

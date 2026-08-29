@@ -105,6 +105,7 @@ export default function LibraryScreen() {
   const monthlyPriceNaira = accessData?.monthlyPriceNaira ?? 1500;
   const unlockedCount = accessData?.unlockedBookletIds?.length ?? 0;
   const totalCount = bookletList?.length ?? 0;
+  const lockedCount = Math.max(0, totalCount - unlockedCount);
   const pointsEarned = rewardsData?.points ?? 0;
 
   const featuredBooklet = bookletList?.find((b: any) => b.id === 299);
@@ -166,7 +167,7 @@ export default function LibraryScreen() {
   const filters: { key: FilterType; label: string; count?: number }[] = [
     { key: "all", label: "All" },
     { key: "unlocked", label: "Unlocked", count: unlockedCount },
-    { key: "locked", label: "Locked", count: totalCount - unlockedCount },
+    { key: "locked", label: "Locked", count: lockedCount },
   ];
 
   return (

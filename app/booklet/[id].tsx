@@ -157,14 +157,14 @@ export default function BookletDetailScreen() {
       queryClient.invalidateQueries({ queryKey: ["/api/booklets/access"] });
       queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
       Alert.alert(
-        "Payment Recorded",
-        "Your payment is pending admin verification. You'll be able to access the full month once approved.",
+        t("affirmation.payment_recorded"),
+        t("affirmation.payment_recorded_msg"),
       );
     },
     onError: (error: any) => {
       Alert.alert(
-        "Error",
-        error?.message || "Could not record payment. Please try again.",
+        t("today.error_title"),
+        error?.message || t("affirmation.payment_error_msg"),
       );
     },
   });

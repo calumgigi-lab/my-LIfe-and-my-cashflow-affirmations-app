@@ -1742,6 +1742,68 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // ── Favorites: Get ──
+    if (path === "/api/favorites" && method === "GET") {
+      const sql = getSQL();
+      const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
+      if (!userId) return res.json({ favorites: [] });
+
+      await sql`
+        CREATE TABLE IF NOT EXISTS favorites (
+          id SERIAL PRIMARY KEY,
+          user_id INTEGER NOT NULL,
+          affirmation_id INTEGER NOT NULL,
+          created_at TIMESTAMPTZ DEFAULT NOW(),
+          UNIQUE(user_id, affirmation_id)
+        )
+      `.catch(() => {});
+
+      const result = await sql`
+        SELECT affirmation_id FROM favorites WHERE user_id = ${userId} ORDER BY created_at DESC
+      `.catch(() => []);
+      return res.json({ favorites: result.map(r => r.affirmation_id) });
+    }
+
+    // ── Favorites: Add ──
+    if (path === "/api/favorites" && method === "POST") {
+      const sql = getSQL();
+      const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
+      if (!userId) return res.status(401).json({ error: "Authentication required" });
+
+      const { affirmationId } = req.body || {};
+      if (!affirmationId) return res.status(400).json({ error: "affirmationId is required" });
+
+      await sql`
+        CREATE TABLE IF NOT EXISTS favorites (
+          id SERIAL PRIMARY KEY,
+          user_id INTEGER NOT NULL,
+          affirmation_id INTEGER NOT NULL,
+          created_at TIMESTAMPTZ DEFAULT NOW(),
+          UNIQUE(user_id, affirmation_id)
+        )
+      `.catch(() => {});
+
+      await sql`
+        INSERT INTO favorites (user_id, affirmation_id)
+        VALUES (${userId}, ${parseInt(affirmationId)})
+        ON CONFLICT (user_id, affirmation_id) DO NOTHING
+      `.catch(() => {});
+
+      return res.json({ message: "Favorite added" });
+    }
+
+    // ── Favorites: Remove ──
+    const favDeleteMatch = path.match(/^\/api\/favorites\/(\d+)$/);
+    if (favDeleteMatch && method === "DELETE") {
+      const sql = getSQL();
+      const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
+      if (!userId) return res.status(401).json({ error: "Authentication required" });
+
+      const affirmationId = parseInt(favDeleteMatch[1]);
+      await sql`DELETE FROM favorites WHERE user_id = ${userId} AND affirmation_id = ${affirmationId}`;
+      return res.json({ message: "Favorite removed" });
+    }
+
     // ── Admin Daily Auto-Bonus ──
     if (path === "/api/rewards/admin-daily" && method === "POST") {
       const sql = getSQL();

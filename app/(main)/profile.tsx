@@ -169,7 +169,7 @@ export default function ProfileScreen() {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     }
     Alert.alert("Sign Out", "Are you sure you want to sign out?", [
-      { text: "Cancel", style: "cancel" },
+      { text: t("library.cancel"), style: "cancel" },
       {
         text: "Sign Out",
         style: "destructive",
@@ -225,7 +225,7 @@ export default function ProfileScreen() {
               { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
             ]}
           >
-            Profile
+            {t("tabs.profile")}
           </Text>
           <View style={styles.navActions}>
             <Pressable
@@ -617,7 +617,7 @@ export default function ProfileScreen() {
               style={styles.sectionLink}
             >
               <Text style={[styles.sectionLinkText, { color: colors.gold }]}>
-                View All
+                {t("booklet.view_all")}
               </Text>
               <Ionicons name="chevron-forward" size={14} color={colors.gold} />
             </Pressable>
@@ -715,12 +715,12 @@ export default function ProfileScreen() {
                     { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
                   ]}
                 >
-                  {stats?.completedToday ? "Today" : "-"}
+                  {stats?.completedToday ? t("tabs.today") : "-"}
                 </Text>
                 <Text
                   style={[styles.statLabel, { color: colors.textSecondary }]}
                 >
-                  Daily Check-in
+                  {t("today.daily_checkin")}
                 </Text>
               </View>
 
@@ -813,7 +813,7 @@ export default function ProfileScreen() {
                 <Text
                   style={[styles.statLabel, { color: colors.textSecondary }]}
                 >
-                  Reward Points
+                  {t("library.reward_points")}
                 </Text>
               </Pressable>
             </View>

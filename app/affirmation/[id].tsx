@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
   Image,
   Alert,
   RefreshControl,
+  Share,
 } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -24,6 +25,9 @@ import { apiRequest, getApiUrl, queryClient } from "@/lib/query-client";
 import { purchaseBooklet } from "@/lib/booklet-purchases";
 import { useTranslation } from "react-i18next";
 import { useTranslatedAffirmation } from "@/lib/use-translated-content";
+import { useAuth } from "@/lib/auth-context";
+import { captureRef } from "react-native-view-shot";
+import * as Sharing from "expo-sharing";
 
 export default function AffirmationDetailScreen() {
   const { t } = useTranslation();
@@ -38,7 +42,64 @@ export default function AffirmationDetailScreen() {
     borderColor: isDark ? "rgba(48, 209, 88, 0.32)" : "rgba(52, 199, 89, 0.24)",
   };
 
+  const { user } = useAuth();
+  const userId = user?.id;
+  const cardRef = useRef<View>(null);
   const [completedAffirmation, setCompletedAffirmation] = useState(false);
+
+  const { data: favoritesData, refetch: refetchFavorites } = useQuery<any>({
+    queryKey: ["/api/favorites"],
+    enabled: !!userId,
+  });
+
+  const isFavorited = favoritesData?.favorites?.includes(Number(id));
+
+  const addFavoriteMutation = useMutation({
+    mutationFn: async (affirmationId: number) => {
+      const res = await apiRequest("POST", "/api/favorites", { affirmationId });
+      return res.json();
+    },
+    onSuccess: () => {
+      refetchFavorites();
+    },
+  });
+
+  const removeFavoriteMutation = useMutation({
+    mutationFn: async (affirmationId: number) => {
+      const res = await apiRequest("DELETE", `/api/favorites/${affirmationId}`);
+      return res.json();
+    },
+    onSuccess: () => {
+      refetchFavorites();
+    },
+  });
+
+  const toggleFavorite = () => {
+    if (!userId) {
+      Alert.alert("Sign in required", "Please sign in to favorite affirmations.");
+      return;
+    }
+    if (isFavorited) {
+      removeFavoriteMutation.mutate(Number(id));
+    } else {
+      addFavoriteMutation.mutate(Number(id));
+    }
+  };
+
+  const handleShare = async () => {
+    try {
+      const uri = await captureRef(cardRef, {
+        format: "jpeg",
+        quality: 0.9,
+      });
+      await Sharing.shareAsync(uri, {
+        mimeType: "image/jpeg",
+        dialogTitle: "Share this affirmation",
+      });
+    } catch (err) {
+      Alert.alert("Share failed", "Could not capture or share this affirmation.");
+    }
+  };
 
   const { data: aff, isLoading, refetch: refetchAff } = useQuery<any>({
     queryKey: ["/api/affirmations", id],
@@ -115,7 +176,7 @@ export default function AffirmationDetailScreen() {
       }
     },
     onError: (error: any) => {
-      Alert.alert("Error", error?.message || "Could not mark as affirmed. Please try again.");
+      Alert.alert(t("today.error_title"), error?.message || "Could not mark as affirmed. Please try again.");
     },
   });
 
@@ -161,7 +222,18 @@ export default function AffirmationDetailScreen() {
         <Pressable onPress={() => router.back()} hitSlop={12}>
           <Ionicons name="arrow-back" size={24} color={colors.text} />
         </Pressable>
-        <View style={{ width: 24 }} />
+        <View style={styles.headerRight}>
+          <Pressable onPress={toggleFavorite} hitSlop={12} style={styles.headerBtn}>
+            <Ionicons
+              name={isFavorited ? "heart" : "heart-outline"}
+              size={22}
+              color={isFavorited ? colors.gold : colors.text}
+            />
+          </Pressable>
+          <Pressable onPress={handleShare} hitSlop={12} style={styles.headerBtn}>
+            <Ionicons name="share-outline" size={22} color={colors.text} />
+          </Pressable>
+        </View>
       </View>
 
       {isLoading ? (
@@ -186,6 +258,7 @@ export default function AffirmationDetailScreen() {
               />
             }
           >
+            <View ref={cardRef} collapsable={false}>
             <Animated.View entering={FadeInDown.duration(600).delay(50)}>
               <View style={[styles.logoContainer, { marginBottom: 24 }]}>
                 <Image
@@ -200,7 +273,7 @@ export default function AffirmationDetailScreen() {
               <View style={styles.dayHeaderRow}>
                 <View style={[styles.dayBadge, { backgroundColor: colors.gold }]}>
                   <Text style={[styles.dayBadgeText, { fontFamily: "DMSans_700Bold" }]}>
-                    DAY {aff.dayNumber}
+                    {t("today.day")} {aff.dayNumber}
                   </Text>
                 </View>
                 {dayOfWeek && (
@@ -337,8 +410,8 @@ export default function AffirmationDetailScreen() {
                     ]}
                   >
                     <Ionicons name="chevron-back" size={18} color={colors.gold} />
-                    <Text style={[styles.navBtnText, { color: colors.text, fontFamily: "DMSans_500Medium" }]} numberOfLines={1}>
-                      Day {prevAff.dayNumber}
+                      <Text style={[styles.navBtnText, { color: colors.text, fontFamily: "DMSans_500Medium" }]} numberOfLines={1}>
+                      {t("booklet.day")} {prevAff.dayNumber}
                     </Text>
                   </Pressable>
                 ) : <View style={{ flex: 1 }} />}
@@ -350,8 +423,8 @@ export default function AffirmationDetailScreen() {
                       { borderColor: colors.border, alignItems: "flex-end", opacity: pressed ? 0.7 : 1 },
                     ]}
                   >
-                    <Text style={[styles.navBtnText, { color: colors.text, fontFamily: "DMSans_500Medium" }]} numberOfLines={1}>
-                      Day {nextAff.dayNumber}
+                      <Text style={[styles.navBtnText, { color: colors.text, fontFamily: "DMSans_500Medium" }]} numberOfLines={1}>
+                      {t("booklet.day")} {nextAff.dayNumber}
                     </Text>
                     <Ionicons name="chevron-forward" size={18} color={colors.gold} />
                   </Pressable>
@@ -364,6 +437,7 @@ export default function AffirmationDetailScreen() {
               <Text style={[styles.swipeHintText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
                 Use the buttons above to turn pages
               </Text>
+            </View>
             </View>
           </ScrollView>
       ) : (
@@ -395,6 +469,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingBottom: 8,
+  },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+  },
+  headerBtn: {
+    padding: 4,
   },
   loadingContainer: { flex: 1, justifyContent: "center", alignItems: "center", gap: 16 },
   scrollContent: { paddingHorizontal: 24 },
