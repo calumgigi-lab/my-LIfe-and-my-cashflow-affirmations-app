@@ -74,7 +74,7 @@ function AffirmationItem({ aff, index, colors, locked }: any) {
             </Text>
           </View>
           <View style={styles.affItemContent}>
-            <Text style={[styles.affItemTitle, { color: colors.text, fontFamily: "DMSans_600SemiBold" }]}>
+            <Text style={[styles.affItemTitle, { color: colors.text, fontFamily: "DMSans_600SemiBold" }]} numberOfLines={1}>
               {aff.title}
             </Text>
             <Text
