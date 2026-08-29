@@ -11,6 +11,7 @@ import {
   Image,
   ImageSourcePropType,
   Alert,
+  RefreshControl,
 } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -21,6 +22,7 @@ import { useThemeColors } from "@/constants/colors";
 import { getApiUrl, queryClient, apiRequest } from "@/lib/query-client";
 import { purchaseBooklet, getBookletProductId } from "@/lib/booklet-purchases";
 import { PaymentDetailsModal } from "@/components/PaymentDetailsModal";
+import { useTranslation } from "react-i18next";
 
 const bookletCovers: Partial<Record<number, ImageSourcePropType>> = {
   1: require("../../book thumbnail/january.png"),
@@ -36,6 +38,7 @@ const bookletCovers: Partial<Record<number, ImageSourcePropType>> = {
 };
 
 function AffirmationItem({ aff, index, colors, locked }: any) {
+  const { t } = useTranslation();
   const affirmationImageUrl = aff.imageUrl
     ? (aff.imageUrl.startsWith("http") || aff.imageUrl.startsWith("data:")
       ? aff.imageUrl
@@ -61,7 +64,7 @@ function AffirmationItem({ aff, index, colors, locked }: any) {
         {locked && (
           <View style={styles.lockedOverlayInCard}>
             <Ionicons name="lock-closed" size={18} color="#fff" />
-            <Text style={styles.lockedOverlayText}>Locked - Preview available for Day 1 and 2 only</Text>
+            <Text style={styles.lockedOverlayText}>{t("booklet.locked_preview")}</Text>
           </View>
         )}
         <View style={styles.affItemMain}>
@@ -96,6 +99,7 @@ function AffirmationItem({ aff, index, colors, locked }: any) {
 }
 
 export default function BookletDetailScreen() {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
@@ -103,24 +107,35 @@ export default function BookletDetailScreen() {
 
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [isPendingPayment, setIsPendingPayment] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const { data: booklet, isLoading: bookletLoading } = useQuery<any>({
+  const { data: booklet, isLoading: bookletLoading, refetch: refetchBooklet } = useQuery<any>({
     queryKey: ["/api/booklets", id],
   });
 
-  const { data: affirmationsList, isLoading: affsLoading } = useQuery<any[]>({
+  const { data: affirmationsList, isLoading: affsLoading, refetch: refetchAffirmations } = useQuery<any[]>({
     queryKey: [`/api/booklets/${id}/affirmations`],
   });
 
-  const { data: accessData } = useQuery<{
+  const { data: accessData, refetch: refetchAccess } = useQuery<{
     bookletId: number;
     unlocked: boolean;
     previewDays: number;
     monthlyPriceNaira: number;
   }>({
-    queryKey: [`/api/booklets/${id}/access`],
+    queryKey: ["/api/booklets", Number(id), "access"],
     enabled: !!id,
+    queryFn: async () => {
+      const response = await apiRequest("GET", `/api/booklets/${id}/access`);
+      return response.json();
+    },
   });
+
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    await Promise.all([refetchBooklet(), refetchAffirmations(), refetchAccess()]);
+    setRefreshing(false);
+  }, [refetchBooklet, refetchAffirmations, refetchAccess]);
 
   // Mutation to record payment after user confirms they made it
   const recordPaymentMutation = useMutation({
@@ -138,7 +153,9 @@ export default function BookletDetailScreen() {
     onSuccess: () => {
       setShowPaymentModal(false);
       setIsPendingPayment(true);
-      queryClient.invalidateQueries({ queryKey: [`/api/booklets/${id}/access`] });
+      queryClient.invalidateQueries({ queryKey: ["/api/booklets", Number(id), "access"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/booklets/access"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
       Alert.alert(
         "Payment Recorded",
         "Your payment is pending admin verification. You'll be able to access the full month once approved.",
@@ -176,7 +193,7 @@ export default function BookletDetailScreen() {
           style={[styles.headerTitle, { color: colors.text, fontFamily: "DMSans_600SemiBold" }]}
           numberOfLines={1}
         >
-          {booklet?.title || "Loading..."}
+          {booklet?.title || t("booklet.loading")}
         </Text>
         <View style={{ width: 24 }} />
       </View>
@@ -184,6 +201,15 @@ export default function BookletDetailScreen() {
       <ScrollView
         contentContainerStyle={[styles.scrollContent, { paddingBottom: 40 }]}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.gold}
+            colors={[colors.gold]}
+            progressBackgroundColor={colors.surface}
+          />
+        }
       >
         {booklet && (
           <View style={styles.bookletHeader}>
@@ -246,7 +272,7 @@ export default function BookletDetailScreen() {
               <View style={[styles.lockBanner, { backgroundColor: colors.surfaceSecondary, borderColor: colors.border }]}>
                 <Ionicons name="lock-closed" size={16} color={colors.gold} />
                 <Text style={[styles.lockBannerText, { color: colors.text }]}>
-                  Days 1-{previewDays} are free. Unlock full month for ₦{monthlyPriceNaira}.
+                  {t("booklet.locked_banner", { previewDays, price: monthlyPriceNaira })}
                 </Text>
                 <Pressable
                   onPress={() => setShowPaymentModal(true)}
@@ -259,7 +285,7 @@ export default function BookletDetailScreen() {
                   {recordPaymentMutation.isPending ? (
                     <ActivityIndicator size="small" color="#fff" />
                   ) : (
-                    <Text style={styles.unlockInlineButtonText}>Unlock</Text>
+                    <Text style={styles.unlockInlineButtonText}>{t("booklet.unlock")}</Text>
                   )}
                 </Pressable>
               </View>
@@ -289,6 +315,7 @@ export default function BookletDetailScreen() {
         visible={showPaymentModal}
         bookletTitle={booklet?.title || ""}
         amount={monthlyPriceNaira}
+        bookletId={Number(id)}
         onConfirmPayment={async () => {
           await recordPaymentMutation.mutateAsync();
         }}

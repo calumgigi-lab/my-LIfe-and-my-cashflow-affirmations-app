@@ -53,12 +53,14 @@ export async function apiRequest(
   method: string,
   route: string,
   data?: unknown | undefined,
+  options?: { skipAuthHeader?: boolean },
 ): Promise<Response> {
   const baseUrl = getApiUrl();
   const url = new URL(route, baseUrl);
   const tunnelHeaders = getTunnelHeaders(baseUrl);
-  const uid = await getUserId();
-  const authHeader = uid ? { "X-User-Id": String(uid) } : {};
+  const skipAuth = options?.skipAuthHeader ?? false;
+  const uid = skipAuth ? null : await getUserId();
+  const authHeader: Record<string, string> = uid ? { "X-User-Id": String(uid) } : {};
 
   const res = await fetch(url.toString(), {
     method,
@@ -83,7 +85,7 @@ export const getQueryFn: <T>(options: {
     const url = new URL(queryKey.join("/") as string, baseUrl);
     const tunnelHeaders = getTunnelHeaders(baseUrl);
     const uid = await getUserId();
-    const authHeader = uid ? { "X-User-Id": String(uid) } : {};
+    const authHeader: Record<string, string> = uid ? { "X-User-Id": String(uid) } : {};
 
     const res = await fetch(url.toString(), {
       credentials: "include",

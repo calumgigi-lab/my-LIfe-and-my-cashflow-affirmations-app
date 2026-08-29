@@ -219,6 +219,7 @@ export default function LeaderboardScreen() {
             tintColor={colors.gold}
             colors={[colors.gold]}
             progressViewOffset={refreshOffset}
+            progressBackgroundColor={colors.surface}
           />
         }
       >

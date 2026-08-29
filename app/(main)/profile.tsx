@@ -213,6 +213,7 @@ export default function ProfileScreen() {
             onRefresh={onRefresh}
             tintColor={colors.gold}
             colors={[colors.gold]}
+            progressBackgroundColor={colors.surface}
           />
         }
       >

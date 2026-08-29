@@ -43,7 +43,7 @@ const MONTHS = [
 const YEARS = Array.from({ length: 60 }, (_, i) => String(2010 - i));
 
 export default function EditProfileScreen() {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
   const insets = useSafeAreaInsets();
@@ -86,6 +86,7 @@ export default function EditProfileScreen() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
+      updateUser({ displayName: fullName, username, email });
       if (Platform.OS !== "web") {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       }

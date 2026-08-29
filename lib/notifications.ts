@@ -66,8 +66,8 @@ export async function scheduleAffirmationReminders(
 
         await Notifications.scheduleNotificationAsync({
           content: {
-            title: "✨ Today's Affirmation",
-            body: message,
+            title: message.title,
+            body: message.body,
             sound: true,
             ...(Platform.OS === "ios" && {
               attachment: {
@@ -95,17 +95,17 @@ export async function cancelAllReminders() {
   await Notifications.cancelAllScheduledNotificationsAsync();
 }
 
-async function getAffirmationSnippetForDate(date: string): Promise<string> {
+async function getAffirmationSnippetForDate(date: string): Promise<{ title: string; body: string }> {
   try {
     const url = new URL(`/api/affirmations/by-date?date=${encodeURIComponent(date)}`, getApiUrl());
     const res = await fetch(url.toString(), { credentials: "include" });
     if (!res.ok) {
-      return "Your daily affirmation is waiting. Open now and speak life over your day.";
+      return { title: "Today's Affirmation", body: "Open now and speak life over your day." };
     }
 
     const aff = await res.json();
     if (!aff || !aff.content) {
-      return "Your daily affirmation is waiting. Open now and speak life over your day.";
+      return { title: "Today's Affirmation", body: "Open now and speak life over your day." };
     }
 
     const title = aff.title || "";
@@ -118,11 +118,11 @@ async function getAffirmationSnippetForDate(date: string): Promise<string> {
       ? `${firstParagraph.slice(0, 137).trimEnd()}...`
       : firstParagraph;
 
-    if (title) {
-      return `"${title}: ${snippet}" — Read & affirm now`;
-    }
-    return `"${snippet}" — Read & affirm now`;
+    return {
+      title: title || "Today's Affirmation",
+      body: snippet || "Open now and speak life over your day.",
+    };
   } catch {
-    return "Your daily affirmation is waiting. Open now and speak life over your day.";
+    return { title: "Today's Affirmation", body: "Open now and speak life over your day." };
   }
 }

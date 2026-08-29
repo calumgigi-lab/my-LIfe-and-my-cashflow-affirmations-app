@@ -30,6 +30,11 @@ function hashPasswordSHA256(password) {
   return hash.digest("hex");
 }
 
+function safeDecode(s) {
+  if (!s) return s;
+  try { return decodeURIComponent(s); } catch { return s; }
+}
+
 // ── Flutterwave V3 API Helper ──
 async function flutterwaveApi(method, endpoint, body) {
   const secretKey = process.env.FLW_SECRET_KEY;
@@ -245,7 +250,7 @@ module.exports = async function handler(req, res) {
           id: a.id,
           bookletId: a.booklet_id,
           dayNumber: a.day_number,
-          title: a.title,
+          title: safeDecode(a.title),
           content: a.content,
           imageUrl: a.image_data ? `/api/images/${a.id}` : a.image_url,
           createdAt: a.created_at,
@@ -265,7 +270,7 @@ module.exports = async function handler(req, res) {
         id: a.id,
         bookletId: a.booklet_id,
         dayNumber: a.day_number,
-        title: a.title,
+        title: safeDecode(a.title),
         content: a.content,
         imageUrl: a.image_data ? `/api/images/${a.id}` : a.image_url,
         createdAt: a.created_at,
@@ -280,7 +285,7 @@ module.exports = async function handler(req, res) {
       let unlockedBookletIds = [];
       if (userId) {
         const purchases = await sql`
-          SELECT booklet_id FROM monthly_purchases
+          SELECT DISTINCT booklet_id FROM monthly_purchases
           WHERE user_id = ${userId} AND status = 'approved'
         `;
         unlockedBookletIds = purchases.map(p => p.booklet_id);
@@ -361,7 +366,7 @@ module.exports = async function handler(req, res) {
         id: a.id,
         bookletId: a.booklet_id,
         dayNumber: a.day_number,
-        title: a.title,
+        title: safeDecode(a.title),
         content: a.content,
         imageUrl: a.image_data ? `/api/images/${a.id}` : a.image_url,
         createdAt: a.created_at,
@@ -414,7 +419,7 @@ module.exports = async function handler(req, res) {
         id: a.id,
         bookletId: a.booklet_id,
         dayNumber: a.day_number,
-        title: a.title,
+        title: safeDecode(a.title),
         content: a.content,
         imageUrl: a.image_data ? `/api/images/${a.id}` : a.image_url,
         createdAt: a.created_at,
@@ -478,7 +483,7 @@ module.exports = async function handler(req, res) {
         completedToday = todayCheck.length > 0;
 
         const unlockedRow = await sql`
-          SELECT count(*) as count FROM monthly_purchases
+          SELECT count(DISTINCT booklet_id) as count FROM monthly_purchases
           WHERE user_id = ${userId} AND status = 'approved'
         `.catch(() => []);
         unlockedBooklets = unlockedRow.length ? Number(unlockedRow[0].count) : 0;
@@ -492,7 +497,10 @@ module.exports = async function handler(req, res) {
 
       const nextLevelThreshold = level === "Bronze" ? 5 : level === "Silver" ? 20 : level === "Gold" ? 50 : level === "Platinum" ? 100 : 100;
       const prevLevelThreshold = level === "Bronze" ? 0 : level === "Silver" ? 5 : level === "Gold" ? 20 : level === "Platinum" ? 50 : 100;
-      const levelProgress = Math.min(((totalAffirmed - prevLevelThreshold) / (nextLevelThreshold - prevLevelThreshold)) * 100, 100);
+      let levelProgress = 100;
+      if (nextLevelThreshold > prevLevelThreshold) {
+        levelProgress = Math.min(((totalAffirmed - prevLevelThreshold) / (nextLevelThreshold - prevLevelThreshold)) * 100, 100);
+      }
 
       return res.json({
         totalBooklets: Number(b[0].count),
@@ -1036,8 +1044,8 @@ module.exports = async function handler(req, res) {
       }
 
       const txRef = `affirm-${userId}-${bookletId}-${Date.now()}`;
-      const baseUrl = req.headers.origin || `https://${req.headers.host}`;
-      const callbackUrl = `${baseUrl}/api/payments/flutterwave/callback?tx_ref=${txRef}&bookletId=${bookletId}&userId=${userId}`;
+      const baseUrl = process.env.APP_BASE_URL || req.headers.origin || `https://${req.headers.host}`;
+      const callbackUrl = `${baseUrl}/api/payments/flutterwave/callback?tx_ref=${txRef}&bookletId=${bookletId}&userId=${userId}&amount=${amount}`;
       const deepLinkUrl = `mylifemycashflow://payment-complete?tx_ref=${txRef}&bookletId=${bookletId}&userId=${userId}`;
       const redirectUrl = callbackUrl;
 
@@ -1146,7 +1154,7 @@ module.exports = async function handler(req, res) {
           if (uid && bid) {
             await sql`
               INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
-              VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${tx.flw_ref || tx.tx_ref}, 'approved', 'flutterwave', ${tx.amount})
+              VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${tx.tx_ref || tx.flw_ref || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
               ON CONFLICT DO NOTHING
             `.catch(() => {});
           }
@@ -1160,23 +1168,15 @@ module.exports = async function handler(req, res) {
     if (path === "/api/payments/flutterwave/webhook" && method === "POST") {
       const sql = getSQL();
       const secretHash = process.env.FLW_SECRET_HASH;
-      const signature = req.headers["flutterwave-signature"];
+      const verifHash = req.headers["verif-hash"] || req.headers["flutterwave-signature"];
       const body = req.body;
 
-      // Verify webhook signature (HMAC-SHA256 or direct match)
-      let sigValid = false;
-      if (secretHash && signature) {
-        // Try HMAC-SHA256 first (Flutterwave V4 standard)
-        try {
-          const rawBody = JSON.stringify(body);
-          const expected = crypto.createHmac("sha256", secretHash).update(rawBody).digest("base64");
-          sigValid = expected === signature;
-        } catch (_) {}
-        // Fallback: direct hash comparison (Flutterwave examples)
-        if (!sigValid) sigValid = signature === secretHash;
-      }
+      // Flutterwave sends the secret hash in the "verif-hash" header.
+      // Compare it directly against FLW_SECRET_HASH (plain comparison — Flutterwave does not use HMAC here).
+      const sigValid = !secretHash || verifHash === secretHash;
       if (secretHash && !sigValid) {
-        console.warn("Flutterwave webhook: invalid signature — still returning 200 per Flutterwave docs");
+        console.warn("Flutterwave webhook: invalid verif-hash, rejecting");
+        return res.status(401).json({ error: "invalid_signature" });
       }
 
       // Flutterwave sends type="charge.completed", NOT event
@@ -1200,21 +1200,23 @@ module.exports = async function handler(req, res) {
 
         if (uid && bid && tx.status === "successful") {
           // Re-verify via API as Flutterwave recommends
+          let verified = false;
           try {
             const verifyRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${txRef}`);
-            if (verifyRes?.data?.status !== "successful") {
-              console.warn("Flutterwave webhook: re-verification failed, skipping");
-              return res.json({ status: "ok", note: "verification_failed" });
-            }
+            verified = verifyRes?.data?.status === "successful";
           } catch (e) {
             console.warn("Flutterwave webhook: re-verify API error:", e.message);
           }
 
-          await sql`
-            INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
-            VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${tx.flw_ref || txRef || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
-            ON CONFLICT DO NOTHING
-          `.catch(() => {});
+          if (verified) {
+            await sql`
+              INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+              VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${txRef || tx.flw_ref || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
+              ON CONFLICT DO NOTHING
+            `.catch(() => {});
+          } else {
+            console.warn("Flutterwave webhook: re-verification failed, not inserting");
+          }
         }
       }
       // Must return 200 within 60 seconds per Flutterwave docs
@@ -1675,7 +1677,7 @@ module.exports = async function handler(req, res) {
         id: a.id,
         bookletId: a.booklet_id,
         dayNumber: a.day_number,
-        title: a.title,
+        title: safeDecode(a.title),
         contentPreview: String(a.content).substring(0, 180),
         bookletTitle: a.booklet_title,
         month: a.month,
@@ -1719,6 +1721,57 @@ module.exports = async function handler(req, res) {
         expiresAt: t.expires_at,
         createdAt: t.created_at,
       })));
+    }
+
+    // ── Locale files ──
+    if (path.startsWith("/api/locales/") && method === "GET") {
+      const lang = path.replace("/api/locales/", "").replace(".json", "");
+      const validLangs = new Set([
+        "en","es","fr","de","pt","it","ru","zh","ja","ar","hi",
+        "yo","ig","ha","zu","xh","af","st","tn","ss","ve","ts",
+        "sw","am","rw","sn","mg","wo","ak","lg","om","so",
+      ]);
+      if (!validLangs.has(lang)) {
+        return res.status(404).json({ error: "Language not found" });
+      }
+      try {
+        const locale = require(`../lib/i18n/locales/${lang}.json`);
+        return res.json(locale);
+      } catch {
+        return res.status(404).json({ error: "Locale file not found" });
+      }
+    }
+
+    // ── Admin Daily Auto-Bonus ──
+    if (path === "/api/rewards/admin-daily" && method === "POST") {
+      const sql = getSQL();
+      const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
+      if (!userId) return res.status(401).json({ error: "Authentication required" });
+
+      const userRow = await sql`SELECT is_admin FROM users WHERE id = ${userId} LIMIT 1`.catch(() => []);
+      if (!userRow.length || !userRow[0].is_admin) {
+        return res.json({ awarded: 0 });
+      }
+
+      const today = new Date().toISOString().split("T")[0];
+      const existing = await sql`
+        SELECT id FROM reward_history
+        WHERE user_id = ${userId} AND action = 'admin_daily_auto' AND created_at::date = ${today}::date
+        LIMIT 1
+      `.catch(() => []);
+
+      if (existing.length) return res.json({ awarded: 0, alreadyReceived: true });
+
+      const bonusPts = 1000;
+      const existingPts = await sql`SELECT id FROM reward_points WHERE user_id = ${userId} LIMIT 1`.catch(() => []);
+      if (existingPts.length) {
+        await sql`UPDATE reward_points SET points = points + ${bonusPts}, total_earned = total_earned + ${bonusPts}, updated_at = NOW() WHERE user_id = ${userId}`;
+      } else {
+        await sql`INSERT INTO reward_points (user_id, points, total_earned, total_spent) VALUES (${userId}, ${bonusPts}, ${bonusPts}, 0)`;
+      }
+      await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${bonusPts}, 'admin_daily_auto', 'Admin daily auto-bonus')`;
+
+      return res.json({ awarded: bonusPts });
     }
 
     // ── 404 ──

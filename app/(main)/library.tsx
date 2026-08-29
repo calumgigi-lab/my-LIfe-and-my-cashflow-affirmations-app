@@ -26,6 +26,7 @@ import {
   isJune2026Celebration,
   JUNE_2026_CELEBRATION_TAGLINE,
 } from "@/lib/booklet-covers";
+import { useTranslation } from "react-i18next";
 
 const monthNames = [
   "",
@@ -46,6 +47,7 @@ const monthNames = [
 type FilterType = "all" | "unlocked" | "locked" | "favorites";
 
 export default function LibraryScreen() {
+  const { t } = useTranslation();
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
   const insets = useSafeAreaInsets();
@@ -86,8 +88,8 @@ export default function LibraryScreen() {
     setRefreshing(false);
   };
 
-  const paymentProvider =
-    providerData?.provider === "flutterwave" ? "flutterwave" : "bank_transfer";
+  const paymentProvider: "flutterwave" | "bank_transfer" =
+    providerData?.provider === "bank_transfer" ? "bank_transfer" : "flutterwave";
 
   const verifyPurchaseMutation = useMutation({
     mutationFn: async (booklet: { id: number; month: number; year: number }) => {
@@ -95,6 +97,7 @@ export default function LibraryScreen() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/booklets/access"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
     },
   });
 
@@ -105,6 +108,8 @@ export default function LibraryScreen() {
   const pointsEarned = rewardsData?.points ?? 0;
 
   const featuredBooklet = bookletList?.find((b: any) => b.id === 299);
+  const featuredUnlocked =
+    featuredBooklet != null && unlockedSet.has(featuredBooklet.id);
 
   const filteredBooklets = useMemo(() => {
     if (!bookletList) return [];
@@ -185,6 +190,7 @@ export default function LibraryScreen() {
             onRefresh={onRefresh}
             tintColor={colors.gold}
             colors={[colors.gold]}
+            progressBackgroundColor={colors.surface}
           />
         }
       >
@@ -196,23 +202,8 @@ export default function LibraryScreen() {
                 { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" },
               ]}
             >
-              Library
+              {t("library.title")}
             </Text>
-            <Pressable
-              style={[
-                styles.navBtn,
-                {
-                  backgroundColor: colors.surface,
-                  borderColor: colors.border + "30",
-                },
-              ]}
-            >
-              <Ionicons
-                name="options-outline"
-                size={20}
-                color={colors.textSecondary}
-              />
-            </Pressable>
           </View>
         </Animated.View>
 
@@ -403,47 +394,63 @@ export default function LibraryScreen() {
               </Text>
 
               <View style={styles.featuredFooter}>
-                <View style={styles.featuredStatus}>
-                  <Ionicons name="lock-closed" size={14} color={colors.gold} />
-                  <Text
-                    style={[
-                      styles.featuredStatusText,
-                      { color: colors.gold, fontFamily: "DMSans_600SemiBold" },
-                    ]}
-                  >
-                    ₦{monthlyPriceNaira.toLocaleString()} to unlock
-                  </Text>
-                </View>
-                <Pressable
-                  onPress={() =>
-                    handleUnlockBooklet({
-                      id: featuredBooklet.id,
-                      month: featuredBooklet.month,
-                      year: featuredBooklet.year,
-                    })
-                  }
-                  style={[
-                    styles.featuredCta,
-                    { backgroundColor: colors.gold },
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.featuredCtaText,
-                      {
-                        color: colors.background,
-                        fontFamily: "DMSans_600SemiBold",
-                      },
-                    ]}
-                  >
-                    Unlock Now
-                  </Text>
-                  <Ionicons
-                    name="arrow-forward-outline"
-                    size={14}
-                    color={colors.background}
-                  />
-                </Pressable>
+                {featuredUnlocked ? (
+                  <View style={styles.featuredStatus}>
+                    <Ionicons name="checkmark-circle" size={14} color={colors.success} />
+                    <Text
+                      style={[
+                        styles.featuredStatusText,
+                        { color: colors.success, fontFamily: "DMSans_600SemiBold" },
+                      ]}
+                    >
+                      Unlocked
+                    </Text>
+                  </View>
+                ) : (
+                  <>
+                    <View style={styles.featuredStatus}>
+                      <Ionicons name="lock-closed" size={14} color={colors.gold} />
+                      <Text
+                        style={[
+                          styles.featuredStatusText,
+                          { color: colors.gold, fontFamily: "DMSans_600SemiBold" },
+                        ]}
+                      >
+                        ₦{monthlyPriceNaira.toLocaleString()} to unlock
+                      </Text>
+                    </View>
+                    <Pressable
+                      onPress={() =>
+                        handleUnlockBooklet({
+                          id: featuredBooklet.id,
+                          month: featuredBooklet.month,
+                          year: featuredBooklet.year,
+                        })
+                      }
+                      style={[
+                        styles.featuredCta,
+                        { backgroundColor: colors.gold },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.featuredCtaText,
+                          {
+                            color: colors.background,
+                            fontFamily: "DMSans_600SemiBold",
+                          },
+                        ]}
+                      >
+                        Unlock Now
+                      </Text>
+                      <Ionicons
+                        name="arrow-forward-outline"
+                        size={14}
+                        color={colors.background}
+                      />
+                    </Pressable>
+                  </>
+                )}
               </View>
             </Pressable>
           </Animated.View>
@@ -498,7 +505,7 @@ export default function LibraryScreen() {
                 { color: colors.text, fontFamily: "PlayfairDisplay_500Medium" },
               ]}
             >
-              No booklets found
+              {t("library.no_booklets_title")}
             </Text>
             <Text
               style={[
@@ -509,7 +516,7 @@ export default function LibraryScreen() {
                 },
               ]}
             >
-              Try a different search or filter
+              {t("library.no_booklets_subtitle")}
             </Text>
           </View>
         ) : (

@@ -22,8 +22,11 @@ import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useThemeColors } from "@/constants/colors";
 import { apiRequest, getApiUrl, queryClient } from "@/lib/query-client";
 import { purchaseBooklet } from "@/lib/booklet-purchases";
+import { useTranslation } from "react-i18next";
+import { useTranslatedAffirmation } from "@/lib/use-translated-content";
 
 export default function AffirmationDetailScreen() {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
@@ -117,7 +120,8 @@ export default function AffirmationDetailScreen() {
   });
 
   const isCompleted = completionCheck?.completed === true || completedAffirmation || completeMutation.isSuccess;
-  const paragraphs = aff?.content?.split("\n\n") || [];
+  const { translatedTitle, translatedContent, isTranslating } = useTranslatedAffirmation(aff?.title, aff?.content);
+  const paragraphs = translatedContent?.split("\n\n") || [];
   const previewDays = accessData?.previewDays ?? 2;
   const isLocked = !!aff && accessData?.unlocked === false && aff.dayNumber > previewDays;
   const monthlyPriceNaira = accessData?.monthlyPriceNaira ?? 1500;
@@ -178,6 +182,7 @@ export default function AffirmationDetailScreen() {
                 onRefresh={onRefresh}
                 tintColor={colors.gold}
                 colors={[colors.gold]}
+                progressBackgroundColor={colors.surface}
               />
             }
           >
@@ -226,8 +231,11 @@ export default function AffirmationDetailScreen() {
 
             <Animated.View entering={FadeInDown.duration(600).delay(200)}>
               <Text style={[styles.affTitle, { color: colors.text, fontFamily: "PlayfairDisplay_700Bold" }]}>
-                {aff.title}
+                {translatedTitle || aff?.title}
               </Text>
+              {isTranslating && (
+                <ActivityIndicator size="small" color={colors.gold} style={{ marginTop: 8 }} />
+              )}
             </Animated.View>
 
             <View style={[styles.divider, { backgroundColor: colors.gold + "40" }]} />
@@ -236,10 +244,10 @@ export default function AffirmationDetailScreen() {
               <View style={[styles.lockedContentCard, { backgroundColor: colors.surfaceSecondary, borderColor: colors.border }]}>
                 <Ionicons name="lock-closed" size={24} color={colors.gold} />
                 <Text style={[styles.lockedTitle, { color: colors.text, fontFamily: "DMSans_700Bold" }]}>
-                  This day is locked
+                  {t("affirmation.this_day_is_locked")}
                 </Text>
                 <Text style={[styles.lockedText, { color: colors.textSecondary, fontFamily: "DMSans_400Regular" }]}>
-                  Days 1-{previewDays} are free previews. Unlock this monthly booklet for ₦{monthlyPriceNaira} to read and affirm this page fully.
+                  {t("affirmation.locked_description", { previewDays, price: monthlyPriceNaira })}
                 </Text>
                 <Pressable
                   onPress={() => unlockMutation.mutate()}
@@ -252,7 +260,7 @@ export default function AffirmationDetailScreen() {
                   {unlockMutation.isPending ? (
                     <ActivityIndicator color="#fff" />
                   ) : (
-                    <Text style={styles.unlockButtonText}>Unlock for ₦{monthlyPriceNaira}</Text>
+                    <Text style={styles.unlockButtonText}>{t("affirmation.unlock_for", { price: monthlyPriceNaira })}</Text>
                   )}
                 </Pressable>
               </View>
@@ -301,7 +309,7 @@ export default function AffirmationDetailScreen() {
                       <>
                         <Ionicons name="checkmark-circle" size={22} color="#fff" />
                         <Text style={[styles.affirmButtonText, { fontFamily: "DMSans_700Bold" }]}>
-                          I Have Affirmed
+                          {t("affirmation.i_have_affirmed")}
                         </Text>
                       </>
                     )}
@@ -311,7 +319,7 @@ export default function AffirmationDetailScreen() {
                 <View style={[styles.completedBanner, completedBannerStyle]}>
                   <Ionicons name="checkmark-circle" size={22} color={colors.success} />
                   <Text style={[styles.completedText, { color: colors.success, fontFamily: "DMSans_600SemiBold" }]}>
-                    Affirmed for today
+                    {t("affirmation.affirmed_for_today")}
                   </Text>
                 </View>
                 )}
@@ -362,7 +370,7 @@ export default function AffirmationDetailScreen() {
         <View style={styles.loadingContainer}>
           <Ionicons name="alert-circle-outline" size={48} color={colors.textSecondary} />
           <Text style={[styles.errorText, { color: colors.text, fontFamily: "DMSans_600SemiBold" }]}>
-            Affirmation not found
+            {t("affirmation.not_found")}
           </Text>
         </View>
       )}

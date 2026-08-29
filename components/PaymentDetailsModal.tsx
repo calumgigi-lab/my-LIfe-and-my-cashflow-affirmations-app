@@ -11,10 +11,11 @@ import {
   Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { apiRequest } from "@/lib/query-client";
+import { apiRequest, queryClient } from "@/lib/query-client";
 import Colors from "@/constants/colors";
 import { useRouter } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
+import { useTranslation } from "react-i18next";
 
 type PaymentProvider = "flutterwave" | "bank_transfer";
 
@@ -40,11 +41,12 @@ export function PaymentDetailsModal({
   visible,
   bookletTitle,
   amount,
-  paymentProvider = "bank_transfer",
+  paymentProvider = "flutterwave",
   onConfirmPayment,
   onCancel,
   bookletId,
 }: PaymentDetailsModalProps) {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
   const colors = Colors[colorScheme];
   const [isLoading, setIsLoading] = useState(false);
@@ -73,13 +75,18 @@ export function PaymentDetailsModal({
     setPendingTxRef(null);
     const result = await checkPaymentStatus(txRef);
     if (result?.status === "success") {
+      queryClient.invalidateQueries({ queryKey: ["/api/booklets/access"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
+      if (bookletId) {
+        queryClient.invalidateQueries({ queryKey: ["/api/booklets", bookletId, "access"] });
+      }
       onCancel();
       router.push("/(main)/library");
     } else {
       Alert.alert("Payment Status", "Return to Library and pull down to refresh.");
       onCancel();
     }
-  }, [checkPaymentStatus, onCancel, router]);
+  }, [checkPaymentStatus, onCancel, router, bookletId]);
 
   useEffect(() => {
     if (!paymentPending || !pendingTxRef) return;

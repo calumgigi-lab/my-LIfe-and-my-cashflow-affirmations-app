@@ -7,6 +7,7 @@ import { KeyboardProvider } from "react-native-keyboard-controller";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { queryClient } from "@/lib/query-client";
 import { AuthProvider } from "@/lib/auth-context";
+import { loadSavedLanguage } from "@/lib/i18n";
 import { endIapConnection, initializeIapConnection } from "@/lib/booklet-purchases";
 import {
   useFonts,
@@ -74,6 +75,10 @@ export default function RootLayout() {
   useEffect(() => {
     initializeIapConnection().catch(() => {
       // Native IAP is unavailable in Expo Go/web; unlock flow falls back gracefully there.
+    });
+
+    loadSavedLanguage().catch(() => {
+      // fall back to the device language if restoring fails
     });
 
     return () => {

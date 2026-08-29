@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -28,6 +28,7 @@ import { purchaseBooklet } from "@/lib/booklet-purchases";
 import { PaymentDetailsModal } from "@/components/PaymentDetailsModal";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useTranslation } from "react-i18next";
+import { useTranslatedAffirmation } from "@/lib/use-translated-content";
 
 const PREVIEW_LINES = 4;
 
@@ -42,7 +43,15 @@ export default function TodayScreen() {
   const [completedAffirmation, setCompletedAffirmation] = useState(false);
   const [expandedAff, setExpandedAff] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [adminBonusAwarded, setAdminBonusAwarded] = useState(false);
   const cardRef = useRef<View>(null);
+
+  useEffect(() => {
+    if (user && !adminBonusAwarded) {
+      setAdminBonusAwarded(true);
+      apiRequest("POST", "/api/rewards/admin-daily").catch(() => {});
+    }
+  }, [user]);
 
   const { data: todayAff, isLoading: affLoading, refetch: refetchAff } = useQuery<any>({
     queryKey: ["/api/affirmations/today"],
@@ -166,7 +175,9 @@ export default function TodayScreen() {
   const eveningDone = isCompleted && isEvening;
 
   // Affirmation preview text
-  const fullContent = todayAff?.content || todayAff?.title || "";
+  const { translatedTitle, translatedContent } = useTranslatedAffirmation(todayAff?.title, todayAff?.content);
+  const fullContent = translatedContent || todayAff?.content || todayAff?.title || "";
+  const displayTitle = translatedTitle || todayAff?.title;
   const isLongContent = fullContent.length > 200;
   const previewContent = isLongContent ? fullContent.slice(0, 200).trim() + "..." : fullContent;
   const displayContent = expandedAff || !isLongContent ? fullContent : previewContent;
@@ -186,12 +197,12 @@ export default function TodayScreen() {
       } catch {
         // Fallback to text share
         Share.share({
-          message: `${todayAff?.title || "Today's Affirmation"}\n\n${fullContent}\n\n— My Life & My Cashflow Affirmations`,
+          message: `${displayTitle || "Today's Affirmation"}\n\n${fullContent}\n\n— My Life & My Cashflow Affirmations`,
         });
       }
     } else {
       Share.share({
-        message: `${todayAff?.title || "Today's Affirmation"}\n\n${fullContent}\n\n— My Life & My Cashflow Affirmations`,
+        message: `${displayTitle || "Today's Affirmation"}\n\n${fullContent}\n\n— My Life & My Cashflow Affirmations`,
       });
     }
   };
@@ -211,7 +222,7 @@ export default function TodayScreen() {
         ]}
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.gold} colors={[colors.gold]} />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.gold} colors={[colors.gold]} progressBackgroundColor={colors.surface} />
         }
       >
         {/* Greeting Header */}
@@ -394,7 +405,7 @@ export default function TodayScreen() {
                           { color: colors.gold, fontFamily: "DMSans_600SemiBold" },
                         ]}
                       >
-                        {todayAff.title || t("today.todays_affirmation")}
+                        {displayTitle || t("today.todays_affirmation")}
                       </Text>
                     </View>
 
@@ -910,6 +921,7 @@ export default function TodayScreen() {
         visible={showPaymentModal}
         bookletTitle={todayAff?.bookletTitle || "Monthly Affirmation"}
         amount={monthlyPriceNaira}
+        bookletId={todayAff?.bookletId != null ? Number(todayAff.bookletId) : undefined}
         onConfirmPayment={async () => {
           await unlockMutation.mutateAsync();
         }}

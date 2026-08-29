@@ -1,8 +1,9 @@
 {
   "expo": {
     "name": "MY LIFE & MY CASHFLOW AFFIRMATIONS",
-    "slug": "my-life-my-cash-flow",
-    "version": "1.0.2",
+    "slug": "my-life-my-cash-flow-tywin",
+    "owner": "tywin",
+    "version": "2.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "mylifemycashflow",
@@ -20,7 +21,7 @@
     "android": {
       "package": "com.mylifemycashflow",
       "minSdkVersion": 24,
-      "versionCode": 2,
+      "versionCode": 18,
       "displayName": "MY LIFE & MY CASHFLOW AFFIRMATIONS",
       "adaptiveIcon": {
         "backgroundColor": "#0A0A0A",
@@ -53,7 +54,7 @@
         "origin": "https://replit.com/"
       },
       "eas": {
-        "projectId": "544bfd7d-c1d3-4081-b9f2-dad5263d3fbb"
+        "projectId": "f1a12347-7f94-4549-ba8b-b14a8e097908"
       }
     },
     "runtimeVersion": {

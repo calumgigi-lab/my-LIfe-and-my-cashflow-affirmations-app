@@ -4,12 +4,18 @@ ios/
 .gradle/
 dist/
 build/
+out/
+.next/
+.turbo/
+server_dist/
 .expo/
+web-build/
 .env
 .env.local
+.env.*.local
 *.apk
 *.aab
-apks_extracted/
+*.apks
 app.apks
 app.aab
 app.zip
@@ -17,7 +23,36 @@ bundletool.jar
 google_play_graphics/
 my-app.apk
 .git/
+.github/
 .venv/
+venv/
+ENV/
+env/
+__pycache__/
 __MACOSX/
 *.log
 coverage/
+.vercel/
+website/
+attached_assets/
+backups/
+apks_extracted/
+WhatsApp Unknown 2026-03-14 at 6.34.59 PM/
+temp/
+tmp/
+.local/
+.cache/
+# affirmation docx not needed for native build (data is in DB)
+affirmation/
+# keep required assets even though .gitignore excludes them
+!assets/
+!assets/**
+!book thumbnail/
+!book thumbnail/**
+!public/
+!public/**
+!package-lock.json
+!yarn.lock
+!pnpm-lock.yaml
+!patches/
+!patches/**

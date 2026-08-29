@@ -20,6 +20,7 @@ const yearMonthCovers: Record<string, ImageSourcePropType> = {
   "2026-6": require("../book thumbnail/june 2026.png"),
   "2026-7": require("../book thumbnail/july 2026.png"),
   "2026-8": require("../book thumbnail/august 2026.png"),
+  "2026-9": require("../book thumbnail/september 2026.png"),
 };
 
 export function getBookletCover(month: number, year?: number): ImageSourcePropType | undefined {

@@ -20,6 +20,7 @@ import { useThemeColors } from "@/constants/colors";
 import { apiRequest } from "@/lib/query-client";
 import { purchaseBooklet } from "@/lib/booklet-purchases";
 import { PaymentDetailsModal } from "@/components/PaymentDetailsModal";
+import { useTranslation } from "react-i18next";
 
 const CATEGORIES = ["All", "Monthly", "Bundle Deals", "Premium", "New Arrivals"] as const;
 
@@ -45,6 +46,7 @@ const TESTIMONIALS = [
 ];
 
 export default function StoreScreen() {
+  const { t } = useTranslation();
   const scheme = useColorScheme();
   const colors = useThemeColors(scheme);
   const insets = useSafeAreaInsets();
@@ -138,6 +140,7 @@ export default function StoreScreen() {
             onRefresh={onRefresh}
             tintColor={colors.gold}
             colors={[colors.gold]}
+            progressBackgroundColor={colors.surface}
           />
         }
       >

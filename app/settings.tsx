@@ -26,8 +26,8 @@ import {
   scheduleAffirmationReminders,
   cancelAllReminders,
 } from "@/lib/notifications";
+import { SUPPORTED_LANGUAGES, setLanguage, loadSavedLanguage } from "@/lib/i18n";
 
-const LANGUAGES = ["English", "French", "Spanish", "Portuguese", "Arabic", "Swahili"];
 const THEMES = ["Dark", "Light"];
 
 export default function SettingsScreen() {
@@ -44,8 +44,14 @@ export default function SettingsScreen() {
   const [showIntervalModal, setShowIntervalModal] = useState(false);
   const [showLanguageModal, setShowLanguageModal] = useState(false);
   const [showThemeModal, setShowThemeModal] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [selectedTheme, setSelectedTheme] = useState("Dark");
+
+  useEffect(() => {
+    loadSavedLanguage().then((code) => {
+      if (code) setSelectedLanguage(code);
+    }).catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (notifSettings) {
@@ -579,7 +585,7 @@ export default function SettingsScreen() {
               <Text
                 style={[styles.settingValue, { color: colors.textSecondary }]}
               >
-                {selectedLanguage}
+                {SUPPORTED_LANGUAGES.find((l) => l.code === selectedLanguage)?.nativeName ?? "English"}
               </Text>
               <Ionicons
                 name="chevron-forward"
@@ -960,22 +966,23 @@ export default function SettingsScreen() {
             >
               Select your preferred language
             </Text>
-            {LANGUAGES.map((lang) => (
+            {SUPPORTED_LANGUAGES.map((lang) => (
               <Pressable
-                key={lang}
-                onPress={() => {
-                  setSelectedLanguage(lang);
+                key={lang.code}
+                onPress={async () => {
+                  setSelectedLanguage(lang.code);
+                  await setLanguage(lang.code);
                   setShowLanguageModal(false);
                 }}
                 style={({ pressed }) => [
                   styles.intervalOption,
                   {
                     backgroundColor:
-                      selectedLanguage === lang
+                      selectedLanguage === lang.code
                         ? colors.gold + "20"
                         : colors.inputBg,
                     borderColor:
-                      selectedLanguage === lang
+                      selectedLanguage === lang.code
                         ? colors.gold
                         : colors.border,
                     opacity: pressed ? 0.7 : 1,
@@ -987,16 +994,16 @@ export default function SettingsScreen() {
                     styles.intervalText,
                     {
                       color:
-                        selectedLanguage === lang
+                        selectedLanguage === lang.code
                           ? colors.gold
                           : colors.text,
                       fontFamily: "DMSans_600SemiBold",
                     },
                   ]}
                 >
-                  {lang}
+                  {lang.nativeName}
                 </Text>
-                {selectedLanguage === lang && (
+                {selectedLanguage === lang.code && (
                   <Ionicons name="checkmark-circle" size={20} color={colors.gold} />
                 )}
               </Pressable>
