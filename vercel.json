@@ -7,7 +7,7 @@
     {
       "src": "/api/(.*)",
       "dest": "/api",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     },
     {
       "handle": "filesystem"

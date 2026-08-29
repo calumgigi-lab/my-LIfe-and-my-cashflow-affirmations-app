@@ -1836,22 +1836,6 @@ module.exports = async function handler(req, res) {
       return res.json({ awarded: bonusPts });
     }
 
-    // ── Admin: Update affirmation title/content ──
-    if (path.match(/^\/api\/affirmations\/\d+$/) && (method === "PATCH" || method === "PUT")) {
-      const affId = parseInt(path.split("/").pop());
-      const { title, content } = req.body || {};
-      if (!title && !content) return res.status(400).json({ error: "Provide title and/or content" });
-      const sql = getSQL();
-      if (title && content) {
-        await sql`UPDATE affirmations SET title = ${title}, content = ${content} WHERE id = ${affId}`;
-      } else if (title) {
-        await sql`UPDATE affirmations SET title = ${title} WHERE id = ${affId}`;
-      } else {
-        await sql`UPDATE affirmations SET content = ${content} WHERE id = ${affId}`;
-      }
-      return res.json({ ok: true, id: affId });
-    }
-
     // ── 404 ──
     return res.status(404).json({ error: "Not found", path });
   } catch (error) {
