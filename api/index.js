@@ -1837,7 +1837,7 @@ module.exports = async function handler(req, res) {
     }
 
     // ── Admin: Update affirmation title/content ──
-    if (path.match(/^\/api\/affirmations\/\d+$/) && method === "PATCH") {
+    if (path.match(/^\/api\/affirmations\/\d+$/) && (method === "PATCH" || method === "PUT")) {
       const affId = parseInt(path.split("/").pop());
       const { title, content } = req.body || {};
       if (!title && !content) return res.status(400).json({ error: "Provide title and/or content" });
