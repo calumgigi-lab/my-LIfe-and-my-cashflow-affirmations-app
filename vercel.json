@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm install --production=false && npm prune --production",
+  "installCommand": "npm install --omit=dev",
   "outputDirectory": ".",
   "routes": [
     {
