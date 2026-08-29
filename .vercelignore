@@ -23,8 +23,6 @@ components/
 constants/
 shared/
 scripts/
-patches/
-migrations/
 android/
 ios/
 assets/
