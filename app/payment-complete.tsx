@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, ActivityIndicator, Text, useColorScheme, StyleSheet } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import { View, ActivityIndicator, Text, useColorScheme, StyleSheet, Dimensions } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { useThemeColors } from "@/constants/colors";
 import { apiRequest, queryClient } from "@/lib/query-client";
@@ -65,9 +65,7 @@ export default function PaymentCompleteScreen() {
               ? "Payment received — pull down on Library to refresh."
               : "Library updated.",
         );
-        if (params.status === "success") {
-          setShowConfetti(true);
-        }
+        setShowConfetti(true);
       } catch {
         if (active) setMessage("Return to Library and pull down to refresh.");
       } finally {
@@ -85,15 +83,15 @@ export default function PaymentCompleteScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {showConfetti && (
-        <ConfettiCannon
-          count={200}
-          origin={{ x: 200, y: 0 }}
-          colors={[colors.gold, "#FFD700", "#FFA500", "#FF6347", "#4CAF50", "#2196F3"]}
-          fallSpeed={3000}
-          duration={4000}
-          animationDuration={3000}
-          onAnimationEnd={() => setShowConfetti(false)}
-        />
+          <ConfettiCannon
+            count={200}
+            origin={{ x: Dimensions.get("window").width / 2, y: -20 }}
+            colors={[colors.gold, "#FFD700", "#FFA500", "#FF6347", "#4CAF50", "#2196F3"]}
+            fallSpeed={3000}
+            duration={4000}
+            animationDuration={3000}
+            onAnimationEnd={() => setShowConfetti(false)}
+          />
       )}
       <ActivityIndicator size="large" color={colors.gold} />
       <Text style={[styles.message, { color: colors.text, fontFamily: "DMSans_500Medium" }]}>{message}</Text>

@@ -3,7 +3,6 @@ import { initReactI18next } from "react-i18next";
 import { getLocales } from "expo-localization";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import en from "./locales/en.json";
-import { getApiUrl } from "@/lib/query-client";
 
 const STORAGE_KEY = "app_language";
 
@@ -52,15 +51,52 @@ export const SUPPORTED_LANGUAGES = [
 
 const loaded = new Set<string>(["en"]);
 
+const localeCache: Record<string, any> = {};
+
+const localeModules: Record<string, () => any> = {
+  es: () => require("./locales/es.json"),
+  fr: () => require("./locales/fr.json"),
+  de: () => require("./locales/de.json"),
+  pt: () => require("./locales/pt.json"),
+  it: () => require("./locales/it.json"),
+  ru: () => require("./locales/ru.json"),
+  zh: () => require("./locales/zh.json"),
+  ja: () => require("./locales/ja.json"),
+  ar: () => require("./locales/ar.json"),
+  hi: () => require("./locales/hi.json"),
+  yo: () => require("./locales/yo.json"),
+  ig: () => require("./locales/ig.json"),
+  ha: () => require("./locales/ha.json"),
+  zu: () => require("./locales/zu.json"),
+  xh: () => require("./locales/xh.json"),
+  af: () => require("./locales/af.json"),
+  st: () => require("./locales/st.json"),
+  tn: () => require("./locales/tn.json"),
+  ss: () => require("./locales/ss.json"),
+  ve: () => require("./locales/ve.json"),
+  ts: () => require("./locales/ts.json"),
+  sw: () => require("./locales/sw.json"),
+  am: () => require("./locales/am.json"),
+  rw: () => require("./locales/rw.json"),
+  sn: () => require("./locales/sn.json"),
+  mg: () => require("./locales/mg.json"),
+  wo: () => require("./locales/wo.json"),
+  ak: () => require("./locales/ak.json"),
+  lg: () => require("./locales/lg.json"),
+  om: () => require("./locales/om.json"),
+  so: () => require("./locales/so.json"),
+};
+
 async function loadLocale(code: string): Promise<void> {
   if (loaded.has(code)) return;
   if (!validCodes.has(code)) return;
   try {
-    const url = `${getApiUrl()}/api/locales/${code}.json`;
-    const res = await fetch(url);
-    if (!res.ok) return;
-    const bundle = await res.json();
-    i18n.addResourceBundle(code, "translation", bundle, true, true);
+    if (!localeCache[code]) {
+      const loader = localeModules[code];
+      if (!loader) return;
+      localeCache[code] = loader();
+    }
+    i18n.addResourceBundle(code, "translation", localeCache[code], true, true);
     loaded.add(code);
   } catch {}
 }

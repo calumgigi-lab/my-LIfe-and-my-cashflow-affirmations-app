@@ -411,28 +411,29 @@ export default function SettingsScreen() {
               <Ionicons name="mail-outline" size={20} color="#64B5F6" />
             </View>
             <View style={styles.settingInfo}>
-              <Text style={[styles.settingLabel, { color: colors.text }]}>
+              <Text style={[styles.settingLabel, { color: colors.text }]} numberOfLines={1}>
                 Email Address
               </Text>
-            </View>
-            <View style={styles.settingRight}>
-              <Text
-                style={[styles.settingValue, { color: colors.textSecondary }]}
-              >
-                {maskedEmail}
-              </Text>
-              <View style={styles.verifiedBadge}>
-                <Ionicons name="checkmark-circle" size={12} color={colors.success} />
-                <Text style={[styles.verifiedText, { color: colors.success }]}>
-                  Verified
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 2 }}>
+                <Text
+                  style={[styles.settingValue, { color: colors.textSecondary }]}
+                  numberOfLines={1}
+                >
+                  {maskedEmail}
                 </Text>
+                <View style={styles.verifiedBadge}>
+                  <Ionicons name="checkmark-circle" size={12} color={colors.success} />
+                  <Text style={[styles.verifiedText, { color: colors.success }]}>
+                    Verified
+                  </Text>
+                </View>
               </View>
-              <Ionicons
-                name="chevron-forward"
-                size={18}
-                color={colors.textSecondary}
-              />
             </View>
+            <Ionicons
+              name="chevron-forward"
+              size={18}
+              color={colors.textSecondary}
+            />
           </Pressable>
         </Animated.View>
 

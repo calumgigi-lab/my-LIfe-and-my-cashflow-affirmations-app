@@ -2,27 +2,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CACHE_PREFIX = "trans_";
 const API_BASE = "https://api.mymemory.translated.net/get";
-const BATCH_DELAY_MS = 200;
+const MAX_CHUNK_CHARS = 450;
 
 const LANG_MAP: Record<string, string> = {
-  tn: "tn",
-  ss: "ss",
-  ve: "ve",
-  ts: "ts",
-  rw: "rw",
-  sn: "sn",
-  mg: "mg",
-  wo: "wo",
-  ak: "ak",
-  lg: "lg",
-  om: "om",
-  zu: "zu",
-  xh: "xh",
-  st: "st",
-  af: "af",
-  sw: "sw",
-  am: "am",
-  so: "so",
+  yo: "yo", ig: "ig", ha: "ha", sw: "sw", zu: "zu", xh: "xh",
+  af: "af", st: "st", tn: "tn", ss: "ss", ve: "ve", ts: "ts",
+  am: "am", rw: "rw", sn: "sn", mg: "mg", wo: "wo", ak: "ak",
+  lg: "lg", om: "om", so: "so",
+  es: "es", fr: "fr", de: "de", pt: "pt", it: "it", ru: "ru",
+  zh: "zh-CN", ja: "ja", ar: "ar", hi: "hi",
 };
 
 function hashString(str: string): string {
@@ -54,6 +42,74 @@ async function setCached(text: string, targetLang: string, translated: string): 
   } catch {}
 }
 
+function decodeResult(text: string): string {
+  try {
+    let decoded = text;
+    if (decoded.includes("%20") || decoded.includes("%27") || decoded.includes("%2C")) {
+      decoded = decodeURIComponent(decoded);
+    }
+    decoded = decoded.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
+    return decoded;
+  } catch {
+    return text;
+  }
+}
+
+async function callMyMemory(text: string, targetLang: string): Promise<string | null> {
+  const mappedLang = LANG_MAP[targetLang] || targetLang;
+  const url = `${API_BASE}?q=${encodeURIComponent(text)}&langpair=en|${mappedLang}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    if (data?.responseStatus === 200 && data?.responseData?.translatedText) {
+      const translated = data.responseData.translatedText;
+      if (translated && translated !== text && !translated.includes("MYMEMORY WARNING")) {
+        return decodeResult(translated);
+      }
+    }
+  } catch {}
+  return null;
+}
+
+function splitIntoChunks(text: string): string[] {
+  if (text.length <= MAX_CHUNK_CHARS) return [text];
+
+  const paragraphs = text.split("\n\n");
+  const chunks: string[] = [];
+  let current = "";
+
+  for (const para of paragraphs) {
+    if ((current + "\n\n" + para).length > MAX_CHUNK_CHARS && current) {
+      chunks.push(current);
+      current = para;
+    } else {
+      current = current ? current + "\n\n" + para : para;
+    }
+  }
+  if (current) chunks.push(current);
+
+  const finalChunks: string[] = [];
+  for (const chunk of chunks) {
+    if (chunk.length > MAX_CHUNK_CHARS) {
+      const sentences = chunk.split(/(?<=[.!?])\s+/);
+      let buf = "";
+      for (const sent of sentences) {
+        if ((buf + " " + sent).length > MAX_CHUNK_CHARS && buf) {
+          finalChunks.push(buf);
+          buf = sent;
+        } else {
+          buf = buf ? buf + " " + sent : sent;
+        }
+      }
+      if (buf) finalChunks.push(buf);
+    } else {
+      finalChunks.push(chunk);
+    }
+  }
+
+  return finalChunks.length ? finalChunks : [text];
+}
+
 export async function translateText(text: string, targetLang: string): Promise<string> {
   if (!text || !text.trim()) return text;
   if (targetLang === "en") return text;
@@ -61,40 +117,20 @@ export async function translateText(text: string, targetLang: string): Promise<s
   const cached = await getCached(text, targetLang);
   if (cached) return cached;
 
-  const mappedLang = LANG_MAP[targetLang] || targetLang;
-
-  try {
-    const url = `${API_BASE}?q=${encodeURIComponent(text)}&langpair=en|${mappedLang}`;
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (data?.responseStatus === 200 && data?.responseData?.translatedText) {
-      const translated = data.responseData.translatedText;
-      await setCached(text, targetLang, translated);
-      return translated;
-    }
-  } catch {}
-
-  return text;
-}
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-export async function translateBatch(texts: string[], targetLang: string): Promise<string[]> {
-  if (!texts.length) return [];
-  if (targetLang === "en") return [...texts];
-
+  const chunks = splitIntoChunks(text);
   const results: string[] = [];
-  for (let i = 0; i < texts.length; i++) {
-    const translated = await translateText(texts[i], targetLang);
-    results.push(translated);
-    if (i < texts.length - 1) {
-      await delay(BATCH_DELAY_MS);
+
+  for (let i = 0; i < chunks.length; i++) {
+    const translated = await callMyMemory(chunks[i], targetLang);
+    results.push(translated || chunks[i]);
+    if (i < chunks.length - 1) {
+      await new Promise((r) => setTimeout(r, 150));
     }
   }
-  return results;
+
+  const result = results.join("\n\n");
+  await setCached(text, targetLang, result);
+  return result;
 }
 
 export async function clearTranslationCache(): Promise<void> {
