@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   Modal,
   View,
@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Alert,
   Linking,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { apiRequest, queryClient } from "@/lib/query-client";
@@ -16,6 +17,7 @@ import Colors from "@/constants/colors";
 import { useRouter } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import { useTranslation } from "react-i18next";
+import ConfettiCannon from "react-native-confetti-cannon";
 
 type PaymentProvider = "flutterwave" | "bank_transfer";
 
@@ -52,6 +54,8 @@ export function PaymentDetailsModal({
   const [isLoading, setIsLoading] = useState(false);
   const [paymentPending, setPaymentPending] = useState(false);
   const [pendingTxRef, setPendingTxRef] = useState<string | null>(null);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const confettiRef = useRef<any>(null);
   const router = useRouter();
 
   const checkPaymentStatus = useCallback(async (txRef: string) => {
@@ -80,8 +84,16 @@ export function PaymentDetailsModal({
       if (bookletId) {
         queryClient.invalidateQueries({ queryKey: ["/api/booklets", bookletId, "access"] });
       }
-      onCancel();
-      router.push("/(main)/library");
+      setPaymentSuccess(true);
+      setTimeout(() => {
+        setPaymentSuccess(false);
+        onCancel();
+        if (bookletId) {
+          router.push(`/booklet/${bookletId}`);
+        } else {
+          router.push("/(main)/library");
+        }
+      }, 3500);
     } else {
       Alert.alert("Payment Status", "Return to Library and pull down to refresh.");
       onCancel();
@@ -147,6 +159,77 @@ export function PaymentDetailsModal({
   };
 
   if (paymentProvider === "flutterwave") {
+    if (paymentSuccess) {
+      return (
+        <Modal visible={visible} transparent={true} animationType="fade">
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "rgba(0,0,0,0.6)",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ConfettiCannon
+              ref={confettiRef}
+              count={200}
+              origin={{ x: Dimensions.get("window").width / 2, y: -20 }}
+              colors={[colors.gold, "#FFD700", "#FFA500", "#FF6347", "#4CAF50", "#2196F3"]}
+              fallSpeed={3000}
+              duration={4000}
+              animationDuration={3000}
+              autoStart={true}
+            />
+            <View
+              style={{
+                backgroundColor: colors.background,
+                borderRadius: 24,
+                padding: 40,
+                width: "80%",
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: 40,
+                  backgroundColor: colors.gold + "20",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginBottom: 20,
+                }}
+              >
+                <Ionicons name="checkmark-circle" size={50} color={colors.gold} />
+              </View>
+              <Text
+                style={{
+                  fontSize: 22,
+                  fontWeight: "700",
+                  color: colors.text,
+                  textAlign: "center",
+                  marginBottom: 8,
+                }}
+              >
+                Payment Successful!
+              </Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: colors.text,
+                  opacity: 0.6,
+                  textAlign: "center",
+                  lineHeight: 20,
+                }}
+              >
+                Your booklet is now unlocked.{"\n"}Enjoy your affirmations!
+              </Text>
+            </View>
+          </View>
+        </Modal>
+      );
+    }
+
     if (paymentPending) {
       return (
         <Modal visible={visible} transparent={true} animationType="fade">

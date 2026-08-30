@@ -3,6 +3,37 @@ import { initReactI18next } from "react-i18next";
 import { getLocales } from "expo-localization";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import en from "./locales/en.json";
+import es from "./locales/es.json";
+import fr from "./locales/fr.json";
+import de from "./locales/de.json";
+import pt from "./locales/pt.json";
+import it from "./locales/it.json";
+import ru from "./locales/ru.json";
+import zh from "./locales/zh.json";
+import ja from "./locales/ja.json";
+import ar from "./locales/ar.json";
+import hi from "./locales/hi.json";
+import yo from "./locales/yo.json";
+import ig from "./locales/ig.json";
+import ha from "./locales/ha.json";
+import zu from "./locales/zu.json";
+import xh from "./locales/xh.json";
+import af from "./locales/af.json";
+import st from "./locales/st.json";
+import tn from "./locales/tn.json";
+import ss from "./locales/ss.json";
+import ve from "./locales/ve.json";
+import ts from "./locales/ts.json";
+import sw from "./locales/sw.json";
+import am from "./locales/am.json";
+import rw from "./locales/rw.json";
+import sn from "./locales/sn.json";
+import mg from "./locales/mg.json";
+import wo from "./locales/wo.json";
+import ak from "./locales/ak.json";
+import lg from "./locales/lg.json";
+import om from "./locales/om.json";
+import so from "./locales/so.json";
 
 const STORAGE_KEY = "app_language";
 
@@ -49,56 +80,21 @@ export const SUPPORTED_LANGUAGES = [
   { code: "hi", name: "Hindi", nativeName: "हिन्दी" },
 ];
 
-const loaded = new Set<string>(["en"]);
-
-const localeCache: Record<string, any> = {};
-
-const localeModules: Record<string, () => any> = {
-  es: () => require("./locales/es.json"),
-  fr: () => require("./locales/fr.json"),
-  de: () => require("./locales/de.json"),
-  pt: () => require("./locales/pt.json"),
-  it: () => require("./locales/it.json"),
-  ru: () => require("./locales/ru.json"),
-  zh: () => require("./locales/zh.json"),
-  ja: () => require("./locales/ja.json"),
-  ar: () => require("./locales/ar.json"),
-  hi: () => require("./locales/hi.json"),
-  yo: () => require("./locales/yo.json"),
-  ig: () => require("./locales/ig.json"),
-  ha: () => require("./locales/ha.json"),
-  zu: () => require("./locales/zu.json"),
-  xh: () => require("./locales/xh.json"),
-  af: () => require("./locales/af.json"),
-  st: () => require("./locales/st.json"),
-  tn: () => require("./locales/tn.json"),
-  ss: () => require("./locales/ss.json"),
-  ve: () => require("./locales/ve.json"),
-  ts: () => require("./locales/ts.json"),
-  sw: () => require("./locales/sw.json"),
-  am: () => require("./locales/am.json"),
-  rw: () => require("./locales/rw.json"),
-  sn: () => require("./locales/sn.json"),
-  mg: () => require("./locales/mg.json"),
-  wo: () => require("./locales/wo.json"),
-  ak: () => require("./locales/ak.json"),
-  lg: () => require("./locales/lg.json"),
-  om: () => require("./locales/om.json"),
-  so: () => require("./locales/so.json"),
+const LOCALE_MAP: Record<string, any> = {
+  es, fr, de, pt, it, ru, zh, ja, ar, hi,
+  yo, ig, ha, zu, xh, af, st, tn, ss, ve, ts,
+  sw, am, rw, sn, mg, wo, ak, lg, om, so,
 };
+
+const loaded = new Set<string>(["en"]);
 
 async function loadLocale(code: string): Promise<void> {
   if (loaded.has(code)) return;
   if (!validCodes.has(code)) return;
-  try {
-    if (!localeCache[code]) {
-      const loader = localeModules[code];
-      if (!loader) return;
-      localeCache[code] = loader();
-    }
-    i18n.addResourceBundle(code, "translation", localeCache[code], true, true);
-    loaded.add(code);
-  } catch {}
+  const bundle = LOCALE_MAP[code];
+  if (!bundle) return;
+  i18n.addResourceBundle(code, "translation", bundle, true, true);
+  loaded.add(code);
 }
 
 export function getDayName(dayNumber: number, month: number, year: number, lang?: string): string {
