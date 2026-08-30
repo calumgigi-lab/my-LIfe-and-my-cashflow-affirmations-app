@@ -990,10 +990,16 @@ export default function SettingsScreen() {
             >
               Select your preferred language
             </Text>
-            {SUPPORTED_LANGUAGES.map((lang) => (
+            {SUPPORTED_LANGUAGES.map((lang) => {
+              const isComingSoon = lang.code !== "en";
+              return (
               <Pressable
                 key={lang.code}
                 onPress={async () => {
+                  if (isComingSoon) {
+                    Alert.alert("Coming Soon", `${lang.name} translation will be available in a future update.`);
+                    return;
+                  }
                   setSelectedLanguage(lang.code);
                   await setLanguage(lang.code);
                   setShowLanguageModal(false);
@@ -1009,29 +1015,37 @@ export default function SettingsScreen() {
                       selectedLanguage === lang.code
                         ? colors.gold
                         : colors.border,
-                    opacity: pressed ? 0.7 : 1,
+                    opacity: isComingSoon ? 0.5 : pressed ? 0.7 : 1,
                   },
                 ]}
               >
-                <Text
-                  style={[
-                    styles.intervalText,
-                    {
-                      color:
-                        selectedLanguage === lang.code
-                          ? colors.gold
-                          : colors.text,
-                      fontFamily: "DMSans_600SemiBold",
-                    },
-                  ]}
-                >
-                  {lang.nativeName}
-                </Text>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={[
+                      styles.intervalText,
+                      {
+                        color:
+                          selectedLanguage === lang.code
+                            ? colors.gold
+                            : colors.text,
+                        fontFamily: "DMSans_600SemiBold",
+                      },
+                    ]}
+                  >
+                    {lang.nativeName}
+                  </Text>
+                  {isComingSoon && (
+                    <Text style={{ fontSize: 11, color: colors.textSecondary, marginTop: 2 }}>
+                      Coming Soon
+                    </Text>
+                  )}
+                </View>
                 {selectedLanguage === lang.code && (
                   <Ionicons name="checkmark-circle" size={20} color={colors.gold} />
                 )}
               </Pressable>
-            ))}
+              );
+            })}
             <Pressable
               onPress={() => setShowLanguageModal(false)}
               style={({ pressed }) => [
