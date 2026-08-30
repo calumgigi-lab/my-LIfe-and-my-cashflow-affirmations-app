@@ -3,7 +3,7 @@
     "name": "MY LIFE & MY CASHFLOW AFFIRMATIONS",
     "slug": "my-life-my-cash-flow-tywin",
     "owner": "tywin",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "mylifemycashflow",
@@ -21,8 +21,9 @@
     "android": {
       "package": "com.mylifemycashflow",
       "minSdkVersion": 24,
-      "versionCode": 18,
+      "versionCode": 19,
       "displayName": "MY LIFE & MY CASHFLOW AFFIRMATIONS",
+      "enableProguardInReleaseBuilds": true,
       "adaptiveIcon": {
         "backgroundColor": "#0A0A0A",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

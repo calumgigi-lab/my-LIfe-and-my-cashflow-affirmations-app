@@ -11,6 +11,8 @@ import {
   Switch,
   Modal,
   TextInput,
+  Linking,
+  KeyboardAvoidingView,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -46,6 +48,9 @@ export default function SettingsScreen() {
   const [showThemeModal, setShowThemeModal] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [selectedTheme, setSelectedTheme] = useState("Dark");
+  const [showSupportModal, setShowSupportModal] = useState(false);
+  const [supportSubject, setSupportSubject] = useState("");
+  const [supportMessage, setSupportMessage] = useState("");
 
   useEffect(() => {
     loadSavedLanguage().then((code) => {
@@ -202,7 +207,25 @@ export default function SettingsScreen() {
   }
 
   function handleHelpSupport() {
-    Alert.alert("Help & Support", "Navigate to help & support.");
+    setShowSupportModal(true);
+  }
+
+  function handleSendSupport() {
+    const subject = encodeURIComponent(supportSubject || "Support Request");
+    const body = encodeURIComponent(
+      `Name: ${user?.name || "N/A"}\nEmail: ${user?.email || "N/A"}\n\n${supportMessage}`
+    );
+    Linking.openURL(
+      `mailto:mylifeandmycashflowaffirmationspartrershipministry@gmail.com?subject=${subject}&body=${body}`
+    ).catch(() => {
+      Alert.alert(
+        "Email Unavailable",
+        "Could not open email client. Please email us directly at mylifeandmycashflowaffirmationspartrershipministry@gmail.com"
+      );
+    });
+    setShowSupportModal(false);
+    setSupportSubject("");
+    setSupportMessage("");
   }
 
   function handlePrivacyPolicy() {
@@ -1272,6 +1295,162 @@ export default function SettingsScreen() {
             </Pressable>
           </View>
         </View>
+      </Modal>
+
+      {/* Support Modal */}
+      <Modal
+        visible={showSupportModal}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowSupportModal(false)}
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1 }}
+        >
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "rgba(0,0,0,0.5)",
+              justifyContent: "flex-end",
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: colors.background,
+                borderTopLeftRadius: 24,
+                borderTopRightRadius: 24,
+                padding: 20,
+                maxHeight: "80%",
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 16,
+                }}
+              >
+                <Text
+                  style={[
+                    styles.modalTitle,
+                    {
+                      color: colors.text,
+                      fontFamily: "PlayfairDisplay_700Bold",
+                    },
+                  ]}
+                >
+                  Help & Support
+                </Text>
+                <Pressable onPress={() => setShowSupportModal(false)}>
+                  <Ionicons name="close-circle" size={28} color={colors.textSecondary} />
+                </Pressable>
+              </View>
+
+              <Text
+                style={[
+                  styles.modalSubtitle,
+                  { color: colors.textSecondary, fontFamily: "DMSans_400Regular", marginBottom: 16 },
+                ]}
+              >
+                Describe your issue or request and we'll get back to you.
+              </Text>
+
+              <Text style={{ color: colors.text, fontFamily: "DMSans_600SemiBold", fontSize: 13, marginBottom: 6 }}>
+                Subject
+              </Text>
+              <TextInput
+                value={supportSubject}
+                onChangeText={setSupportSubject}
+                placeholder="e.g. Login problem, Payment issue, Feature request..."
+                placeholderTextColor={colors.textSecondary + "80"}
+                style={{
+                  borderWidth: 1,
+                  borderColor: colors.border,
+                  borderRadius: 12,
+                  padding: 14,
+                  fontSize: 15,
+                  color: colors.text,
+                  backgroundColor: colors.inputBg,
+                  marginBottom: 14,
+                  fontFamily: "DMSans_400Regular",
+                }}
+              />
+
+              <Text style={{ color: colors.text, fontFamily: "DMSans_600SemiBold", fontSize: 13, marginBottom: 6 }}>
+                Message
+              </Text>
+              <TextInput
+                value={supportMessage}
+                onChangeText={setSupportMessage}
+                placeholder="Tell us what happened or what you need..."
+                placeholderTextColor={colors.textSecondary + "80"}
+                multiline
+                numberOfLines={5}
+                textAlignVertical="top"
+                style={{
+                  borderWidth: 1,
+                  borderColor: colors.border,
+                  borderRadius: 12,
+                  padding: 14,
+                  fontSize: 15,
+                  color: colors.text,
+                  backgroundColor: colors.inputBg,
+                  minHeight: 120,
+                  marginBottom: 16,
+                  fontFamily: "DMSans_400Regular",
+                }}
+              />
+
+              <View style={{ flexDirection: "row", gap: 12 }}>
+                <Pressable
+                  onPress={() => setShowSupportModal(false)}
+                  style={({ pressed }) => [
+                    {
+                      flex: 1,
+                      paddingVertical: 14,
+                      borderRadius: 12,
+                      borderWidth: 1,
+                      borderColor: colors.border,
+                      alignItems: "center",
+                      opacity: pressed ? 0.7 : 1,
+                    },
+                  ]}
+                >
+                  <Text style={{ color: colors.text, fontFamily: "DMSans_600SemiBold", fontSize: 15 }}>
+                    Cancel
+                  </Text>
+                </Pressable>
+
+                <Pressable
+                  onPress={handleSendSupport}
+                  disabled={!supportMessage.trim()}
+                  style={({ pressed }) => [
+                    {
+                      flex: 1,
+                      paddingVertical: 14,
+                      borderRadius: 12,
+                      backgroundColor: supportMessage.trim() ? colors.gold : colors.border,
+                      alignItems: "center",
+                      opacity: pressed ? 0.7 : 1,
+                    },
+                  ]}
+                >
+                  <Text
+                    style={{
+                      color: supportMessage.trim() ? "#000" : colors.textSecondary,
+                      fontFamily: "DMSans_700Bold",
+                      fontSize: 15,
+                    }}
+                  >
+                    Send Email
+                  </Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
       </Modal>
     </View>
   );

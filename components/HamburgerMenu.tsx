@@ -170,6 +170,8 @@ export default function HamburgerMenu() {
                   { label: "Affirmations", icon: "book-outline", route: "/admin-affirmations" },
                   { label: "Broadcast News", icon: "megaphone-outline", route: "/admin-notifications" },
                   { label: "User Management", icon: "people-outline", route: "/admin-users" },
+                  { label: "Live Controls", icon: "power-outline", route: "/admin-maintenance" },
+                  { label: "Testimonies", icon: "chatbubbles-outline", route: "/admin-testimonies" },
                 ].map((item) => (
                   <Pressable
                     key={item.route}
