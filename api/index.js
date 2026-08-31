@@ -575,7 +575,7 @@ module.exports = async function handler(req, res) {
       await sql`
         CREATE TABLE IF NOT EXISTS reward_points (
           id SERIAL PRIMARY KEY,
-          user_id INTEGER NOT NULL REFERENCES users(id),
+          user_id INTEGER NOT NULL REFERENCES users(id) UNIQUE,
           points INTEGER NOT NULL DEFAULT 0,
           total_earned INTEGER NOT NULL DEFAULT 0,
           total_spent INTEGER NOT NULL DEFAULT 0,
@@ -592,22 +592,17 @@ module.exports = async function handler(req, res) {
           created_at TIMESTAMP DEFAULT NOW()
         )
       `.catch(() => {});
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_reward_points_user
+        ON reward_points (user_id)`.catch(() => {});
 
-      const existingPoints = await sql`
-        SELECT id FROM reward_points WHERE user_id = ${userId} LIMIT 1
-      `.catch(() => []);
-      if (existingPoints.length) {
-        await sql`
-          UPDATE reward_points
-          SET points = points + 50, total_earned = total_earned + 50, updated_at = NOW()
-          WHERE user_id = ${userId}
-        `;
-      } else {
-        await sql`
-          INSERT INTO reward_points (user_id, points, total_earned, total_spent)
-          VALUES (${userId}, 50, 50, 0)
-        `;
-      }
+      await sql`
+        INSERT INTO reward_points (user_id, points, total_earned, total_spent)
+        VALUES (${userId}, 50, 50, 0)
+        ON CONFLICT (user_id) DO UPDATE
+        SET points = reward_points.points + 50,
+            total_earned = reward_points.total_earned + 50,
+            updated_at = NOW()
+      `;
       await sql`
         INSERT INTO reward_history (user_id, points, action, description)
         VALUES (${userId}, 50, 'affirm', 'Affirmed daily affirmation')
@@ -641,8 +636,22 @@ module.exports = async function handler(req, res) {
         else if (newStreak === 14) milestoneBonus = 25;
         else if (newStreak === 30) milestoneBonus = 50;
         if (milestoneBonus > 0) {
-          await sql`UPDATE reward_points SET points = points + ${milestoneBonus}, total_earned = total_earned + ${milestoneBonus}, updated_at = NOW() WHERE user_id = ${userId}`;
-          await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${milestoneBonus}, 'streak_milestone', ${`Streak milestone: ${newStreak} days`})`;
+          // Dedup: check if this milestone was already awarded
+          const milestoneKey = `streak_milestone_${newStreak}`;
+          const existingMilestone = await sql`
+            SELECT id FROM reward_history
+            WHERE user_id = ${userId} AND action = 'streak_milestone' AND description LIKE ${`%${newStreak} days%`}
+            LIMIT 1
+          `.catch(() => []);
+          if (!existingMilestone.length) {
+            await sql`INSERT INTO reward_points (user_id, points, total_earned, total_spent)
+              VALUES (${userId}, ${milestoneBonus}, ${milestoneBonus}, 0)
+              ON CONFLICT (user_id) DO UPDATE
+              SET points = reward_points.points + ${milestoneBonus},
+                  total_earned = reward_points.total_earned + ${milestoneBonus},
+                  updated_at = NOW()`;
+            await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${milestoneBonus}, 'streak_milestone', ${`Streak milestone: ${newStreak} days`})`;
+          }
         }
 
         return res.json({ message: "Completed", completed: true, pointsAwarded: 50, streakMilestoneBonus: milestoneBonus, currentStreak: newStreak });
@@ -721,24 +730,36 @@ module.exports = async function handler(req, res) {
       if (!userId) return res.status(401).json({ error: "Authentication required" });
 
       const today = new Date().toISOString().split("T")[0];
-      const existing = await sql`
-        SELECT id FROM reward_history
-        WHERE user_id = ${userId} AND action = 'daily_checkin' AND created_at::date = ${today}::date
-        LIMIT 1
-      `.catch(() => []);
 
-      if (existing.length) return res.json({ alreadyCheckedIn: true, pointsAwarded: 0 });
+      // Atomic dedup: use unique index + ON CONFLICT to prevent race conditions
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_reward_history_daily
+        ON reward_history (user_id, action, (created_at::date))`.catch(() => {});
 
       const userRow = await sql`SELECT is_admin FROM users WHERE id = ${userId} LIMIT 1`.catch(() => []);
       const isAdmin = userRow.length && userRow[0].is_admin;
       const checkInPts = isAdmin ? 1000 : 10;
-      const existingPts = await sql`SELECT id FROM reward_points WHERE user_id = ${userId} LIMIT 1`.catch(() => []);
-      if (existingPts.length) {
-        await sql`UPDATE reward_points SET points = points + ${checkInPts}, total_earned = total_earned + ${checkInPts}, updated_at = NOW() WHERE user_id = ${userId}`;
-      } else {
-        await sql`INSERT INTO reward_points (user_id, points, total_earned, total_spent) VALUES (${userId}, ${checkInPts}, ${checkInPts}, 0)`;
+
+      const insertResult = await sql`
+        INSERT INTO reward_history (user_id, points, action, description)
+        VALUES (${userId}, ${checkInPts}, 'daily_checkin', ${isAdmin ? 'Admin daily bonus' : 'Daily check-in bonus'})
+        ON CONFLICT (user_id, action, (created_at::date)) DO NOTHING
+        RETURNING id
+      `.catch(() => []);
+
+      if (!insertResult.length) {
+        return res.json({ alreadyCheckedIn: true, pointsAwarded: 0 });
       }
-      await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${checkInPts}, 'daily_checkin', ${isAdmin ? 'Admin daily bonus' : 'Daily check-in bonus'})`;
+
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_reward_points_user
+        ON reward_points (user_id)`.catch(() => {});
+      await sql`
+        INSERT INTO reward_points (user_id, points, total_earned, total_spent)
+        VALUES (${userId}, ${checkInPts}, ${checkInPts}, 0)
+        ON CONFLICT (user_id) DO UPDATE
+        SET points = reward_points.points + ${checkInPts},
+            total_earned = reward_points.total_earned + ${checkInPts},
+            updated_at = NOW()
+      `;
 
       return res.json({ alreadyCheckedIn: false, pointsAwarded: checkInPts });
     }
@@ -807,12 +828,17 @@ module.exports = async function handler(req, res) {
         return res.status(400).json({ error: "You already own this booklet" });
       }
 
-      // Deduct points
-      await sql`
+      // Deduct points (atomic: WHERE prevents negative balance race condition)
+      const deductResult = await sql`
         UPDATE reward_points
         SET points = points - ${pointsCost}, total_spent = total_spent + ${pointsCost}, updated_at = NOW()
-        WHERE user_id = ${userId}
-      `;
+        WHERE user_id = ${userId} AND points >= ${pointsCost}
+        RETURNING points
+      `.catch(() => []);
+
+      if (!deductResult.length) {
+        return res.status(400).json({ error: "Insufficient points or concurrent purchase detected." });
+      }
 
       // Log the spend
       await sql`
@@ -876,19 +902,25 @@ module.exports = async function handler(req, res) {
 
       await sql`UPDATE users SET profile_picture_url = ${pictureUrl} WHERE id = ${userId}`;
 
-      // One-time profile picture upload bonus
+      // One-time profile picture upload bonus (atomic)
       let bonusAwarded = 0;
-      const alreadyBonused = await sql`SELECT id FROM reward_history WHERE user_id = ${userId} AND action = 'profile_picture' LIMIT 1`.catch(() => []);
-      if (!alreadyBonused.length) {
-        const profPicPts = 100;
+      const profPicPts = 100;
+      const profPicResult = await sql`
+        INSERT INTO reward_history (user_id, points, action, description)
+        VALUES (${userId}, ${profPicPts}, 'profile_picture', 'Profile picture upload bonus')
+        ON CONFLICT DO NOTHING
+        RETURNING id
+      `.catch(() => []);
+      if (profPicResult.length) {
         bonusAwarded = profPicPts;
-        const existingPts = await sql`SELECT id FROM reward_points WHERE user_id = ${userId} LIMIT 1`.catch(() => []);
-        if (existingPts.length) {
-          await sql`UPDATE reward_points SET points = points + ${profPicPts}, total_earned = total_earned + ${profPicPts}, updated_at = NOW() WHERE user_id = ${userId}`;
-        } else {
-          await sql`INSERT INTO reward_points (user_id, points, total_earned, total_spent) VALUES (${userId}, ${profPicPts}, ${profPicPts}, 0)`;
-        }
-        await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${profPicPts}, 'profile_picture', 'Profile picture upload bonus')`;
+        await sql`
+          INSERT INTO reward_points (user_id, points, total_earned, total_spent)
+          VALUES (${userId}, ${profPicPts}, ${profPicPts}, 0)
+          ON CONFLICT (user_id) DO UPDATE
+          SET points = reward_points.points + ${profPicPts},
+              total_earned = reward_points.total_earned + ${profPicPts},
+              updated_at = NOW()
+        `;
       }
 
       return res.json({ message: "Profile picture updated", profilePictureUrl: pictureUrl, bonusAwarded });
@@ -1815,23 +1847,30 @@ module.exports = async function handler(req, res) {
         return res.json({ awarded: 0 });
       }
 
-      const today = new Date().toISOString().split("T")[0];
-      const existing = await sql`
-        SELECT id FROM reward_history
-        WHERE user_id = ${userId} AND action = 'admin_daily_auto' AND created_at::date = ${today}::date
-        LIMIT 1
-      `.catch(() => []);
-
-      if (existing.length) return res.json({ awarded: 0, alreadyReceived: true });
+      // Atomic dedup: unique index prevents race conditions
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_reward_history_admin_daily
+        ON reward_history (user_id, action, (created_at::date))`.catch(() => {});
 
       const bonusPts = 1000;
-      const existingPts = await sql`SELECT id FROM reward_points WHERE user_id = ${userId} LIMIT 1`.catch(() => []);
-      if (existingPts.length) {
-        await sql`UPDATE reward_points SET points = points + ${bonusPts}, total_earned = total_earned + ${bonusPts}, updated_at = NOW() WHERE user_id = ${userId}`;
-      } else {
-        await sql`INSERT INTO reward_points (user_id, points, total_earned, total_spent) VALUES (${userId}, ${bonusPts}, ${bonusPts}, 0)`;
-      }
-      await sql`INSERT INTO reward_history (user_id, points, action, description) VALUES (${userId}, ${bonusPts}, 'admin_daily_auto', 'Admin daily auto-bonus')`;
+      const insertResult = await sql`
+        INSERT INTO reward_history (user_id, points, action, description)
+        VALUES (${userId}, ${bonusPts}, 'admin_daily_auto', 'Admin daily auto-bonus')
+        ON CONFLICT (user_id, action, (created_at::date)) DO NOTHING
+        RETURNING id
+      `.catch(() => []);
+
+      if (!insertResult.length) return res.json({ awarded: 0, alreadyReceived: true });
+
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_reward_points_user
+        ON reward_points (user_id)`.catch(() => {});
+      await sql`
+        INSERT INTO reward_points (user_id, points, total_earned, total_spent)
+        VALUES (${userId}, ${bonusPts}, ${bonusPts}, 0)
+        ON CONFLICT (user_id) DO UPDATE
+        SET points = reward_points.points + ${bonusPts},
+            total_earned = reward_points.total_earned + ${bonusPts},
+            updated_at = NOW()
+      `;
 
       return res.json({ awarded: bonusPts });
     }
