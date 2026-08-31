@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -28,6 +28,7 @@ import { useTranslatedAffirmation } from "@/lib/use-translated-content";
 import { useAuth } from "@/lib/auth-context";
 import { captureRef } from "react-native-view-shot";
 import * as Sharing from "expo-sharing";
+import { isAffirmationCompleted, markAffirmationCompleted } from "@/lib/completed-affirmations";
 
 export default function AffirmationDetailScreen() {
   const { t } = useTranslation();
@@ -110,6 +111,15 @@ export default function AffirmationDetailScreen() {
     enabled: !!id,
   });
 
+  // Persist completion locally so the button stays marked even if query cache is stale
+  useEffect(() => {
+    if (!id) return;
+    const numId = Number(id);
+    isAffirmationCompleted(numId).then((done) => {
+      if (done) setCompletedAffirmation(true);
+    });
+  }, [id]);
+
   const { data: accessData, refetch: refetchAccess } = useQuery<{
     bookletId: number;
     unlocked: boolean;
@@ -165,6 +175,7 @@ export default function AffirmationDetailScreen() {
     },
     onSuccess: (data: any) => {
       setCompletedAffirmation(true);
+      if (id) markAffirmationCompleted(Number(id));
       queryClient.setQueryData(["/api/completions/check", id], { completed: true });
       queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
       queryClient.invalidateQueries({ queryKey: ["/api/completions"] });

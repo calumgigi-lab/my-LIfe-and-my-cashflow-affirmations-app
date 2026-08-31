@@ -29,6 +29,7 @@ import { PaymentDetailsModal } from "@/components/PaymentDetailsModal";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useTranslation } from "react-i18next";
 import { useTranslatedAffirmation } from "@/lib/use-translated-content";
+import { isAffirmationCompleted, markAffirmationCompleted } from "@/lib/completed-affirmations";
 
 const PREVIEW_LINES = 4;
 
@@ -70,6 +71,14 @@ export default function TodayScreen() {
     enabled: !!todayAff?.id,
   });
 
+  // Persist completion locally so the button stays marked even if query cache is stale
+  useEffect(() => {
+    if (!todayAff?.id) return;
+    isAffirmationCompleted(todayAff.id).then((done) => {
+      if (done) setCompletedAffirmation(true);
+    });
+  }, [todayAff?.id]);
+
   const { data: todayAccess } = useQuery<{
     bookletId: number;
     unlocked: boolean;
@@ -91,6 +100,7 @@ export default function TodayScreen() {
     },
     onSuccess: (data: any) => {
       setCompletedAffirmation(true);
+      if (todayAff?.id) markAffirmationCompleted(todayAff.id);
       queryClient.setQueryData(["/api/completions/check", todayAff?.id?.toString()], { completed: true });
       queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
       queryClient.invalidateQueries({ queryKey: ["/api/completions"] });
