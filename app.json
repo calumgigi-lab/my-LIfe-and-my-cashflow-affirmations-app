@@ -21,7 +21,7 @@
     "android": {
       "package": "com.mylifemycashflow",
       "minSdkVersion": 24,
-      "versionCode": 19,
+      "versionCode": 20,
       "displayName": "MY LIFE & MY CASHFLOW AFFIRMATIONS",
       "enableProguardInReleaseBuilds": true,
       "adaptiveIcon": {
