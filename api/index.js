@@ -1039,6 +1039,7 @@ module.exports = async function handler(req, res) {
     if (path === "/api/purchases/verify" && method === "POST") {
       const sql = getSQL();
       await sql`ALTER TABLE monthly_purchases ADD COLUMN IF NOT EXISTS payment_method VARCHAR(30) DEFAULT 'bank_transfer'`.catch(() => {});
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_monthly_purchases_user_booklet ON monthly_purchases (user_id, booklet_id)`.catch(() => {});
       const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : (req.body?.userId ? parseInt(req.body.userId) : null);
       const { bookletId, platform, productId, transactionId } = req.body || {};
       if (!userId || !bookletId || !transactionId) {
@@ -1049,7 +1050,8 @@ module.exports = async function handler(req, res) {
       }
       const result = await sql`
         INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method)
-        VALUES (${userId}, ${bookletId}, ${platform || "android"}, ${productId || "monthly_booklet"}, ${transactionId}, 'pending', 'bank_transfer')
+        VALUES (${userId}, ${bookletId}, ${platform || "android"}, ${productId || "monthly_booklet"}, ${transactionId}, 'approved', 'bank_transfer')
+        ON CONFLICT (user_id, booklet_id) DO UPDATE SET status = 'approved', transaction_id = ${transactionId}, updated_at = NOW()
         RETURNING *
       `;
       return res.json(result[0]);
@@ -1104,6 +1106,7 @@ module.exports = async function handler(req, res) {
     const flwCallbackMatch = path.match(/^\/api\/payments\/flutterwave\/callback$/);
     if (flwCallbackMatch && method === "GET") {
       const sql = getSQL();
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_monthly_purchases_user_booklet ON monthly_purchases (user_id, booklet_id)`.catch(() => {});
       const txRef = req.query.tx_ref;
       const bookletId = parseInt(req.query.bookletId) || null;
       const userId = parseInt(req.query.userId) || null;
@@ -1118,7 +1121,7 @@ module.exports = async function handler(req, res) {
             await sql`
               INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
               VALUES (${userId}, ${bookletId}, 'web', 'flutterwave', ${txRef}, 'approved', 'flutterwave', ${parseInt(req.query.amount) || 1500})
-              ON CONFLICT DO NOTHING
+              ON CONFLICT (user_id, booklet_id) DO UPDATE SET status = 'approved', transaction_id = ${txRef}, payment_method = 'flutterwave', amount_naira = ${parseInt(req.query.amount) || 1500}, updated_at = NOW()
             `.catch(() => {});
           }
         }
@@ -1136,6 +1139,7 @@ module.exports = async function handler(req, res) {
     // ── Flutterwave: Sync Payment Status ──
     if (path === "/api/payments/flutterwave/sync" && method === "POST") {
       const sql = getSQL();
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_monthly_purchases_user_booklet ON monthly_purchases (user_id, booklet_id)`.catch(() => {});
       const userId = req.headers["x-user-id"] ? parseInt(req.headers["x-user-id"]) : null;
       const { reference, bookletId } = req.body || {};
 
@@ -1157,7 +1161,7 @@ module.exports = async function handler(req, res) {
           await sql`
             INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
             VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${reference}, 'approved', 'flutterwave', ${flwRes.data.amount || 1500})
-            ON CONFLICT DO NOTHING
+            ON CONFLICT (user_id, booklet_id) DO UPDATE SET status = 'approved', transaction_id = ${reference}, payment_method = 'flutterwave', amount_naira = ${flwRes.data.amount || 1500}, updated_at = NOW()
           `.catch(() => {});
         }
         return res.json({ status: "success", verified: true });
@@ -1168,6 +1172,7 @@ module.exports = async function handler(req, res) {
     // ── Flutterwave: Verify by Transaction ID ──
     if (path === "/api/payments/flutterwave/verify" && method === "POST") {
       const sql = getSQL();
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_monthly_purchases_user_booklet ON monthly_purchases (user_id, booklet_id)`.catch(() => {});
       const { transactionId } = req.body || {};
       if (!transactionId) return res.status(400).json({ error: "transactionId is required" });
 
@@ -1187,7 +1192,7 @@ module.exports = async function handler(req, res) {
             await sql`
               INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
               VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${tx.tx_ref || tx.flw_ref || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
-              ON CONFLICT DO NOTHING
+              ON CONFLICT (user_id, booklet_id) DO UPDATE SET status = 'approved', transaction_id = ${tx.tx_ref || tx.flw_ref || String(tx.id)}, payment_method = 'flutterwave', amount_naira = ${tx.amount}, updated_at = NOW()
             `.catch(() => {});
           }
         }
@@ -1199,6 +1204,7 @@ module.exports = async function handler(req, res) {
     // ── Flutterwave: Webhook ──
     if (path === "/api/payments/flutterwave/webhook" && method === "POST") {
       const sql = getSQL();
+      await sql`CREATE UNIQUE INDEX IF NOT EXISTS uq_monthly_purchases_user_booklet ON monthly_purchases (user_id, booklet_id)`.catch(() => {});
       const secretHash = process.env.FLW_SECRET_HASH;
       const verifHash = req.headers["verif-hash"] || req.headers["flutterwave-signature"];
       const body = req.body;
@@ -1244,7 +1250,7 @@ module.exports = async function handler(req, res) {
             await sql`
               INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
               VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${txRef || tx.flw_ref || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
-              ON CONFLICT DO NOTHING
+              ON CONFLICT (user_id, booklet_id) DO UPDATE SET status = 'approved', transaction_id = ${txRef || tx.flw_ref || String(tx.id)}, payment_method = 'flutterwave', amount_naira = ${tx.amount}, updated_at = NOW()
             `.catch(() => {});
           } else {
             console.warn("Flutterwave webhook: re-verification failed, not inserting");
