@@ -20,10 +20,7 @@
     },
     "android": {
       "package": "com.mylifemycashflow",
-      "minSdkVersion": 24,
       "versionCode": 20,
-      "displayName": "MY LIFE & MY CASHFLOW AFFIRMATIONS",
-      "enableProguardInReleaseBuilds": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app-logo.png",
         "backgroundColor": "#0A0A0A"
@@ -37,6 +34,15 @@
         "expo-router",
         {
           "origin": "https://replit.com/"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true,
+            "minSdkVersion": 24
+          }
         }
       ],
       "react-native-iap",
