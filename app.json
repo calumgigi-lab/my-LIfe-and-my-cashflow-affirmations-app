@@ -20,7 +20,7 @@
     },
     "android": {
       "package": "com.mylifemycashflow",
-      "versionCode": 21,
+      "versionCode": 22,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app-logo.png",
         "backgroundColor": "#0A0A0A"
