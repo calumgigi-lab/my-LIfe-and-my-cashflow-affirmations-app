@@ -952,17 +952,20 @@ const styles = StyleSheet.create({
   // Greeting
   greetingRow: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     gap: 10,
     marginBottom: 6,
   },
   greetingIcon: {
-    marginTop: 2,
+    marginTop: 4,
+    flexShrink: 0,
   },
   greetingText: {
     fontSize: 28,
     letterSpacing: -0.3,
     lineHeight: 34,
+    flex: 1,
+    flexShrink: 1,
   },
   greetingDate: {
     fontSize: 14,
@@ -981,11 +984,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 12,
+    gap: 8,
   },
   streakLeft: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
+    flexShrink: 0,
   },
   streakCount: {
     fontSize: 18,
@@ -996,6 +1001,8 @@ const styles = StyleSheet.create({
   },
   streakMilestone: {
     fontSize: 12,
+    flex: 1,
+    textAlign: "right",
   },
   streakProgressTrack: {
     width: "100%",
@@ -1046,6 +1053,7 @@ const styles = StyleSheet.create({
     marginTop: 28,
     borderRadius: 24,
     padding: 2,
+    overflow: "hidden",
   },
   affirmationCardInner: {
     borderRadius: 22,
