@@ -15,4 +15,11 @@ thumbs.db
 *.apk
 *.aab
 *.ipa
+*.apks
+*.zip
+*.bin
+*.jar
+.venv/
+.local/
 start-dev.bat
+patches/
