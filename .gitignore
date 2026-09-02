@@ -8,11 +8,19 @@ pnpm-lock.yaml
 
 # Build outputs - DO NOT TRACK
 dist/
+dist-export/
 build/
 out/
 .next/
 .turbo/
 server_dist/
+
+# Scripts & temp files
+scripts/
+deploy.js
+bundle-error.txt
+bundle-out.txt
+metro-output.txt
 
 # Android Build Artifacts - LARGE FILES
 *.apk

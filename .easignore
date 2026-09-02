@@ -5,6 +5,7 @@ node_modules/
 .env.local
 *.log
 dist/
+dist-export/
 .expo/
 android/
 ios/
@@ -15,4 +16,3 @@ thumbs.db
 *.aab
 *.ipa
 start-dev.bat
-patches/
