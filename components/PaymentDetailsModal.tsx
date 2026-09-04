@@ -74,11 +74,24 @@ export function PaymentDetailsModal({
     return null;
   }, [bookletId]);
 
+  const pollPaymentStatus = useCallback(async (txRef: string, maxRetries = 6, delayMs = 3000) => {
+    for (let i = 0; i < maxRetries; i++) {
+      const result = await checkPaymentStatus(txRef);
+      if (result?.status === "success" || result?.verified) {
+        return result;
+      }
+      if (i < maxRetries - 1) {
+        await new Promise((r) => setTimeout(r, delayMs));
+      }
+    }
+    return null;
+  }, [checkPaymentStatus]);
+
   const handlePaymentReturn = useCallback(async (txRef: string) => {
     setPaymentPending(false);
     setPendingTxRef(null);
-    const result = await checkPaymentStatus(txRef);
-    if (result?.status === "success") {
+    const result = await pollPaymentStatus(txRef);
+    if (result?.status === "success" || result?.verified) {
       queryClient.invalidateQueries({ queryKey: ["/api/booklets/access"] });
       queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
       if (bookletId) {
@@ -98,7 +111,7 @@ export function PaymentDetailsModal({
       Alert.alert("Payment Status", "Return to Library and pull down to refresh.");
       onCancel();
     }
-  }, [checkPaymentStatus, onCancel, router, bookletId]);
+  }, [pollPaymentStatus, onCancel, router, bookletId]);
 
   useEffect(() => {
     if (!paymentPending || !pendingTxRef) return;

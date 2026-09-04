@@ -20,6 +20,7 @@ async function ensureProfileColumns() {
     await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS phone text`;
     await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS gender text`;
     await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS date_of_birth text`;
+    await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS session_version integer DEFAULT 0`;
   } catch {}
 }
 ensureProfileColumns();
@@ -148,6 +149,11 @@ module.exports = async function handler(req, res) {
       if (!passwordValid) {
         return res.status(401).json({ error: "Invalid email or password" });
       }
+      let sessionVersion = 0;
+      try {
+        const sv = await sql`SELECT COALESCE(session_version, 0) as sv FROM users WHERE id = ${u.id}`;
+        if (sv.length) sessionVersion = sv[0].sv;
+      } catch {}
       return res.json({
         id: u.id,
         username: u.username,
@@ -155,6 +161,7 @@ module.exports = async function handler(req, res) {
         displayName: u.display_name,
         profilePictureUrl: u.profile_picture_url,
         isAdmin: u.is_admin,
+        sessionVersion,
       });
     }
 
@@ -170,6 +177,11 @@ module.exports = async function handler(req, res) {
       `;
       if (!result.length) return res.status(401).json({ error: "User not found" });
       const u = result[0];
+      let sessionVersion = 0;
+      try {
+        const sv = await sql`SELECT COALESCE(session_version, 0) as sv FROM users WHERE id = ${userId}`;
+        if (sv.length) sessionVersion = sv[0].sv;
+      } catch {}
       return res.json({
         id: u.id,
         username: u.username,
@@ -182,6 +194,7 @@ module.exports = async function handler(req, res) {
         phone: u.phone || null,
         gender: u.gender || null,
         dateOfBirth: u.date_of_birth || null,
+        sessionVersion,
       });
     }
 
@@ -1113,17 +1126,26 @@ module.exports = async function handler(req, res) {
 
       let paymentSuccessful = false;
 
-      if (txRef) {
-        const flwRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${txRef}`);
-        if (flwRes.status === "success" && flwRes.data && flwRes.data.status === "successful") {
-          paymentSuccessful = true;
-          if (bookletId && userId) {
+      if (txRef && bookletId && userId) {
+        // Always insert as pending first — Flutterwave redirect means user completed checkout
+        await sql`
+          INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+          VALUES (${userId}, ${bookletId}, 'web', 'flutterwave', ${txRef}, 'pending', 'flutterwave', ${parseInt(req.query.amount) || 1500})
+          ON CONFLICT (user_id, booklet_id) DO UPDATE SET transaction_id = ${txRef}, updated_at = NOW()
+        `.catch(() => {});
+
+        // Try to verify immediately — if successful, upgrade to approved
+        try {
+          const flwRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${txRef}`);
+          if (flwRes.status === "success" && flwRes.data && flwRes.data.status === "successful") {
+            paymentSuccessful = true;
             await sql`
-              INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
-              VALUES (${userId}, ${bookletId}, 'web', 'flutterwave', ${txRef}, 'approved', 'flutterwave', ${parseInt(req.query.amount) || 1500})
-              ON CONFLICT (user_id, booklet_id) DO UPDATE SET status = 'approved', transaction_id = ${txRef}, payment_method = 'flutterwave', amount_naira = ${parseInt(req.query.amount) || 1500}, updated_at = NOW()
+              UPDATE monthly_purchases SET status = 'approved', approved_at = NOW(), updated_at = NOW()
+              WHERE user_id = ${userId} AND booklet_id = ${bookletId}
             `.catch(() => {});
           }
+        } catch (e) {
+          console.warn("Callback verify failed, purchase saved as pending:", e.message);
         }
       }
 
@@ -1131,7 +1153,7 @@ module.exports = async function handler(req, res) {
       if (txRef) params.set("tx_ref", txRef);
       if (bookletId) params.set("bookletId", String(bookletId));
       if (userId) params.set("userId", String(userId));
-      params.set("status", paymentSuccessful ? "success" : "cancelled");
+      params.set("status", paymentSuccessful ? "success" : "pending");
       const deepLinkUrl = `mylifemycashflow://payment-complete?${params.toString()}`;
       return res.redirect(deepLinkUrl);
     }
@@ -1147,26 +1169,60 @@ module.exports = async function handler(req, res) {
         return res.status(400).json({ error: "reference is required" });
       }
 
-      const flwRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${reference}`);
-      if (flwRes.status === "success" && flwRes.data && flwRes.data.status === "successful") {
-        let uid = userId || flwRes.data.meta?.userId;
-        let bid = bookletId || flwRes.data.meta?.bookletId;
-        // Fallback: parse tx_ref format affirm-{userId}-{bookletId}-{timestamp}
-        if ((!uid || !bid) && reference && reference.startsWith("affirm-")) {
-          const parts = reference.split("-");
-          uid = uid || parseInt(parts[1]) || null;
-          bid = bid || parseInt(parts[2]) || null;
-        }
-        if (uid && bid) {
-          await sql`
-            INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
-            VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${reference}, 'approved', 'flutterwave', ${flwRes.data.amount || 1500})
-            ON CONFLICT (user_id, booklet_id) DO UPDATE SET status = 'approved', transaction_id = ${reference}, payment_method = 'flutterwave', amount_naira = ${flwRes.data.amount || 1500}, updated_at = NOW()
-          `.catch(() => {});
-        }
-        return res.json({ status: "success", verified: true });
+      // Parse user/booklet from meta or tx_ref fallback
+      let uid = userId;
+      let bid = bookletId;
+      if (!uid || !bid) {
+        try {
+          const flwCheck = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${reference}`);
+          if (flwCheck.status === "success" && flwCheck.data) {
+            uid = uid || flwCheck.data.meta?.userId;
+            bid = bid || flwCheck.data.meta?.bookletId;
+          }
+        } catch {}
       }
-      return res.json({ status: "pending", verified: false });
+      if ((!uid || !bid) && reference && reference.startsWith("affirm-")) {
+        const parts = reference.split("-");
+        uid = uid || parseInt(parts[1]) || null;
+        bid = bid || parseInt(parts[2]) || null;
+      }
+
+      if (!uid || !bid) {
+        return res.status(400).json({ error: "Could not determine userId or bookletId" });
+      }
+
+      // Try Flutterwave verification
+      let verified = false;
+      let amount = 1500;
+      try {
+        const flwRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${reference}`);
+        if (flwRes.status === "success" && flwRes.data && flwRes.data.status === "successful") {
+          verified = true;
+          amount = flwRes.data.amount || 1500;
+        }
+      } catch (e) {
+        console.warn("Sync verify failed:", e.message);
+      }
+
+      const newStatus = verified ? "approved" : "pending";
+
+      await sql`
+        INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+        VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${reference}, ${newStatus}, 'flutterwave', ${amount})
+        ON CONFLICT (user_id, booklet_id) DO UPDATE
+        SET status = CASE
+            WHEN ${verified} THEN 'approved'
+            WHEN monthly_purchases.status = 'approved' THEN 'approved'
+            ELSE 'pending'
+          END,
+          transaction_id = ${reference},
+          payment_method = 'flutterwave',
+          amount_naira = ${amount},
+          approved_at = CASE WHEN ${verified} AND monthly_purchases.status != 'approved' THEN NOW() ELSE approved_at END,
+          updated_at = NOW()
+      `;
+
+      return res.json({ status: verified ? "success" : "pending", verified });
     }
 
     // ── Flutterwave: Verify by Transaction ID ──
@@ -1690,6 +1746,25 @@ module.exports = async function handler(req, res) {
       await sql`UPDATE users SET password = ${hashed} WHERE id = ${userId}`;
       return res.json({ message: "Password changed successfully" });
     }
+
+    // ── Admin: Force Reset User Password ──
+    if (path === "/api/admin/force-reset-password" && method === "POST") {
+      const sql = getSQL();
+      const adminToken = req.body?.adminToken;
+      const admin = adminToken === process.env.ADMIN_SETUP_TOKEN ? true : await verifyAdmin(req, sql);
+      if (!admin) return res.status(403).json({ error: "Admin access required" });
+      const { userId: targetUserId, newPassword: targetPassword } = req.body || {};
+      if (!targetUserId || !targetPassword) {
+        return res.status(400).json({ error: "userId and newPassword are required" });
+      }
+      const hashed = await bcrypt.hash(String(targetPassword), 10);
+      await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS session_version integer DEFAULT 0`;
+      await sql`UPDATE users SET password = ${hashed}, session_version = COALESCE(session_version, 0) + 1 WHERE id = ${targetUserId}`;
+      return res.json({ message: "Password reset and all sessions invalidated" });
+    }
+
+    // ── Ensure session_version column exists ──
+    // (run once on cold start)
 
     // ── Admin: Get Duplicate Affirmations ──
     if (path === "/api/admin/affirmations/duplicates" && method === "GET") {

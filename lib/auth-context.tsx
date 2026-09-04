@@ -9,6 +9,7 @@ interface AuthUser {
   displayName: string | null;
   isAdmin?: boolean;
   profilePictureUrl?: string | null;
+  sessionVersion?: number;
 }
 
 interface AuthContextValue {
@@ -34,9 +35,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const res = await apiRequest("GET", "/api/auth/me");
       const data = await res.json();
+      // Session version check: force logout if password was changed
+      const cached = await AsyncStorage.getItem("auth_user");
+      const cachedUser = cached ? JSON.parse(cached) : null;
+      if (cachedUser?.sessionVersion != null && data.sessionVersion != null && cachedUser.sessionVersion !== data.sessionVersion) {
+        setUser(null);
+        setAuthUserId(null);
+        await AsyncStorage.removeItem("auth_user");
+        return;
+      }
       setUser(data);
       setAuthUserId(data?.id ?? null);
       if (data?.id) await AsyncStorage.setItem("auth_user", JSON.stringify(data));
+      // Auto daily check-in for admin
+      if (data?.isAdmin && data?.id) {
+        fetch(`${process.env.EXPO_PUBLIC_API_URL || "https://global-affirmation-hub-1.vercel.app"}/api/rewards/daily-checkin`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "X-User-Id": String(data.id) },
+        }).catch(() => {});
+      }
     } catch {
       // fallback to cached user for header auth
       try {
