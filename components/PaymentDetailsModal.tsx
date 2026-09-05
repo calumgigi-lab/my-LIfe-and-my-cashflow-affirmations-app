@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { apiRequest, queryClient } from "@/lib/query-client";
 import Colors from "@/constants/colors";
 import { useRouter } from "expo-router";
+import { useAuth } from "@/lib/auth-context";
 import * as WebBrowser from "expo-web-browser";
 import { useTranslation } from "react-i18next";
 import ConfettiCannon from "react-native-confetti-cannon";
@@ -49,6 +50,7 @@ export function PaymentDetailsModal({
   bookletId,
 }: PaymentDetailsModalProps) {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const colorScheme = useColorScheme() ?? "light";
   const colors = Colors[colorScheme];
   const [isLoading, setIsLoading] = useState(false);
@@ -152,8 +154,8 @@ export function PaymentDetailsModal({
       const res = await apiRequest("POST", "/api/payments/flutterwave/initialize", {
         bookletId: bookletId,
         amount: amount,
-        email: "user@globalaffirmationhub.com",
-        name: "User",
+        email: user?.email || "user@globalaffirmationhub.com",
+        name: user?.displayName || user?.username || "User",
       });
       const data = await res.json();
       if (data.checkoutUrl && data.txRef) {
