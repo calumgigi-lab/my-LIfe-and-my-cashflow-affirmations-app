@@ -1218,7 +1218,7 @@ module.exports = async function handler(req, res) {
           transaction_id = ${reference},
           payment_method = 'flutterwave',
           amount_naira = ${amount},
-          approved_at = CASE WHEN ${verified} AND monthly_purchases.status != 'approved' THEN NOW() ELSE approved_at END,
+          approved_at = CASE WHEN ${verified} AND monthly_purchases.status != 'approved' THEN NOW() ELSE monthly_purchases.approved_at END,
           updated_at = NOW()
       `;
 
