@@ -182,6 +182,7 @@ export default function AffirmationDetailScreen() {
       queryClient.invalidateQueries({ queryKey: ["/api/completions/check"] });
       queryClient.invalidateQueries({ queryKey: ["/api/streak"] });
       queryClient.invalidateQueries({ queryKey: ["/api/rewards/balance"] });
+      queryClient.refetchQueries({ queryKey: ["/api/rewards/balance"] });
       if (Platform.OS !== "web") {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       }

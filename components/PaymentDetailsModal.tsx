@@ -161,9 +161,13 @@ export function PaymentDetailsModal({
       if (data.checkoutUrl && data.txRef) {
         setPendingTxRef(data.txRef);
         setPaymentPending(true);
-        const result = await WebBrowser.openBrowserAsync(data.checkoutUrl);
-        if (result.type === "cancel" || result.type === "dismiss") {
-          handlePaymentReturn(data.txRef);
+        try {
+          const result = await WebBrowser.openBrowserAsync(data.checkoutUrl);
+          if (result.type === "cancel" || result.type === "dismiss") {
+            handlePaymentReturn(data.txRef);
+          }
+        } catch {
+          await Linking.openURL(data.checkoutUrl);
         }
       } else {
         throw new Error(data.error || "Failed to create payment link");
