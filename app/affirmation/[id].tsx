@@ -192,7 +192,7 @@ export default function AffirmationDetailScreen() {
     },
   });
 
-  const isCompleted = completionCheck?.completed === true || completedAffirmation || completeMutation.isSuccess;
+  const isCompleted = completionCheck?.completed === true || completedAffirmation;
   const { translatedTitle, translatedContent, isTranslating } = useTranslatedAffirmation(aff?.title, aff?.content);
   const paragraphs = translatedContent?.split("\n\n") || [];
   const previewDays = accessData?.previewDays ?? 2;

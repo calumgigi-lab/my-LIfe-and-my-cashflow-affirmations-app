@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const COMPLETED_KEY = "completed_affirmation_ids";
+const MAX_CACHED = 100;
 
 export async function getCompletedAffirmationIds(): Promise<Set<number>> {
   try {
@@ -17,7 +18,12 @@ export async function markAffirmationCompleted(affirmationId: number): Promise<v
   try {
     const ids = await getCompletedAffirmationIds();
     ids.add(affirmationId);
-    await AsyncStorage.setItem(COMPLETED_KEY, JSON.stringify([...ids]));
+    const arr = [...ids];
+    if (arr.length > MAX_CACHED) {
+      await AsyncStorage.setItem(COMPLETED_KEY, JSON.stringify(arr.slice(-MAX_CACHED)));
+    } else {
+      await AsyncStorage.setItem(COMPLETED_KEY, JSON.stringify(arr));
+    }
   } catch {}
 }
 
