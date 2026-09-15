@@ -1116,29 +1116,35 @@ module.exports = async function handler(req, res) {
       const bookletId = parseInt(req.query.bookletId) || null;
       const userId = parseInt(req.query.userId) || null;
 
-      let paymentSuccessful = false;
-
       if (txRef && bookletId && userId) {
-        // Always insert as pending first — Flutterwave redirect means user completed checkout
-        await sql`
-          INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
-          VALUES (${userId}, ${bookletId}, 'web', 'flutterwave', ${txRef}, 'pending', 'flutterwave', ${parseInt(req.query.amount) || 1500})
-          ON CONFLICT (user_id, booklet_id) DO UPDATE SET transaction_id = ${txRef}, updated_at = NOW()
-        `.catch(() => {});
 
-        // Try to verify immediately — if successful, upgrade to approved
+        // Try Flutterwave verification first
         try {
           const flwRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${txRef}`);
           if (flwRes.status === "success" && flwRes.data && flwRes.data.status === "successful") {
             paymentSuccessful = true;
-            await sql`
-              UPDATE monthly_purchases SET status = 'approved', approved_at = NOW(), updated_at = NOW()
-              WHERE user_id = ${userId} AND booklet_id = ${bookletId}
-            `.catch(() => {});
           }
         } catch (e) {
-          console.warn("Callback verify failed, purchase saved as pending:", e.message);
+          console.warn("Callback verify API error:", e.message);
         }
+
+        // Upsert — if already approved (by webhook), never downgrade
+        const newStatus = paymentSuccessful ? "approved" : "pending";
+        await sql`
+          INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+          VALUES (${userId}, ${bookletId}, 'web', 'flutterwave', ${txRef}, ${newStatus}, 'flutterwave', ${parseInt(req.query.amount) || 1500})
+          ON CONFLICT (user_id, booklet_id) DO UPDATE SET
+            status = CASE
+              WHEN monthly_purchases.status = 'approved' THEN 'approved'
+              ELSE ${newStatus}
+            END,
+            approved_at = CASE
+              WHEN ${paymentSuccessful} AND monthly_purchases.status != 'approved' THEN NOW()
+              ELSE monthly_purchases.approved_at
+            END,
+            transaction_id = ${txRef},
+            updated_at = NOW()
+        `.catch(() => {});
       }
 
       const params = new URLSearchParams();
@@ -1285,24 +1291,18 @@ module.exports = async function handler(req, res) {
         }
 
         if (uid && bid && tx.status === "successful") {
-          // Re-verify via API as Flutterwave recommends
-          let verified = false;
-          try {
-            const verifyRes = await flutterwaveApi("GET", `/transactions/verify_by_reference?tx_ref=${txRef}`);
-            verified = verifyRes?.data?.status === "successful";
-          } catch (e) {
-            console.warn("Flutterwave webhook: re-verify API error:", e.message);
-          }
-
-          if (verified) {
-            await sql`
-              INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
-              VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${txRef || tx.flw_ref || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
-              ON CONFLICT (user_id, booklet_id) DO UPDATE SET status = 'approved', transaction_id = ${txRef || tx.flw_ref || String(tx.id)}, payment_method = 'flutterwave', amount_naira = ${tx.amount}, updated_at = NOW()
-            `.catch(() => {});
-          } else {
-            console.warn("Flutterwave webhook: re-verification failed, not inserting");
-          }
+          await sql`
+            INSERT INTO monthly_purchases (user_id, booklet_id, platform, product_id, transaction_id, status, payment_method, amount_naira)
+            VALUES (${uid}, ${bid}, 'web', 'flutterwave', ${txRef || tx.flw_ref || String(tx.id)}, 'approved', 'flutterwave', ${tx.amount})
+            ON CONFLICT (user_id, booklet_id) DO UPDATE SET
+              status = CASE WHEN monthly_purchases.status = 'approved' THEN 'approved' ELSE 'approved' END,
+              approved_at = COALESCE(monthly_purchases.approved_at, NOW()),
+              transaction_id = ${txRef || tx.flw_ref || String(tx.id)},
+              payment_method = 'flutterwave',
+              amount_naira = ${tx.amount},
+              updated_at = NOW()
+          `.catch(() => {});
+          console.log(`Webhook approved: user ${uid} booklet ${bid} ref ${txRef}`);
         }
       }
       // Must return 200 within 60 seconds per Flutterwave docs
